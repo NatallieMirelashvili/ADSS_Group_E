@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ADSS_Group_E:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ADSS_Group_E_jar</output-path>
+    <root id="archive" name="ADSS_Group_E.jar">
+      <element id="module-output" name="ADSS_Group_E" />
+    </root>
+  </artifact>
+</component>
