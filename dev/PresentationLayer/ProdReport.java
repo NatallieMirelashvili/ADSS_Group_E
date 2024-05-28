@@ -1,18 +1,16 @@
 package PresentationLayer;
 import java.util.Scanner;
-public class Report {
-
+public class ProdReport {
     @Override
     public String toString() {
-        return "What report would like to produce today?" +
-                "1. Produce an inventory report" +
-                "2. Produce an expired report" +
-                "3. Produce a damaged report" +
-                "4. Return to main menu";
+        return "What would like to report today?" +
+                "1. Report on a damaged item" +
+                "2. Report on an expired item" +
+                "3. Return to main menu";
     }
     public void runMenu(){
         int choice = 0;
-        while (choice!=4){
+        while (choice!=3){
             choice = GetChoice();
         }
     }
@@ -22,15 +20,12 @@ public class Report {
         int userInput = scanner.nextInt();;
         switch (userInput){
             case 1:
-                InventoryReport();
+                ReportDamaged();
                 break;
             case 2:
-                ExpiredReport();
+                ReportExpired();
                 break;
             case 3:
-                DamagedReport();
-                break;
-            case 4:
                 ReturnToMainMenu();
                 break;
             default:
@@ -40,4 +35,5 @@ public class Report {
         }
         return userInput;
     }
+
 }
