@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class AStock {
-    HashMap<String, HashMap<String, HashMap<Double, ArrayList<Product>>>> myStock;
+    HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock;
     int amountIn;
 
-    public HashMap<String, HashMap<String, HashMap<Double, ArrayList<Product>>>> getMyStock() {
+    public HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> getMyStock() {
         return myStock;
     }
 
-    public void setMyStock(HashMap<String, HashMap<String, HashMap<Double, ArrayList<Product>>>> myStock) {
+    public void setMyStock(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock) {
         this.myStock = myStock;
     }
 
@@ -24,7 +24,7 @@ public class AStock {
         return amountIn;
     }
 
-    public AStock(HashMap<String, HashMap<String, HashMap<Double, ArrayList<Product>>>> myStock, int amountIn) {
+    public AStock(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock, int amountIn) {
         this.myStock = myStock;
         this.amountIn = amountIn;
     }

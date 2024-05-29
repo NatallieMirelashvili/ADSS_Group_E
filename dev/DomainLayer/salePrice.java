@@ -12,4 +12,15 @@ public class salePrice {
         this.discountRatio = discountRatio;
     }
 
+    public Date getStartSale() {
+        return startSale;
+    }
+
+    public Date getEndSale() {
+        return endSale;
+    }
+
+    public double getDiscountRatio() {
+        return discountRatio;
+    }
 }

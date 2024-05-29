@@ -1,12 +1,11 @@
 package DomainLayer;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Product {
     private String catName;
     private String subCatName;
-    private double size;
+    private String size;
     private Tuple<Integer, Integer> total;
     private String manuFactor;
     private int catalogNum;
@@ -20,7 +19,7 @@ public class Product {
 
     int minimalAmount;
 
-    public Product(String catName, String subCatName, double size, Tuple<Integer, Integer> total, String manuFactor, int catalogNum, double marketPriceConst, double manuPriceConst, double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount, ArrayList<Item> items, int minimalAmount) {
+    public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total, String manuFactor, int catalogNum, double marketPriceConst, double manuPriceConst, double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount, ArrayList<Item> items, int minimalAmount) {
         this.catName = catName;
         this.subCatName = subCatName;
         this.size = size;
@@ -45,13 +44,20 @@ public class Product {
         return subCatName;
     }
 
-    public double getSize() {
+    public String getSize() {
         return size;
     }
 
-    public Tuple<Integer, Integer> getTotal() {
-        return total;
+    public int getTotalAmount() {
+        return total.getVal1()+total.getVal2();
     }
+    public int getStoreAmount() {
+        return total.getVal1();
+    }
+    public int getWarehouseAmount() {
+        return total.getVal2();
+    }
+
 
     public String getManuFactor() {
         return manuFactor;
@@ -101,13 +107,13 @@ public class Product {
         this.subCatName = subCatName;
     }
 
-    public void setSize(double size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
-    public void setTotal(Tuple<Integer, Integer> total) {
-        this.total = total;
-    }
+    public void setStoreAmount(int storeAmount) { this.total.setVal1(storeAmount);}
+
+    public void setWarehouseAmount(int warehouseAmount) { this.total.setVal2(warehouseAmount);}
 
     public void setManuFactor(String manuFactor) {
         this.manuFactor = manuFactor;
@@ -135,12 +141,13 @@ public class Product {
 
     public void setMySalePrice(salePrice mySalePrice) {
         this.mySalePrice = mySalePrice;
+        this.marketPriceCurr=this.marketPriceConst*mySalePrice.getDiscountRatio();
     }
-
 
 
     public void setDiscount(double discount) {
         this.discount = discount;
+        this.manuPriceCurr=this.manuPriceConst*discount;
     }
 
     public void setItems(ArrayList<Item> items) {
@@ -150,9 +157,11 @@ public class Product {
     public void setMinimalAmount(int minimalAmount) {
         this.minimalAmount = minimalAmount;
     }
-//    Requ
+
+
+//    Request
     public boolean isMinimal(){
-        return this.total.getVal1() + this.total.getVal2() <= minimalAmount;
+        return getTotalAmount()<= minimalAmount;
     }
 
 

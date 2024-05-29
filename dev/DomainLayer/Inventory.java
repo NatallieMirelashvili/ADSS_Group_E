@@ -5,44 +5,73 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Inventory extends AStock{
-    public Inventory(HashMap<String, HashMap<String, HashMap<Double, ArrayList<Product>>>> myStock, int amountIn) {
+    public Inventory(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock, int amountIn) {
         super(myStock, amountIn);
     }
 
-    public void setSalePrice(salePrice mySalePrice, String cat, String subCat , Double size, Date from, Date to, double discount) {
-        salePrice newSale = new salePrice(from, to, discount);
-        HashMap<String, HashMap<Double, ArrayList<Product>>> subCatToChange = myStock.get(cat);
-        if (subCat.equals("")) {
-            for (String mysubCat : subCatToChange.keySet()) {
-                HashMap<Double, ArrayList<Product>> sizeToChange = myStock.get(cat).get(mysubCat);
-                for (Double mysize : sizeToChange.keySet()) {
-                    ArrayList<Product> productToChange = myStock.get(cat).get(mysubCat).get(mysize);
-                    for (Product product : productToChange)
-                        product.setMySalePrice(newSale);
-                }
-            }
-            return;
+    //update sale price about products by category, sub category and size that given (all or some)
+    public void setSalePrice(String cat, String subCat , String size, Date from, Date to, double ratioSale) {
+        salePrice newSale = new salePrice(from, to, ratioSale);
+        if (!subCat.equals("0") && !(size.equals("0"))) { //have cat,subCat,size
+            setSaleOnProducts(runProductBySize(cat, subCat, size), newSale);
+        } else if (size.equals("0")) { //have cat, subCat
+            setSaleOnProducts(runProductBySubCat(cat, subCat), newSale);
+        } else { //have cat
+            setSaleOnProducts(runProductByCat(cat), newSale);
         }
-        if (size == 0.0) {
-            HashMap<Double, ArrayList<Product>> sizeToChange = myStock.get(cat).get(subCat);
-            for (Double mysize : sizeToChange.keySet()) {
-                ArrayList<Product> productToChange = myStock.get(cat).get(subCat).get(mysize);
-                for (Product product : productToChange)
-                    product.setMySalePrice(newSale);
-            }
-            return;
-        }
-            ArrayList<Product> productToChange = myStock.get(cat).get(subCat).get(size);
-            for (Product product : productToChange)
-                product.setMySalePrice(newSale);
-        }
-
-    public void setSalePrice(salePrice mySalePrice, String cat, String subCat , Date from, Date to, double discount) {
-        setSalePrice( mySalePrice,  cat,  subCat ,0.0,  from,  to,  discount);
-        }
-    public void setSalePrice(salePrice mySalePrice, String cat , Date from, Date to, double discount) {
-        setSalePrice( mySalePrice,  cat,  "" ,0.0,  from,  to,  discount);
     }
+
+    //help function-update sale price about list of products
+    public void setSaleOnProducts (ArrayList<Product> products, salePrice newSale){
+        for (Product product : products)
+            product.setMySalePrice(newSale);
+    }
+
+    //update discount about products by category, sub category and size that given (all or some)
+    public void setDiscount(String cat, String subCat , String size, double myDiscount, String myManufacturer) {
+        if (!subCat.equals("0") && !(size.equals("0"))) { //have cat,subCat,size
+            discountOnProducts(runProductBySize(cat, subCat, size), myDiscount,myManufacturer);
+        } else if (size.equals("0")) { //have cat, subCat
+            discountOnProducts(runProductBySubCat(cat, subCat), myDiscount,myManufacturer);
+        } else { //have cat
+            discountOnProducts(runProductByCat(cat), myDiscount,myManufacturer);
+        }
+    }
+
+    //help function-update discount about list of products
+    public void discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
+        for (Product product : products) {
+            if (product.getManuFactor().equals(manufacturer))
+                product.setDiscount(discount);
+        }
+    }
+
+    //return an array list of all products by category, sub category and size
+    public ArrayList<Product> runProductBySize (String cat, String subCat, String size) {
+        return myStock.get(cat).get(subCat).get(size);
+    }
+
+    //return an array list of all products by category and sub category
+    public ArrayList<Product> runProductBySubCat (String cat, String subCat) {
+        ArrayList<Product> productsRes=new ArrayList<>();
+        HashMap<String, ArrayList<Product>> products1 = myStock.get(cat).get(subCat);
+        for (String mySize : products1.keySet()) {
+            productsRes.addAll(runProductBySize (cat,subCat,mySize));
+        }
+        return productsRes;
+    }
+
+    //return an array list of all products by category
+    public ArrayList<Product> runProductByCat (String cat) {
+        ArrayList<Product> productsRes=new ArrayList<>();
+        HashMap<String, HashMap<String, ArrayList<Product>>> subCatToChange = myStock.get(cat);
+            for (String mySubCat : subCatToChange.keySet()) {
+                productsRes.addAll(runProductBySubCat (cat, mySubCat));
+            }
+            return productsRes;
+    }
+
+
 
     }
 
