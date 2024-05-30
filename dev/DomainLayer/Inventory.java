@@ -5,9 +5,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Inventory extends AStock{
+
+    //    ***Constructor***
     public Inventory(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock, int amountIn) {
         super(myStock, amountIn);
     }
+
+//  ***Setters***
+
 
     //update sale price about products by category, sub category and size that given (all or some)
     public void setSalePrice(String cat, String subCat , String size, Date from, Date to, double ratioSale) {
@@ -38,13 +43,9 @@ public class Inventory extends AStock{
         }
     }
 
-    //help function-update discount about list of products
-    public void discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
-        for (Product product : products) {
-            if (product.getManuFactor().equals(manufacturer))
-                product.setDiscount(discount);
-        }
-    }
+
+//    ***Running by category***
+
 
     //return an array list of all products by category, sub category and size
     public ArrayList<Product> runProductBySize (String cat, String subCat, String size) {
@@ -71,6 +72,15 @@ public class Inventory extends AStock{
             return productsRes;
     }
 
+//    ***Help Functions***
+
+    //help function-update discount about list of products
+    public void discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
+        for (Product product : products) {
+            if (product.getManuFactor().equals(manufacturer))
+                product.setDiscount(discount);
+        }
+    }
 
 
     }

@@ -3,6 +3,8 @@ package DomainLayer;
 import java.util.ArrayList;
 
 public class Product {
+
+//   ***Fields***
     private String catName;
     private String subCatName;
     private String size;
@@ -16,8 +18,9 @@ public class Product {
     private salePrice mySalePrice;
     private double discount;
     private ArrayList<Item> items ;
+    private int minimalAmount;
 
-    int minimalAmount;
+//    ***Contracture***
 
     public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total, String manuFactor, int catalogNum, double marketPriceConst, double manuPriceConst, double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount, ArrayList<Item> items, int minimalAmount) {
         this.catName = catName;
@@ -36,6 +39,7 @@ public class Product {
         this.minimalAmount = minimalAmount;
     }
 
+//      ***Getters***
     public String getCatName() {
         return catName;
     }
@@ -99,6 +103,19 @@ public class Product {
         return minimalAmount;
     }
 
+//    ***Setters***
+
+    public void setMySalePrice(salePrice mySalePrice) {
+        this.mySalePrice = mySalePrice;
+        this.marketPriceCurr=this.marketPriceConst*mySalePrice.getDiscountRatio();
+    }
+
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+        this.manuPriceCurr=this.manuPriceConst*discount;
+    }
+
     public void setCatName(String catName) {
         this.catName = catName;
     }
@@ -139,16 +156,7 @@ public class Product {
         this.marketPriceCurr = marketPriceCurr;
     }
 
-    public void setMySalePrice(salePrice mySalePrice) {
-        this.mySalePrice = mySalePrice;
-        this.marketPriceCurr=this.marketPriceConst*mySalePrice.getDiscountRatio();
-    }
 
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-        this.manuPriceCurr=this.manuPriceConst*discount;
-    }
 
     public void setItems(ArrayList<Item> items) {
         this.items = items;
@@ -159,7 +167,7 @@ public class Product {
     }
 
 
-//    Request
+//    ***Help Functions***
     public boolean isMinimal(){
         return getTotalAmount()<= minimalAmount;
     }

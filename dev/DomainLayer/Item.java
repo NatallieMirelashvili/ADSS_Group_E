@@ -1,10 +1,14 @@
 package DomainLayer;
 import java.util.Date;
 public class Item {
-    int id;
-    Date expirationDate;
-    Tuple<String, Integer> place;
-    int catalogNum;
+//    ***Fields***
+    private int id;
+    private Date expirationDate;
+    private Tuple<String, Integer> place;
+    private int catalogNum;
+
+
+//    ***Constructor***
 
     public Item(int id, Date expirationDate, Tuple<String, Integer> place, int catalogNum) {
         this.id = id;
@@ -12,6 +16,7 @@ public class Item {
         this.place = place;
         this.catalogNum = catalogNum;
     }
+//    ***Getters***
 
     public int getId() {
         return id;
@@ -28,6 +33,8 @@ public class Item {
     public int getCatalogNum() {
         return catalogNum;
     }
+
+//    ***Setters***
 
     public void setId(int id) {
         this.id = id;
