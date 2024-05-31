@@ -5,25 +5,35 @@ public class ProdReport {
 //    inventory report by category add user input for these option and support all options (mini switch case) - contains
 //    current amount of any product in those categories, places in store, id, catalog number.
 //   *****Menu Functions****
-public static void  ReportDamaged(){}
-public static void  ReportExpired(){}
-public static void  ReturnToMainMenu(){}
-    @Override
-    public String toString() {
+    private static int GetidFromUSR(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter the id number of the item you want to report on");
+        return scanner.nextInt();
+    }
+    public static void  ReportDamaged(){
+        int id_damage = GetidFromUSR(); //stock controller take care of it
+    }
+    public static void  ReportExpired(){
+        int id_expire = GetidFromUSR(); //stock controller take care of it
+    }
+    public static void  ReturnToMainMenu(){
+        System.out.println("Returning to main menu");
+}
+    public static String PrintMenu() {
         return "What would you like to report today?" +
                 "1. Report on a damaged item" +
                 "2. Report on an expired item" +
                 "3. Return to main menu";
     }
-    public void runMenu(){
+    public static void runMenu(){
         int choice = 0;
         while (choice!=3){
             choice = GetChoice();
         }
     }
-    public int GetChoice(){
+    public static int GetChoice(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print(this);
+        System.out.print(PrintMenu());
         int userInput = scanner.nextInt();;
         switch (userInput) {
             case 1 -> ReportDamaged();
@@ -37,5 +47,4 @@ public static void  ReturnToMainMenu(){}
         }
         return userInput;
     }
-
 }
