@@ -8,7 +8,6 @@ public class AStock {
     protected HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock;
     protected int amountIn;
 
-
 //    ***Constructor***
             public AStock(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock, int amountIn) {
                 this.myStock = myStock;

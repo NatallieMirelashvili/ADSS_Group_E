@@ -1,14 +1,5 @@
 package PresentationLayer;
-import com.google.gson.JsonObject;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
 public class MainMenu {
 //    Flag
     private static int initProgram = 0;
@@ -21,41 +12,14 @@ public class MainMenu {
         return true;
     }
 
-//    Read file help functions:
-    private static JsonObject CreateJasonFromFile(int iteration, String[] memberLst,String[] valuesOfMembers){
-        JsonObject myJson = new JsonObject();
-        for (int i = 0; i <= iteration; i++){
-            String member = memberLst[i];
-            String value = valuesOfMembers[0];
-            myJson.addProperty(member, value);
-        }
-        return myJson;
-    }
 // ***Menu Functions***
     public static void initProg(){
         boolean bool = isInit();
         if (bool){
             System.out.println("System initialed");
         }
-        System.out.println("Please enter the file path you want to fetch");
-        Scanner scanner = new Scanner(System.in);
-        String fileP = scanner.nextLine();
-        BufferedReader buffer;
-        String line;
-        try {
-            buffer = new BufferedReader((new FileReader(fileP)));
-            line = buffer.readLine();
-            String[] membersLst = line.split(",");
-            line =  buffer.readLine();
-            while (line != null){
-                String[] membersValueByOrder = line.split(",");
-                JsonObject record = CreateJasonFromFile(membersLst.length, membersLst, membersValueByOrder);
-//                turn record to object with switch case: product or item
-                line = buffer.readLine();
-            }
-        } catch (Exception e) {
-            System.out.println("File Not Found please try again");}
-
+        ReadFileAndStock.readFileByType();
+        ReadFileAndStock.createStock();
         initProgram = 1;
     }
 //    move all read file to another class and add reaction of stock

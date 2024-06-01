@@ -172,5 +172,11 @@ public class Product {
         return getTotalAmount()<= minimalAmount;
     }
 
+    public void addItemToLst(Item newItem){
+        if (newItem.getCatalogNum() == catalogNum){
+            items.add(newItem);
+        }
+    }
+
 
 }

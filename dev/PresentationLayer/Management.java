@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 
 public class Management {
+
 //    help function:
     private static int showCatalogChoices(){
         Scanner scan = new Scanner(System.in);
@@ -18,7 +19,7 @@ public class Management {
         System.out.println(msg);
         return scan.nextLine();
     }
-//    switch this methode to main
+
     private static JsonObject CreateJason(int iteration, ArrayList<String> msgLst, ArrayList<String> memberLst){
         JsonObject myJson = new JsonObject();
         Scanner scanner = new Scanner(System.in);
@@ -29,6 +30,11 @@ public class Management {
         }
         return myJson;
     }
+
+    private static void alertOnMinAmount(int makat){
+        System.out.println("The product with the catalog number: " + makat + "is about to run out!");
+    }
+
 //   *****Menu Functions****
     public static void AddProd(){
         ArrayList<String> msgLst = new ArrayList<>(8);
@@ -83,7 +89,7 @@ public class Management {
     public static void SellItem() {
         Scanner scan = new Scanner(System.in);
         String input = readFromUsr("Please enter the id number of the item you want to sell", scan);
-//        ask from Stock controller
+//        ask from Stock controller - see if you get to the minimal amount for report a lak.
     }
     public static void UpdateSales(){
         int stam = showCatalogChoices();
