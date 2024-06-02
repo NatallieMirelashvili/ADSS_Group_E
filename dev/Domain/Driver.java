@@ -5,18 +5,36 @@ public class Driver {
     private String name;
     private String licence;
     private String phone_num;
-    private boolean assignment;
-    public Driver(int ID, String name, String licence, String phone_num, boolean assignment) {
+
+    private boolean availability;
+
+    private int password;
+    public Driver(int ID, String name, String licence, String phone_num, int password) {
         this.ID = ID;
         this.name = name;
         this.licence = licence;
         this.phone_num = phone_num;
-        this.assignment = assignment;
+        this.availability = true;
+        this.password = password;
     }
 
     public int getID() {
         return ID;
     }
 
+    public void setpassword(int password) {
+        this.password = password;
+    }
 
-}
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    public boolean getAvailability() {
+        return availability;
+    }
+
+    public String toString() {
+        return "Driver ID: " + ID + "\nName: " + name + "\nLicence: " + licence + "\nPhone Number: " + phone_num;
+    }
+    }

@@ -5,18 +5,24 @@ public class truck {
     private String model;
     private double curr_weight;
     private double max_weight;
-    private String [] licence;
+    private String licence;
+    private boolean availability;
 
-    public truck(int id, String model, double curr_weight, double max_weight, String[] licence) {
+    public truck(int id, String model, double curr_weight, double max_weight, String licence) {
         this.id = id;
         this.model = model;
         this.curr_weight = curr_weight;
         this.max_weight = max_weight;
         this.licence = licence;
+        this.availability = true;
     }
 
     public int getID() {
         return id;
+    }
+
+    public String ToString() {
+        return "Truck ID: " + id + "\nModel: " + model + "\nCurrent Weight: " + curr_weight + "\nMax Weight: " + max_weight + "\nLicence: " + licence;
     }
 }
 

@@ -21,4 +21,8 @@ public class site {
     public String getSite_name() {
         return name;
     }
+
+    public String ToString() {
+        return "Site Name: " + name + "\nType: " + type + "\nAddress: " + address + "\nContact Name: " + contacts_name + "\nPhone Number: " + phone + "\nArea: " + area;
+    }
 }

@@ -2,23 +2,29 @@ package Domain;
 
 public class Item {
     // Private attributes for item details
-    private String itemId;
+    private int itemId;
     private String itemName;
     private int amount;
 
     // Constructor to initialize item details
-    public Item(String itemId, String itemName, int amount) {
+    public Item(int itemId, String itemName) {
         this.itemId = itemId;
         this.itemName = itemName;
+        this.amount = 0;
+    }
+
+    public Item(Item old_item, int amount){
+        this.itemId = old_item.getItemId();
+        this.itemName = old_item.getItemName();
         this.amount = amount;
     }
 
     // Getter and setter methods for itemId
-    public String getItemId() {
+    public int getItemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(int itemId) {
         this.itemId = itemId;
     }
 
@@ -42,8 +48,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Domain.Item{" +
-                "itemId='" + itemId + '\'' +
+        return  "itemId='" + itemId + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", amount=" + amount +
                 '}';
