@@ -1,11 +1,44 @@
 package Presention;
 
 import java.util.*;
+import Controller.controller;
 
 public class Drivers_menu {
 
     public static void show() {
+        int ID = 0;
+        int password = 1234;
         boolean continue_loop = true;
+        System.out.println("Please enter your ID:");
+        Scanner sc = new Scanner(System.in);
+        while (continue_loop){
+            try {
+                ID = sc.nextInt();
+                continue_loop = false;
+            }
+            catch (Exception e){
+                System.out.println("Please enter an Integer");
+                sc.next();
+            }
+        }
+        continue_loop = true;
+        System.out.println("Please enter your password:");
+        while (continue_loop){
+            try {
+                password = sc.nextInt();
+                continue_loop = false;
+            }
+            catch (Exception e){
+                System.out.println("Please enter an Integer");
+                sc.next();
+            }
+        }
+        if (controller.driver_exists(ID) && controller.driver_password(ID, password)){
+            System.out.println("Welcome driver");
+        } else {
+            System.out.println("Invalid ID or password");
+            return;
+        }
         while (continue_loop) {
             System.out.println("Welcome to Drivers menu");
             System.out.println("1. Print transport form");
@@ -16,7 +49,6 @@ public class Drivers_menu {
             System.out.println("Enter your choice: ");
 
         int choice;
-        Scanner sc = new Scanner(System.in);
         try {
             choice = sc.nextInt();
         } catch (Exception e) {
@@ -26,15 +58,26 @@ public class Drivers_menu {
 
         switch (choice) {
             case 1:
-                Delivery_form.print();
+
                 break;
             case 2:
-                Items_form.print();
+
                 break;
             case 3:
-                System.out.println("Start of transportation");
+                boolean start = controller.start_driving(ID);
+                if (!start) {
+                    System.out.println("You have no transportation to start");
+                    break;
+                }
+                System.out.println("Transportation started successfully");
                 break;
             case 4:
+                boolean end = controller.end_driving(ID);
+                if (!end) {
+                    System.out.println("You have no transportation to end");
+                    break;
+                }
+                controller.end_driving(ID);
                 System.out.println("End of transportation");
                 break;
             case 5:

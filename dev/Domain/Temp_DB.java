@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Temp_DB {
     private static HashMap<Integer, Driver> drivers_d = new HashMap<Integer, Driver>();
     private static HashMap<Integer, truck> trucks_d = new HashMap<Integer, truck>();
-    private static HashMap<String, site> site_d = new HashMap<String, site>();
+    private static HashMap<Integer, site> site_d = new HashMap<Integer, site>();
     private static HashMap<Integer, Delivery> delivery_forms_d = new HashMap<Integer, Delivery>();
     private static HashMap<Integer, Item> items_d = new HashMap<Integer, Item>();
 
@@ -33,14 +33,15 @@ public class Temp_DB {
     }
 
     public static void add_site(JsonObject site) {
+        int ID = site.get("ID").getAsInt();
         String type = site.get("type").getAsString();
         String name = site.get("name").getAsString();
         String address = site.get("address").getAsString();
         String contacts_name = site.get("contacts_name").getAsString();
         String phone_num = site.get("phone_num").getAsString();
         String area = site.get("area").getAsString();
-        site new_site = new site(type, name, address,contacts_name, phone_num, area);
-        site_d.put(new_site.getSite_name(), new_site);
+        site new_site = new site(ID, type, name, address,contacts_name, phone_num, area);
+        site_d.put(new_site.getSite_ID(), new_site);
     }
 
     public static void add_delivery(JsonObject delivery) {
@@ -76,4 +77,72 @@ public class Temp_DB {
     public static Delivery get_delivery(int deliveryID) {
         return delivery_forms_d.get(deliveryID);
     }
+
+    public static void remove_driver(int driverID) {
+        drivers_d.remove(driverID);
+    }
+
+    public static void remove_truck(int truckID) {
+        trucks_d.remove(truckID);
+    }
+
+    public static void remove_site(String site_name) {
+        site_d.remove(site_name);
+    }
+
+    public static void remove_delivery(int deliveryID) {
+        delivery_forms_d.remove(deliveryID);
+    }
+
+    public static void remove_item(int itemID) {
+        items_d.remove(itemID);
+    }
+
+    public static boolean site_exists(int ID) {
+        return site_d.containsKey(ID);
+    }
+
+    public static boolean driver_exists(int ID) {
+        return drivers_d.containsKey(ID);
+    }
+
+    public static boolean truck_exists(int ID) {
+        return trucks_d.containsKey(ID);
+    }
+
+    public static boolean start_driving(int driverID) {
+        get_driver(driverID).setAvailability(false);
+        int deliveryID = get_delivery_id(driverID);
+        if (deliveryID == -1) {
+            return false;
+        }
+        Delivery del = get_delivery(deliveryID);
+        get_truck(del.getTruck_of_delivery().getID()).setAvailability(false);
+        return true;
+    }
+
+    public static boolean end_driving(int driverID) {
+        get_driver(driverID).setAvailability(true);
+        int deliveryID = get_delivery_id(driverID);
+        if (deliveryID == -1 || get_driver(driverID).getAvailability()) {
+            return false;
+        }
+        Delivery del = get_delivery(deliveryID);
+        get_truck(del.getTruck_of_delivery().getID()).setAvailability(true);
+        return true;
+    }
+
+    public static boolean driver_password(int driverID, int password) {
+        return get_driver(driverID).getPassword() == password;
+    }
+
+    public static int get_delivery_id(int driverID) {
+        for (int deliveryID : delivery_forms_d.keySet()) {
+            if (delivery_forms_d.get(deliveryID).getDriverID() == driverID && delivery_forms_d.get(deliveryID).getDate().equals(LocalDate.now())){
+                return deliveryID;
+            }
+        }
+        return -1;
+    }
+
 }

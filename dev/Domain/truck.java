@@ -8,6 +8,7 @@ public class truck {
     private String licence;
     private boolean availability;
 
+
     public truck(int id, String model, double curr_weight, double max_weight, String licence) {
         this.id = id;
         this.model = model;
@@ -19,6 +20,14 @@ public class truck {
 
     public int getID() {
         return id;
+    }
+
+    public void setCurr_weight(double curr_weight) {
+        this.curr_weight = curr_weight;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public String ToString() {

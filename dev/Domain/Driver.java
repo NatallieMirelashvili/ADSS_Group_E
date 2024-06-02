@@ -34,6 +34,10 @@ public class Driver {
         return availability;
     }
 
+    public int getPassword() {
+        return password;
+    }
+
     public String toString() {
         return "Driver ID: " + ID + "\nName: " + name + "\nLicence: " + licence + "\nPhone Number: " + phone_num;
     }

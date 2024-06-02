@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Delivery {
     private int ID;
@@ -35,6 +36,18 @@ public Delivery(LocalDate date, LocalTime hour) {
 
     public void setOrigin(site origin) {
         this.origin = origin;
+    }
+
+    public int getDriverID() {
+        return driver.getID();
+    }
+
+    public LocalDate getDate(){
+        return this.date;
+    }
+
+    public truck getTruck_of_delivery() {
+        return this.truck;
     }
 
     public void createItems_form(site destination) {
