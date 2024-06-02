@@ -41,6 +41,7 @@ public class DataObject {
     }
     public static void AddProd(Product new_prod){
         prodObj.add(new_prod);
+
 //        adding this new product to the stock:
 
 
