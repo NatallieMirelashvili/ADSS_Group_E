@@ -177,6 +177,9 @@ public class Product {
             items.add(newItem);
         }
     }
-
+    public void addMeToInven(){
+        Inventory inventory = DataObject.getInvenObj();
+        inventory.addProduct(this);
+    }
 
 }

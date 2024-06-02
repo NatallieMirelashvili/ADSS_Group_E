@@ -3,59 +3,55 @@ package DomainLayer;
 import java.util.ArrayList;
 
 public class DataObject {
-    ArrayList<Item> itemsObj;
-    Inventory invenObj;
-    Defective defObj;
-    Expired expObj;
-    ArrayList<Product> prodObj;
+    private static ArrayList<Item> itemsObj;
+    private static Inventory invenObj;
+    private static Defective defObj;
+    private static Expired expObj;
+    private static ArrayList<Product> prodObj;
 
 //    Getters
 
-    public ArrayList<Item> getItemsObj() {
+    public static ArrayList<Item> getItemsObj() {
         return itemsObj;
     }
 
-    public Inventory getInvenObj() {
+    public static Inventory getInvenObj() {
         return invenObj;
     }
 
-    public Defective getDefObj() {
+    public static Defective getDefObj() {
         return defObj;
     }
 
-    public Expired getExpObj() {
+    public static Expired getExpObj() {
         return expObj;
     }
 
-    public ArrayList<Product> getProdObj() {
+    public static ArrayList<Product> getProdObj() {
         return prodObj;
     }
 
 //    Setters:
 
-    public void AddItem(Item new_item){
+    public static void AddItem(Item new_item){
         itemsObj.add(new_item);
-//        adding this new item to its product list:
-        for(Product prod: prodObj){
-            if (new_item.getCatalogNum() == prod.getCatalogNum()){
-                prod.addItemToLst(new_item);
-                break;
-            }
-        }
-    }
-    public void AddProd(Product new_prod){
-        prodObj.add(new_prod);
-//        adding this new product to the stock:
-        invenObj.runProductBySize(new_prod.getCatName(), new_prod.getSubCatName(), new_prod.getSize()).add(new_prod);
+        //adding this new item to its product list:
+        new_item.addMeToProd();
 
     }
-    public void setInventory(Inventory inventory){
+    public static void AddProd(Product new_prod){
+        prodObj.add(new_prod);
+//        adding this new product to the stock:
+
+
+    }
+    public static void setInventory(Inventory inventory){
         invenObj = inventory;
     }
-    public void setDefective(Defective defective){
+    public static void setDefective(Defective defective){
         defObj = defective;
     }
-    public void setExpObj(Expired expired){
+    public static void setExpObj(Expired expired){
         expObj = expired;
     }
 }

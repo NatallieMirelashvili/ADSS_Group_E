@@ -81,7 +81,9 @@ public class Inventory extends AStock{
                 product.setDiscount(discount);
         }
     }
-
+    public void addProduct(Product newP){
+        this.runProductBySize(newP.getCatName(), newP.getSubCatName(), newP.getSize()).add(newP);
+    }
 
     }
 

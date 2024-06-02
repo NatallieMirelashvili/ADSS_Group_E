@@ -1,4 +1,5 @@
 package DomainLayer;
+import java.util.ArrayList;
 import java.util.Date;
 public class Item {
 //    ***Fields***
@@ -51,4 +52,15 @@ public class Item {
     public void setCatalogNum(int catalogNum) {
         this.catalogNum = catalogNum;
     }
+    public void addMeToProd(){
+//        In the next work get this from data layer
+        ArrayList<Product> products = DataObject.getProdObj();
+        for(Product prod: products){
+            if (this.getCatalogNum() == prod.getCatalogNum()){
+                prod.addItemToLst(this);
+                break;
+            }
+        }
+    }
+
 }

@@ -10,7 +10,7 @@ public class ReadFileAndStock {
         JsonObject myJson = new JsonObject();
         for (int i = 0; i <= iteration; i++){
             String member = memberLst[i];
-            String value = valuesOfMembers[0];
+            String value = valuesOfMembers[i];
             myJson.addProperty(member, value);
         }
         return myJson;
