@@ -3,10 +3,10 @@ package DomainLayer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Defective extends AStock{
+public class Defective extends AReport{
 
     //    ***Constructor***
-    public Defective(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock, int amountIn) {
-        super(myStock, amountIn);
+    public Defective() {
+        super();
     }
 }

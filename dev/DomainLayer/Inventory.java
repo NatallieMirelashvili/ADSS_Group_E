@@ -4,14 +4,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Inventory extends AStock{
+public class Inventory{
+
+    //    ***Fields***
+    private HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock;
+    private int amountIn;
 
     //    ***Constructor***
-    public Inventory(HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock, int amountIn) {
-        super(myStock, amountIn);
-    }
+    public Inventory() {
+            this.myStock = null;
+            this.amountIn = 0;
+        }
 
-//  ***Setters***
+    //    ***Getters***
+    public int getAmountIn() {
+        return amountIn;
+    }
+    public HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> getMyStock() {
+        return myStock;
+    }
 
 
     //update sale price about products by category, sub category and size that given (all or some)
