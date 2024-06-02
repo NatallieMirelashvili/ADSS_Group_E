@@ -43,15 +43,12 @@ public class Product {
     public String getCatName() {
         return catName;
     }
-
     public String getSubCatName() {
         return subCatName;
     }
-
     public String getSize() {
         return size;
     }
-
     public int getTotalAmount() {
         return total.getVal1()+total.getVal2();
     }
@@ -61,12 +58,9 @@ public class Product {
     public int getWarehouseAmount() {
         return total.getVal2();
     }
-
-
     public String getManuFactor() {
         return manuFactor;
     }
-
     public int getCatalogNum() {
         return catalogNum;
     }
@@ -178,8 +172,8 @@ public class Product {
         }
     }
     public void addMeToInven(){
-        Inventory inventory = DataObject.getInvenObj();
-        inventory.addProduct(this);
+        Inventory inventory = DataObject.getInventObj();
+        inventory.addProductToInventory(this);
     }
 
 }

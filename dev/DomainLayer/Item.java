@@ -7,6 +7,7 @@ public class Item {
     private Date expirationDate;
     private Tuple<String, Integer> place;
     private int catalogNum;
+    private Product myProduct;
 
 
 //    ***Constructor***
@@ -16,6 +17,12 @@ public class Item {
         this.expirationDate = expirationDate;
         this.place = place;
         this.catalogNum = catalogNum;
+        for (Product product: DataObject.getProdObj()){
+            if (product.getCatalogNum()==(catalogNum)) {
+                this.myProduct = product;
+                break;
+            }
+        }
     }
 //    ***Getters***
 
@@ -54,7 +61,7 @@ public class Item {
     }
     public void addMeToProd(){
 //        In the next work get this from data layer
-        ArrayList<Product> products = DataObject.getProdObj();
+        ArrayList<Product> products = DataObject.getInventObj().getProdByCatalog();
         for(Product prod: products){
             if (this.getCatalogNum() == prod.getCatalogNum()){
                 prod.addItemToLst(this);

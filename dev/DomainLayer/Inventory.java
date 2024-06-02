@@ -8,22 +8,27 @@ public class Inventory{
 
     //    ***Fields***
     private HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock;
-    private int amountIn;
+    private static int amountItems;
+    private int amountProducts;
 
-    //    ***Constructor***
-    public Inventory() {
-            this.myStock = null;
-            this.amountIn = 0;
-        }
 
     //    ***Getters***
-    public int getAmountIn() {
-        return amountIn;
+    public int getAmountItems() {
+        return amountItems;
+    }
+
+    public int getAmountProducts() {
+        return amountProducts;
     }
     public HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> getMyStock() {
         return myStock;
     }
 
+    public Inventory() {
+        this.myStock = new HashMap<>();
+        this.amountItems = 0;
+        this.amountProducts = 0;
+    }
 
     //update sale price about products by category, sub category and size that given (all or some)
     public void setSalePrice(String cat, String subCat , String size, Date from, Date to, double ratioSale) {
@@ -92,9 +97,56 @@ public class Inventory{
                 product.setDiscount(discount);
         }
     }
-    public void addProduct(Product newP){
-        this.runProductBySize(newP.getCatName(), newP.getSubCatName(), newP.getSize()).add(newP);
+
+    // לשנות לדרך השלילה -- לבדוק אחד אחד ולהוסיף את הפרודקט במקום המתאים
+    public void addProductToInventory(Product newP) {
+        if (myStock.containsKey(newP.getCatName())) {
+            if (myStock.get(newP.getCatName()).containsKey(newP.getSubCatName())) {
+                if (myStock.get(newP.getCatName()).get(newP.getSubCatName()).containsKey(newP.getSize())) {
+                    runProductBySize(newP.getCatName(), newP.getSubCatName(), newP.getSize()).add(newP);
+                    amountProducts++;
+                    return;
+                }
+            }
+        }
+        ArrayList<Product> proToAdd = new ArrayList<>();
+        proToAdd.add(newP);
+        myStock.putIfAbsent(newP.getCatName(), new HashMap<>());
+        myStock.get(newP.getCatName()).putIfAbsent(newP.getSubCatName(), new HashMap<>());
+        myStock.get(newP.getCatName()).get(newP.getSubCatName()).putIfAbsent(newP.getSize(), new ArrayList<>());
+        myStock.get(newP.getCatName()).get(newP.getSubCatName()).get(newP.getSize()).addAll(proToAdd);
+        amountProducts++;
+        amountItems++;
     }
 
+    static public Item popItem(int IDItem) {
+        for (int i = 0; i < amountItems; i++) {
+            if (DataObject.itemsObj.get(i).getId() == IDItem) {
+                Item itemToRemove = DataObject.itemsObj.remove(i);
+                amountItems--;
+                return itemToRemove;
+            }
+        }
+        System.out.println("Item Not Found please try again");
+        return null;
+    }
+
+    static public void ItemSells(int IDItem){
+        popItem(IDItem);
+    }
+    static public void ItemDefective(int IDItem){
+        Item itemDefective = popItem(IDItem);
+        //DataObject.defObj.products.put(itemDefective.getCatalogNum(),//אין לי גישה לפרןדקט)
+    }
+    static public void ItemExpired(int IDItem){
+        Item itemExpired = popItem(IDItem);
+        //DataObject.defObj.products.put(itemExpired.getCatalogNum(),//אין לי גישה לפרןדקט)
+    }
+
+    public void GenerateReports() {
+//        for (int i = 1; i <= amountDefectives; i++) {
+//            System.out.println(i + ". CatalogNum:" + items.get(i).getCatalogNum() + "Location:" + items.get(i).getPlace());
+//        }
+    }
     }
 

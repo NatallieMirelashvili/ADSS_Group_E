@@ -3,20 +3,20 @@ package DomainLayer;
 import java.util.ArrayList;
 
 public class DataObject {
-    private static ArrayList<Item> itemsObj;
-    private static Inventory invenObj;
-    private static Defective defObj;
-    private static Expired expObj;
-    private static ArrayList<Product> prodObj;
+//    public static ArrayList<Item> itemsObj;
+    private static Inventory inventObj=new Inventory();
+    private static Defective defObj=new Defective();
+    private static Expired expObj=new Expired();
+//    private static ArrayList<Product> prodObj;
 
 //    Getters
 
-    public static ArrayList<Item> getItemsObj() {
-        return itemsObj;
-    }
+//    public static ArrayList<Item> getItemsObj() {
+//        return itemsObj;
+//    }
 
-    public static Inventory getInvenObj() {
-        return invenObj;
+    public static Inventory getInventObj() {
+        return inventObj;
     }
 
     public static Defective getDefObj() {
@@ -27,9 +27,9 @@ public class DataObject {
         return expObj;
     }
 
-    public static ArrayList<Product> getProdObj() {
-        return prodObj;
-    }
+//    public static ArrayList<Product> getProdObj() {
+//        return prodObj;
+//    }
 
 //    Setters:
 
@@ -47,7 +47,7 @@ public class DataObject {
 
     }
     public static void setInventory(Inventory inventory){
-        invenObj = inventory;
+        inventObj = inventory;
     }
     public static void setDefective(Defective defective){
         defObj = defective;

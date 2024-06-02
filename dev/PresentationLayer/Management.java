@@ -56,12 +56,12 @@ public class Management {
         memberLst.add("manuPriceConst");
         memberLst.add("minimalAmount");
         JsonObject JsonObj = CreateJason(8, msgLst, memberLst);
-        JsonObj.addProperty("total", "0, 0");
-        JsonObj.addProperty("manuPriceCurr", JsonObj.get("manuPriceConst").getAsString());
-        JsonObj.addProperty("marketPriceCurr", JsonObj.get("marketPriceConst").getAsString());
-        JsonObj.addProperty("mySalePrice", "null");
-        JsonObj.addProperty("discount", "0");
-        JsonObj.addProperty("items", "null");
+//        JsonObj.addProperty("total", "0, 0");
+//        JsonObj.addProperty("manuPriceCurr", JsonObj.get("manuPriceConst").getAsString());
+//        JsonObj.addProperty("marketPriceCurr", JsonObj.get("marketPriceConst").getAsString());
+//        JsonObj.addProperty("mySalePrice", "null");
+//        JsonObj.addProperty("discount", "0");
+//        JsonObj.addProperty("items", "null");
 //       need to send the json to proper controller
 
 
