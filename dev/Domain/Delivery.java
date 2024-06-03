@@ -72,4 +72,24 @@ public Delivery(LocalDate date, LocalTime hour) {
             }
         }
     }
+
+        public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Delivery ID: ").append(ID)
+                .append("\nDate: ").append(date)
+                .append("\nHour: ").append(hour)
+                .append("\nTruck: ").append(truck.getID())
+                .append("\nDriver: ").append(driver.getID()).append(",").append(driver.getName())
+                .append("\nOrigin address: ").append(origin.getSite_address()).append(" contact: ").append(origin.getSite_contact_name()).append(" phone: ").append(origin.getSite_contact_phone());
+
+        for (items_form items_form : item_form) {
+            sb.append("\n").append(items_form.toString());
+        }
+
+        return sb.toString();
+    }
+
+    public ArrayList<items_form> getItems_form() {
+        return item_form;
+    }
 }

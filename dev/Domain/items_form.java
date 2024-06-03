@@ -1,7 +1,4 @@
 package Domain;
-
-import Domain.Item;
-
 import java.util.ArrayList;
 
 public class items_form {
@@ -68,11 +65,18 @@ public class items_form {
 
         // לבדוק אם לעשות get לאיטם ואז הסרה, מסיר גם מהשדה עצמו או רק מהקופי שלו
 
-        public String toString() {
-            return "items_form{" +
-                    "destination=" + destination +
-                    ", items=" + items +
-                    '}';
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("items_form{")
+                .append("Destination: ").append(destination.getSite_address()).append(" contact: ").append(destination.getSite_contact_name()).append(" phone: ").append(destination.getSite_contact_phone())
+                .append(", items=");
+
+        for (Item item : items) {
+            sb.append("\n").append(item.toString());
         }
+
+        sb.append('\n');
+        return sb.toString();
+    }
 
 }

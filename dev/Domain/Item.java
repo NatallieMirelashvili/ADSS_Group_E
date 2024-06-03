@@ -51,7 +51,10 @@ public class Item {
         return  "itemId='" + itemId + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", amount=" + amount +
-                '}';
+                '\n';
     }
 
+    public Item getItem() {
+        return this;
+    }
 }

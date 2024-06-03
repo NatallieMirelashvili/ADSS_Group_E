@@ -38,6 +38,10 @@ public class Driver {
         return password;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String toString() {
         return "Driver ID: " + ID + "\nName: " + name + "\nLicence: " + licence + "\nPhone Number: " + phone_num;
     }

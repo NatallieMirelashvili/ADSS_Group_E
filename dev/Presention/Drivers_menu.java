@@ -58,10 +58,26 @@ public class Drivers_menu {
 
         switch (choice) {
             case 1:
-
+                System.out.println(controller.print_transport_form(ID));
                 break;
             case 2:
+                int destinationID = 0;
+                System.out.println("Enter the destination ID:");
+                while (continue_loop){
+                    while (!sc.hasNextInt()) {
+                        System.out.println("Please enter an Integer");
+                        sc.next();
+                    }
+                    destinationID = sc.nextInt();
+                    if (!controller.site_exists(destinationID)) {
+                        System.out.println("Site with this ID does not exist");
+                        System.out.println("Enter the destination ID:");
+                    } else {
+                        continue_loop = false;
+                    }
+                }
 
+                System.out.println(controller.print_items_form(ID, destinationID));
                 break;
             case 3:
                 boolean start = controller.start_driving(ID);

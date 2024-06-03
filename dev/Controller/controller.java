@@ -35,4 +35,12 @@ public class controller {
     public static boolean driver_password(int driverID, int password) {
         return Temp_DB.driver_password(driverID, password);
     }
+
+    public static String print_transport_form(int driverID) {
+        return Temp_DB.print_transport_form(driverID);
+    }
+
+    public static String print_items_form(int ID, int destinationID) {
+        return Temp_DB.print_items_form(ID, destinationID);
+    }
 }

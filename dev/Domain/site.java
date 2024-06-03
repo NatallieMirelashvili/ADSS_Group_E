@@ -23,6 +23,17 @@ public class site {
         return name;
     }
 
+    public String getSite_address() {
+        return address;
+    }
+
+    public String getSite_contact_name() {
+        return contacts_name;
+    }
+
+    public String getSite_contact_phone() {
+        return phone;
+    }
     public String ToString() {
         return "Site Name: " + name + "\nType: " + type + "\nAddress: " + address + "\nContact Name: " + contacts_name + "\nPhone Number: " + phone + "\nArea: " + area;
     }

@@ -23,7 +23,7 @@ public class Temp_DB {
     }
 
     public static void add_truck(JsonObject truck) {
-    String ID = truck.get("ID").getAsString();
+        String ID = truck.get("ID").getAsString();
         String model = truck.get("model").getAsString();
         String curr_weight = truck.get("curr_weight").getAsString();
         String max_weight = truck.get("max_weight").getAsString();
@@ -40,7 +40,7 @@ public class Temp_DB {
         String contacts_name = site.get("contacts_name").getAsString();
         String phone_num = site.get("phone_num").getAsString();
         String area = site.get("area").getAsString();
-        site new_site = new site(ID, type, name, address,contacts_name, phone_num, area);
+        site new_site = new site(ID, type, name, address, contacts_name, phone_num, area);
         site_d.put(new_site.getSite_ID(), new_site);
     }
 
@@ -138,11 +138,32 @@ public class Temp_DB {
 
     public static int get_delivery_id(int driverID) {
         for (int deliveryID : delivery_forms_d.keySet()) {
-            if (delivery_forms_d.get(deliveryID).getDriverID() == driverID && delivery_forms_d.get(deliveryID).getDate().equals(LocalDate.now())){
+            if (delivery_forms_d.get(deliveryID).getDriverID() == driverID && delivery_forms_d.get(deliveryID).getDate().equals(LocalDate.now())) {
                 return deliveryID;
             }
         }
         return -1;
     }
 
+    public static String print_transport_form(int driverID) {
+        for (int deliveryID : delivery_forms_d.keySet()) {
+            if (delivery_forms_d.get(deliveryID).getDriverID() == driverID && delivery_forms_d.get(deliveryID).getDate().equals(LocalDate.now())) {
+                return delivery_forms_d.get(deliveryID).toString();
+            }
+        }
+        return "No delivery form for today";
+    }
+
+    public static String print_items_form(int ID, int destinationID) {
+        for (int deliveryID : delivery_forms_d.keySet()) {
+            if (delivery_forms_d.get(deliveryID).getDriverID() == ID && delivery_forms_d.get(deliveryID).getDate().equals(LocalDate.now())) {
+                for (items_form items_form : delivery_forms_d.get(deliveryID).getItems_form()) {
+                    if (items_form.getDestination().getSite_ID() == destinationID) {
+                        return items_form.toString();
+                    }
+                }
+            }
+        }
+        return "No items form for today";
+    }
 }
