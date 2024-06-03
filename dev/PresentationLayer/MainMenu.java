@@ -1,4 +1,6 @@
 package PresentationLayer;
+import ServiceLayer.StockController;
+
 import java.util.Scanner;
 public class MainMenu {
 //    Flag
@@ -32,7 +34,7 @@ public class MainMenu {
     public static void GenerateReports(){
         boolean initStatus = isInit();
         if (!initStatus){return;}
-        ProdReport.runMenu();
+        Report.runMenu();
     }
     public static void inventory(){
         boolean initStatus = isInit();
@@ -42,7 +44,7 @@ public class MainMenu {
     public static void ThrowItem(){
         boolean initStatus = isInit();
         if (!initStatus){return;}
-        Report.runMenu();
+        ProduceReports.runMenu();
     }
     public static void managerDetails(){
         boolean initStatus = isInit();
@@ -52,6 +54,11 @@ public class MainMenu {
                 email: ng@mailto.yossi
                 phone number: 0525381648
                 """);
+    }
+    public static void nextDay(){
+        System.out.println("Grate job for today!\n");
+        StockController.checkAllItemsExpCtr();
+        StockController.checkAllItemsSaleCtr();
     }
     public static void exit(){
         boolean initStatus = isInit();
@@ -66,12 +73,13 @@ public class MainMenu {
                 3. Decommissioning an items
                 4. Preform an inventory actions
                 5. Show warehouse manager's contact details
-                6. Exit program""";
+                6. Move to the next day before exit the office
+                7. Exit program""";
     }
 
     public static void runMenu(){
         int choice = 0;
-        while (choice!=5){
+        while (choice!=7){
             choice = GetChoice();
         }
     }
@@ -85,9 +93,10 @@ public class MainMenu {
             case 3 -> ThrowItem();
             case 4 -> inventory();
             case 5 -> managerDetails();
-            case 6 -> exit();
+            case 6 -> nextDay();
+            case 7 -> exit();
             default -> {
-                System.out.println("Please choose valid number between 1-6");
+                System.out.println("Please choose valid number between 1-7");
 
             }
         }

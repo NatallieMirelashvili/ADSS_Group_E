@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Management {
 
 //    help function:
-    private static ArrayList<String> showCatalogChoices(){
+    public static ArrayList<String> showCatalogChoices(){
         Scanner scan = new Scanner(System.in);
         ArrayList<String> categoriesForSales = new ArrayList<>(3);
         String mainCat = readStrFromUsr("Please enter the main category you would like to update its sale", scan);
@@ -41,12 +41,6 @@ public class Management {
         return myJson;
     }
 
-    private static void CheckGetToMinimal(int catalogNum){
-        boolean bool = StockController.checkMinimal(catalogNum);
-        if (bool){
-            System.out.println("The product with the catalog number: " + catalogNum + "is about to run out!");
-        }
-    }
 
 //   *****Menu Functions****
     public static void AddProd(){
@@ -69,8 +63,7 @@ public class Management {
         memberLst.add("manuPriceConst");
         memberLst.add("minimalAmount");
         JsonObject JsonObj = CreateJason(8, msgLst, memberLst);
-//       need to send the json to proper controller
-
+        ProductController.createNewProd(JsonObj);
 
     }
     public static void AddItem(){
@@ -86,36 +79,40 @@ public class Management {
         memberLst.add("place");
         memberLst.add("catalogNum");
         JsonObject JsonObj = CreateJason(4, msgLst, memberLst);
+        boolean prodInStock = StockController.ProdInStockControl(JsonObj.get("catalogNum").getAsInt());
+        if(prodInStock){
+        ProductController.createNewItem(JsonObj);
+        }
+        System.out.println("There is no such products in the market, please follow the next steps: \n");
+        AddProd();
+        ProductController.createNewItem(JsonObj);
+        System.out.println("Thank you, the item and new product added successfully\n");
 
     }
     public static void RemoveProd(){
         Scanner scan = new Scanner(System.in);
-        int input = readIntFromUsr("Please enter the catalog number of the product you want cancel from selling", scan);
-        boolean status = StockController.removeItem(input);
-        CheckGetToMinimal(input);
+        int input = readIntFromUsr("Please enter the catalog number of the product you want to " +
+                "cancel from selling", scan);
+        StockController.removeProdControl(input);
     }
-    public static void SellItem() {
-        int input = readIntFromUsr("Please enter the id number of the item you want to sell", scan);
-        boolean status = StockController.sellItem(input);
-        CheckGetToMinimal(input);
-    }
+
     public static void UpdateSales(){
         ArrayList<String> askCat = showCatalogChoices();
-        StockController.updateSale(askCat.get(0), askCat.get(1), askCat.get(2));
+        StockController.updateSaleControl(askCat.get(0), askCat.get(1), askCat.get(2));
     }
     public static void UpdateDiscount(){
         ArrayList<String> askCat = showCatalogChoices();
-        StockController.updateDis(askCat.get(0), askCat.get(1), askCat.get(2));
+        StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2));
     }
     public static void MoveStoreWare(){
         Scanner scan = new Scanner(System.in);
         int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        ProductController.moveItemFromS(id);
+        StockController.moveItemFromSControl(id);
     }
     public static void MoveWareStore(){
         Scanner scan = new Scanner(System.in);
         int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        ProductController.moveItemFromW(id);
+        StockController.moveItemFromWControl(id);
     }
     public static void ReturnToMainMenu(){
         System.out.println("Returning to main menu...");
@@ -128,16 +125,15 @@ public class Management {
                 1. Add a product to inventory
                 2. Add an item to inventory
                 3. Remove a product from inventory
-                4. Sell an item
-                5. Update sales
-                6. Update discount from manufacturers
-                7. Move an item from store to warehouse
-                8. Move an item from warehouse to store
-                9. Return to main menu""";
+                4. Update sales
+                5. Update discount from manufacturers
+                6. Move an item from store to warehouse
+                7. Move an item from warehouse to store
+                8. Return to main menu""";
     }
     public static void runMenu(){
         int choice = 0;
-        while (choice!=9){
+        while (choice!=8){
             choice = GetChoice();
         }
     }
@@ -149,15 +145,13 @@ public class Management {
             case 1 -> AddProd();
             case 2 -> AddItem();
             case 3 -> RemoveProd();
-            case 4 -> SellItem();
-            case 5 -> UpdateSales();
-            case 6 -> UpdateDiscount();
-            case 7 -> MoveStoreWare();
-            case 8 -> MoveWareStore();
-            case 9 -> ReturnToMainMenu();
+            case 4 -> UpdateSales();
+            case 5 -> UpdateDiscount();
+            case 6 -> MoveStoreWare();
+            case 7 -> MoveWareStore();
+            case 8 -> ReturnToMainMenu();
             default -> {
                 System.out.println("Please choose valid number between 1-9");
-                ;
             }
         }
         return userInput;

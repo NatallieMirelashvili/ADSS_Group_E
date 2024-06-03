@@ -1,10 +1,10 @@
 package ServiceLayer;
+import DomainLayer.Inventory;
 import DomainLayer.Item;
 import DomainLayer.Product;
-import DomainLayer.DataObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import java.util.Date;
+
 
 //    Access to product functions
 public class ProductController {
@@ -17,8 +17,14 @@ public class ProductController {
     }
 
     public static void createNewProd(JsonObject record){
+        boolean alreadyInStock = StockController.ProdInStockControl(record.get("catalogNum").getAsInt());
+        if(!alreadyInStock){
         Gson gs = new Gson();
         Product newProd = gs.fromJson(record, Product.class);
-        newProd.addMeToInven();
+        newProd.addMeToInven();}
+        System.out.println("Added failed - the product already in stock.\n");
     }
+
+
 }
+
