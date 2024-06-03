@@ -5,7 +5,7 @@ import Controller.controller;
 import java.util.Scanner;
 
 public class Site_addition {
-    public static void add_new_site(String[] args) {
+    public static void add_new_site() {
         boolean validChoice = false;
         int ID = 0;
         String type = "";
@@ -44,8 +44,17 @@ public class Site_addition {
         String contact_name = sc.nextLine();
         System.out.println("Enter site contact phone number");
         String contact_phone = sc.nextLine();
-        System.out.println("Enter site area");
-        String area = sc.nextLine();
+        validChoice = false;
+        String area = null;
+        System.out.println("Enter site area - north, center or south");
+        while (!validChoice) {
+            area = sc.nextLine();
+            if (area.equals("north") || area.equals("center") || area.equals("south")) {
+                validChoice = true;
+            } else {
+                System.out.println("Invalid input. Please enter north, center or south");
+            }
+        }
         System.out.println("Site added successfully");
 
         JsonObject site = new JsonObject();

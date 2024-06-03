@@ -14,11 +14,15 @@ public class Drivers_menu {
         while (continue_loop){
             try {
                 ID = sc.nextInt();
+                if (!controller.driver_exists(ID)){
+                    System.out.println("Driver with this ID does not exist");
+                    System.out.println("Please enter your ID:");
+                    continue;
+                }
                 continue_loop = false;
             }
             catch (Exception e){
-                System.out.println("Please enter an Integer");
-                sc.next();
+                System.out.println("Please enter an Integer as your ID");
             }
         }
         continue_loop = true;
@@ -26,26 +30,25 @@ public class Drivers_menu {
         while (continue_loop){
             try {
                 password = sc.nextInt();
-                continue_loop = false;
+                if (controller.driver_password(ID, password)){
+                    continue_loop = false;
+                } else {
+                    System.out.println("Invalid password, please try again");
+                }
             }
             catch (Exception e){
-                System.out.println("Please enter an Integer");
+                System.out.println("Please enter an Integer as your password");
                 sc.next();
             }
         }
-        if (controller.driver_exists(ID) && controller.driver_password(ID, password)){
-            System.out.println("Welcome driver");
-        } else {
-            System.out.println("Invalid ID or password");
-            return;
-        }
+        continue_loop = true;
         while (continue_loop) {
             System.out.println("Welcome to Drivers menu");
             System.out.println("1. Print transport form");
             System.out.println("2. Print items form");
             System.out.println("3. Start of transportation");
             System.out.println("4. End of transportation");
-            System.out.println("5. Exit");
+            System.out.println("5. Exit \n");
             System.out.println("Enter your choice: ");
 
         int choice;
@@ -70,31 +73,34 @@ public class Drivers_menu {
                     }
                     destinationID = sc.nextInt();
                     if (!controller.site_exists(destinationID)) {
+                        if (destinationID == 0) {
+                            break;
+                        }
                         System.out.println("Site with this ID does not exist");
                         System.out.println("Enter the destination ID:");
+                        System.out.println("To return to the main menu enter 0");
                     } else {
-                        continue_loop = false;
-                    }
+                        System.out.println(controller.print_items_form(ID, destinationID));
+                        break;
+                                }
                 }
-
-                System.out.println(controller.print_items_form(ID, destinationID));
                 break;
             case 3:
                 boolean start = controller.start_driving(ID);
                 if (!start) {
-                    System.out.println("You have no transportation to start");
+                    System.out.println("You have no transportation to start \n");
                     break;
                 }
-                System.out.println("Transportation started successfully");
+                System.out.println("Transportation started successfully \n");
                 break;
             case 4:
                 boolean end = controller.end_driving(ID);
                 if (!end) {
-                    System.out.println("You have no transportation to end");
+                    System.out.println("You have no transportation to end \n");
                     break;
                 }
                 controller.end_driving(ID);
-                System.out.println("End of transportation");
+                System.out.println("End of transportation \n");
                 break;
             case 5:
                 System.out.println("Exit");

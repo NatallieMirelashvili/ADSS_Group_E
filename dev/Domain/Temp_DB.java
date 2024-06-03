@@ -47,7 +47,13 @@ public class Temp_DB {
     public static void add_delivery(JsonObject delivery) {
         String date = delivery.get("date").getAsString();
         String hour = delivery.get("hour").getAsString();
-        Delivery new_delivery = new Delivery(LocalDate.parse(date), LocalTime.parse(hour));
+        int driverID = delivery.get("driverID").getAsInt();
+        int truckID = delivery.get("truckID").getAsInt();
+        int siteID = delivery.get("siteID").getAsInt();
+        Driver driver = get_driver(driverID);
+        truck truck = get_truck(truckID);
+        site site = get_site(siteID);
+        Delivery new_delivery = new Delivery(LocalDate.parse(date), LocalTime.parse(hour), truck, driver, site);
         delivery_forms_d.put(new_delivery.getID(), new_delivery);
     }
 
@@ -70,8 +76,8 @@ public class Temp_DB {
         return trucks_d.get(truckID);
     }
 
-    public static site get_site(String site_name) {
-        return site_d.get(site_name);
+    public static site get_site(int site_ID) {
+        return site_d.get(site_ID);
     }
 
     public static Delivery get_delivery(int deliveryID) {
@@ -165,5 +171,9 @@ public class Temp_DB {
             }
         }
         return "No items form for today";
+    }
+
+    public static void change_site_area(int ID, String area) {
+        site_d.get(ID).setArea(area);
     }
 }

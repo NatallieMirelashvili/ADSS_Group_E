@@ -36,8 +36,7 @@ public class Main {
 //                    break;
 //            }
 //        }
-        for (int i = 0; i<3; i++){
-            Site_addition.add_new_site(args);
-        }
+    Driver_Addition.add_new_driver();
+        Drivers_menu.show();
     }
 }

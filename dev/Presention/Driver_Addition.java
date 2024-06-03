@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import java.util.Scanner;
 
 public class Driver_Addition {
-    public static void add_new_driver(String[] args) {
+    public static void add_new_driver() {
         int ID = 0;
         String licence = "";
         int password = 1234;
@@ -52,7 +52,7 @@ public class Driver_Addition {
                 System.out.println("Invalid input. Please enter an Integer");
                 sc.next();
             }
-            System.out.println("Driver added successfully");
+            System.out.println("Driver added successfully \n");
 
             JsonObject driver = new JsonObject();
             driver.addProperty("ID", ID);

@@ -41,4 +41,8 @@ public class site {
     public int getSite_ID() {
         return site_id;
     }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 }

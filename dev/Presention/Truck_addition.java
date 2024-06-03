@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import java.util.Scanner;
 
 public class Truck_addition {
-    public static void add_new_truck(String[] args) {
+    public static void add_new_truck() {
         int ID = 0;
         double curr_weight = 0;
         double max_weight = 0;

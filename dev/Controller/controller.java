@@ -12,6 +12,9 @@ public class controller {
     public static void add_site(JsonObject site) {
         Temp_DB.add_site(site);
     }
+    public static void add_delivery(JsonObject delivery) {
+        Temp_DB.add_delivery(delivery);
+    }
     public static boolean site_exists(int ID) {
         return Temp_DB.site_exists(ID);
     }
@@ -42,5 +45,9 @@ public class controller {
 
     public static String print_items_form(int ID, int destinationID) {
         return Temp_DB.print_items_form(ID, destinationID);
+    }
+
+    public static void change_site_area(int ID, String area) {
+        Temp_DB.change_site_area(ID, area);
     }
 }

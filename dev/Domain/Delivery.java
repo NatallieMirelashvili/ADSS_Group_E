@@ -16,10 +16,13 @@ public class Delivery {
     private ArrayList<items_form> item_form = new ArrayList<items_form>();
 
     static int counter = 0;
-public Delivery(LocalDate date, LocalTime hour) {
+public Delivery(LocalDate date, LocalTime hour, truck truck, Driver driver, site origin) {
         this.ID = counter++;
         this.date = date;
         this.hour = hour;
+        this.truck = truck;
+        this.driver = driver;
+        this.origin = origin;
     }
 
     public int getID() {
