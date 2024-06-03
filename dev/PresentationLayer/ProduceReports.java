@@ -13,18 +13,18 @@ public class ProduceReports {
         Scanner scan = new Scanner(System.in);
         String which = scan.nextLine();
         if (which.equals("All")) {
-            StockController.showAllItemsCtr();
+            System.out.println(StockController.showAllItemsCtr());
             return;
         }
         ArrayList<String> AskedCategories = Management.showCatalogChoices();
-        StockController.showByCatCtr(AskedCategories.get(0), AskedCategories.get(1), AskedCategories.get(2));
+        System.out.println(StockController.showByCatCtr(AskedCategories.get(0), AskedCategories.get(1), AskedCategories.get(2)));
 
     }
     public static void  ExpiredReport(){
-        StockController.showExpReportsCtr();
+        System.out.println(StockController.showExpReportsCtr());
     }
     public static void  DamagedReport(){
-        StockController.showDamageReportsCtr();
+        System.out.println(StockController.showDamageReportsCtr());
     }
     public static void  ThereIsExpItems(){
         if(StockController.isThereExpCtr()){

@@ -52,18 +52,22 @@ public class StockController {
     public static void checkAllItemsSaleCtr(){
         Inventory.checkAllItemsSale();
     }
-    public static void showAllItemsCtr(){
-        Inventory.showAllItems();
+    public static String showAllItemsCtr(){
+        String report = Inventory.showAllItems();
+        return report;
     }
-    public static void showByCatCtr(String main, String sub, String size){
-        Inventory.showItemsByCat(main, sub, size);
+    public static String showByCatCtr(String main, String sub, String size){
+        String report = Inventory.showItemsByCat(main, sub, size);
+        return report;
     }
-    public static void showExpReportsCtr(){
-        Exception.showYourItems();
+    public static String showExpReportsCtr(){
+        String report = Exception.showYourItems();
+        return report;
     }
 
-    public static void showDamageReportsCtr(){
-        Defective.showYourItems();
+    public static String showDamageReportsCtr(){
+        String report = Defective.showYourItems();
+        return report;
     }
 
 //    if number of expired items is not 0 - there are some expired items, so we returns true
