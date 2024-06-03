@@ -1,5 +1,6 @@
 package ServiceLayer;
 import DomainLayer.Defective;
+import DomainLayer.Expired;
 import DomainLayer.Inventory;
 
 public class StockController {
@@ -53,26 +54,22 @@ public class StockController {
         Inventory.checkAllItemsSale();
     }
     public static String showAllItemsCtr(){
-        String report = Inventory.showAllItems();
-        return report;
+        return Inventory.showAllItems();
     }
     public static String showByCatCtr(String main, String sub, String size){
-        String report = Inventory.showItemsByCat(main, sub, size);
-        return report;
+        return Inventory.showItemsByCat(main, sub, size);
     }
     public static String showExpReportsCtr(){
-        String report = Exception.showYourItems();
-        return report;
+        return Expired.showYourItems();
     }
 
     public static String showDamageReportsCtr(){
-        String report = Defective.showYourItems();
-        return report;
+        return Defective.showYourItems();
     }
 
 //    if number of expired items is not 0 - there are some expired items, so we returns true
     public static boolean isThereExpCtr(){
-            return Exception.getAmountExp() != 0;
+            return Expired.getAmountExp() != 0;
     }
 
 
