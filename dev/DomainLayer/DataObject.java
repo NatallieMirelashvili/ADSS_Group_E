@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DataObject {
 //    public static ArrayList<Item> itemsObj;
-    private static Inventory inventObj=new Inventory();
+    private static Inventory inventObj = new Inventory();
     private static Defective defObj=new Defective();
     private static Expired expObj=new Expired();
 //    private static ArrayList<Product> prodObj;
@@ -33,19 +33,22 @@ public class DataObject {
 
 //    Setters:
 
-    public static void AddItem(Item new_item){
-        itemsObj.add(new_item);
-        //adding this new item to its product list:
-        new_item.addMeToProd();
-
-    }
-    public static void AddProd(Product new_prod){
-        prodObj.add(new_prod);
-
-//        adding this new product to the stock:
+//    We need only to add items and products to the inventory in this class
 
 
-    }
+
+//    public static void AddItem(Item new_item){
+//        itemsObj.add(new_item);
+//        //adding this new item to its product list:
+//        new_item.addMeToProd();
+//
+//    }
+//    public static void AddProd(Product new_prod){
+//        prodObj.add(new_prod);
+//
+////        adding this new product to the stock:
+//
+//    }
     public static void setInventory(Inventory inventory){
         inventObj = inventory;
     }

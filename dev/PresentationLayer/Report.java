@@ -15,16 +15,17 @@ public class Report {
         //from controller
     }
     public static void  ReturnToMainMenu(){
-        System.out.println("Returning to main menu");
+        System.out.println("Returning to main menu...\n");
 
     }
     public static String PrintMenu() {
-        return "What report would you like to produce today?" +
-                "1. Produce an inventory report" +
-                "2. Produce an expired report" +
-                "3. Produce a damaged report" +
-                "4. Check if there are an expired items in store" +
-                "5. Return to main menu";
+        return """
+                What report would you like to produce today?
+                1. Produce an inventory report
+                2. Produce an expired report
+                3. Produce a damaged report
+                4. Check if there are an expired items in store
+                5. Return to main menu""";
     }
     public static void runMenu(){
         int choice = 0;
@@ -43,9 +44,8 @@ public class Report {
             case 4 -> ThereIsExpItems();
             case 5 -> ReturnToMainMenu();
             default -> {
-                //there is a outside while or not? that runs the main menu
                 System.out.println("Please choose valid number between 1-5");
-                ;
+
             }
         }
         return userInput;

@@ -1,10 +1,10 @@
 package DomainLayer;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 public class Item {
 //    ***Fields***
     private int id;
-    private Date expirationDate;
+    private LocalDate expirationDate;
     private Tuple<String, Integer> place;
     private int catalogNum;
     private Product myProduct;
@@ -12,11 +12,14 @@ public class Item {
 
 //    ***Constructor***
 
-    public Item(int id, Date expirationDate, Tuple<String, Integer> place, int catalogNum) {
+    public Item(int id, LocalDate expirationDate, Tuple<String, Integer> place, int catalogNum) {
         this.id = id;
         this.expirationDate = expirationDate;
         this.place = place;
         this.catalogNum = catalogNum;
+
+//        Replace this loop in using inventory's function which find product by its catalog number!!!!
+
         for (Product product: DataObject.getProdObj()){
             if (product.getCatalogNum()==(catalogNum)) {
                 this.myProduct = product;
@@ -30,7 +33,7 @@ public class Item {
         return id;
     }
 
-    public Date getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
@@ -48,7 +51,7 @@ public class Item {
         this.id = id;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 

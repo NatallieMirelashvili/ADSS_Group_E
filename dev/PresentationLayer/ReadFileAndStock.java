@@ -15,14 +15,15 @@ public class ReadFileAndStock {
         }
         return myJson;
     }
-    public static void readFileByType() {
+    public static void readProducts(){
+        readFileByType(1, "products line in market");
+    }
+    public static void readItems(){
+        readFileByType(2, "items for sell in market");
+    }
+    public static void readFileByType(int initCase, String msg) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Yoy received two exel files: one for creating products and the other for create specific items." +
-                "please chose one of the two options:" +
-                "1. Read products from file." +
-                "2. Read items from file");
-        int choose = scanner.nextInt();
-        System.out.println("Please enter the file path of the data type records you chosen:");
+        System.out.println("Please enter the file path of" + msg + "file records you received:\n");
         String fileP = scanner.nextLine();
         BufferedReader buffer;
         String line;
@@ -41,14 +42,14 @@ public class ReadFileAndStock {
                 JsonObject record = CreateJasonFromFile(membersLst.length, membersLst, membersValueByOrder);
 
 //                create needed object by Json using controller:
-                switch (choose){
+                switch (initCase){
                     case 1 -> ProductController.createNewProd(record);
                     case 2 -> ProductController.createNewItem(record);
                 }
                 line = buffer.readLine();
             }
         } catch (Exception e) {
-            System.out.println("File Not Found please try again");
+            System.out.println("File Not Found please try again\n");
         }
     }
 

@@ -17,3 +17,5 @@ public class StockController {
 //        forCreatedStuff.setInventory(itemsForSell);
 //    }
 }
+//LocalDate instead of Date
+

@@ -7,7 +7,7 @@ public class ProdReport {
 //   *****Menu Functions****
     private static int GetidFromUSR(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter the id number of the item you want to report on");
+        System.out.print("Please enter the id number of the item you want to report on:");
         return scanner.nextInt();
     }
     public static void  ReportDamaged(){
@@ -17,13 +17,13 @@ public class ProdReport {
         int id_expire = GetidFromUSR(); //stock controller take care of it
     }
     public static void  ReturnToMainMenu(){
-        System.out.println("Returning to main menu");
+        System.out.println("Returning to main menu...\n");
 }
     public static String PrintMenu() {
-        return "What would you like to report today?" +
-                "1. Report on a damaged item" +
-                "2. Report on an expired item" +
-                "3. Return to main menu";
+        return """
+                What would you like to report today?
+                1. Report on a damaged item
+                2. Report on an expired item3. Return to main menu""";
     }
     public static void runMenu(){
         int choice = 0;

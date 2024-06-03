@@ -1,15 +1,15 @@
 package DomainLayer;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class salePrice {
 
 //    ***Fields***
-    private Date startSale;
-    private Date endSale;
+    private LocalDate startSale;
+    private LocalDate endSale;
     private double discountRatio;
 
 //    ***Constructor***
-    public salePrice(Date startSale, Date endSale, double discountRatio) {
+    public salePrice(LocalDate startSale, LocalDate endSale, double discountRatio) {
         this.startSale = startSale;
         this.endSale = endSale;
         this.discountRatio = discountRatio;
@@ -17,11 +17,11 @@ public class salePrice {
 
 //  ***Getters***
 
-    public Date getStartSale() {
+    public LocalDate getStartSale() {
         return startSale;
     }
 
-    public Date getEndSale() {
+    public LocalDate getEndSale() {
         return endSale;
     }
 
@@ -32,11 +32,11 @@ public class salePrice {
 //    ***Setters***
 
 
-    public void setStartSale(Date startSale) {
+    public void setStartSale(LocalDate startSale) {
         this.startSale = startSale;
     }
 
-    public void setEndSale(Date endSale) {
+    public void setEndSale(LocalDate endSale) {
         this.endSale = endSale;
     }
 

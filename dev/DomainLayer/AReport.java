@@ -15,11 +15,11 @@ public class AReport {
     }
 
     public String GenerateReports() {
-        String outputForController = "";
+        StringBuilder outputForController = new StringBuilder();
         for (int i = 1; i <= amountDefectives; i++) {
-            outputForController +=(i + ". CatalogNum:" + items.get(i).getCatalogNum() + "Location:" + items.get(i).getPlace());
+            outputForController.append(i).append(". CatalogNum:").append(items.get(i).getCatalogNum()).append("Location:").append(items.get(i).getPlace());
         }
-        return outputForController;
+        return outputForController.toString();
     }
 
 }
