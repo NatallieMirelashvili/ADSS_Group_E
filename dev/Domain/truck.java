@@ -33,5 +33,12 @@ public class truck {
     public String ToString() {
         return "Truck ID: " + id + "\nModel: " + model + "\nCurrent Weight: " + curr_weight + "\nMax Weight: " + max_weight + "\nLicence: " + licence;
     }
+    public boolean isAvailable() {
+        return availability;
+    }
+
+    public String getLicense() {
+        return licence;
+    }
 }
 

@@ -47,9 +47,9 @@ public class Temp_DB {
     public static void add_delivery(JsonObject delivery) {
         String date = delivery.get("date").getAsString();
         String hour = delivery.get("hour").getAsString();
-        int driverID = delivery.get("driverID").getAsInt();
-        int truckID = delivery.get("truckID").getAsInt();
-        int siteID = delivery.get("siteID").getAsInt();
+        int driverID = delivery.get("driver_ID").getAsInt();
+        int truckID = delivery.get("truck_ID").getAsInt();
+        int siteID = delivery.get("site_ID").getAsInt();
         Driver driver = get_driver(driverID);
         truck truck = get_truck(truckID);
         site site = get_site(siteID);

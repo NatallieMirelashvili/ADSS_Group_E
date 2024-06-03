@@ -3,15 +3,16 @@ import java.util.*;
 import Controller.controller;
 
 public class Delivery_manager_menu {
-    public static void show() {
+    public static void first_entrance(){
         final int manager_password = 102030;
         boolean continue_loop = true;
         int password = 0;
-        Scanner sc = new Scanner(System.in);
+        // int counter = 0; TODO: IF MISSED THE PASSWORD 3 TIMES IT WILL EXIT
+        Scanner psd = new Scanner(System.in);
         System.out.println("Please enter your password:");
         while (continue_loop){
             try {
-                password = sc.nextInt();
+                password = psd.nextInt();
                 if (password != manager_password){
                     System.out.println("Invalid password, please try again");
                     continue;
@@ -20,10 +21,14 @@ public class Delivery_manager_menu {
             }
             catch (Exception e){
                 System.out.println("Please enter an Integer");
-                sc.next();
+                psd.next();
             }
         }
-        continue_loop = true;
+        show();
+    }
+    public static void show() {
+        Scanner sc = new Scanner(System.in);
+        boolean continue_loop = true;
         System.out.println("Welcome to Delivery Manager menu");
         while (continue_loop) {
             System.out.println("1. Add new delivery");
@@ -49,21 +54,34 @@ public class Delivery_manager_menu {
                     break;
                 case 2:
                     System.out.println("Enter site ID");
-                    try {
-                        int ID = sc.nextInt();
-                        if (!controller.site_exists(ID)){
-                            System.out.println("Site with this ID does not exist");
-                            continue;
+                    String area;
+                    while(true) {
+                        try {
+                            int ID = sc.nextInt();
+                            if (ID < 0) {
+                                System.out.println("Invalid input. Please enter a positive Integer as site ID");
+                                continue;
+                            }
+                            if (!controller.site_exists(ID)) {
+                                System.out.println("Site with this ID does not exist please enter a valid site ID");
+                                continue;
+                            }
+                            sc.nextLine();
+                            System.out.println("Enter new area - north, center or south");
+                            while (true) {
+                                area = sc.nextLine();
+                                if (!area.equals("north") && !area.equals("center") && !area.equals("south")) {
+                                    System.out.println("Invalid area, please enter north, center or south");
+                            }
+                                else break;
+                            }
+                            controller.change_site_area(ID, area);
+                            System.out.println("Area changed successfully");
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input. Please enter an Integer");
+                            sc.next();
                         }
-                        System.out.println("Enter new area");
-                        String area = sc.nextLine();
-                        if (!area.equals("north") && !area.equals("center") && !area.equals("south")){
-                            System.out.println("Invalid area, please enter north, center or south");
-                            continue;
-                        }
-                        controller.change_site_area(ID, area);
-                    } catch (Exception e) {
-                        System.out.println("Invalid input. Please enter an Integer");
                     }
                     break;
                 case 3:
@@ -75,8 +93,8 @@ public class Delivery_manager_menu {
                 case 5:
                     Site_addition.add_new_site();
                     break;
-                case 6:
-                    Delivery_duration.start_delivery();
+                case 6: // TODO: THIS FUNCTION IS NOT IMPLEMENTED YET
+                    //Delivery_duration.start_delivery();
                     break;
                 case 7:
                     continue_loop = false;
@@ -85,5 +103,8 @@ public class Delivery_manager_menu {
                     System.out.println("Invalid choice, please enter a number between 1 and 7");
             }
         }
+
     }
+
+
 }

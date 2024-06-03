@@ -50,4 +50,14 @@ public class controller {
     public static void change_site_area(int ID, String area) {
         Temp_DB.change_site_area(ID, area);
     }
+    public static boolean truck_available(int ID) {
+        return Temp_DB.get_truck(ID).isAvailable();
+    }
+    public static boolean driver_available(int ID) {
+        return Temp_DB.get_driver(ID).getAvailability();
+    }
+
+    public static boolean check_license(int truckId, int driverId) {
+        return Temp_DB.get_truck(truckId).getLicense().equals(Temp_DB.get_driver(driverId).getLicense());
+    }
 }

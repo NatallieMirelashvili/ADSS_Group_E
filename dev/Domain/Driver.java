@@ -45,4 +45,8 @@ public class Driver {
     public String toString() {
         return "Driver ID: " + ID + "\nName: " + name + "\nLicence: " + licence + "\nPhone Number: " + phone_num;
     }
+
+    public String getLicense() {
+        return licence;
     }
+}

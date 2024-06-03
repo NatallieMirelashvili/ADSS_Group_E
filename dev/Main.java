@@ -36,7 +36,7 @@ public class Main {
 //                    break;
 //            }
 //        }
-    Driver_Addition.add_new_driver();
-        Drivers_menu.show();
+Delivery_manager_menu.first_entrance(); //   Driver_Addition.add_new_driver();
+//        Drivers_menu.show();
     }
 }
