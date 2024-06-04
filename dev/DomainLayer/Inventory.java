@@ -279,13 +279,13 @@ public class Inventory{
     static public StringBuilder HelperGenerateReportsStock(ArrayList<Product> toPrint) {
         int i = 1;
         StringBuilder output = new StringBuilder();
-        String title = "Inventory report:\n";
+        String title = "Inventory report:\n\n";
         for (Product product : toPrint) {
             output.append(i).append(".");
             output.append(product.printProduct());
             String catalogNum = "Catalog Number:" + product.getCatalogNumProduct() + "\n";
             String total = "Total amount:" + product.getTotalAmount() + "\n";
-            output.append(catalogNum).append(total);
+            output.append(catalogNum).append(total).append("\n\n");
             i++;
         }
         return output;

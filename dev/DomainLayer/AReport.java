@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 abstract public class AReport {
 
-//   ***Fields***
+    //   ***Fields***
     protected ArrayList<Tuple<String,Item>> items;
     protected String name;
     protected int amount;
 
     //   ***Getters***
-
     public ArrayList<Tuple<String, Item>> getItems() {
         return items;
     }
@@ -38,7 +37,7 @@ abstract public class AReport {
     //After printing all items are removed
     public String GenerateReports() {
         StringBuilder outputForController = new StringBuilder();
-        String title = "Report" + name + "items:\n";
+        String title = "Report" + name + "items:\n\n";
         outputForController.append(title);
         //all information
         for (int i=1; i<= items.size(); i++) {
@@ -49,7 +48,7 @@ abstract public class AReport {
             outputForController.append(Serial).append(items.get(i).getVal1()).append(location).append(catalogNum).append(id);
         }
         String summery = "Total" + name + "items:" + items.size() +"\n";
-        outputForController.append(summery);
+        outputForController.append("\n\n").append(summery);
         items.clear();
         return outputForController.toString();
     }
