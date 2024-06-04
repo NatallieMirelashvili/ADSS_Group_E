@@ -40,6 +40,7 @@ public class ProductController {
                     record.get("discount").getAsInt(),items, record.get("minimalAmount").getAsInt());
             newProd.addMeToInven();
         }
+
         System.out.println("Added failed - the product already in stock.\n");
     }
 
