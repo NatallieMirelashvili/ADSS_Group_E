@@ -16,7 +16,7 @@ public class ProduceReports {
             System.out.println(StockController.showAllItemsCtr());
             return;
         }
-        ArrayList<String> AskedCategories = Management.showCatalogChoices();
+        ArrayList<String> AskedCategories = Management.showCatalogChoices(scan);
         System.out.println(StockController.showByCatCtr(AskedCategories.get(0), AskedCategories.get(1), AskedCategories.get(2)));
 
     }

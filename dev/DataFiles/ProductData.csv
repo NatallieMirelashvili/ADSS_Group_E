@@ -1,0 +1,8 @@
+minimalAmount,items,discount,mySalePrice,manuPriceCurr,marketPriceCurr,manuPriceConst,marketPriceConst,catalogNum,manuFactor,total,size,subCatName,catName
+1,null,0, null,15.09,30.99,15.09,30.99,1111,Tnuva,50 20,0.5 litter,Cream cheese,Dairy
+2,null,0,null,10.8,40.99,10.8,40.99,1112,Tara,50 20,500 gram,Gouda,Dairy
+4,null,0,null,12.78,30.99,12.78,30.99,1113,Straus,50 30,100 gram,Cheddar,Dairy
+3,null,0,null,19.67,50.99,19.67,50.99,1114,Straus,50 30,200 gram,Cheddar,Dairy
+2,null,0,null,20.2,40.19,20.2,40.19,1115,Tnuva,50 30,200 gram,Cheddar,Dairy
+1,null,0,null,30.1,50.99,30.1,50.99,2111,Sano,40 50,2 litter,Bleach,Cleaning
+2,null,0,null,11.12,34.9,11.12,34.9,2112,Touch,100 300,1 gram,Liquid soap,Cleaning

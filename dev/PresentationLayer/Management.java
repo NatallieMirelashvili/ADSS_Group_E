@@ -4,17 +4,17 @@ import ServiceLayer.StockController;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Management {
 
 //    help function:
-    public static ArrayList<String> showCatalogChoices(){
-        Scanner scan = new Scanner(System.in);
+    public static ArrayList<String> showCatalogChoices(Scanner scan){
         ArrayList<String> categoriesForSales = new ArrayList<>(3);
-        String mainCat = readStrFromUsr("Please enter the main category you would like to update its sale", scan);
-        String sub = readStrFromUsr("If you want to update sale on a specific sub category, enter its name or press 0 if dont", scan);
-        String size = readStrFromUsr("If you want to update sale on a specific size of product, for liquid add the " +
+        String mainCat = readStrFromUsr("Please enter the main category", scan);
+        String sub = readStrFromUsr("If you want to add a specific sub category, enter its name or press 0 if dont", scan);
+        String size = readStrFromUsr("If you want to add a specific size of product, for liquid add the " +
                 "word 'litters' else add the word 'grams' after the size number or press 0 if you dont", scan);
         categoriesForSales.add(mainCat);
         categoriesForSales.add(sub);
@@ -97,22 +97,44 @@ public class Management {
     }
 
     public static void UpdateSales(){
-        ArrayList<String> askCat = showCatalogChoices();
-        StockController.updateSaleControl(askCat.get(0), askCat.get(1), askCat.get(2));
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> askCat = showCatalogChoices(scan);
+        String getStartMSG = "Please enter the start date of sale by the format: YYYY-MM-DD";
+        String fromSTR = readStrFromUsr(getStartMSG, scan);
+        LocalDate fromDate = LocalDate.parse(fromSTR);
+        String getToMSG ="Please enter the due date of sale by the format: YYYY-MM-DD";
+        String toSTR = readStrFromUsr(getToMSG, scan);
+        LocalDate dueDate = LocalDate.parse(toSTR);
+        System.out.println("Please enter the sale percentage: ");
+        double percentage = scan.nextDouble();
+        StockController.updateSaleControl(askCat.get(0), askCat.get(1), askCat.get(2), fromDate, dueDate, percentage);
     }
     public static void UpdateDiscount(){
-        ArrayList<String> askCat = showCatalogChoices();
-        StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2));
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> askCat = showCatalogChoices(scan);
+        System.out.println("Please enter the discount percentage: ");
+        double ratio = scan.nextDouble();
+        String manuMSG = "Please enter the name of the manufacturer you want to update its percentage: ";
+        String manu = readStrFromUsr(manuMSG, scan);
+        StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2), ratio, manu);
     }
     public static void MoveStoreWare(){
         Scanner scan = new Scanner(System.in);
         int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        StockController.moveItemFromSControl(id);
+        String getPassMSG = "Please type a letter in [A-Z] which present the pass in the warehouse where you want to put the item: ";
+        String pass = readStrFromUsr(getPassMSG, scan);
+        String shelfMSG = "Please type the number of shelf you want to put your item: ";
+        Integer shelf = readIntFromUsr(shelfMSG, scan);
+        StockController.moveItemFromSControl(id, pass, shelf);
     }
     public static void MoveWareStore(){
         Scanner scan = new Scanner(System.in);
         int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        StockController.moveItemFromWControl(id);
+        String getPassMSG = "Please type a the pass in the store where you want to put the item: ";
+        String pass = readStrFromUsr(getPassMSG, scan);
+        String shelfMSG = "Please type the number of shelf you want to put your item: ";
+        Integer shelf = readIntFromUsr(shelfMSG, scan);
+        StockController.moveItemFromSControl(id, pass, shelf);
     }
     public static void ReturnToMainMenu(){
         System.out.println("Returning to main menu...");

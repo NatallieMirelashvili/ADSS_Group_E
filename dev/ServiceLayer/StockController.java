@@ -1,7 +1,8 @@
 package ServiceLayer;
-import DomainLayer.Defective;
-import DomainLayer.Expired;
 import DomainLayer.Inventory;
+import DomainLayer.Tuple;
+
+import java.time.LocalDate;
 
 public class StockController {
     public static boolean ProdInStockControl(int cagNum){return Inventory.ProductExist(cagNum);}
@@ -31,25 +32,22 @@ public class StockController {
 
     public static boolean checkMinimalControl(int idOfItem){return Inventory.checkMinimal(idOfItem);}
 
-    //need also filed (LocalDate from, LocalDate to, double ratioSale)
-    public static void updateSaleControl(String main, String sub, String size){
-        Inventory.setSalePrice(main, sub, size);
+    public static void updateSaleControl(String main, String sub, String size, LocalDate from, LocalDate to, double ratio){
+        Inventory.setSalePrice(main, sub, size, from, to, ratio);
     }
 
-    //need also filed (double myDiscount, String myManufacturer)
-    public static void updateDisControl(String main, String sub, String size){
-        Inventory.setDiscount(main, sub, size);
+    public static void updateDisControl(String main, String sub, String size,double ratio, String manu){
+        Inventory.setDiscount(main, sub, size, ratio, manu);
     }
 
-    //need also filed (Tuple<String, Integer> placeNew)
-    public static void moveItemFromSControl(int idToMove){
-        Inventory.FromStoreToWare(idToMove);
+    public static void moveItemFromSControl(int idToMove, String pass, Integer shelf){
+        Tuple<String, Integer> newPlace = new Tuple<>(pass, shelf);
+        Inventory.FromStoreToWare(idToMove, newPlace);
     }
 
-    //need also filed (Tuple<String, Integer> placeNew)
-
-    public static void moveItemFromWControl(int idToMove){
-        Inventory.FromWareToStore(idToMove);
+    public static void moveItemFromWControl(int idToMove, String pass, Integer shelf){
+        Tuple<String, Integer> newPlace = new Tuple<>(pass, shelf);
+        Inventory.FromWareToStore(idToMove, newPlace);
     }
 
     public static void checkAllItemsExpCtr(){
@@ -80,8 +78,5 @@ public class StockController {
 
 
 
-
-
 }
-//LocalDate instead of Date
 

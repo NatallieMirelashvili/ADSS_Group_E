@@ -2,6 +2,7 @@ package ServiceLayer;
 import DomainLayer.Inventory;
 import DomainLayer.Item;
 import DomainLayer.Product;
+import DomainLayer.Tuple;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -11,7 +12,7 @@ public class ProductController {
 
 // Create item/ product
     public static void createNewItem(JsonObject record){
-        Gson gs = new Gson();
+        Tuple<String, Integer> place =
         Item newItem = gs.fromJson(record, Item.class);
         newItem.addMeToProd();
     }
