@@ -22,7 +22,10 @@ public class Product {
 
 //    ***Contracture***
 
-    public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total, String manuFactor, int catalogNumProduct, double marketPriceConst, double manuPriceConst, double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount, ArrayList<Item> items, int minimalAmount) {
+    public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total,
+                   String manuFactor, int catalogNumProduct, double marketPriceConst, double manuPriceConst,
+                   double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount,
+                   ArrayList<Item> items, int minimalAmount) {
         this.catName = catName;
         this.subCatName = subCatName;
         this.size = size;
