@@ -6,26 +6,18 @@ public class Item {
     private int id;
     private LocalDate expirationDate;
     private Tuple<String, Integer> place;
-    private int catalogNum;
+    private int catalogNumItem;
     private Product myProduct;
 
 
 //    ***Constructor***
 
-    public Item(int id, LocalDate expirationDate, Tuple<String, Integer> place, int catalogNum) {
+    public Item(int id, LocalDate expirationDate, Tuple<String, Integer> place, int catalogNumItem) {
         this.id = id;
         this.expirationDate = expirationDate;
         this.place = place;
-        this.catalogNum = catalogNum;
+        this.catalogNumItem = catalogNumItem;
 
-//        Replace this loop in using inventory's function which find product by its catalog number!!!!
-
-        for (Product product: DataObject.getProdObj()){
-            if (product.getCatalogNum()==(catalogNum)) {
-                this.myProduct = product;
-                break;
-            }
-        }
     }
 //    ***Getters***
 
@@ -41,8 +33,8 @@ public class Item {
         return place;
     }
 
-    public int getCatalogNum() {
-        return catalogNum;
+    public int getCatalogNumItem() {
+        return catalogNumItem;
     }
 
 //    ***Setters***
@@ -59,18 +51,12 @@ public class Item {
         this.place = place;
     }
 
-    public void setCatalogNum(int catalogNum) {
-        this.catalogNum = catalogNum;
-    }
-    public void addMeToProd(){
-//        In the next work get this from data layer
-        ArrayList<Product> products = DataObject.getInventObj().getProdByCatalog();
-        for(Product prod: products){
-            if (this.getCatalogNum() == prod.getCatalogNum()){
-                prod.addItemToLst(this);
-                break;
-            }
-        }
+    public void setCatalogNumItem(int catalogNumItem) {
+        this.catalogNumItem = catalogNumItem;
     }
 
+    public void addMeToProd() {
+        Product myProduct = Inventory.FindProduct(this.catalogNumItem);
+        myProduct.addItemToLst(this);
+    }
 }

@@ -10,7 +10,7 @@ public class Product {
     private String size;
     private Tuple<Integer, Integer> total;
     private String manuFactor;
-    private int catalogNum;
+    private int catalogNumProduct;
     private double marketPriceConst;
     private double manuPriceConst;
     private double manuPriceCurr;
@@ -22,13 +22,13 @@ public class Product {
 
 //    ***Contracture***
 
-    public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total, String manuFactor, int catalogNum, double marketPriceConst, double manuPriceConst, double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount, ArrayList<Item> items, int minimalAmount) {
+    public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total, String manuFactor, int catalogNumProduct, double marketPriceConst, double manuPriceConst, double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount, ArrayList<Item> items, int minimalAmount) {
         this.catName = catName;
         this.subCatName = subCatName;
         this.size = size;
         this.total = total;
         this.manuFactor = manuFactor;
-        this.catalogNum = catalogNum;
+        this.catalogNumProduct = catalogNumProduct;
         this.marketPriceConst = marketPriceConst;
         this.manuPriceConst = manuPriceConst;
         this.manuPriceCurr = manuPriceCurr;
@@ -61,8 +61,8 @@ public class Product {
     public String getManuFactor() {
         return manuFactor;
     }
-    public int getCatalogNum() {
-        return catalogNum;
+    public int getCatalogNumProduct() {
+        return catalogNumProduct;
     }
 
     public double getMarketPriceConst() {
@@ -130,8 +130,8 @@ public class Product {
         this.manuFactor = manuFactor;
     }
 
-    public void setCatalogNum(int catalogNum) {
-        this.catalogNum = catalogNum;
+    public void setCatalogNumProduct(int catalogNumProduct) {
+        this.catalogNumProduct = catalogNumProduct;
     }
 
     public void setMarketPriceConst(double marketPriceConst) {
@@ -166,14 +166,24 @@ public class Product {
         return getTotalAmount()<= minimalAmount;
     }
 
+    //add item
     public void addItemToLst(Item newItem){
-        if (newItem.getCatalogNum() == catalogNum){
+        if (newItem.getCatalogNumItem() == catalogNumProduct){
             items.add(newItem);
         }
     }
+
+    public Item FindItemInPro(int IDItem) {
+        for (Item items : items) {
+            if (items.getId() == IDItem) {
+                return items;
+            }
+        }
+        return null;
+    }
+
     public void addMeToInven(){
-        Inventory inventory = DataObject.getInventObj();
-        inventory.addProductToInventory(this);
+            DataObject.getInventObj().addProductToInventory(this);
     }
 
 }

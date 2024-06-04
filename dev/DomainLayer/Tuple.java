@@ -34,9 +34,7 @@ public class Tuple<T,U> implements Serializable {
 
     @Override
     public String toString() {
-        return "Pair{" +
-                "val1=" + val1 +
-                ", val2=" + val2 +"}";
+        return val1 +"," + val2;
     }
 
     //    ***Setters**

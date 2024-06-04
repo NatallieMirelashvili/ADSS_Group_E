@@ -3,52 +3,26 @@ package DomainLayer;
 import java.util.ArrayList;
 
 public class DataObject {
-//    public static ArrayList<Item> itemsObj;
     private static Inventory inventObj = new Inventory();
-    private static Defective defObj=new Defective();
-    private static Expired expObj=new Expired();
-//    private static ArrayList<Product> prodObj;
+    private static AReport defObj=new Defective();
+    private static AReport expObj=new Expired();
 
-//    Getters
-
-//    public static ArrayList<Item> getItemsObj() {
-//        return itemsObj;
-//    }
+//    *** Getters ***
 
     public static Inventory getInventObj() {
         return inventObj;
     }
 
-    public static Defective getDefObj() {
+    public static AReport getDefObj() {
         return defObj;
     }
 
-    public static Expired getExpObj() {
+    public static AReport getExpObj() {
         return expObj;
     }
 
-//    public static ArrayList<Product> getProdObj() {
-//        return prodObj;
-//    }
 
-//    Setters:
-
-//    We need only to add items and products to the inventory in this class
-
-
-
-//    public static void AddItem(Item new_item){
-//        itemsObj.add(new_item);
-//        //adding this new item to its product list:
-//        new_item.addMeToProd();
-//
-//    }
-//    public static void AddProd(Product new_prod){
-//        prodObj.add(new_prod);
-//
-////        adding this new product to the stock:
-//
-//    }
+    //    *** Setters ***
     public static void setInventory(Inventory inventory){
         inventObj = inventory;
     }

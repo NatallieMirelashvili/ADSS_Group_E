@@ -4,7 +4,7 @@ import DomainLayer.Expired;
 import DomainLayer.Inventory;
 
 public class StockController {
-    public static boolean ProdInStockControl(int cagNum){return Inventory.ProdInStock(cagNum);}
+    public static boolean ProdInStockControl(int cagNum){return Inventory.ProductExist(cagNum);}
 
 
 
@@ -30,20 +30,26 @@ public class StockController {
     }
 
     public static boolean checkMinimalControl(int idOfItem){return Inventory.checkMinimal(idOfItem);}
+
+    //need also filed (LocalDate from, LocalDate to, double ratioSale)
     public static void updateSaleControl(String main, String sub, String size){
-        Inventory.updateSale(main, sub, size);
+        Inventory.setSalePrice(main, sub, size);
     }
 
-
+    //need also filed (double myDiscount, String myManufacturer)
     public static void updateDisControl(String main, String sub, String size){
-        Inventory.updateDiscount(main, sub, size);
+        Inventory.setDiscount(main, sub, size);
     }
+
+    //need also filed (Tuple<String, Integer> placeNew)
     public static void moveItemFromSControl(int idToMove){
-        Inventory.moveFromStore(idToMove);
+        Inventory.FromStoreToWare(idToMove);
     }
+
+    //need also filed (Tuple<String, Integer> placeNew)
 
     public static void moveItemFromWControl(int idToMove){
-        Inventory.moveFromWarehouse(idToMove);
+        Inventory.FromWareToStore(idToMove);
     }
 
     public static void checkAllItemsExpCtr(){
@@ -60,16 +66,16 @@ public class StockController {
         return Inventory.showItemsByCat(main, sub, size);
     }
     public static String showExpReportsCtr(){
-        return Expired.showYourItems();
+        return Inventory.generateReportExpired();
     }
 
     public static String showDamageReportsCtr(){
-        return Defective.showYourItems();
+        return Inventory.generateReportDamage();
     }
 
 //    if number of expired items is not 0 - there are some expired items, so we returns true
     public static boolean isThereExpCtr(){
-            return Expired.getAmountExp() != 0;
+            return Inventory.getAmountExp() != 0;
     }
 
 

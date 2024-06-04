@@ -3,10 +3,9 @@ package DomainLayer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Expired extends AReport{
+public class Expired extends AReport {
 
-    //    ***Constructor***
     public Expired() {
-        super();
+        this.name = "expired";
     }
 }
