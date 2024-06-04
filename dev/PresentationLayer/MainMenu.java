@@ -7,11 +7,7 @@ public class MainMenu {
     private static boolean initProgram = false;
 //    help functions
     private static boolean isInit(){
-        if (!initProgram){
-            System.out.println("Please choose option 1 first and initial the products in the market\n");
-            return false;
-        }
-        return true;
+        return initProgram;
     }
 
 // ***Menu Functions***
@@ -21,14 +17,18 @@ public class MainMenu {
             System.out.println("System already initialed\n");
             return;
         }
-        System.out.println("Welcome to your market system, to start please follow the steps:\n");
-        ReadFileAndStock.readProducts();
+        System.out.println("Welcome to your market system\n");
+        boolean bool = ReadFileAndStock.readProducts();
+        if (!bool){
+            return;
+        }
         System.out.println("Thank you! Products line of your market initialize\n");
-        ReadFileAndStock.readItems();
-        ReadFileAndStock.createStock();
+        bool = ReadFileAndStock.readItems();
+        if (!bool){
+            return;
+        }
         initProgram = true;
         System.out.println("Thank you! we are ready to start...\n");
-
     }
 
     public static void GenerateReports(){
@@ -69,12 +69,13 @@ public class MainMenu {
         return """
                 What would you like to do today?
                 1. fetch program
-                2. Generate reports
-                3. Decommissioning an items
+                2. sell/report on a damage/expired item
+                3. Generate reports
                 4. Preform an inventory actions
                 5. Show warehouse manager's contact details
                 6. Move to the next day before exit the office
-                7. Exit program""";
+                7. Exit program
+                """;
     }
 
     public static void runMenu(){

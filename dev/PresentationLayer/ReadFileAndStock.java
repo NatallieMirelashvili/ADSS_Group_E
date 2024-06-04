@@ -1,36 +1,36 @@
 package PresentationLayer;
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import ServiceLayer.ProductController;
 
 public class ReadFileAndStock {
     private static JsonObject CreateJasonFromFile(int iteration, String[] memberLst,String[] valuesOfMembers){
         JsonObject myJson = new JsonObject();
-        for (int i = 0; i <= iteration; i++){
+        for (int i = 0; i < iteration; i++){
             String member = memberLst[i];
             String value = valuesOfMembers[i];
             myJson.addProperty(member, value);
         }
         return myJson;
     }
-    public static void readProducts(){
-        readFileByType(1, "products line in market");
+    public static boolean readProducts(){
+        return readFileByType(1, "products line in market", "C:\\Users\\המחשב שלי\\Documents\\עבודות בניתוץ\\ADSS_Group_E\\dev\\DataFiles\\ProductData.csv");
     }
-    public static void readItems(){
-        readFileByType(2, "items for sell in market");
+    public static boolean readItems(){
+        return readFileByType(2, "items for sell in market", "C:\\Users\\המחשב שלי\\Documents\\עבודות בניתוץ\\ADSS_Group_E\\dev\\DataFiles\\ItemsData.csv");
     }
-    public static void readFileByType(int initCase, String msg) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the file path of" + msg + "file records you received:\n");
-        String fileP = scanner.nextLine();
+    public static boolean readFileByType(int initCase, String msg, String filePath) {
+        System.out.println("Loading "+ msg + "...\n");
         BufferedReader buffer;
         String line;
         try {
 //            Read object fields:
 
-            buffer = new BufferedReader((new FileReader(fileP)));
+            buffer = new BufferedReader((new FileReader(filePath)));
             line = buffer.readLine();
             String[] membersLst = line.split(",");
 
@@ -47,16 +47,19 @@ public class ReadFileAndStock {
                     case 2 -> ProductController.createNewItem(record);
                 }
                 line = buffer.readLine();
+
             }
-        } catch (Exception e) {
+            return true;
+        } catch (FileNotFoundException e) {
             System.out.println("File Not Found please try again\n");
+            return false;
+        }
+        catch (IOException e){
+            System.out.println("Some IO Exception has occurred\n");
+            return false;
         }
     }
 
 //    After creating products and items we want to assemble all data in Stock classes:
-
-    public static void createStock() {
-
-    }
 
 }

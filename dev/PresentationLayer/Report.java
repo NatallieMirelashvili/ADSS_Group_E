@@ -50,7 +50,8 @@ public class Report {
                 1. Report on a damaged item
                 2. Report on an expired item.
                 3. Sell an item
-                4. Return to main menu""";
+                4. Return to main menu
+                """;
     }
     public static void runMenu(){
         int choice = 0;
