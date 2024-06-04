@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+
 import ServiceLayer.ProductController;
 
-public class ReadFileAndStock {
+public class ReadFile {
     private static JsonObject CreateJasonFromFile(int iteration, String[] memberLst,String[] valuesOfMembers){
         JsonObject myJson = new JsonObject();
         for (int i = 0; i < iteration; i++){
