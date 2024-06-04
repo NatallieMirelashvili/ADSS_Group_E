@@ -4,22 +4,24 @@ import java.util.ArrayList;
 
 abstract public class AReport {
 
+//   ***Fields***
     protected ArrayList<Tuple<String,Item>> items;
     protected String name;
     protected int amount;
+
+    //   ***Getters***
+
     public ArrayList<Tuple<String, Item>> getItems() {
         return items;
     }
-
     public int getAmount() {
         return amount;
     }
-
     public String getName() {
         return name;
     }
 
-
+    //   ***Methood***
 
     //print a report by format->
     //Report (by name) items:
@@ -27,6 +29,7 @@ abstract public class AReport {
     //Category:
     //Sub Category:
     //Size:
+    //Manufacturer:
     //Location:
     //Catalog Number:
     //ID:
@@ -51,6 +54,7 @@ abstract public class AReport {
         return outputForController.toString();
     }
 
+    //add item to report with important details
     public void AddItemToMe(Tuple<String,Item> toAdd){
         items.add(toAdd);
     }

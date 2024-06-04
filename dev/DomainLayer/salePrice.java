@@ -16,30 +16,23 @@ public class salePrice {
     }
 
 //  ***Getters***
-
     public LocalDate getStartSale() {
         return startSale;
     }
-
     public LocalDate getEndSale() {
         return endSale;
     }
-
     public double getDiscountRatio() {
         return discountRatio;
     }
 
 //    ***Setters***
-
-
     public void setStartSale(LocalDate startSale) {
         this.startSale = startSale;
     }
-
     public void setEndSale(LocalDate endSale) {
         this.endSale = endSale;
     }
-
     public void setDiscountRatio(double discountRatio) {
         this.discountRatio = discountRatio;
     }

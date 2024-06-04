@@ -6,16 +6,15 @@ import java.time.LocalDate;
 
 public class StockController {
     public static boolean ProdInStockControl(int cagNum){return Inventory.ProductExist(cagNum);}
-
-
+    
 
     //    delete from inventory:
-    public static void removeProdControl(int idToRemove){
-        if(!ProdInStockControl(idToRemove)){
+    public static void removeProdControl(int CatNumToRemove){
+        if(!ProdInStockControl(CatNumToRemove)){
             System.out.println("Sorry, you can't remove unexcited product\n");
             return;
         }
-        Inventory.removeProd(idToRemove);
+        Inventory.removeProd(CatNumToRemove);
     }
 
 //    you can only sell or report item if its exist
@@ -55,13 +54,13 @@ public class StockController {
     }
 
     public static void checkAllItemsSaleCtr(){
-        Inventory.checkAllItemsSale();
+        Inventory.checkAllProdSale();
     }
-    public static String showAllItemsCtr(){
-        return Inventory.showAllItems();
+    public static StringBuilder showAllItemsCtr(){
+        return Inventory.GenerateReportsStock();
     }
-    public static String showByCatCtr(String main, String sub, String size){
-        return Inventory.showItemsByCat(main, sub, size);
+    public static StringBuilder showByCatCtr(String main, String sub, String size){
+        return Inventory.GenerateReportsStockByCat(main, sub, size);
     }
     public static String showExpReportsCtr(){
         return Inventory.generateReportExpired();
@@ -76,6 +75,9 @@ public class StockController {
             return Inventory.getAmountExp() != 0;
     }
 
+    public static boolean isThereDemCtr(){
+        return Inventory.getAmountDef() != 0;
+    }
 
 
 }

@@ -22,14 +22,4 @@ public class DataObject {
     }
 
 
-    //    *** Setters ***
-    public static void setInventory(Inventory inventory){
-        inventObj = inventory;
-    }
-    public static void setDefective(Defective defective){
-        defObj = defective;
-    }
-    public static void setExpObj(Expired expired){
-        expObj = expired;
-    }
 }

@@ -3,7 +3,6 @@ package DomainLayer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.time.LocalDate;
 
 
 import static DomainLayer.DataObject.getDefObj;
@@ -13,24 +12,31 @@ public class Inventory{
 
     //    ***Fields***
     static private HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock=new HashMap<>();
-    static private int amountItems=0;
     static private int amountProducts=0;
-    private static LocalDate currentDate = LocalDate.now();
-
-
+    static private LocalDate currentDate = LocalDate.now();
 
     //    ***Getters***
-    public int getAmountItems() {
-        return amountItems;
+    static public int getAmountItems() {
+        int allItems=0;
+        for (int i=0; i<amountProducts; i++) {
+            allItems += runAllProducts().get(i).getTotalAmount();
+        }
+        return allItems;
     }
-
-    public int getAmountProducts() {
+    static public int getAmountProducts() {
         return amountProducts;
     }
-    public HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> getMyStock() {
+    static public HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> getMyStock() {
         return myStock;
     }
 
+    //     ***Setters***
+
+    static public void setAmountProducts(int amountProducts) {
+        Inventory.amountProducts = amountProducts;
+    }
+
+    //    ***Methood***
 
     //update sale price about products by category, sub category and size that given (all or some)
     static public void setSalePrice(String cat, String subCat , String size, LocalDate from, LocalDate to, double ratioSale) {
@@ -60,10 +66,6 @@ public class Inventory{
             discountOnProducts(runProductByCat(cat), myDiscount,myManufacturer);
         }
     }
-
-
-//    ***Running by category***
-
 
     //return an array list of all products by category, sub category and size
     static public ArrayList<Product> runProductBySize (String cat, String subCat, String size) {
@@ -99,8 +101,6 @@ public class Inventory{
         return productsRes;
     }
 
-//    ***Help Functions***
-
     //help function-update discount about list of products
     static public void discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
         for (Product product : products) {
@@ -111,29 +111,26 @@ public class Inventory{
 
     //find if product exist in inventory
     static public boolean ProductExist(int catNumber) {
-        ArrayList<Product> AllProducts = runAllProducts();
-        for (Product product : AllProducts){
-            if (product.getCatalogNumProduct()==catNumber){
-                return true;
-            }
-        }
+        if (FindProduct(catNumber)!=null)
+            return true;
         return false;
     }
 
-    //return product in inventory only if he exists
+    //return product in inventory if he exists; otherwise return null.
     static public Product FindProduct(int catNumber) {
         Product productRes = null;
         ArrayList<Product> AllProducts = runAllProducts();
         for (Product product : AllProducts){
             if (product.getCatalogNumProduct()==catNumber){
                 productRes=product;
+                break;
             }
         }
         return productRes;
     }
 
-        //add product if he didn't exist
-    public void addProductToInventory(Product newP) {
+    //add a new product to inventory that didn't exist
+    static public void addProductToInventory(Product newP) {
         ArrayList<Product> proToAdd = new ArrayList<>();
         proToAdd.add(newP);
         if (!myStock.containsKey(newP.getCatName())) {
@@ -154,6 +151,14 @@ public class Inventory{
         amountProducts++;
         }
 
+    //find if item exist in inventory
+    static public boolean ItemExist(int IDItem) {
+        if (FindItemInInvent(IDItem)!=null)
+            return true;
+        return false;
+    }
+
+    //return item in inventory if he exists; otherwise return null.
     static public Item FindItemInInvent(int IDItem) {
         for (int i = 0; i < amountProducts; i++) {
             Item item = runAllProducts().get(i).FindItemInPro(IDItem);
@@ -164,104 +169,103 @@ public class Inventory{
         return null;
     }
 
-
     //if item exists return Tuple<String,Item> such the string represent category, sub category and size
     //of his product; otherwise return null.
     static public Tuple<String,Item> removeItem(int IDItem) {
-        Tuple<String,Item> itemToRemove = null;
+        Tuple<String,Item> itemToRemove= new Tuple<>();
         Item item = FindItemInInvent(IDItem);
             if(item!=null){
-                Product product = FindProduct(item.getCatalogNumItem());
-                String category = "Category:" + product.getCatName()+"\n";
-                String subCategory = "Sub Category:" + product.getSubCatName()+"\n";
-                String size = "Size:" + product.getSize()+"\n";
-                itemToRemove.setVal1(category + subCategory + size);
+                Product product = item.getMyProduct();
+                String detailsItem = product.printProduct();
+                itemToRemove.setVal1(detailsItem);
                 itemToRemove.setVal2(item);
-                amountItems--;
+                product.removeItemToLst(item);
             }
         return itemToRemove;
     }
 
+    //remove product from inventory and all his items
     static public void removeProd(int catalogNum) {
-        if (ProductExist(catalogNum)) {
-            Product myProd = FindProduct(catalogNum);
-            myStock.get(myProd.getCatName()).get(myProd.getSubCatName()).get(myProd.getSize()).remove(myProd);
+        Product myProd = FindProduct(catalogNum);
+        if (myProd!=null){
+            runProductBySize(myProd.getCatName(),myProd.getSubCatName(),myProd.getSize()).remove(myProd);
             amountProducts--;
+    }
+}
+    //remove item from inventory when he is sale
+    static public void ItemSells(int IDItem){
+        Item item = FindItemInInvent(IDItem);
+        if (item != null) {
+            Product product = item.getMyProduct();
+            product.removeItemToLst(item);
         }
     }
 
-    static public void ItemSells(int IDItem){
-        removeItem(IDItem);
-    }
+    //remove item from inventory when he is defective and move to list of defectives with details important
     static public void ItemDefective(int IDItem){
         Tuple<String,Item> itemDefective = removeItem(IDItem);
         getDefObj().getItems().add(itemDefective);
     }
 
+    //remove item from inventory when he is expired and move to list of expired with details important
     static public void ItemExpired(int IDItem){
         Tuple<String,Item> itemExpired = removeItem(IDItem);
         getExpObj().getItems().add(itemExpired);
     }
 
+    //Generate a reports
     static public String generateReportExpired(){
         return getExpObj().GenerateReports();
     }
-
     static public String generateReportDamage(){
         return getDefObj().GenerateReports();
     }
-
     static public int getAmountExp(){
         return getExpObj().getAmount();
     }
-
     static public int getAmountDef(){
         return getDefObj().getAmount();
     }
 
-
-        //check Minimal
+    //return true if the product of item is minimal amount
     static public boolean checkMinimal(int itemID) {
         Item item = FindItemInInvent(itemID);
         if (item != null) {
-            Product product = FindProduct(item.getCatalogNumItem());
-            if (product.isMinimal()) {
-                return true;
-            }
+            return item.getMyProduct().isMinimal();
         }
         return false;
     }
 
-    static public Product MoveItem(int idToMove, Tuple<String, Integer> placeNew) {
-        Item item = FindItemInInvent(idToMove);
-        item.setPlace(placeNew);
-        Product product = FindProduct(item.getCatalogNumItem());
-        return product;
-    }
-        static public void FromStoreToWare(int idToMove, Tuple<String, Integer> placeNew){
-        Product product=MoveItem(idToMove,placeNew);
-        product.setStoreAmount(product.getStoreAmount()-1);
-        product.setWarehouseAmount(product.getWarehouseAmount()+1);
+    //move item from store to warehouse
+    static public void FromStoreToWare(int idToMove, Tuple<String, Integer> placeNew){
+        Item itemMove = FindItemInInvent(idToMove);
+        if (itemMove != null) {
+            itemMove.getMyProduct().ProFromStoreToWare(idToMove, placeNew);
+        }
     }
 
-    static public void FromWareToStore(int idToMove, Tuple<String, Integer> placeNew){
-        Product product=MoveItem(idToMove,placeNew);
-        product.setStoreAmount(product.getStoreAmount()+1);
-        product.setWarehouseAmount(product.getWarehouseAmount()-1);
+    //move item from warehouse to store
+    static public void FromWareToStore(int idToMove, Tuple<String, Integer> placeNew) {
+        Item itemMove = FindItemInInvent(idToMove);
+        if (itemMove != null) {
+            itemMove.getMyProduct().ProFromWareToStore(idToMove, placeNew);
+        }
     }
 
-    static public void checkAllItemsExp(){
+    //remove all items that expired to list of items that expired according to date
+    static public void checkAllItemsExp() {
         ArrayList<Product> products = runAllProducts();
-        for (Product product:products){
-            for (Item item: product.getItems()){
-                if (item.getExpirationDate().isBefore(currentDate)){
+        for (Product product : products) {
+            for (Item item : product.getItems()) {
+                if (item.getExpirationDate().isBefore(currentDate)) {
                     ItemExpired(item.getId());
                 }
             }
         }
     }
 
-    static public void checkAllItemsSale() {
+    //update sale price according to date
+    static public void checkAllProdSale() {
         ArrayList<Product> products = runAllProducts();
         for (Product product : products) {
             if (product.getMySalePrice().getEndSale().isBefore(currentDate)) {
@@ -270,12 +274,39 @@ public class Inventory{
         }
     }
 
-    static public String GenerateReportsStock() {
-        StringBuilder outputForController = new StringBuilder();
+    //Generate a report of inventory:
+    //helper function
+    static public StringBuilder HelperGenerateReportsStock(ArrayList<Product> toPrint) {
+        int i = 1;
+        StringBuilder output = new StringBuilder();
         String title = "Inventory report:\n";
-
-
+        for (Product product : toPrint) {
+            output.append(i).append(".");
+            output.append(product.printProduct());
+            String catalogNum = "Catalog Number:" + product.getCatalogNumProduct() + "\n";
+            String total = "Total amount:" + product.getTotalAmount() + "\n";
+            output.append(catalogNum).append(total);
+            i++;
+        }
+        return output;
     }
-
+    //Generate a report of all inventory
+    static public StringBuilder GenerateReportsStock() {
+        StringBuilder outputForController = new StringBuilder();
+        outputForController.append(HelperGenerateReportsStock(runAllProducts());
+        return outputForController;
     }
+    //Generate a report of inventory according to category
+    static public StringBuilder GenerateReportsStockByCat(String cat, String subCat, String size) {
+        StringBuilder outputForController = new StringBuilder();
+        if (!subCat.equals("0") && !(size.equals("0"))) { //have cat,subCat,size
+            outputForController.append(HelperGenerateReportsStock(runProductBySize(cat, subCat, size)));
+        } else if (size.equals("0")) { //have cat, subCat
+            outputForController.append(HelperGenerateReportsStock(runProductBySubCat(cat, subCat)));
+        } else { //have cat
+            outputForController.append(HelperGenerateReportsStock(runProductByCat(cat)));
+        }
+        return outputForController;
+    }
+}
 

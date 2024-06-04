@@ -21,25 +21,25 @@ public class Product {
     private int minimalAmount;
 
 //    ***Contracture***
-
-    public Product(String catName, String subCatName, String size, Tuple<Integer, Integer> total,
-                   String manuFactor, int catalogNumProduct, double marketPriceConst, double manuPriceConst,
-                   double manuPriceCurr, double marketPriceCurr, salePrice mySalePrice, double discount,
-                   ArrayList<Item> items, int minimalAmount) {
+    public Product(String catName, String subCatName, String size, String manuFactor, int catalogNumProduct,
+                   double marketPriceConst, double manuPriceConst, double discount, int minimalAmount) {
         this.catName = catName;
         this.subCatName = subCatName;
         this.size = size;
-        this.total = total;
         this.manuFactor = manuFactor;
         this.catalogNumProduct = catalogNumProduct;
-        this.marketPriceConst = marketPriceConst;
-        this.manuPriceConst = manuPriceConst;
-        this.manuPriceCurr = manuPriceCurr;
-        this.marketPriceCurr = marketPriceCurr;
-        this.mySalePrice = mySalePrice;
-        this.discount = discount;
-        this.items = items;
         this.minimalAmount = minimalAmount;
+        this.discount = discount;
+
+        this.marketPriceConst = marketPriceConst;
+        this.marketPriceCurr = marketPriceConst;
+
+        this.manuPriceConst = manuPriceConst;
+        this.manuPriceCurr = manuPriceConst-(manuPriceConst*discount/100);
+
+        this.items = null;
+        this.mySalePrice=null;
+        this.total= new Tuple<>(0,0);
     }
 
 //      ***Getters***
@@ -67,98 +67,48 @@ public class Product {
     public int getCatalogNumProduct() {
         return catalogNumProduct;
     }
-
     public double getMarketPriceConst() {
         return marketPriceConst;
     }
-
     public double getManuPriceConst() {
         return manuPriceConst;
     }
-
     public double getManuPriceCurr() {
         return manuPriceCurr;
     }
-
     public double getMarketPriceCurr() {
         return marketPriceCurr;
     }
-
     public salePrice getMySalePrice() {
         return mySalePrice;
     }
-
     public double getDiscount() {
         return discount;
     }
-
     public ArrayList<Item> getItems() {
         return items;
     }
-
     public int getMinimalAmount() {
         return minimalAmount;
     }
 
 //    ***Setters***
-
     public void setMySalePrice(salePrice mySalePrice) {
         this.mySalePrice = mySalePrice;
-        this.marketPriceCurr=this.marketPriceConst*mySalePrice.getDiscountRatio();
+        setMarketPriceCurr(getMarketPriceConst()-(getMarketPriceConst()*mySalePrice.getDiscountRatio()/100));
     }
-
-
     public void setDiscount(double discount) {
         this.discount = discount;
-        this.manuPriceCurr=this.manuPriceConst*discount;
+        setManuPriceCurr(getManuPriceConst()-(getManuPriceConst()*discount/100));
     }
-
-    public void setCatName(String catName) {
-        this.catName = catName;
-    }
-
-    public void setSubCatName(String subCatName) {
-        this.subCatName = subCatName;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
     public void setStoreAmount(int storeAmount) { this.total.setVal1(storeAmount);}
-
     public void setWarehouseAmount(int warehouseAmount) { this.total.setVal2(warehouseAmount);}
-
-    public void setManuFactor(String manuFactor) {
-        this.manuFactor = manuFactor;
-    }
-
-    public void setCatalogNumProduct(int catalogNumProduct) {
-        this.catalogNumProduct = catalogNumProduct;
-    }
-
-    public void setMarketPriceConst(double marketPriceConst) {
-        this.marketPriceConst = marketPriceConst;
-    }
-
-    public void setManuPriceConst(double manuPriceConst) {
-        this.manuPriceConst = manuPriceConst;
-    }
-
     public void setManuPriceCurr(double manuPriceCurr) {
         this.manuPriceCurr = manuPriceCurr;
     }
-
     public void setMarketPriceCurr(double marketPriceCurr) {
         this.marketPriceCurr = marketPriceCurr;
     }
-
-
-
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
     public void setMinimalAmount(int minimalAmount) {
         this.minimalAmount = minimalAmount;
     }
@@ -171,11 +121,43 @@ public class Product {
 
     //add item
     public void addItemToLst(Item newItem){
-        if (newItem.getCatalogNumItem() == catalogNumProduct){
             items.add(newItem);
+            if (newItem.getStoreOrWare().equals("Store")){
+                setStoreAmount(getStoreAmount()+1);
+            }else //the item in warehouse
+                setWarehouseAmount(getWarehouseAmount()+1);
+    }
+
+    //remove item
+    public void removeItemToLst(Item removeItem) {
+        items.remove(removeItem);
+        if (removeItem.getStoreOrWare().equals("Store")) {
+            setStoreAmount(getStoreAmount() - 1);
+        } else //the item in warehouse
+            setWarehouseAmount(getWarehouseAmount() - 1);
+    }
+
+    //help function when item move from store to warehouse or vice versa
+    public void ProFromStoreToWare(int idToMove, Tuple<String, Integer> placeNew) {
+        Item item = FindItemInPro(idToMove);
+        if (item != null) {
+            item.setPlace(placeNew);
+            item.setStoreOrWare("Warehouse");
+            setWarehouseAmount(getWarehouseAmount()+1);
+            setStoreAmount(getStoreAmount()-1);
+        }
+    }
+    public void ProFromWareToStore(int idToMove, Tuple<String, Integer> placeNew) {
+        Item item = FindItemInPro(idToMove);
+        if (item != null) {
+            item.setPlace(placeNew);
+            item.setStoreOrWare("Store");
+            setWarehouseAmount(getWarehouseAmount()-1);
+            setStoreAmount(getStoreAmount()+1);
         }
     }
 
+    //return item by id; if he didn't exist return null
     public Item FindItemInPro(int IDItem) {
         for (Item items : items) {
             if (items.getId() == IDItem) {
@@ -185,8 +167,16 @@ public class Product {
         return null;
     }
 
-    public void addMeToInven(){
-            DataObject.getInventObj().addProductToInventory(this);
+    //add product to inventory
+    public void addMeToInvent(){
+        Inventory.addProductToInventory(this);
     }
 
+    public String printProduct(){
+        String category = "Category:" + this.getCatName()+"\n";
+        String subCategory = "Sub Category:" + this.getSubCatName()+"\n";
+        String size = "Size:" + this.getSize()+"\n";
+        String manufacturer = "Manufacturer:" + this.getManuFactor()+"\n";
+        return  category+subCategory+size+manufacturer;
+    }
 }
