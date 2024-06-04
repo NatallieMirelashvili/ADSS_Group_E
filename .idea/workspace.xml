@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96e01df1-a0d5-4ee1-a335-0ef8964d7b3f" name="Changes" comment="update report">
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/AReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/AReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/DataObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/DataObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/Defective.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/Defective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/Tuple.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/Tuple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/salePrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/salePrice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ServiceLayer/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ServiceLayer/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ServiceLayer/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ServiceLayer/StockController.java" afterDir="false" />
-    </list>
+    <list default="true" id="96e01df1-a0d5-4ee1-a335-0ef8964d7b3f" name="Changes" comment="update domain (everything except system)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +87,7 @@
       <workItem from="1717425161298" duration="162000" />
       <workItem from="1717425364801" duration="4794000" />
       <workItem from="1717448738758" duration="13679000" />
-      <workItem from="1717502180372" duration="15845000" />
+      <workItem from="1717502180372" duration="16172000" />
     </task>
     <task id="LOCAL‎-00001" summary="update report">
       <created>1717337896487</created>
@@ -107,7 +96,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1717337896487</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="update domain (everything except system)">
+      <created>1717518925309</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717518925309</updated>
+    </task>
+    <task id="LOCAL‎-00003" summary="update domain (everything except system)">
+      <created>1717519158620</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717519158620</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +129,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update report" />
-    <option name="LAST_COMMIT_MESSAGE" value="update report" />
+    <MESSAGE value="update domain (everything except system)" />
+    <option name="LAST_COMMIT_MESSAGE" value="update domain (everything except system)" />
   </component>
 </project>

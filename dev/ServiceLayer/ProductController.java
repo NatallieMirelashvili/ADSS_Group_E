@@ -38,7 +38,7 @@ public class ProductController {
                     record.get("marketPriceConst").getAsDouble(),record.get("manuPriceConst").getAsDouble(),record.get("marketPriceCurr").getAsDouble(),
                     record.get("manuPriceCurr").getAsDouble(), sale,
                     record.get("discount").getAsDouble(),items, record.get("minimalAmount").getAsInt());
-            newProd.addMeToInven();
+            newProd.addMeToInvent();
             return true;
         }
         return false;
