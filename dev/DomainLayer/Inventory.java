@@ -133,7 +133,7 @@ public class Inventory{
     static public void addProductToInventory(Product newP) {
         ArrayList<Product> proToAdd = new ArrayList<>();
         proToAdd.add(newP);
-        if (!myStock.containsKey(newP.getCatName())) {
+        if (!myStock.containsKey(newP.getCatName()))  {
             myStock.putIfAbsent(newP.getCatName(), new HashMap<>());
             myStock.get(newP.getCatName()).putIfAbsent(newP.getSubCatName(), new HashMap<>());
             myStock.get(newP.getCatName()).get(newP.getSubCatName()).putIfAbsent(newP.getSize(), new ArrayList<>());
