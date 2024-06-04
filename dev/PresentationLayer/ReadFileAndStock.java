@@ -1,27 +1,29 @@
 package PresentationLayer;
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import ServiceLayer.ProductController;
 
 public class ReadFileAndStock {
     private static JsonObject CreateJasonFromFile(int iteration, String[] memberLst,String[] valuesOfMembers){
         JsonObject myJson = new JsonObject();
-        for (int i = 0; i <= iteration; i++){
+        for (int i = 0; i < iteration; i++){
             String member = memberLst[i];
             String value = valuesOfMembers[i];
             myJson.addProperty(member, value);
         }
         return myJson;
     }
-    public static void readProducts(){
-        readFileByType(1, "products line in market", "ProductData.csv");
+    public static boolean readProducts(){
+        return readFileByType(1, "products line in market", "C:\\Users\\המחשב שלי\\Documents\\עבודות בניתוץ\\ADSS_Group_E\\dev\\DataFiles\\ProductData.csv");
     }
-    public static void readItems(){
-        readFileByType(2, "items for sell in market", "ItemsData.csv");
+    public static boolean readItems(){
+        return readFileByType(2, "items for sell in market", "C:\\Users\\המחשב שלי\\Documents\\עבודות בניתוץ\\ADSS_Group_E\\dev\\DataFiles\\ItemsData.csv");
     }
-    public static void readFileByType(int initCase, String msg, String filePath) {
+    public static boolean readFileByType(int initCase, String msg, String filePath) {
         System.out.println("Loading "+ msg + "...\n");
         BufferedReader buffer;
         String line;
@@ -45,9 +47,16 @@ public class ReadFileAndStock {
                     case 2 -> ProductController.createNewItem(record);
                 }
                 line = buffer.readLine();
+
             }
-        } catch (Exception e) {
+            return true;
+        } catch (FileNotFoundException e) {
             System.out.println("File Not Found please try again\n");
+            return false;
+        }
+        catch (IOException e){
+            System.out.println("Some IO Exception has occurred\n");
+            return false;
         }
     }
 

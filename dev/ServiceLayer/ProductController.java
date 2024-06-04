@@ -23,7 +23,7 @@ public class ProductController {
         newItem.addMeToProd();
     }
 
-    public static void createNewProd(JsonObject record){
+    public static boolean createNewProd(JsonObject record){
         boolean alreadyInStock = StockController.ProdInStockControl(record.get("catalogNum").getAsInt());
         if(!alreadyInStock){
             String totJson = record.get("total").getAsString();
@@ -35,13 +35,13 @@ public class ProductController {
             salePrice sale = null;
             Product newProd = new Product(record.get("catName").getAsString(), record.get("subCatName").getAsString(),
                     record.get("size").getAsString(),totalTup,record.get("manuFactor").getAsString(), record.get("catalogNum").getAsInt(),
-                    record.get("marketPriceConst").getAsInt(),record.get("manuPriceConst").getAsInt(),record.get("marketPriceCurr").getAsInt(),
-                    record.get("manuPriceCurr").getAsInt(), sale,
-                    record.get("discount").getAsInt(),items, record.get("minimalAmount").getAsInt());
+                    record.get("marketPriceConst").getAsDouble(),record.get("manuPriceConst").getAsDouble(),record.get("marketPriceCurr").getAsDouble(),
+                    record.get("manuPriceCurr").getAsDouble(), sale,
+                    record.get("discount").getAsDouble(),items, record.get("minimalAmount").getAsInt());
             newProd.addMeToInven();
+            return true;
         }
-
-        System.out.println("Added failed - the product already in stock.\n");
+        return false;
     }
 
 

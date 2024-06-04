@@ -33,7 +33,7 @@ public class Management {
     private static JsonObject CreateJason(int iteration, ArrayList<String> msgLst, ArrayList<String> memberLst){
         JsonObject myJson = new JsonObject();
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i <= iteration; i++){
+        for (int i = 0; i < iteration; i++){
             String member = memberLst.get(i);
             String value = readStrFromUsr(msgLst.get(i), scanner);
             myJson.addProperty(member, value);
@@ -47,7 +47,7 @@ public class Management {
         ArrayList<String> msgLst = new ArrayList<>(8);
         msgLst.add("Enter main category: ");
         msgLst.add("Enter sub category: ");
-        msgLst.add("Enter size, for liquid add the word 'litters' else add the word 'grams' after the size number: ");
+        msgLst.add("Enter size, for liquid add the word 'litter' else add the word 'gram' after the size number: ");
         msgLst.add("Enter product's manufacturer: ");
         msgLst.add("Enter catalog number: ");
         msgLst.add("Enter initial market price: ");
@@ -63,15 +63,26 @@ public class Management {
         memberLst.add("manuPriceConst");
         memberLst.add("minimalAmount");
         JsonObject JsonObj = CreateJason(8, msgLst, memberLst);
-        ProductController.createNewProd(JsonObj);
+        JsonObj.addProperty("total", "0 0");
+        JsonObj.addProperty("discount", "0");
+        JsonObj.addProperty("mySalePrice", "null");
+        JsonObj.addProperty("marketPriceCurr", "0");
+        JsonObj.addProperty("manuPriceCurr", "0");
+        boolean bool = ProductController.createNewProd(JsonObj);
+        if (bool){
+            System.out.println("The product added successfully");
+            return;
+        }
+        System.out.println("Added failed - the product already in stock.\n");
 
     }
     public static void AddItem(){
         ArrayList<String> msgLst = new ArrayList<>(4);
         msgLst.add("Enter item id: ");
-        msgLst.add("Enter expiration date DD-MM-YYYY: ");
-        msgLst.add("Enter the aile - if you are in warehouse enter a letter from A-Z. else enter item's main category" +
-                "Please press ',' tab and then enter the shelf number: ");
+        msgLst.add("Enter expiration date YYYY-MM-DD: ");
+        msgLst.add("If you want to add this item to the warehouse Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.\n" +
+                "else enter item's main category and then PRESS backspace then1" +
+                " enter the shelf number:");
         msgLst.add("Enter catalog number from the Catalog Number Table you received with the program instructions: ");
         ArrayList<String> memberLst = new ArrayList<>(4);
         memberLst.add("id");
@@ -83,10 +94,17 @@ public class Management {
         if(prodInStock){
         ProductController.createNewItem(JsonObj);
         }
-        System.out.println("There is no such products in the market, please follow the next steps: \n");
-        AddProd();
-        ProductController.createNewItem(JsonObj);
-        System.out.println("Thank you, the item and new product added successfully\n");
+        System.out.println("There is no such products in the market," +
+                " if you want to add a proper product please type 'YES' and then press ENTER. " +
+                "Else type 'NO' and then press ENTER." +
+                "");
+        Scanner scan = new Scanner(System.in);
+        if(scan.nextLine().equals("YES"))
+            {AddProd();
+            ProductController.createNewItem(JsonObj);
+            System.out.println("Thank you, the item and new product added successfully\n");
+            return;}
+        System.out.println("OK, item will not add\n");
 
     }
     public static void RemoveProd(){
@@ -130,11 +148,11 @@ public class Management {
     public static void MoveWareStore(){
         Scanner scan = new Scanner(System.in);
         int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        String getPassMSG = "Please type a the pass in the store where you want to put the item: ";
+        String getPassMSG = "Please type a the pass in the store (its the item main category) where you want to put the item: ";
         String pass = readStrFromUsr(getPassMSG, scan);
         String shelfMSG = "Please type the number of shelf you want to put your item: ";
         Integer shelf = readIntFromUsr(shelfMSG, scan);
-        StockController.moveItemFromSControl(id, pass, shelf);
+        StockController.moveItemFromWControl(id, pass, shelf);
     }
     public static void ReturnToMainMenu(){
         System.out.println("Returning to main menu...");
@@ -151,7 +169,8 @@ public class Management {
                 5. Update discount from manufacturers
                 6. Move an item from store to warehouse
                 7. Move an item from warehouse to store
-                8. Return to main menu""";
+                8. Return to main menu
+                """;
     }
     public static void runMenu(){
         int choice = 0;
