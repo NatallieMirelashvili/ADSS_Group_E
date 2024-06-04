@@ -44,7 +44,7 @@ public class Management {
 
 //   *****Menu Functions****
     public static void AddProd(){
-        ArrayList<String> msgLst = new ArrayList<>(8);
+        ArrayList<String> msgLst = new ArrayList<>(9);
         msgLst.add("Enter main category: ");
         msgLst.add("Enter sub category: ");
         msgLst.add("Enter size, for liquid add the word 'litter' else add the word 'gram' after the size number: ");
@@ -53,22 +53,19 @@ public class Management {
         msgLst.add("Enter initial market price: ");
         msgLst.add("Enter initial manufacturer price of product:");
         msgLst.add("Enter minimal amount in which to inform when its product about to run out: ");
-        ArrayList<String> memberLst = new ArrayList<>(8);
+        msgLst.add("Enter a discount from manufacturer in ratio (if you dont want to add please type '0'): ");
+        ArrayList<String> memberLst = new ArrayList<>(9);
         memberLst.add("catName");
         memberLst.add("subCatName");
         memberLst.add("size");
         memberLst.add("manuFactor");
-        memberLst.add("catalogNum");
+        memberLst.add("catalogNumProduct");
         memberLst.add("marketPriceConst");
         memberLst.add("manuPriceConst");
         memberLst.add("minimalAmount");
-        JsonObject JsonObj = CreateJason(8, msgLst, memberLst);
-        JsonObj.addProperty("total", "0 0");
-        JsonObj.addProperty("discount", "0");
-        JsonObj.addProperty("mySalePrice", "null");
-        JsonObj.addProperty("marketPriceCurr", "0");
-        JsonObj.addProperty("manuPriceCurr", "0");
-        boolean bool = ProductController.createNewProd(JsonObj);
+        memberLst.add("discount");
+        JsonObject JsonObjProd = CreateJason(9, msgLst, memberLst);
+        boolean bool = ProductController.createNewProd(JsonObjProd);
         if (bool){
             System.out.println("The product added successfully");
             return;
@@ -81,18 +78,20 @@ public class Management {
         msgLst.add("Enter item id: ");
         msgLst.add("Enter expiration date YYYY-MM-DD: ");
         msgLst.add("If you want to add this item to the warehouse Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.\n" +
-                "else enter item's main category and then PRESS backspace then1" +
+                "else enter item's main category and then PRESS backspace then" +
                 " enter the shelf number:");
         msgLst.add("Enter catalog number from the Catalog Number Table you received with the program instructions: ");
         ArrayList<String> memberLst = new ArrayList<>(4);
         memberLst.add("id");
         memberLst.add("expirationDate");
         memberLst.add("place");
-        memberLst.add("catalogNum");
-        JsonObject JsonObj = CreateJason(4, msgLst, memberLst);
-        boolean prodInStock = StockController.ProdInStockControl(JsonObj.get("catalogNum").getAsInt());
+        memberLst.add("catalogNumItem");
+        JsonObject JsonObjItem = CreateJason(4, msgLst, memberLst);
+        boolean prodInStock = StockController.ProdInStockControl(JsonObjItem.get("catalogNumItem").getAsInt());
         if(prodInStock){
-        ProductController.createNewItem(JsonObj);
+        ProductController.createNewItem(JsonObjItem);
+        System.out.println("Item added successfully\n");
+        return;
         }
         System.out.println("There is no such products in the market," +
                 " if you want to add a proper product please type 'YES' and then press ENTER. " +
@@ -101,7 +100,7 @@ public class Management {
         Scanner scan = new Scanner(System.in);
         if(scan.nextLine().equals("YES"))
             {AddProd();
-            ProductController.createNewItem(JsonObj);
+            ProductController.createNewItem(JsonObjItem);
             System.out.println("Thank you, the item and new product added successfully\n");
             return;}
         System.out.println("OK, item will not add\n");

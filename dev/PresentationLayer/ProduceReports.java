@@ -6,19 +6,18 @@ import java.util.Scanner;
 public class ProduceReports {
     //   *****Menu Functions****
     public static void  InventoryReport(){
-//        System.out.println("""
-//                If you want to watch all items for sale please type 'All' and then press ENTER.
-//                Else, if you want to watch items by categories please type Category and then press ENTER
-//                """);
-//        Scanner scan = new Scanner(System.in);
-//        String which = scan.nextLine();
-//        if (which.equals("All")) {
-//            System.out.println(StockController.showAllItemsCtr());
-//            return;
-//        }
-//        ArrayList<String> AskedCategories = Management.showCatalogChoices(scan);
-//        System.out.println(StockController.showByCatCtr(AskedCategories.get(0), AskedCategories.get(1), AskedCategories.get(2)));
-//
+        System.out.println("""
+                If you want to watch all items for sale please type 'All' and then press ENTER.
+                Else, if you want to watch items by categories please type Category and then press ENTER""");
+        Scanner scan = new Scanner(System.in);
+        String which = scan.nextLine();
+        if (which.equals("All")) {
+            System.out.println(StockController.showAllItemsCtr());
+            return;
+        }
+        ArrayList<String> AskedCategories = Management.showCatalogChoices(scan);
+        System.out.println(StockController.showByCatCtr(AskedCategories.get(0), AskedCategories.get(1), AskedCategories.get(2)));
+
     }
     public static void  ExpiredReport(){
         System.out.println(StockController.showExpReportsCtr());

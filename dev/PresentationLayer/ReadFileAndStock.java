@@ -18,10 +18,10 @@ public class ReadFileAndStock {
         return myJson;
     }
     public static boolean readProducts(){
-        return readFileByType(1, "products line in market", "C:\\Users\\המחשב שלי\\Documents\\עבודות בניתוץ\\ADSS_Group_E\\dev\\DataFiles\\ProductData.csv");
+        return readFileByType(1, "products line in market", "dev/DataFiles/ProductData.csv");
     }
     public static boolean readItems(){
-        return readFileByType(2, "items for sell in market", "C:\\Users\\המחשב שלי\\Documents\\עבודות בניתוץ\\ADSS_Group_E\\dev\\DataFiles\\ItemsData.csv");
+        return readFileByType(2, "items for sell in market", "dev/DataFiles/ItemsData.csv");
     }
     public static boolean readFileByType(int initCase, String msg, String filePath) {
         System.out.println("Loading "+ msg + "...\n");
