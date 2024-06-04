@@ -293,7 +293,7 @@ public class Inventory{
     //Generate a report of all inventory
     static public StringBuilder GenerateReportsStock() {
         StringBuilder outputForController = new StringBuilder();
-        outputForController.append(HelperGenerateReportsStock(runAllProducts());
+        outputForController.append(HelperGenerateReportsStock(runAllProducts()));
         return outputForController;
     }
     //Generate a report of inventory according to category

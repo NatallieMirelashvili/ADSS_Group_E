@@ -37,7 +37,7 @@ public class Product {
         this.manuPriceConst = manuPriceConst;
         this.manuPriceCurr = manuPriceConst-(manuPriceConst*discount/100);
 
-        this.items = null;
+        this.items = new ArrayList<>(0);
         this.mySalePrice=null;
         this.total= new Tuple<>(0,0);
     }

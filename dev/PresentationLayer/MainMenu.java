@@ -18,12 +18,12 @@ public class MainMenu {
             return;
         }
         System.out.println("Welcome to your market system\n");
-        boolean bool = ReadFileAndStock.readProducts();
+        boolean bool = ReadFile.readProducts();
         if (!bool){
             return;
         }
         System.out.println("Thank you! Products line of your market initialize\n");
-        bool = ReadFileAndStock.readItems();
+        bool = ReadFile.readItems();
         if (!bool){
             return;
         }
@@ -96,10 +96,8 @@ public class MainMenu {
             case 5 -> managerDetails();
             case 6 -> nextDay();
             case 7 -> exit();
-            default -> {
-                System.out.println("Please choose valid number between 1-7");
+            default -> System.out.println("Please choose valid number between 1-7");
 
-            }
         }
         return userInput;
     }
