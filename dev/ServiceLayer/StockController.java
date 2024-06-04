@@ -57,12 +57,12 @@ public class StockController {
     public static void checkAllItemsSaleCtr(){
         Inventory.checkAllItemsSale();
     }
-    public static String showAllItemsCtr(){
-        return Inventory.showAllItems();
-    }
-    public static String showByCatCtr(String main, String sub, String size){
-        return Inventory.showItemsByCat(main, sub, size);
-    }
+//    public static String showAllItemsCtr(){
+//        return Inventory.showAllItems();
+//    }
+//    public static String showByCatCtr(String main, String sub, String size){
+//        return Inventory.showItemsByCat(main, sub, size);
+//    }
     public static String showExpReportsCtr(){
         return Inventory.generateReportExpired();
     }

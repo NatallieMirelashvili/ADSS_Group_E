@@ -16,21 +16,19 @@ public class ReadFileAndStock {
         return myJson;
     }
     public static void readProducts(){
-        readFileByType(1, "products line in market");
+        readFileByType(1, "products line in market", "ProductData.csv");
     }
     public static void readItems(){
-        readFileByType(2, "items for sell in market");
+        readFileByType(2, "items for sell in market", "ItemsData.csv");
     }
-    public static void readFileByType(int initCase, String msg) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the file path of" + msg + "file records you received:\n");
-        String fileP = scanner.nextLine();
+    public static void readFileByType(int initCase, String msg, String filePath) {
+        System.out.println("Loading "+ msg + "...\n");
         BufferedReader buffer;
         String line;
         try {
 //            Read object fields:
 
-            buffer = new BufferedReader((new FileReader(fileP)));
+            buffer = new BufferedReader((new FileReader(filePath)));
             line = buffer.readLine();
             String[] membersLst = line.split(",");
 
@@ -54,9 +52,5 @@ public class ReadFileAndStock {
     }
 
 //    After creating products and items we want to assemble all data in Stock classes:
-
-    public static void createStock() {
-
-    }
 
 }

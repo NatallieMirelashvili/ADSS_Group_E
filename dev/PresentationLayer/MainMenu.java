@@ -25,7 +25,6 @@ public class MainMenu {
         ReadFileAndStock.readProducts();
         System.out.println("Thank you! Products line of your market initialize\n");
         ReadFileAndStock.readItems();
-        ReadFileAndStock.createStock();
         initProgram = true;
         System.out.println("Thank you! we are ready to start...\n");
 
@@ -74,7 +73,8 @@ public class MainMenu {
                 4. Preform an inventory actions
                 5. Show warehouse manager's contact details
                 6. Move to the next day before exit the office
-                7. Exit program""";
+                7. Exit program
+                """;
     }
 
     public static void runMenu(){

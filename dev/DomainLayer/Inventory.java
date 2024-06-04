@@ -270,12 +270,12 @@ public class Inventory{
         }
     }
 
-    static public String GenerateReportsStock() {
-        StringBuilder outputForController = new StringBuilder();
-        String title = "Inventory report:\n";
-
-
-    }
+//    static public String GenerateReportsStock() {
+//        StringBuilder outputForController = new StringBuilder();
+//        String title = "Inventory report:\n";
+//
+//
+//    }
 
     }
 
