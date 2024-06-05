@@ -8,6 +8,7 @@ public class StockController {
     public static boolean ProdInStockControl(int cagNum){return Inventory.ProductExist(cagNum);}
     public static boolean ProdInStockByCatCTR(String cat, String subCat, String size){
         return Inventory.ProductExistByCat(cat, subCat, size);
+
     }
 
     //    delete from inventory:
