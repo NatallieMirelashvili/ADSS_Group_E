@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class Product {
 
 //   ***Fields***
-    private String catName;
-    private String subCatName;
-    private String size;
+    private final String catName;
+    private final String subCatName;
+    private final String size;
     private Tuple<Integer, Integer> total;
-    private String manuFactor;
-    private int catalogNumProduct;
-    private double marketPriceConst;
-    private double manuPriceConst;
+    private final String manuFactor;
+    private final int catalogNumProduct;
+    private final double marketPriceConst;
+    private final double manuPriceConst;
     private double manuPriceCurr;
     private double marketPriceCurr;
     private salePrice mySalePrice;
     private double discount;
     private ArrayList<Item> items ;
-    private int minimalAmount;
+    private final int minimalAmount;
 
 //    ***Contracture***
     public Product(String catName, String subCatName, String size, String manuFactor, int catalogNumProduct,
@@ -82,24 +82,21 @@ public class Product {
     public salePrice getMySalePrice() {
         return mySalePrice;
     }
-    public double getDiscount() {
-        return discount;
-    }
+
     public ArrayList<Item> getItems() {
         return items;
-    }
-    public int getMinimalAmount() {
-        return minimalAmount;
     }
 
 //    ***Setters***
     public void setMySalePrice(salePrice mySalePrice) {
         this.mySalePrice = mySalePrice;
-        setMarketPriceCurr(getMarketPriceConst()-(getMarketPriceConst()*mySalePrice.getDiscountRatio()/100));
+        if (mySalePrice.getStartSale().isEqual(Inventory.currentDate)) {
+            this.setMarketPriceCurr(this.getMarketPriceConst() - (this.getMarketPriceConst() * mySalePrice.getDiscountRatio() / 100));
+        }
     }
     public void setDiscount(double discount) {
         this.discount = discount;
-        setManuPriceCurr(getManuPriceConst()-(getManuPriceConst()*discount/100));
+        this.setManuPriceCurr(this.getManuPriceConst()-(this.getManuPriceConst()*discount/100));
     }
     public void setStoreAmount(int storeAmount) { this.total.setVal1(storeAmount);}
     public void setWarehouseAmount(int warehouseAmount) { this.total.setVal2(warehouseAmount);}
@@ -109,14 +106,11 @@ public class Product {
     public void setMarketPriceCurr(double marketPriceCurr) {
         this.marketPriceCurr = marketPriceCurr;
     }
-    public void setMinimalAmount(int minimalAmount) {
-        this.minimalAmount = minimalAmount;
-    }
 
 
 //    ***Help Functions***
     public boolean isMinimal(){
-        return getTotalAmount()<= minimalAmount;
+        return getTotalAmount()-1 <= minimalAmount;
     }
 
     //add item

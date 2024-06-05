@@ -6,27 +6,26 @@ import java.time.LocalDate;
 
 public class StockController {
     public static boolean ProdInStockControl(int cagNum){return Inventory.ProductExist(cagNum);}
-    
+    public static boolean ProdInStockByCatCTR(String cat, String subCat, String size){
+        return Inventory.ProductExistByCat(cat, subCat, size);
+
+    }
 
     //    delete from inventory:
     public static void removeProdControl(int CatNumToRemove){
-        if(!ProdInStockControl(CatNumToRemove)){
-            System.out.println("Sorry, you can't remove unexcited product\n");
-            return;
-        }
         Inventory.removeProd(CatNumToRemove);
     }
 
 //    you can only sell or report item if its exist
 
-    public static void sellItemControl(int idSell){
-        Inventory.ItemSells(idSell);
+    public static boolean sellItemControl(int idSell){
+        return Inventory.ItemSells(idSell);
     }
-    public static void reportDamageControl(int idDamage){
-        Inventory.ItemDefective(idDamage);
+    public static boolean reportDamageControl(int idDamage){
+        return Inventory.ItemDefective(idDamage);
     }
-    public static void reportExpiredControl(int idExp){
-        Inventory.ItemExpired(idExp);
+    public static boolean reportExpiredControl(int idExp){
+        return Inventory.ItemExpired(idExp);
     }
 
     public static boolean checkMinimalControl(int idOfItem){return Inventory.checkMinimal(idOfItem);}
@@ -35,17 +34,15 @@ public class StockController {
         Inventory.setSalePrice(main, sub, size, from, to, ratio);
     }
 
-    public static void updateDisControl(String main, String sub, String size,double ratio, String manu){
-        Inventory.setDiscount(main, sub, size, ratio, manu);
+    public static boolean updateDisControl(String main, String sub, String size,double ratio, String manu){
+        return Inventory.setDiscount(main, sub, size, ratio, manu);
     }
 
-    public static void moveItemFromSControl(int idToMove, String pass, Integer shelf){
-        Tuple<String, Integer> newPlace = new Tuple<>(pass, shelf);
+    public static void moveItemFromSControl(int idToMove,Tuple<String, Integer> newPlace){
         Inventory.FromStoreToWare(idToMove, newPlace);
     }
 
-    public static void moveItemFromWControl(int idToMove, String pass, Integer shelf){
-        Tuple<String, Integer> newPlace = new Tuple<>(pass, shelf);
+    public static void moveItemFromWControl(int idToMove, Tuple<String, Integer> newPlace){
         Inventory.FromWareToStore(idToMove, newPlace);
     }
 
@@ -55,6 +52,9 @@ public class StockController {
 
     public static void checkAllItemsSaleCtr(){
         Inventory.checkAllProdSale();
+    }
+    public static void updateDateToNextCtr(){
+        Inventory.moveToNextDay();
     }
     public static StringBuilder showAllItemsCtr(){
         return Inventory.GenerateReportsStock();
@@ -70,13 +70,10 @@ public class StockController {
         return Inventory.generateReportDamage();
     }
 
-//    if number of expired items is not 0 - there are some expired items, so we returns true
-    public static boolean isThereExpCtr(){
-            return Inventory.getAmountExp() != 0;
-    }
 
-    public static boolean isThereDemCtr(){
-        return Inventory.getAmountDef() != 0;
+
+    public static boolean idInStockCTR(int isToCheck){
+        return Inventory.ItemExist(isToCheck);
     }
 
 
