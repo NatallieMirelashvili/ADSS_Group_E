@@ -92,8 +92,8 @@ public class Temp_DB {
         trucks_d.remove(truckID);
     }
 
-    public static void remove_site(String site_name) {
-        site_d.remove(site_name);
+    public static void remove_site(int site_id) {
+        site_d.remove(site_id);
     }
 
     public static void remove_delivery(int deliveryID) {
@@ -116,6 +116,9 @@ public class Temp_DB {
         return trucks_d.containsKey(ID);
     }
 
+    public static boolean delivery_exists(int ID) {
+        return delivery_forms_d.containsKey(ID);
+    }
     public static boolean start_driving(int driverID) {
         get_driver(driverID).setAvailability(false);
         int deliveryID = get_delivery_id(driverID);

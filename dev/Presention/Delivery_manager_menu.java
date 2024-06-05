@@ -7,14 +7,19 @@ public class Delivery_manager_menu {
         final int manager_password = 102030;
         boolean continue_loop = true;
         int password = 0;
-        // int counter = 0; TODO: IF MISSED THE PASSWORD 3 TIMES IT WILL EXIT
+        int counter = 0; // counter for the number of tries
         Scanner psd = new Scanner(System.in);
         System.out.println("Please enter your password:");
         while (continue_loop){
             try {
+                if (counter == 3){
+                    System.out.println("You have reached the maximum number of tries");
+                    return;
+                }
                 password = psd.nextInt();
                 if (password != manager_password){
                     System.out.println("Invalid password, please try again");
+                    counter++;
                     continue;
                 }
                 continue_loop = false;
@@ -36,9 +41,10 @@ public class Delivery_manager_menu {
             System.out.println("3. Add new driver");
             System.out.println("4. Add new truck");
             System.out.println("5. Add new site");
-            System.out.println("6. Start delivery");
-            System.out.println("7. Exit \n");
-            System.out.println("Enter your choice: ");
+            System.out.println("6. Add new items form to existing delivery");
+            System.out.println("7. Start delivery");
+            System.out.println("8. Exit \n");
+            System.out.println("Please enter your choice: ");
 
             int choice;
             try {
@@ -53,7 +59,7 @@ public class Delivery_manager_menu {
                     Delivery_form.add_new_delivery_form();
                     break;
                 case 2:
-                    System.out.println("Enter site ID");
+                    System.out.println("Please enter site ID");
                     String area;
                     while(true) {
                         try {
@@ -93,14 +99,36 @@ public class Delivery_manager_menu {
                 case 5:
                     Site_addition.add_new_site();
                     break;
-                case 6: // TODO: THIS FUNCTION IS NOT IMPLEMENTED YET
+                case 6:
+                    System.out.println("Please enter delivery ID");
+                    int delivery_ID;
+                    while (true) {
+                        try {
+                            delivery_ID = sc.nextInt();
+                            if (delivery_ID < 0) {
+                                System.out.println("Invalid input. Please enter a positive Integer as delivery ID");
+                                continue;
+                            }
+                            if (!controller.delivery_exists(delivery_ID)) {
+                                System.out.println("Delivery with this ID does not exist please enter a valid delivery ID");
+                                continue;
+                            }
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input. Please enter an Integer as delivery ID");
+                            sc.next();
+                        }
+                    }
+                    Items_form_addition.add_new_items_form(delivery_ID);
+                    break;
+                case 7:  // TODO: THIS FUNCTION IS NOT IMPLEMENTED YET
                     //Delivery_duration.start_delivery();
                     break;
-                case 7:
+                case 8:
                     continue_loop = false;
                     break;
                 default:
-                    System.out.println("Invalid choice, please enter a number between 1 and 7");
+                    System.out.println("Invalid choice, please enter a number between 1 and 8");
             }
         }
 

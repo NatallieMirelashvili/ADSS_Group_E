@@ -19,7 +19,7 @@ public class Delivery_form {
         while (true) {
             date = sc.nextLine();
             if (date.equals("exit")) {
-                Delivery_manager_menu.show();
+                return;
             }
             try {
                 dateFormatter.parse(date);
@@ -32,7 +32,7 @@ public class Delivery_form {
         while (true) {
             time = sc.nextLine();
             if (time.equals("exit")) {
-                Delivery_manager_menu.show();
+                return;
             }
             try {
                 timeFormatter.parse(time);
@@ -84,7 +84,7 @@ public class Delivery_form {
                 try {
                     site_ID = sc.nextInt();
                     if (site_ID == -1) {
-                        Delivery_manager_menu.show();
+                        return;
                     }
                     if (site_ID < 0) {
                         System.out.println("Invalid input. Please enter a positive Integer as site ID");
@@ -111,7 +111,7 @@ public class Delivery_form {
             delivery.addProperty("site_ID", site_ID);
             controller.add_delivery(delivery);
 
-            System.out.println("Enter 1 to add item form to the delivery or -1 to return to Delivery Manager menu");
+            System.out.println("Enter 1 to create item form to the delivery or -1 to return to Delivery Manager menu");
             int choice;
             try {
                 choice = sc.nextInt();
@@ -119,7 +119,7 @@ public class Delivery_form {
                     Items_form_addition.add_new_items_form(delivery_ID);
                 }
                 if (choice == -1) {
-                    Delivery_manager_menu.show();
+                    return;
                 }
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter 1 or -1");

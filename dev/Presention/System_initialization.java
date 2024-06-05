@@ -24,6 +24,11 @@ public class System_initialization {
             System.out.println("Error reading sites");
         }
         System.out.println("Sites read successfully");
+        System.out.println("Reading Items...");
+        if (!readItems("dev/DataFiles/items.csv")) {
+            System.out.println("Error reading items");
+        }
+        System.out.println("Items read successfully");
         System.out.println("System initialization finished\n");
     }
     private static boolean readTrucks(String csvFile) {
@@ -94,6 +99,28 @@ public class System_initialization {
                 site.addProperty("phone_num", data[5]);
                 site.addProperty("area", data[6]);
                 controller.add_site(site);
+            }
+            return true;
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error reading file");
+            return false;
+        }
+    }
+    private static boolean readItems(String csvFile) {
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(cvsSplitBy);
+                JsonObject item = new JsonObject();
+                item.addProperty("ID", Integer.parseInt(data[0]));
+                item.addProperty("name", data[1]);
+                controller.add_item(item);
             }
             return true;
         } catch (FileNotFoundException e) {

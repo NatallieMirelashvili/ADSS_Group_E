@@ -15,6 +15,18 @@ public class controller {
     public static void add_delivery(JsonObject delivery) {
         Temp_DB.add_delivery(delivery);
     }
+    public static void add_item(JsonObject item) {
+        Temp_DB.add_item(item);
+    }
+    public static String get_item_name(int ID) {
+        return Temp_DB.get_item(ID).getItemName();
+    }
+    public static String get_site_name(int ID) {
+        return Temp_DB.get_site(ID).getSite_name();
+    }
+    public static boolean delivery_exists(int ID) {
+        return Temp_DB.delivery_exists(ID);
+    }
     public static boolean site_exists(int ID) {
         return Temp_DB.site_exists(ID);
     }
