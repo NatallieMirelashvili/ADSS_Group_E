@@ -25,10 +25,9 @@ public class Temp_DB {
     public static void add_truck(JsonObject truck) {
         String ID = truck.get("ID").getAsString();
         String model = truck.get("model").getAsString();
-        String curr_weight = truck.get("curr_weight").getAsString();
         String max_weight = truck.get("max_weight").getAsString();
         String licence = truck.get("licence").getAsString();
-        truck new_truck = new truck(Integer.parseInt(ID), model, Double.parseDouble(curr_weight), Double.parseDouble(max_weight), licence);
+        truck new_truck = new truck(Integer.parseInt(ID), model, Double.parseDouble(max_weight), licence);
         trucks_d.put(new_truck.getID(), new_truck);
     }
 

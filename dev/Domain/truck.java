@@ -9,10 +9,10 @@ public class truck {
     private boolean availability;
 
 
-    public truck(int id, String model, double curr_weight, double max_weight, String licence) {
+    public truck(int id, String model, double max_weight, String licence) {
         this.id = id;
         this.model = model;
-        this.curr_weight = curr_weight;
+        this.curr_weight = 0;
         this.max_weight = max_weight;
         this.licence = licence;
         this.availability = true;

@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Truck_addition {
     public static void add_new_truck() {
         int ID = 0;
-        double curr_weight = 0;
         double max_weight = 0;
         String licence = "";
         boolean validChoice = false;
@@ -60,7 +59,6 @@ public class Truck_addition {
         JsonObject new_truck = new JsonObject();
         new_truck.addProperty("ID", ID);
         new_truck.addProperty("model", model);
-        new_truck.addProperty("curr_weight", curr_weight);
         new_truck.addProperty("max_weight", max_weight);
         new_truck.addProperty("licence", licence);
         controller.add_truck(new_truck);
