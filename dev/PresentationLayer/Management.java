@@ -1,4 +1,5 @@
 package PresentationLayer;
+import DomainLayer.Tuple;
 import ServiceLayer.ProductController;
 import ServiceLayer.StockController;
 import com.google.gson.JsonObject;
@@ -10,16 +11,17 @@ import java.time.format.DateTimeFormatter;
 public class Management {
 
 //    help function:
-    public static ArrayList<String> showCatalogChoices(Scanner scan){
+    public static Tuple<ArrayList<String>, Boolean> showCatalogChoices(Scanner scan){
         ArrayList<String> categoriesForSales = new ArrayList<>(3);
         String mainCat = readStrFromUsr("Please enter the main category", scan);
         String sub = readStrFromUsr("If you want to add a specific sub category, enter its name or press 0 if dont", scan);
         String size = readStrFromUsr("If you want to add a specific size of product, for liquid add the " +
-                "word 'litters' else add the word 'grams' after the size number or press 0 if you dont", scan);
+                "word 'litter' else add the word 'gram' after the size number or press 0 if you dont", scan);
         categoriesForSales.add(mainCat);
         categoriesForSales.add(sub);
         categoriesForSales.add(size);
-        return categoriesForSales;
+        Boolean bool = StockController.ProdInStockByCatCTR(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
+        return new Tuple<>(categoriesForSales, bool);
     }
     private static String readStrFromUsr(String msg, Scanner scan){
         System.out.println(msg);
@@ -108,14 +110,25 @@ public class Management {
     }
     public static void RemoveProd(){
         Scanner scan = new Scanner(System.in);
-        int input = readIntFromUsr("Please enter the catalog number of the product you want to " +
-                "cancel from selling", scan);
+        String idMsg = "Please enter the catalog number of the product you want to cancel from selling";
+        int input = readIntFromUsr(idMsg, scan);
+        if(!StockController.ProdInStockControl(input)){
+            System.out.println("Sorry, you can't remove unexcited product\n");
+            return;
+        }
         StockController.removeProdControl(input);
+        System.out.println("Product removed successfully!\n");
     }
 
     public static void UpdateSales(){
         Scanner scan = new Scanner(System.in);
-        ArrayList<String> askCat = showCatalogChoices(scan);
+        Tuple<ArrayList<String>,Boolean> askCatCorrect = showCatalogChoices(scan);
+        Boolean correct = askCatCorrect.getVal2();
+        if(!correct){
+            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
+            return;
+        }
+        ArrayList<String> askCat = askCatCorrect.getVal1();
         String getStartMSG = "Please enter the start date of sale by the format: YYYY-MM-DD";
         String fromSTR = readStrFromUsr(getStartMSG, scan);
         LocalDate fromDate = LocalDate.parse(fromSTR);
@@ -125,33 +138,59 @@ public class Management {
         System.out.println("Please enter the sale percentage: ");
         double percentage = scan.nextDouble();
         StockController.updateSaleControl(askCat.get(0), askCat.get(1), askCat.get(2), fromDate, dueDate, percentage);
+        System.out.println("Sale updated successfully\n");
     }
     public static void UpdateDiscount(){
-        Scanner scan = new Scanner(System.in);
-        ArrayList<String> askCat = showCatalogChoices(scan);
+        Scanner scan1 = new Scanner(System.in);
+        Tuple<ArrayList<String>,Boolean> askCatCorrect = showCatalogChoices(scan1);
+        Boolean correct = askCatCorrect.getVal2();
+        if(!correct){
+            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
+            return;
+        }
+        ArrayList<String> askCat = askCatCorrect.getVal1();
         System.out.println("Please enter the discount percentage: ");
-        double ratio = scan.nextDouble();
+        double ratio = scan1.nextDouble();
         String manuMSG = "Please enter the name of the manufacturer you want to update its percentage: ";
-        String manu = readStrFromUsr(manuMSG, scan);
-        StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2), ratio, manu);
+        Scanner scan2 = new Scanner(System.in);
+        String manu = readStrFromUsr(manuMSG, scan2);
+        if(StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2), ratio, manu)){
+            System.out.println("Discount from manufacturer updated successfully\n");
+            return;
+        }
+        System.out.println("There is no such manufacturer " + manu + "!\n");
+
     }
     public static void MoveStoreWare(){
-        Scanner scan = new Scanner(System.in);
-        int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        String getPassMSG = "Please type a letter in [A-Z] which present the pass in the warehouse where you want to put the item: ";
-        String pass = readStrFromUsr(getPassMSG, scan);
-        String shelfMSG = "Please type the number of shelf you want to put your item: ";
-        Integer shelf = readIntFromUsr(shelfMSG, scan);
-        StockController.moveItemFromSControl(id, pass, shelf);
+        Scanner scan1 = new Scanner(System.in);
+        String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
+        int id = readIntFromUsr(idMsg, scan1);
+        if(StockController.idInStockCTR(id)){
+            Scanner scan2 = new Scanner(System.in);
+            String placeMSG = "Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.";
+            String placeInLine = readStrFromUsr(placeMSG, scan2);
+            Tuple<String, Integer> place = ProductController.createPlaceItem(placeInLine);
+            StockController.moveItemFromSControl(id,place);
+            System.out.println("Item moved to warehouse successfully!\n");
+            return;
+        }
+        System.out.println("This item not in stock!\n");
     }
     public static void MoveWareStore(){
-        Scanner scan = new Scanner(System.in);
-        int id = readIntFromUsr("Please enter the id number of the item you want to move from store to warehouse", scan);
-        String getPassMSG = "Please type a the pass in the store (its the item main category) where you want to put the item: ";
-        String pass = readStrFromUsr(getPassMSG, scan);
-        String shelfMSG = "Please type the number of shelf you want to put your item: ";
-        Integer shelf = readIntFromUsr(shelfMSG, scan);
-        StockController.moveItemFromWControl(id, pass, shelf);
+        Scanner scan1 = new Scanner(System.in);
+        String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
+        int id = readIntFromUsr(idMsg, scan1);
+        if(StockController.idInStockCTR(id)){
+            System.out.println("Please type the pass in the store (its the item main category) where you want to put the item " +
+                    "and then PRESS backspace and enter the shelf number.");
+            Scanner scan2 = new Scanner(System.in);
+            String placeInLine = scan2.nextLine();
+            Tuple<String, Integer> place = ProductController.createPlaceItem(placeInLine);
+            StockController.moveItemFromWControl(id,place);
+            System.out.println("Item moved to store successfully!\n");
+            return;
+        }
+        System.out.println("This item not in stock!\n");
     }
     public static void ReturnToMainMenu(){
         System.out.println("Returning to main menu...");

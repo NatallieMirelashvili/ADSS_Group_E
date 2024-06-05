@@ -24,22 +24,36 @@ public class Report {
 
 
     public static void  ReportDamaged(){
-        String msg = "Please enter the id number of the item you want to report its damage:";
+        String msg = "Please enter the id number of the item you want to report its damage:\n";
         int id_damage = GetIdFromUSR(msg);
-        StockController.reportDamageControl(id_damage);
         CheckGetToMinimal(id_damage);
+        boolean bool = StockController.reportDamageControl(id_damage);
+        if(!bool){
+            System.out.println("This item with the id: " + id_damage + " is not in the inventory\n");
+            return;}
+        System.out.println("The item reported successfully!\n");
     }
-    public static void  ReportExpired(){
-        String msg = "Please enter the id number of the item you want to report on its expiration:";
+    public static void ReportExpired(){
+        String msg = "Please enter the id number of the item you want to report on its expiration:\n";
         int id_expire = GetIdFromUSR(msg);
-        StockController.reportExpiredControl(id_expire);
         CheckGetToMinimal(id_expire);
+        boolean bool = StockController.reportExpiredControl(id_expire);
+        if(!bool){
+            System.out.println("This item with the id: " + id_expire + " is not in the inventory\n");
+            return;
+        }
+        System.out.println("The item reported successfully!\n");
     }
     public static void SellItem() {
-        String msg = "Please enter the id number of the item you want to sell";
+        String msg = "Please enter the id number of the item you want to sell\n";
         int input = GetIdFromUSR(msg);
-        StockController.sellItemControl(input);
         CheckGetToMinimal(input);
+        boolean bool = StockController.sellItemControl(input);
+        if(!bool){
+            System.out.println("This item with the id: " + input + " is not in the inventory\n");
+            return;
+        }
+        System.out.println("The item sold successfully!\n");
     }
     public static void  ReturnToMainMenu(){
         System.out.println("Returning to main menu...\n");

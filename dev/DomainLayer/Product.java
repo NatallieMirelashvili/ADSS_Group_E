@@ -88,18 +88,17 @@ public class Product {
     public ArrayList<Item> getItems() {
         return items;
     }
-    public int getMinimalAmount() {
-        return minimalAmount;
-    }
 
 //    ***Setters***
     public void setMySalePrice(salePrice mySalePrice) {
         this.mySalePrice = mySalePrice;
-        setMarketPriceCurr(getMarketPriceConst()-(getMarketPriceConst()*mySalePrice.getDiscountRatio()/100));
+        if (mySalePrice.getStartSale().isEqual(Inventory.currentDate)) {
+            this.setMarketPriceCurr(this.getMarketPriceConst() - (this.getMarketPriceConst() * mySalePrice.getDiscountRatio() / 100));
+        }
     }
     public void setDiscount(double discount) {
         this.discount = discount;
-        setManuPriceCurr(getManuPriceConst()-(getManuPriceConst()*discount/100));
+        this.setManuPriceCurr(this.getManuPriceConst()-(this.getManuPriceConst()*discount/100));
     }
     public void setStoreAmount(int storeAmount) { this.total.setVal1(storeAmount);}
     public void setWarehouseAmount(int warehouseAmount) { this.total.setVal2(warehouseAmount);}
@@ -116,7 +115,7 @@ public class Product {
 
 //    ***Help Functions***
     public boolean isMinimal(){
-        return getTotalAmount()<= minimalAmount;
+        return getTotalAmount()-1 <= minimalAmount;
     }
 
     //add item

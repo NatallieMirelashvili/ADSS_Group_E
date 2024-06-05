@@ -13,7 +13,7 @@ public class Inventory{
     //    ***Fields***
     static private HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myStock=new HashMap<>();
     static private int amountProducts=0;
-    static private LocalDate currentDate = LocalDate.now();
+    static public LocalDate currentDate = LocalDate.now();
 
     //    ***Getters***
     static public int getAmountItems() {
@@ -41,13 +41,15 @@ public class Inventory{
     //update sale price about products by category, sub category and size that given (all or some)
     static public void setSalePrice(String cat, String subCat , String size, LocalDate from, LocalDate to, double ratioSale) {
         salePrice newSale = new salePrice(from, to, ratioSale);
-        if (!subCat.equals("0") && !(size.equals("0"))) { //have cat,subCat,size
-            setSaleOnProducts(runProductBySize(cat, subCat, size), newSale);
-        } else if (size.equals("0")) { //have cat, subCat
-            setSaleOnProducts(runProductBySubCat(cat, subCat), newSale);
-        } else { //have cat
+        if (subCat.equals("0")) {
             setSaleOnProducts(runProductByCat(cat), newSale);
+            return;
         }
+        if(size.equals("0")){
+            setSaleOnProducts(runProductBySubCat(cat, subCat), newSale);
+            return;
+        }
+        setSaleOnProducts(runProductBySize(cat, subCat, size), newSale);
     }
 
     //help function-update sale price about list of products
@@ -57,39 +59,48 @@ public class Inventory{
     }
 
     //update discount about products by category, sub category and size that given (all or some)
-    static public void setDiscount(String cat, String subCat , String size, double myDiscount, String myManufacturer) {
-        if (!subCat.equals("0") && !(size.equals("0"))) { //have cat,subCat,size
-            discountOnProducts(runProductBySize(cat, subCat, size), myDiscount,myManufacturer);
-        } else if (size.equals("0")) { //have cat, subCat
-            discountOnProducts(runProductBySubCat(cat, subCat), myDiscount,myManufacturer);
-        } else { //have cat
-            discountOnProducts(runProductByCat(cat), myDiscount,myManufacturer);
+    static public boolean setDiscount(String cat, String subCat , String size, double myDiscount, String myManufacturer) {
+        if (subCat.equals("0")) {
+            return discountOnProducts(runProductByCat(cat), myDiscount,myManufacturer);
         }
+        if(size.equals("0")){
+            return discountOnProducts(runProductBySubCat(cat, subCat), myDiscount,myManufacturer);
+        }
+        return discountOnProducts(runProductBySize(cat, subCat, size), myDiscount,myManufacturer);
     }
 
     //return an array list of all products by category, sub category and size
     static public ArrayList<Product> runProductBySize (String cat, String subCat, String size) {
-        return myStock.get(cat).get(subCat).get(size);
+        if (ProductExistByCat(cat, subCat,size)) {
+            return myStock.get(cat).get(subCat).get(size);
+        }
+        return new ArrayList<Product>();
     }
 
     //return an array list of all products by category and sub category
     static public ArrayList<Product> runProductBySubCat (String cat, String subCat) {
-        ArrayList<Product> productsRes=new ArrayList<>();
-        HashMap<String, ArrayList<Product>> products1 = myStock.get(cat).get(subCat);
-        for (String mySize : products1.keySet()) {
-            productsRes.addAll(runProductBySize (cat,subCat,mySize));
+        if (ProductExistByCat(cat, subCat,"0")) {
+            ArrayList<Product> productsRes = new ArrayList<>();
+            HashMap<String, ArrayList<Product>> products1 = myStock.get(cat).get(subCat);
+            for (String mySize : products1.keySet()) {
+                productsRes.addAll(runProductBySize(cat, subCat, mySize));
+            }
+            return productsRes;
         }
-        return productsRes;
+        return new ArrayList<Product>();
     }
 
     //return an array list of all products by category
     static public ArrayList<Product> runProductByCat (String cat) {
-        ArrayList<Product> productsRes=new ArrayList<>();
-        HashMap<String, HashMap<String, ArrayList<Product>>> subCatToChange = myStock.get(cat);
+        if (ProductExistByCat(cat, "0","0")) {
+            ArrayList<Product> productsRes = new ArrayList<>();
+            HashMap<String, HashMap<String, ArrayList<Product>>> subCatToChange = myStock.get(cat);
             for (String mySubCat : subCatToChange.keySet()) {
-                productsRes.addAll(runProductBySubCat (cat, mySubCat));
+                productsRes.addAll(runProductBySubCat(cat, mySubCat));
             }
             return productsRes;
+        }
+        return new ArrayList<Product>();
     }
 
     //return an array list of all products by category
@@ -102,18 +113,36 @@ public class Inventory{
     }
 
     //help function-update discount about list of products
-    static public void discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
+    static public boolean discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
         for (Product product : products) {
-            if (product.getManuFactor().equals(manufacturer))
+            if (product.getManuFactor().equals(manufacturer)) {
                 product.setDiscount(discount);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //find if product exist in inventory when given category
+    static public boolean ProductExistByCat(String cat, String subCat, String size) {
+        if (myStock.get(cat) != null) {
+            if (myStock.get(cat).get(subCat) != null) {
+                if (myStock.get(cat).get(subCat).get(size) != null) {
+                    return true;
+                } else {  // case where size does not exist
+                    return size.equals("0");
+                }
+            } else {   // case where subCat does not exist
+                return (size.equals("0") && subCat.equals("0"));
+            }
+        } else { // case where cat does not exist
+            return false;
         }
     }
 
-    //find if product exist in inventory
+    //find if product exist in inventory when given catalog number
     static public boolean ProductExist(int catNumber) {
-        if (FindProduct(catNumber)!=null)
-            return true;
-        return false;
+        return FindProduct(catNumber) != null;
     }
 
     //return product in inventory if he exists; otherwise return null.
@@ -193,24 +222,32 @@ public class Inventory{
     }
 }
     //remove item from inventory when he is sale
-    static public void ItemSells(int IDItem){
+    static public boolean ItemSells(int IDItem){
         Item item = FindItemInInvent(IDItem);
         if (item != null) {
             Product product = item.getMyProduct();
             product.removeItemToLst(item);
+            return true;
         }
+        return false;
     }
 
     //remove item from inventory when he is defective and move to list of defectives with details important
-    static public void ItemDefective(int IDItem){
+    static public boolean ItemDefective(int IDItem){
         Tuple<String,Item> itemDefective = removeItem(IDItem);
+        if(itemDefective.getVal2() == null)
+            return false;
         getDefObj().getItems().add(itemDefective);
+        return true;
     }
 
     //remove item from inventory when he is expired and move to list of expired with details important
-    static public void ItemExpired(int IDItem){
+    static public boolean ItemExpired(int IDItem){
         Tuple<String,Item> itemExpired = removeItem(IDItem);
+        if(itemExpired.getVal2() == null)
+            return false;
         getExpObj().getItems().add(itemExpired);
+        return true;
     }
 
     //Generate a reports
@@ -254,38 +291,62 @@ public class Inventory{
 
     //remove all items that expired to list of items that expired according to date
     static public void checkAllItemsExp() {
+        int loc=0;
         ArrayList<Product> products = runAllProducts();
         for (Product product : products) {
-            for (Item item : product.getItems()) {
-                if (item.getExpirationDate().isBefore(currentDate)) {
-                    ItemExpired(item.getId());
+            int j=product.getItems().size();
+            for (int i=0; i<j; i++) {
+                if (product.getItems().get(loc).getExpirationDate().isBefore(currentDate)) {
+                    ItemExpired(product.getItems().get(loc).getId());
+                }
+                else {
+                    loc++;
                 }
             }
+            loc=0;
         }
+
     }
 
     //update sale price according to date
     static public void checkAllProdSale() {
         ArrayList<Product> products = runAllProducts();
         for (Product product : products) {
+            if(product.getMySalePrice()!=null){
             if (product.getMySalePrice().getEndSale().isBefore(currentDate)) {
                 product.setMarketPriceCurr(product.getMarketPriceConst());
+                }
+            if (product.getMySalePrice().getStartSale().isEqual(currentDate)) {
+                product.setMarketPriceCurr(product.getMarketPriceConst()-
+                        (product.getMarketPriceConst()* product.getMySalePrice().getDiscountRatio()/100));
+            }
             }
         }
+    }
+    public static void moveToNextDay(){
+        currentDate = currentDate.plusDays(1);
     }
 
     //Generate a report of inventory:
     //helper function
     static public StringBuilder HelperGenerateReportsStock(ArrayList<Product> toPrint) {
-        int i = 1;
         StringBuilder output = new StringBuilder();
-        String title = "Inventory report:\n";
+        if (toPrint.isEmpty()){
+            output.append("There is no existing items");
+            return output;
+        }
+        int i = 1;
+        String title = "Inventory report:\n\n";
+        output.append(title);
         for (Product product : toPrint) {
-            output.append(i).append(".");
+            output.append(i).append(".\n");
             output.append(product.printProduct());
             String catalogNum = "Catalog Number:" + product.getCatalogNumProduct() + "\n";
-            String total = "Total amount:" + product.getTotalAmount() + "\n";
-            output.append(catalogNum).append(total);
+            String marketPrice = "Marketing price:" + product.getMarketPriceCurr() + "\n";
+            String manuPrice = "Manufacturer price:" + product.getManuPriceCurr() + "\n";
+            String totalStore = "Total amount of items in store:" + product.getStoreAmount() + "\n";
+            String totalWare = "Total amount of items in warehouse:" + product.getWarehouseAmount() + "\n\n";
+            output.append(catalogNum).append(marketPrice).append(manuPrice).append(totalStore).append(totalWare);
             i++;
         }
         return output;
@@ -299,14 +360,17 @@ public class Inventory{
     //Generate a report of inventory according to category
     static public StringBuilder GenerateReportsStockByCat(String cat, String subCat, String size) {
         StringBuilder outputForController = new StringBuilder();
-        if (!subCat.equals("0") && !(size.equals("0"))) { //have cat,subCat,size
-            outputForController.append(HelperGenerateReportsStock(runProductBySize(cat, subCat, size)));
-        } else if (size.equals("0")) { //have cat, subCat
-            outputForController.append(HelperGenerateReportsStock(runProductBySubCat(cat, subCat)));
-        } else { //have cat
+        if(subCat.equals("0")){
             outputForController.append(HelperGenerateReportsStock(runProductByCat(cat)));
+            return outputForController;
         }
+        if(size.equals("0")){
+            outputForController.append(HelperGenerateReportsStock(runProductBySubCat(cat, subCat)));
+            return outputForController;
+        }
+        outputForController.append(HelperGenerateReportsStock(runProductBySize(cat, subCat, size)));
         return outputForController;
+
     }
 }
 

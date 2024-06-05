@@ -5,7 +5,7 @@ import java.util.ArrayList;
 abstract public class AReport {
 
 //   ***Fields***
-    protected ArrayList<Tuple<String,Item>> items;
+    protected ArrayList<Tuple<String,Item>> items = new ArrayList<>();
     protected String name;
     protected int amount;
 
@@ -15,7 +15,7 @@ abstract public class AReport {
         return items;
     }
     public int getAmount() {
-        return amount;
+        return items.size();
     }
     public String getName() {
         return name;
@@ -38,17 +38,17 @@ abstract public class AReport {
     //After printing all items are removed
     public String GenerateReports() {
         StringBuilder outputForController = new StringBuilder();
-        String title = "Report" + name + "items:\n";
+        String title = "Report " + name + " items:\n\n";
         outputForController.append(title);
         //all information
-        for (int i=1; i<= items.size(); i++) {
-            String Serial = i+".\n";
+        for (int i=0; i< items.size(); i++) {
+            String Serial = (i+1)+".\n";
             String location = "Location:" + items.get(i).getVal2().getPlace()+"\n";
             String catalogNum = "Catalog Number:" + items.get(i).getVal2().getCatalogNumItem()+"\n";
             String id = "ID:" + items.get(i).getVal2().getId()+"\n";
-            outputForController.append(Serial).append(items.get(i).getVal1()).append(location).append(catalogNum).append(id);
+            outputForController.append(Serial).append(items.get(i).getVal1()).append(location).append(catalogNum).append(id).append("\n");
         }
-        String summery = "Total" + name + "items:" + items.size() +"\n";
+        String summery = "Total " + name + " items: " + items.size() +"\n";
         outputForController.append(summery);
         items.clear();
         return outputForController.toString();

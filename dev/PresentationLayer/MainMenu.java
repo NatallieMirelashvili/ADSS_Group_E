@@ -32,23 +32,24 @@ public class MainMenu {
     }
 
     public static void GenerateReports(){
-        boolean initStatus = isInit();
-        if (!initStatus){return;}
-        Report.runMenu();
+//        boolean initStatus = isInit();
+//        if (!initStatus){return;}
+        ProduceReports.runMenu();
+
     }
     public static void inventory(){
-        boolean initStatus = isInit();
-        if (!initStatus){return;}
+//        boolean initStatus = isInit();
+//        if (!initStatus){return;}
         Management.runMenu();
     }
     public static void ThrowItem(){
-        boolean initStatus = isInit();
-        if (!initStatus){return;}
-        ProduceReports.runMenu();
+//        boolean initStatus = isInit();
+//        if (!initStatus){return;}
+        Report.runMenu();
     }
     public static void managerDetails(){
-        boolean initStatus = isInit();
-        if (!initStatus){return;}
+//        boolean initStatus = isInit();
+//        if (!initStatus){return;}
         System.out.println("""
                 Warehouse manager: Naveh Gershoni
                 email: ng@mailto.yossi
@@ -57,12 +58,13 @@ public class MainMenu {
     }
     public static void nextDay(){
         System.out.println("Grate job for today!\n");
+        StockController.updateDateToNextCtr();
         StockController.checkAllItemsExpCtr();
         StockController.checkAllItemsSaleCtr();
     }
     public static void exit(){
-        boolean initStatus = isInit();
-        if (!initStatus){return;}
+//        boolean initStatus = isInit();
+//        if (!initStatus){return;}
         System.out.println("Exiting program...\nGoodBye!");
     }
     public static String printMenu() {
@@ -90,8 +92,8 @@ public class MainMenu {
         int userInput = scanner.nextInt();
         switch (userInput) {
             case 1 -> initProg();
-            case 2 -> GenerateReports();
-            case 3 -> ThrowItem();
+            case 2 -> ThrowItem();
+            case 3 -> GenerateReports();
             case 4 -> inventory();
             case 5 -> managerDetails();
             case 6 -> nextDay();
