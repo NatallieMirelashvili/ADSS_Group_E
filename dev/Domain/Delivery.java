@@ -25,6 +25,10 @@ public Delivery(LocalDate date, LocalTime hour, truck truck, Driver driver, site
         this.origin = origin;
     }
 
+    public static int getCounter() {
+        return (counter);
+    }
+
     public int getID() {
         return ID;
     }
@@ -58,10 +62,10 @@ public Delivery(LocalDate date, LocalTime hour, truck truck, Driver driver, site
         items_form new_items_form = new items_form(destination, items);
         item_form.add(new_items_form);
     }
-    public void add_item_to_Items_form(String destination_name, int itemID, int amount) {
-        for (items_form items_form : item_form) {
-            if (items_form.getDestination().getSite_name().equals(destination_name)) {
-                items_form.addItem(new Item(Temp_DB.get_item(itemID), amount));
+    public void add_item_to_Items_form(int destination_ID, Item item, int amount) {
+        for (items_form items_form_s : item_form) {
+            if (items_form_s.getDestination().getSite_ID() == destination_ID) {
+                items_form_s.addItem(new Item(item, amount));
                 break;
             }
         }

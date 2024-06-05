@@ -60,4 +60,27 @@ public class controller {
     public static boolean check_license(int truckId, int driverId) {
         return Temp_DB.get_truck(truckId).getLicense().equals(Temp_DB.get_driver(driverId).getLicense());
     }
+    public static String get_site_type(int site_ID) {
+        return Temp_DB.get_site(site_ID).get_type();
+    }
+    public static int get_delivery_ID() {
+        return Temp_DB.get_delivery_ID();
+    }
+    public static boolean destination_exists(int delivery_ID, int site_ID) {
+        return Temp_DB.destination_exists(delivery_ID, site_ID);
+    }
+    public static boolean same_area(int delivery_ID, int site_ID) {
+        return Temp_DB.same_area(delivery_ID, site_ID);
+    }
+    public static boolean item_exists(int item_ID) {
+        return Temp_DB.item_exists(item_ID);
+    }
+    public static void add_items_form(int delivery_ID, int site_ID) {
+        Temp_DB.add_items_form(delivery_ID, site_ID);
+    }
+    public static void add_item_to_items_form(int delivery_ID, int site_ID, int item_ID, int quantity) {
+        Temp_DB.add_item_to_Items_form(delivery_ID, site_ID, item_ID, quantity);
+    }
+
+
 }

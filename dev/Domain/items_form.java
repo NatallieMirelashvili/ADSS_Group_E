@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class items_form {
     int id;
     site destination;
-    private ArrayList<Item> items = new ArrayList<Item>();
+    private ArrayList<Item> items;
 
     static int counter = 0;
     public items_form(site destination, ArrayList<Item> items) {

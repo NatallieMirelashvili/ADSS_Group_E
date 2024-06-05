@@ -3,6 +3,7 @@ import com.google.gson.JsonObject;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Temp_DB {
@@ -174,5 +175,43 @@ public class Temp_DB {
 
     public static void change_site_area(int ID, String area) {
         site_d.get(ID).setArea(area);
+    }
+
+    public static int get_delivery_ID() {
+        return Delivery.getCounter();
+    }
+
+    public static boolean destination_exists(int delivery_ID, int site_ID) {
+        ArrayList<items_form> item_form_arr = get_delivery(delivery_ID).getItems_form();
+        for (items_form items_form : item_form_arr) {
+            if (items_form.getDestination().getSite_ID() == site_ID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean same_area(int delivery_ID, int site_ID) {
+        ArrayList<items_form> item_form_arr = get_delivery(delivery_ID).getItems_form();
+        if (item_form_arr.size() == 0) {
+            return true;
+        }
+        site destination = get_site(site_ID);
+        site last_destination = item_form_arr.get(item_form_arr.size() - 1).getDestination();
+        return destination.getArea().equals(last_destination.getArea());
+    }
+    public static boolean item_exists(int item_ID) {
+        return items_d.containsKey(item_ID);
+    }
+    public static void add_items_form(int delivery_ID, int site_ID){
+        Delivery delivery = get_delivery(delivery_ID);
+        site destination = get_site(site_ID);
+        delivery.createItems_form(destination);
+    }
+    public static void add_item_to_Items_form(int delivery_ID, int site_ID, int item_ID, int quantity){
+        Delivery delivery = get_delivery(delivery_ID);
+        site destination = get_site(site_ID);
+        Item item = get_item(item_ID);
+        delivery.add_item_to_Items_form(destination.getSite_ID(), item, quantity);
     }
 }

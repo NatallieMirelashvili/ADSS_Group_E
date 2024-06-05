@@ -100,7 +100,8 @@ public class Delivery_form {
                     sc.next();
                 }
             }
-            System.out.println("Delivery added successfully");
+        int delivery_ID = controller.get_delivery_ID();
+        System.out.println("Delivery added successfully, delivery ID is:" + delivery_ID);
 
             JsonObject delivery = new JsonObject();
             delivery.addProperty("date", date);
@@ -109,7 +110,20 @@ public class Delivery_form {
             delivery.addProperty("driver_ID", driver_ID);
             delivery.addProperty("site_ID", site_ID);
             controller.add_delivery(delivery);
-            // TODO: add items form
+
+            System.out.println("Enter 1 to add item form to the delivery or -1 to return to Delivery Manager menu");
+            int choice;
+            try {
+                choice = sc.nextInt();
+                if (choice == 1) {
+                    Items_form_addition.add_new_items_form(delivery_ID);
+                }
+                if (choice == -1) {
+                    Delivery_manager_menu.show();
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter 1 or -1");
+            }
         }
 
 

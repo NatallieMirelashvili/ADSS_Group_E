@@ -45,4 +45,11 @@ public class site {
     public void setArea(String area) {
         this.area = area;
     }
+
+    public String get_type() {
+        return type;
+    }
+    public String getArea() {
+        return area;
+    }
 }
