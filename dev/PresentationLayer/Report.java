@@ -1,7 +1,5 @@
 package PresentationLayer;
-import ServiceLayer.ProductController;
 import ServiceLayer.StockController;
-
 import java.util.Scanner;
 public class Report {
 
@@ -76,16 +74,13 @@ public class Report {
     public static int GetChoice(){
         Scanner scanner = new Scanner(System.in);
         System.out.print(PrintMenu());
-        int userInput = scanner.nextInt();;
+        int userInput = scanner.nextInt();
         switch (userInput) {
             case 1 -> ReportDamaged();
             case 2 -> ReportExpired();
             case 3 -> SellItem();
             case 4 -> ReturnToMainMenu();
-            default -> {
-                System.out.println("Please choose valid number between 1-4");
-
-            }
+            default -> System.out.println("Please choose valid number between 1-4");
         }
         return userInput;
     }

@@ -32,24 +32,16 @@ public class MainMenu {
     }
 
     public static void GenerateReports(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         ProduceReports.runMenu();
 
     }
     public static void inventory(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         Management.runMenu();
     }
     public static void ThrowItem(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         Report.runMenu();
     }
     public static void managerDetails(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         System.out.println("""
                 Warehouse manager: Naveh Gershoni
                 email: ng@mailto.yossi
@@ -63,8 +55,6 @@ public class MainMenu {
         StockController.checkAllItemsSaleCtr();
     }
     public static void exit(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         System.out.println("Exiting program...\nGoodBye!");
     }
     public static String printMenu() {

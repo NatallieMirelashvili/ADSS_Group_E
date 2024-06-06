@@ -6,12 +6,11 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Management {
 
 //    help function:
-    public static Tuple<ArrayList<String>, Boolean> showCatalogChoices(Scanner scan){
+    public static ArrayList<String> showCatalogChoices(Scanner scan){
         ArrayList<String> categoriesForSales = new ArrayList<>(3);
         String mainCat = readStrFromUsr("Please enter the main category", scan);
         String sub = readStrFromUsr("If you want to add a specific sub category, enter its name or press 0 if dont", scan);
@@ -20,8 +19,12 @@ public class Management {
         categoriesForSales.add(mainCat);
         categoriesForSales.add(sub);
         categoriesForSales.add(size);
-        Boolean bool = StockController.ProdInStockByCatCTR(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
-        return new Tuple<>(categoriesForSales, bool);
+        boolean bool = StockController.ProdInStockByCatCTR(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
+        if(!bool){
+            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
+            return null;
+        }
+        return categoriesForSales;
     }
     private static String readStrFromUsr(String msg, Scanner scan){
         System.out.println(msg);
@@ -122,13 +125,9 @@ public class Management {
 
     public static void UpdateSales(){
         Scanner scan = new Scanner(System.in);
-        Tuple<ArrayList<String>,Boolean> askCatCorrect = showCatalogChoices(scan);
-        Boolean correct = askCatCorrect.getVal2();
-        if(!correct){
-            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
-            return;
-        }
-        ArrayList<String> askCat = askCatCorrect.getVal1();
+        ArrayList<String> askCatCorrect = showCatalogChoices(scan);
+       if(askCatCorrect == null)
+           return;
         String getStartMSG = "Please enter the start date of sale by the format: YYYY-MM-DD";
         String fromSTR = readStrFromUsr(getStartMSG, scan);
         LocalDate fromDate = LocalDate.parse(fromSTR);
@@ -137,24 +136,19 @@ public class Management {
         LocalDate dueDate = LocalDate.parse(toSTR);
         System.out.println("Please enter the sale percentage: ");
         double percentage = scan.nextDouble();
-        StockController.updateSaleControl(askCat.get(0), askCat.get(1), askCat.get(2), fromDate, dueDate, percentage);
+        StockController.updateSaleControl(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), fromDate, dueDate, percentage);
         System.out.println("Sale updated successfully\n");
     }
     public static void UpdateDiscount(){
-        Scanner scan1 = new Scanner(System.in);
-        Tuple<ArrayList<String>,Boolean> askCatCorrect = showCatalogChoices(scan1);
-        Boolean correct = askCatCorrect.getVal2();
-        if(!correct){
-            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> askCatCorrect = showCatalogChoices(scan);
+        if(askCatCorrect == null)
             return;
-        }
-        ArrayList<String> askCat = askCatCorrect.getVal1();
-        System.out.println("Please enter the discount percentage: ");
-        double ratio = scan1.nextDouble();
         String manuMSG = "Please enter the name of the manufacturer you want to update its percentage: ";
-        Scanner scan2 = new Scanner(System.in);
-        String manu = readStrFromUsr(manuMSG, scan2);
-        if(StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2), ratio, manu)){
+        String manu = readStrFromUsr(manuMSG, scan);
+        System.out.println("Please enter the discount percentage: ");
+        double ratio = scan.nextDouble();
+        if(StockController.updateDisControl(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), ratio, manu)){
             System.out.println("Discount from manufacturer updated successfully\n");
             return;
         }
@@ -199,7 +193,7 @@ public class Management {
 
     public static String PrintMenu() {
         return """
-                What would you like to do today?
+                What an action on your inventory would you like to do?
                 1. Add a product to inventory
                 2. Add an item to inventory
                 3. Remove a product from inventory
@@ -219,7 +213,7 @@ public class Management {
     public static int GetChoice(){
         Scanner scanner = new Scanner(System.in);
         System.out.print(PrintMenu());
-        int userInput = scanner.nextInt();;
+        int userInput = scanner.nextInt();
         switch (userInput) {
             case 1 -> AddProd();
             case 2 -> AddItem();
@@ -229,9 +223,8 @@ public class Management {
             case 6 -> MoveStoreWare();
             case 7 -> MoveWareStore();
             case 8 -> ReturnToMainMenu();
-            default -> {
-                System.out.println("Please choose valid number between 1-9");
-            }
+            default -> System.out.println("Please choose valid number between 1-9");
+
         }
         return userInput;
     }

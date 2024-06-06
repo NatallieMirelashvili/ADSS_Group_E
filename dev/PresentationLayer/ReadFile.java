@@ -1,9 +1,8 @@
 package PresentationLayer;
 import com.google.gson.JsonObject;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
+import java.nio.file.Paths;
 
 import ServiceLayer.ProductController;
 
@@ -17,11 +16,18 @@ public class ReadFile {
         }
         return myJson;
     }
+    private static String getPathToFiles(String relevanceFile){
+        String currDir = System.getProperty("user.dir");
+        File currDirF = new File(currDir);
+        return Paths.get(currDirF.getParent(), "dev","DataFiles",relevanceFile).toString();
+    }
     public static boolean readProducts(){
-        return readFileByType(1, "products line in market", "dev/DataFiles/ProductData.csv");
+        String fileToRead = getPathToFiles("ProductData.csv");
+        return readFileByType(1, "products line in market", fileToRead);
     }
     public static boolean readItems(){
-        return readFileByType(2, "items for sell in market", "dev/DataFiles/ItemsData.csv");
+        String fileToRead = getPathToFiles("ItemsData.csv");
+        return readFileByType(2, "items for sell in market", fileToRead);
     }
     public static boolean readFileByType(int initCase, String msg, String filePath) {
         System.out.println("Loading "+ msg + "...\n");
@@ -59,7 +65,4 @@ public class ReadFile {
             return false;
         }
     }
-
-//    After creating products and items we want to assemble all data in Stock classes:
-
 }

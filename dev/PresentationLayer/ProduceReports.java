@@ -1,5 +1,4 @@
 package PresentationLayer;
-import DomainLayer.Tuple;
 import ServiceLayer.StockController;
 
 import java.util.ArrayList;
@@ -9,16 +8,21 @@ public class ProduceReports {
     public static void  InventoryReport(){
         System.out.println("""
                 If you want to watch all items for sale please type 'All' and then press ENTER.
-                Else, if you want to watch items by categories please type Category and then press ENTER""");
+                Else, if you want to watch items by categories please type 'Category' and then press ENTER""");
         Scanner scan = new Scanner(System.in);
         String which = scan.nextLine();
+        while (!(which.equals("All") || which.equals("Category"))){
+            System.out.println("Please type 'All' or 'Category as you are required");
+            which = scan.nextLine();
+        }
         if (which.equals("All")) {
             System.out.println(StockController.showAllItemsCtr());
             return;
         }
-        Tuple<ArrayList<String>,Boolean> askCatCorrect = Management.showCatalogChoices(scan);
-        System.out.println(StockController.showByCatCtr(askCatCorrect.getVal1().get(0), askCatCorrect.getVal1().get(1), askCatCorrect.getVal1().get(2)));
-
+        ArrayList<String> askCatCorrect = Management.showCatalogChoices(scan);
+        if (askCatCorrect == null)
+            return;
+        System.out.println(StockController.showByCatCtr(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2)));
     }
     public static void  ExpiredReport(){
         System.out.println(StockController.showExpReportsCtr());
@@ -48,7 +52,7 @@ public class ProduceReports {
     public static int GetChoice(){
         Scanner scanner = new Scanner(System.in);
         System.out.print(PrintMenu());
-        int userInput = scanner.nextInt();;
+        int userInput = scanner.nextInt();
         switch (userInput) {
             case 1 -> InventoryReport();
             case 2 -> ExpiredReport();
