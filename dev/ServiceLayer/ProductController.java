@@ -1,12 +1,20 @@
 package ServiceLayer;
-import DomainLayer.*;
+import DomainLayer.Product;
+import DomainLayer.Item;
+import DomainLayer.Tuple;
 import com.google.gson.JsonObject;
-
 import java.time.LocalDate;
 
 
-//    Access to product functions
 public class ProductController {
+
+    /**
+     * Name: createPlaceItem - a method which turns a string which presents item's place by the instruction.
+     * For example item 1234 is in the warehouse in aile A shelf 6, so the method gets the "A 6" input and returns the
+     * proper tuple <A, 6>
+     * Args: String placeStr
+     * Returns: Tuple<String, Integer>
+     * */
     public static Tuple<String, Integer> createPlaceItem(String placeStr){
         String[] passShelf = placeStr.split(" ");
         String pass = passShelf[0];
@@ -14,7 +22,12 @@ public class ProductController {
         return new Tuple<>(pass, shelf);
     }
 
-// Create item/ product
+    /**
+     * Name: createNewItem - a method which turns a Json object which presents item's characters and adds the new item
+     * to the inventory. Using Item's class methods.
+     * Args: JsonObject record
+     * Returns: None
+     * */
     public static void createNewItem(JsonObject record){
         Tuple<String, Integer> place = createPlaceItem(record.get("place").getAsString());
         String expD = record.get("expirationDate").getAsString();
@@ -23,6 +36,12 @@ public class ProductController {
         newItem.addMeToProd();
     }
 
+    /**
+     * Name: createNewProd - a method which turns a Json object which presents product's characters and adds the new product
+     * to the inventory. Using Product's class constructor and StockController methods.
+     * Args: JsonObject record
+     * Returns: None
+     * */
     public static boolean createNewProd(JsonObject record){
         boolean alreadyInStock = StockController.ProdInStockControl(record.get("catalogNumProduct").getAsInt());
         if(!alreadyInStock){

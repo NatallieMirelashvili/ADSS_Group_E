@@ -21,21 +21,8 @@ abstract public class AReport {
         return name;
     }
 
-    //   ***Methood***
+    //   ***Methods***
 
-    //print a report by format->
-    //Report (by name) items:
-    //1.
-    //Category:
-    //Sub Category:
-    //Size:
-    //Manufacturer:
-    //Location:
-    //Catalog Number:
-    //ID:
-    //....
-    //Total (by name) items:
-    //After printing all items are removed
     public String GenerateReports() {
         StringBuilder outputForController = new StringBuilder();
         String title = "Report " + name + " items:\n\n";

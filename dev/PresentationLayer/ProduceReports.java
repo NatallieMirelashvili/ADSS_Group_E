@@ -1,10 +1,15 @@
 package PresentationLayer;
 import ServiceLayer.StockController;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class ProduceReports {
     //   *****Menu Functions****
+    /***
+     *Name:InventoryReport - A methods which print the inventory report by asked categories or the full inventory.
+     * Args: None
+     * Returns: None
+     */
     public static void  InventoryReport(){
         System.out.println("""
                 If you want to watch all items for sale please type 'All' and then press ENTER.
@@ -12,7 +17,7 @@ public class ProduceReports {
         Scanner scan = new Scanner(System.in);
         String which = scan.nextLine();
         while (!(which.equals("All") || which.equals("Category"))){
-            System.out.println("Please type 'All' or 'Category as you are required");
+            System.out.println("Please type 'All' or 'Category' as you are required");
             which = scan.nextLine();
         }
         if (which.equals("All")) {
@@ -24,9 +29,23 @@ public class ProduceReports {
             return;
         System.out.println(StockController.showByCatCtr(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2)));
     }
+
+    /***
+     *Name:ExpiredReport - A methods which print the expired items report. After you will produce this report it will
+     * be removed from the program!
+     * Args: None
+     * Returns: None
+     */
     public static void  ExpiredReport(){
         System.out.println(StockController.showExpReportsCtr());
     }
+
+    /***
+     *Name:DamagedReport - A methods which print the damaged items report. After you will produce this report it will
+     * be removed from the program!
+     * Args: None
+     * Returns: None
+     */
     public static void  DamagedReport(){
         System.out.println(StockController.showDamageReportsCtr());
     }

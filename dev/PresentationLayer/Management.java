@@ -10,6 +10,11 @@ import java.time.LocalDate;
 public class Management {
 
 //    help function:
+    /***
+     *Name:showCatalogChoices - A sub function which present the categories you can classify your products when its necessary.
+     * Args: Scanner scan - so the function will be able to scan your answers.
+     * Returns: ArrayList<String> - of the asked categories.
+     */
     public static ArrayList<String> showCatalogChoices(Scanner scan){
         ArrayList<String> categoriesForSales = new ArrayList<>(3);
         String mainCat = readStrFromUsr("Please enter the main category", scan);
@@ -46,7 +51,11 @@ public class Management {
         return myJson;
     }
 
-
+    /***
+     *Name:AddProd - A Method who adds new product to the inventory by the asked characters.
+     * Args: None
+     * Returns: None
+     */
 //   *****Menu Functions****
     public static void AddProd(){
         ArrayList<String> msgLst = new ArrayList<>(9);
@@ -78,6 +87,16 @@ public class Management {
         System.out.println("Added failed - the product already in stock.\n");
 
     }
+
+    /***
+     *Name:AddItem - A Method who adds new item to the inventory by the asked characters.
+     * Please notice that the catalog number of the new item fix to the proper product and the proper product already
+     * added to the inventory. For example if you want to add new milk with 2 litter with id of 1234 please unsure that
+     * the product Dairy Milk 0.5 litter with catalog number of 1515 added to the inventory before and the catalog
+     * number of item 1234 you input is: 1515.
+     * Args: None
+     * Returns: None
+     */
     public static void AddItem(){
         ArrayList<String> msgLst = new ArrayList<>(4);
         msgLst.add("Enter item id: ");
@@ -111,6 +130,14 @@ public class Management {
         System.out.println("OK, item will not add\n");
 
     }
+
+    /***
+     *Name:RemoveProd - A method which removes a product from the inventory. Please use it when you want to stop sell
+     * items of this product in your store.
+     * Args: None
+     * Returns: None
+     */
+
     public static void RemoveProd(){
         Scanner scan = new Scanner(System.in);
         String idMsg = "Please enter the catalog number of the product you want to cancel from selling";
@@ -123,6 +150,11 @@ public class Management {
         System.out.println("Product removed successfully!\n");
     }
 
+    /***
+     *Name:UpdateSales - A method which update a sale on products in the inventory.
+     * Args: None
+     * Returns: None
+     */
     public static void UpdateSales(){
         Scanner scan = new Scanner(System.in);
         ArrayList<String> askCatCorrect = showCatalogChoices(scan);
@@ -139,6 +171,11 @@ public class Management {
         StockController.updateSaleControl(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), fromDate, dueDate, percentage);
         System.out.println("Sale updated successfully\n");
     }
+    /***
+     *Name:UpdateDiscount - A method which update a discount ratios on products from their manufacturer who provide them.
+     * Args: None
+     * Returns: None
+     */
     public static void UpdateDiscount(){
         Scanner scan = new Scanner(System.in);
         ArrayList<String> askCatCorrect = showCatalogChoices(scan);
@@ -155,6 +192,12 @@ public class Management {
         System.out.println("There is no such manufacturer " + manu + "!\n");
 
     }
+
+    /***
+     *Name:MoveStoreWare - A method which move an item from store to the warehouse.
+     * Args: None
+     * Returns: None
+     */
     public static void MoveStoreWare(){
         Scanner scan1 = new Scanner(System.in);
         String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
@@ -170,6 +213,11 @@ public class Management {
         }
         System.out.println("This item not in stock!\n");
     }
+    /***
+     *Name:MoveWareStore - A method which move an item from warehouse to the store.
+     * Args: None
+     * Returns: None
+     */
     public static void MoveWareStore(){
         Scanner scan1 = new Scanner(System.in);
         String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
