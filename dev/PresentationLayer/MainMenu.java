@@ -90,7 +90,7 @@ public class MainMenu {
                 3. Generate reports
                 4. Preform an inventory actions
                 5. Show warehouse manager's contact details
-                6. Move to the next day before exit the office
+                6. End of shift report
                 7. Exit program
                 """;
     }
