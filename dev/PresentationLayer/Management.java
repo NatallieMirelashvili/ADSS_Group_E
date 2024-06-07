@@ -6,12 +6,16 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Management {
 
 //    help function:
-    public static Tuple<ArrayList<String>, Boolean> showCatalogChoices(Scanner scan){
+    /***
+     *Name:showCatalogChoices - A sub function which present the categories you can classify your products when its necessary.
+     * Args: Scanner scan - so the function will be able to scan your answers.
+     * Returns: ArrayList<String> - of the asked categories.
+     */
+    public static ArrayList<String> showCatalogChoices(Scanner scan){
         ArrayList<String> categoriesForSales = new ArrayList<>(3);
         String mainCat = readStrFromUsr("Please enter the main category", scan);
         String sub = readStrFromUsr("If you want to add a specific sub category, enter its name or press 0 if dont", scan);
@@ -20,8 +24,12 @@ public class Management {
         categoriesForSales.add(mainCat);
         categoriesForSales.add(sub);
         categoriesForSales.add(size);
-        Boolean bool = StockController.ProdInStockByCatCTR(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
-        return new Tuple<>(categoriesForSales, bool);
+        boolean bool = StockController.ProdInStockByCatCTR(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
+        if(!bool){
+            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
+            return null;
+        }
+        return categoriesForSales;
     }
     private static String readStrFromUsr(String msg, Scanner scan){
         System.out.println(msg);
@@ -43,7 +51,11 @@ public class Management {
         return myJson;
     }
 
-
+    /***
+     *Name:AddProd - A Method who adds new product to the inventory by the asked characters.
+     * Args: None
+     * Returns: None
+     */
 //   *****Menu Functions****
     public static void AddProd(){
         ArrayList<String> msgLst = new ArrayList<>(9);
@@ -75,6 +87,16 @@ public class Management {
         System.out.println("Added failed - the product already in stock.\n");
 
     }
+
+    /***
+     *Name:AddItem - A Method who adds new item to the inventory by the asked characters.
+     * Please notice that the catalog number of the new item fix to the proper product and the proper product already
+     * added to the inventory. For example if you want to add new milk with 2 litter with id of 1234 please unsure that
+     * the product Dairy Milk 0.5 litter with catalog number of 1515 added to the inventory before and the catalog
+     * number of item 1234 you input is: 1515.
+     * Args: None
+     * Returns: None
+     */
     public static void AddItem(){
         ArrayList<String> msgLst = new ArrayList<>(4);
         msgLst.add("Enter item id: ");
@@ -108,6 +130,14 @@ public class Management {
         System.out.println("OK, item will not add\n");
 
     }
+
+    /***
+     *Name:RemoveProd - A method which removes a product from the inventory. Please use it when you want to stop sell
+     * items of this product in your store.
+     * Args: None
+     * Returns: None
+     */
+
     public static void RemoveProd(){
         Scanner scan = new Scanner(System.in);
         String idMsg = "Please enter the catalog number of the product you want to cancel from selling";
@@ -120,15 +150,16 @@ public class Management {
         System.out.println("Product removed successfully!\n");
     }
 
+    /***
+     *Name:UpdateSales - A method which update a sale on products in the inventory.
+     * Args: None
+     * Returns: None
+     */
     public static void UpdateSales(){
         Scanner scan = new Scanner(System.in);
-        Tuple<ArrayList<String>,Boolean> askCatCorrect = showCatalogChoices(scan);
-        Boolean correct = askCatCorrect.getVal2();
-        if(!correct){
-            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
-            return;
-        }
-        ArrayList<String> askCat = askCatCorrect.getVal1();
+        ArrayList<String> askCatCorrect = showCatalogChoices(scan);
+       if(askCatCorrect == null)
+           return;
         String getStartMSG = "Please enter the start date of sale by the format: YYYY-MM-DD";
         String fromSTR = readStrFromUsr(getStartMSG, scan);
         LocalDate fromDate = LocalDate.parse(fromSTR);
@@ -137,30 +168,36 @@ public class Management {
         LocalDate dueDate = LocalDate.parse(toSTR);
         System.out.println("Please enter the sale percentage: ");
         double percentage = scan.nextDouble();
-        StockController.updateSaleControl(askCat.get(0), askCat.get(1), askCat.get(2), fromDate, dueDate, percentage);
+        StockController.updateSaleControl(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), fromDate, dueDate, percentage);
         System.out.println("Sale updated successfully\n");
     }
+    /***
+     *Name:UpdateDiscount - A method which update a discount ratios on products from their manufacturer who provide them.
+     * Args: None
+     * Returns: None
+     */
     public static void UpdateDiscount(){
-        Scanner scan1 = new Scanner(System.in);
-        Tuple<ArrayList<String>,Boolean> askCatCorrect = showCatalogChoices(scan1);
-        Boolean correct = askCatCorrect.getVal2();
-        if(!correct){
-            System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> askCatCorrect = showCatalogChoices(scan);
+        if(askCatCorrect == null)
             return;
-        }
-        ArrayList<String> askCat = askCatCorrect.getVal1();
-        System.out.println("Please enter the discount percentage: ");
-        double ratio = scan1.nextDouble();
         String manuMSG = "Please enter the name of the manufacturer you want to update its percentage: ";
-        Scanner scan2 = new Scanner(System.in);
-        String manu = readStrFromUsr(manuMSG, scan2);
-        if(StockController.updateDisControl(askCat.get(0), askCat.get(1), askCat.get(2), ratio, manu)){
+        String manu = readStrFromUsr(manuMSG, scan);
+        System.out.println("Please enter the discount percentage: ");
+        double ratio = scan.nextDouble();
+        if(StockController.updateDisControl(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), ratio, manu)){
             System.out.println("Discount from manufacturer updated successfully\n");
             return;
         }
         System.out.println("There is no such manufacturer " + manu + "!\n");
 
     }
+
+    /***
+     *Name:MoveStoreWare - A method which move an item from store to the warehouse.
+     * Args: None
+     * Returns: None
+     */
     public static void MoveStoreWare(){
         Scanner scan1 = new Scanner(System.in);
         String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
@@ -176,6 +213,11 @@ public class Management {
         }
         System.out.println("This item not in stock!\n");
     }
+    /***
+     *Name:MoveWareStore - A method which move an item from warehouse to the store.
+     * Args: None
+     * Returns: None
+     */
     public static void MoveWareStore(){
         Scanner scan1 = new Scanner(System.in);
         String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
@@ -199,7 +241,7 @@ public class Management {
 
     public static String PrintMenu() {
         return """
-                What would you like to do today?
+                What an action on your inventory would you like to do?
                 1. Add a product to inventory
                 2. Add an item to inventory
                 3. Remove a product from inventory
@@ -219,7 +261,7 @@ public class Management {
     public static int GetChoice(){
         Scanner scanner = new Scanner(System.in);
         System.out.print(PrintMenu());
-        int userInput = scanner.nextInt();;
+        int userInput = scanner.nextInt();
         switch (userInput) {
             case 1 -> AddProd();
             case 2 -> AddItem();
@@ -229,9 +271,8 @@ public class Management {
             case 6 -> MoveStoreWare();
             case 7 -> MoveWareStore();
             case 8 -> ReturnToMainMenu();
-            default -> {
-                System.out.println("Please choose valid number between 1-9");
-            }
+            default -> System.out.println("Please choose valid number between 1-9");
+
         }
         return userInput;
     }

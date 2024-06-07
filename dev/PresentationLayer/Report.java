@@ -1,17 +1,17 @@
 package PresentationLayer;
-import ServiceLayer.ProductController;
 import ServiceLayer.StockController;
-
 import java.util.Scanner;
 public class Report {
 
 //    ***Help Functions***
+//    An help function which scan id of items from user.
     private static int GetIdFromUSR(String msg){
         Scanner scanner = new Scanner(System.in);
         System.out.print(msg);
         return scanner.nextInt();
     }
 
+//    A help function which alert if product got into minimal amount situation.
     private static void CheckGetToMinimal(int idItem) {
         boolean bool = StockController.checkMinimalControl(idItem);
         if (bool) {
@@ -22,6 +22,12 @@ public class Report {
 
     //   *****Menu Functions****
 
+    /***
+     *Name:ReportDamaged - A method which reports on an asked item that it has a damage which prevent it to be sold.
+     * The asked item will be presented in the next damage items report and removed from the inventory.
+     * Args:None
+     * Returns:None
+     */
 
     public static void  ReportDamaged(){
         String msg = "Please enter the id number of the item you want to report its damage:\n";
@@ -33,6 +39,14 @@ public class Report {
             return;}
         System.out.println("The item reported successfully!\n");
     }
+
+    /***
+     *Name:ReportDamaged - A method which reports on an asked item that it got to its expiration date which prevent
+     * it to be sold.
+     * The asked item will be presented in the next expired items report and removed from the inventory.
+     * Args:None
+     * Returns:None
+     */
     public static void ReportExpired(){
         String msg = "Please enter the id number of the item you want to report on its expiration:\n";
         int id_expire = GetIdFromUSR(msg);
@@ -44,6 +58,13 @@ public class Report {
         }
         System.out.println("The item reported successfully!\n");
     }
+
+    /***
+     *Name:SellItem - A method which reports that the asked item sold.
+     * The asked item will be removed from the inventory.
+     * Args:None
+     * Returns:None
+     */
     public static void SellItem() {
         String msg = "Please enter the id number of the item you want to sell\n";
         int input = GetIdFromUSR(msg);
@@ -76,16 +97,13 @@ public class Report {
     public static int GetChoice(){
         Scanner scanner = new Scanner(System.in);
         System.out.print(PrintMenu());
-        int userInput = scanner.nextInt();;
+        int userInput = scanner.nextInt();
         switch (userInput) {
             case 1 -> ReportDamaged();
             case 2 -> ReportExpired();
             case 3 -> SellItem();
             case 4 -> ReturnToMainMenu();
-            default -> {
-                System.out.println("Please choose valid number between 1-4");
-
-            }
+            default -> System.out.println("Please choose valid number between 1-4");
         }
         return userInput;
     }

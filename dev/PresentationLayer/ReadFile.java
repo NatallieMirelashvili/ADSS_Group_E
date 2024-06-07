@@ -1,13 +1,12 @@
 package PresentationLayer;
 import com.google.gson.JsonObject;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
+import java.io.*;
+import java.nio.file.Paths;
 import ServiceLayer.ProductController;
 
+
 public class ReadFile {
+//    Help function which fit field to its proper value which got from file to Json object.
     private static JsonObject CreateJasonFromFile(int iteration, String[] memberLst,String[] valuesOfMembers){
         JsonObject myJson = new JsonObject();
         for (int i = 0; i < iteration; i++){
@@ -17,12 +16,41 @@ public class ReadFile {
         }
         return myJson;
     }
+//    Help function which combine the proper file to the csv files which provided from the developers.
+    private static String getPathToFiles(String relevanceFile){
+        String currDir = System.getProperty("user.dir");
+        File currDirF = new File(currDir);
+        return Paths.get(currDirF.getParent(), "dev","DataFiles",relevanceFile).toString();
+    }
+
+      /***
+     *Name:readProducts - A method which starts the reading of products from the file.
+     * Args: None
+     * Returns: boolean - file scanned successfully?
+     */
     public static boolean readProducts(){
-        return readFileByType(1, "products line in market", "dev/DataFiles/ProductData.csv");
+        String fileToRead = getPathToFiles("ProductData.csv");
+        return readFileByType(1, "products line in market", fileToRead);
     }
+
+    /***
+     *Name:readItems - A method which starts the reading of items from the file.
+     * Args: None
+     * Returns: boolean - file scanned successfully?
+     */
     public static boolean readItems(){
-        return readFileByType(2, "items for sell in market", "dev/DataFiles/ItemsData.csv");
+        String fileToRead = getPathToFiles("ItemsData.csv");
+        return readFileByType(2, "items for sell in market", fileToRead);
     }
+
+    /***
+     *Name:readFileByType - A method which reads files filled with data on products or items and create a Product
+     * or Item java object.
+     * Args: int initCase: if you want to the ProductsData file input will be 1, else (ItemsData) input will be 2.
+     *       String msg: for let the user know from which file the function reads.
+     *       String filePath: the file path.
+     * Returns: boolean - file scanned successfully?
+     */
     public static boolean readFileByType(int initCase, String msg, String filePath) {
         System.out.println("Loading "+ msg + "...\n");
         BufferedReader buffer;
@@ -59,7 +87,4 @@ public class ReadFile {
             return false;
         }
     }
-
-//    After creating products and items we want to assemble all data in Stock classes:
-
 }

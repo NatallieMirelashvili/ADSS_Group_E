@@ -1,7 +1,12 @@
 package PresentationLayer;
 import ServiceLayer.StockController;
-
 import java.util.Scanner;
+
+
+/**
+ * MainMenu - a class which its purpose to run the main menu for thr user. The main menu functions contains passes to
+ * sub menus by subjects which presented to user.
+ * */
 public class MainMenu {
 //    Flag
     private static boolean initProgram = false;
@@ -11,6 +16,12 @@ public class MainMenu {
     }
 
 // ***Menu Functions***
+
+    /***
+     *Name:initProg - A method which manage the initial of the system if it is necessary.
+     * Args:None
+     * Returns:None
+     */
     public static void initProg(){
         boolean initStatus = isInit();
         if (initStatus){
@@ -32,30 +43,36 @@ public class MainMenu {
     }
 
     public static void GenerateReports(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         ProduceReports.runMenu();
 
     }
     public static void inventory(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         Management.runMenu();
     }
     public static void ThrowItem(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         Report.runMenu();
     }
+
+    /***
+     *Name:managerDetails - A method which prints the warehouse's manager's context details.
+     * Args:None
+     * Returns:None
+     */
     public static void managerDetails(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         System.out.println("""
                 Warehouse manager: Naveh Gershoni
                 email: ng@mailto.yossi
                 phone number: 0525381648
                 """);
     }
+
+    /***
+     *Name:nextDay - A method which moves the current day - in the system's world! The method updates product's price by
+     * the end date of sales or starts sale if its start day of sale. Additionally, its removes expired items from the inventory.
+     * You might want to use this option when its end of the work day in the market.
+     * Args:None
+     * Returns:None
+     */
     public static void nextDay(){
         System.out.println("Grate job for today!\n");
         StockController.updateDateToNextCtr();
@@ -63,8 +80,6 @@ public class MainMenu {
         StockController.checkAllItemsSaleCtr();
     }
     public static void exit(){
-//        boolean initStatus = isInit();
-//        if (!initStatus){return;}
         System.out.println("Exiting program...\nGoodBye!");
     }
     public static String printMenu() {
