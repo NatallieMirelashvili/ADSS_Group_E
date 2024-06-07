@@ -78,5 +78,16 @@ public class items_form {
         sb.append('\n');
         return sb.toString();
     }
+    public static int getCounter() {
+        return counter;
+    }
 
+    public boolean item_exists(int itemId) {
+        for (Item item : items) {
+            if (item.getItemId() == itemId) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

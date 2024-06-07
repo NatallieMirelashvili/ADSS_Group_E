@@ -85,10 +85,19 @@ public class Items_form_addition {
 
                 System.out.println("Enter item quantity");
                 int quantity = validateQuantity(sc);
+                if (site_type.equals("unloading")) {
+                    if (!handleUnloadingSite(sc, delivery_ID, item_ID, quantity)) {
+                        continue;
+                    }
+                }
                 System.out.println("You have chose to add " + quantity + " of item " + controller.get_item_name(item_ID) + " to the destination " + controller.get_site_name(site_ID) + " in delivery " + delivery_ID);
                 items_count++;
-                controller.add_item_to_items_form(delivery_ID, site_ID, item_ID, quantity);
+                controller.add_item_to_items_form(delivery_ID, controller.get_items_form_ID()-1, item_ID, quantity);
+                if (site_type.equals("loading")) {
+                    controller.add_loaded_item(delivery_ID, item_ID, quantity);
+                }
             }
+            System.out.println("You have added " + items_count + " items to the destination " + controller.get_site_name(site_ID) + " in items form " + (controller.get_items_form_ID()-1));
             items_form_count++;
         }
     }
@@ -107,6 +116,10 @@ public class Items_form_addition {
                         continue;
                     }
                     return -1;
+                }
+                if (site_ID < 0) {
+                    System.out.println("Invalid input. Please enter a positive Integer as site ID");
+                    continue;
                 }
                 if (!controller.site_exists(site_ID)) {
                     System.out.println("Site with this ID does not exist, please enter a valid site ID");
@@ -135,6 +148,10 @@ public class Items_form_addition {
         while (validChoice) {
             try {
                 item_ID = sc.nextInt();
+                if (item_ID < 0){
+                    System.out.println("Invalid input. Please enter a positive Integer as item ID");
+                    continue;
+                }
                 if (!controller.item_exists(item_ID)) {
                     System.out.println("Item with this ID does not exist, please enter a valid item ID");
                     continue;
@@ -148,7 +165,7 @@ public class Items_form_addition {
         return item_ID;
     }
 
-    private static int validateQuantity(Scanner sc) {
+    static int validateQuantity(Scanner sc) {
         int quantity = 0;
         boolean validChoice = true;
         while (validChoice) {
@@ -165,5 +182,32 @@ public class Items_form_addition {
             }
         }
         return quantity;
+    }
+
+    private static boolean handleUnloadingSite(Scanner sc, int delivery_ID, int item_ID, int quantity) {
+        if (!controller.item_exists_in_delivery(delivery_ID, item_ID) || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity) {
+            System.out.println("This item does not exist in the delivery or The quantity exceeds the quantity of this item in the delivery ");
+            System.out.println("1. Change former items form");
+            System.out.println("2. Add new item to this destination");
+            int choice_2 = 0;
+            while (true) {
+                try {
+                    choice_2 = sc.nextInt();
+                    if (choice_2 == 1) {
+                        item_form_edit.edit_item_form(delivery_ID,sc);
+                        return false;
+                    }
+                    if (choice_2 == 2) {
+                        return false;
+                    }
+                    System.out.println("Invalid input. Please enter 1 or 2");
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Please enter 1 or 2");
+                    sc.next();
+
+                }
+            }
+        }
+        return true;
     }
 }

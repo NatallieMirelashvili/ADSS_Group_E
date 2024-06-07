@@ -121,8 +121,8 @@ public class Delivery_manager_menu {
                     }
                     Items_form_addition.add_new_items_form(delivery_ID);
                     break;
-                case 7:  // TODO: THIS FUNCTION IS NOT IMPLEMENTED YET
-                    //Delivery_duration.start_delivery();
+                case 7:
+                    Delivery_duration.start_delivery_duration();
                     break;
                 case 8:
                     continue_loop = false;

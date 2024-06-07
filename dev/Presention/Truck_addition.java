@@ -16,6 +16,10 @@ public class Truck_addition {
         while (!validChoice) {
             try {
                 ID = sc.nextInt();
+                if (ID < 0) {
+                    System.out.println("Invalid input. Please enter a positive Integer");
+                    continue;
+                }
                 if (controller.truck_exists(ID)) {
                     System.out.println("Truck with this ID already exists");
                     System.out.println("Enter truck ID");

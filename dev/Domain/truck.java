@@ -21,6 +21,9 @@ public class truck {
     public int getID() {
         return id;
     }
+    public double get_max_Weight(){
+        return this.max_weight;
+    }
 
     public void setCurr_weight(double curr_weight) {
         this.curr_weight = curr_weight;

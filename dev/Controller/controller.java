@@ -90,8 +90,72 @@ public class controller {
     public static void add_items_form(int delivery_ID, int site_ID) {
         Temp_DB.add_items_form(delivery_ID, site_ID);
     }
-    public static void add_item_to_items_form(int delivery_ID, int site_ID, int item_ID, int quantity) {
-        Temp_DB.add_item_to_Items_form(delivery_ID, site_ID, item_ID, quantity);
+    public static void add_item_to_items_form(int delivery_ID, int item_form_ID, int item_ID, int quantity) {
+        Temp_DB.add_item_to_Items_form(delivery_ID, item_form_ID, item_ID, quantity);
+    }
+    public static boolean delivery_starts_now(int delivery_ID) {
+        return Temp_DB.delivery_starts_now(delivery_ID);
+    }
+    public static double weight_check(int delivery_ID){
+        return Temp_DB.weight_check(delivery_ID);
+    }
+    public static void setCurr_weight(int delivery_ID, double weight){
+        Temp_DB.setCurr_weight(delivery_ID, weight);
+    }
+
+    public static int get_delivery_destinations_size(int delivery_ID){
+        return Temp_DB.get_delivery(delivery_ID).item_form_size();
+    }
+    public static boolean get_delivery_destinations_loading(int delivery_ID, int index){
+        return Temp_DB.get_delivery_destinations_loading(delivery_ID, index);
+    }
+    public static String get_destinations_name(int delivery_ID, int index){
+        return Temp_DB.get_destinations_name(delivery_ID, index);
+    }
+    public static void add_loaded_item(int delivery_ID,int item_ID,int quantity){
+        Temp_DB.add_loaded_item(delivery_ID, item_ID, quantity);
+    }
+    public static boolean item_exists_in_delivery(int delivery_ID, int item_ID){
+        return Temp_DB.item_exists_in_delivery(delivery_ID, item_ID);
+    }
+    public static int get_item_quantity_in_delivery(int delivery_ID, int item_ID){
+        return Temp_DB.get_item_quantity_in_delivery(delivery_ID, item_ID);
+    }
+    public static void decrease_item_in_loaded_items(int delivery_ID,int item_ID,int quantity){
+        Temp_DB.decrease_item_in_loaded_items(delivery_ID, item_ID, quantity);
+    }
+    public static void increase_item_in_loaded_items(int delivery_ID,int item_ID,int quantity)
+    {
+        Temp_DB.increase_item_in_loaded_items(delivery_ID, item_ID, quantity);
+    }
+    public static int get_items_form_ID(){
+        return Temp_DB.get_items_form_ID();
+    }
+    public static boolean items_form_exists(int delivery_ID, int items_form_ID){
+        return Temp_DB.items_form_exists(delivery_ID, items_form_ID);
+    }
+    public static int get_site_in_items_form(int delivery_ID, int items_form_ID){
+        return Temp_DB.get_site_in_items_form(delivery_ID, items_form_ID);
+    }
+
+    public static void remove_item_from_items_form(int deliveryId, int itemsFormId, int itemId) {
+        Temp_DB.remove_item_from_items_form(deliveryId, itemsFormId, itemId);
+    }
+
+    public static void remove_loaded_item(int deliveryId, int itemId) {
+        Temp_DB.remove_loaded_item(deliveryId, itemId);
+    }
+
+    public static int get_item_quantity_in_items_form(int deliveryId, int itemsFormId, int itemId) {
+        return Temp_DB.get_item_quantity_in_items_form(deliveryId, itemsFormId, itemId);
+    }
+
+    public static void set_amount_of_item_in_items_form(int deliveryId, int itemsFormId, int itemId, int quantity) {
+        Temp_DB.set_amount_of_item_in_items_form(deliveryId, itemsFormId, itemId, quantity);
+    }
+
+    public static boolean item_exists_in_items_form(int deliveryId, int itemsFormId, int itemId) {
+        return Temp_DB.item_exists_in_items_form(deliveryId, itemsFormId, itemId);
     }
 
 

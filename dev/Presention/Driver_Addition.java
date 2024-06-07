@@ -16,6 +16,10 @@ public class Driver_Addition {
         while (!validChoice) {
             try {
                 ID = sc.nextInt();
+                if (ID < 0) {
+                    System.out.println("Invalid input. Please enter a positive Integer");
+                    continue;
+                }
                 if (controller.driver_exists(ID)) {
                     System.out.println("Driver with this ID already exists");
                     System.out.println("Enter driver ID");

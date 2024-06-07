@@ -14,6 +14,10 @@ public class Site_addition {
         while (!validChoice) {
             try {
                 ID = sc.nextInt();
+                if (ID < 0) {
+                    System.out.println("Invalid input. Please enter a positive Integer");
+                    continue;
+                }
                 if (controller.site_exists(ID)) {
                     System.out.println("Site with this ID already exists");
                     System.out.println("Enter site ID");

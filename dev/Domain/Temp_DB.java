@@ -211,10 +211,98 @@ public class Temp_DB {
         site destination = get_site(site_ID);
         delivery.createItems_form(destination);
     }
-    public static void add_item_to_Items_form(int delivery_ID, int site_ID, int item_ID, int quantity){
+    public static void add_item_to_Items_form(int delivery_ID, int item_form_ID, int item_ID, int quantity){
         Delivery delivery = get_delivery(delivery_ID);
-        site destination = get_site(site_ID);
         Item item = get_item(item_ID);
-        delivery.add_item_to_Items_form(destination.getSite_ID(), item, quantity);
+        delivery.add_item_to_Items_form(item_form_ID, item, quantity);
     }
+
+    public static boolean delivery_starts_now(int delivery_ID){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        if (this_delivery.getDate().equals(LocalDate.now())){
+            return true;
+        }
+        return false;
+    }
+
+    public static double weight_check(int delivery_ID){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.getTruck_of_delivery().get_max_Weight();
+    }
+    public static void setCurr_weight(int delivery_ID, double weight){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        this_delivery.getTruck_of_delivery().setCurr_weight(weight);
+    }
+    public static boolean get_delivery_destinations_loading(int delivery_ID, int index){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.getItems_form().get(index).getDestination().get_type().equals("loading");
+    }
+    public static String get_destinations_name(int delivery_ID, int index){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.getItems_form().get(index).getDestination().getSite_name();
+    }
+    public static void add_loaded_item(int delivery_ID,int item_ID, int quantity){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        Item this_item = get_item(item_ID);
+        this_delivery.add_loaded_item(this_item, quantity);
+    }
+    public static boolean item_exists_in_delivery(int delivery_ID, int item_ID){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.item_loaded(item_ID);
+    }
+    public static int get_item_quantity_in_delivery(int delivery_ID, int item_ID){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.get_item_quantity(item_ID);
+    }
+    public static void decrease_item_in_loaded_items(int delivery_ID,int item_ID,int quantity){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        if (this_delivery.get_item_loaded(item_ID).getAmount() == quantity){
+            this_delivery.remove_item_from_loaded_items(item_ID);
+            return;
+        }
+        this_delivery.decrease_item_in_loaded_items(item_ID, quantity);
+    }
+    public static void increase_item_in_loaded_items(int delivery_ID,int item_ID,int quantity){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        this_delivery.increase_item_in_loaded_items(item_ID, quantity);
+    }
+    public static int get_items_form_ID() {
+        return items_form.getCounter();
+    }
+    public static boolean items_form_exists(int delivery_ID, int items_form_ID){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.items_form_exists(items_form_ID);
+    }
+    public static int get_site_in_items_form(int delivery_ID, int items_form_ID){
+        Delivery this_delivery = get_delivery(delivery_ID);
+        return this_delivery.getItems_form().get(items_form_ID).getDestination().getSite_ID();
+    }
+
+    public static void remove_item_from_items_form(int deliveryId, int itemsFormId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.remove_item_from_items_form(itemsFormId, itemId);
+    }
+
+    public static void remove_loaded_item(int deliveryId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.remove_item_from_loaded_items(itemId);
+    }
+
+    public static int get_item_quantity_in_items_form(int deliveryId, int itemsFormId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_item_quantity_in_items_form(itemsFormId, itemId);
+
+    }
+
+    public static void set_amount_of_item_in_items_form(int deliveryId, int itemsFormId, int itemId, int quantity) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.set_amount_of_item_in_items_form(itemsFormId, itemId, quantity);
+    }
+
+    public static boolean item_exists_in_items_form(int deliveryId, int itemsFormId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.item_exists_in_items_form(itemsFormId, itemId);
+    }
+
+
 }
