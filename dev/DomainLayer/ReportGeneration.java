@@ -10,12 +10,7 @@ public class ReportGeneration {
     static public String generateReportDamage(){
         return getDefObj().GenerateReports();
     }
-    static public int getAmountExp(){
-        return getExpObj().getAmount();
-    }
-    static public int getAmountDef(){
-        return getDefObj().getAmount();
-    }
+
 
     //Generate a report of inventory:
     //helper function
@@ -44,21 +39,21 @@ public class ReportGeneration {
     //Generate a report of all inventory
     static public StringBuilder GenerateReportsStock() {
         StringBuilder outputForController = new StringBuilder();
-        outputForController.append(HelperGenerateReportsStock(getInventObj().runAllProducts()));
+        outputForController.append(HelperGenerateReportsStock(Inventory.runAllProducts()));
         return outputForController;
     }
     //Generate a report of inventory according to category
     static public StringBuilder GenerateReportsStockByCat(String cat, String subCat, String size) {
         StringBuilder outputForController = new StringBuilder();
         if(subCat.equals("0")){
-            outputForController.append(HelperGenerateReportsStock(getInventObj().runProductByCat(cat)));
+            outputForController.append(HelperGenerateReportsStock(Inventory.runProductByCat(cat)));
             return outputForController;
         }
         if(size.equals("0")){
-            outputForController.append(HelperGenerateReportsStock(getInventObj().runProductBySubCat(cat, subCat)));
+            outputForController.append(HelperGenerateReportsStock(Inventory.runProductBySubCat(cat, subCat)));
             return outputForController;
         }
-        outputForController.append(HelperGenerateReportsStock(getInventObj().runProductBySize(cat, subCat, size)));
+        outputForController.append(HelperGenerateReportsStock(Inventory.runProductBySize(cat, subCat, size)));
         return outputForController;
 
     }
