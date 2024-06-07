@@ -1,5 +1,6 @@
 package ServiceLayer;
 import DomainLayer.Inventory;
+import DomainLayer.ReportGeneration;
 import DomainLayer.Tuple;
 
 import java.time.LocalDate;
@@ -154,7 +155,7 @@ public class StockController {
      * Returns: StringBuilder - The report (Presentation prints).
      * */
     public static StringBuilder showAllItemsCtr(){
-        return Inventory.GenerateReportsStock();
+        return ReportGeneration.GenerateReportsStock();
     }
 
     /**
@@ -163,7 +164,7 @@ public class StockController {
      * Returns: StringBuilder - The report (Presentation prints).
      * */
     public static StringBuilder showByCatCtr(String main, String sub, String size){
-        return Inventory.GenerateReportsStockByCat(main, sub, size);
+        return ReportGeneration.GenerateReportsStockByCat(main, sub, size);
     }
 
     /**
@@ -172,7 +173,7 @@ public class StockController {
      * Returns: String - The report (Presentation prints).
      * */
     public static String showExpReportsCtr(){
-        return Inventory.generateReportExpired();
+        return ReportGeneration.generateReportExpired();
     }
 
     /**
@@ -181,7 +182,7 @@ public class StockController {
      * Returns: String - The report (Presentation prints).
      * */
     public static String showDamageReportsCtr(){
-        return Inventory.generateReportDamage();
+        return ReportGeneration.generateReportDamage();
     }
 
 
