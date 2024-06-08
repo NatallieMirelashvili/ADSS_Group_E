@@ -11,7 +11,7 @@ public class Delivery_duration {
                 return;
             }
             for (int i = 0; i < controller.get_delivery_destinations_size(delivery_ID); i++) {
-                if (controller.get_delivery_destinations_loading(delivery_ID, i)) {
+                if (controller.get_delivery_destinations_loading(delivery_ID, i)) { // if loading destination
                     String destination_name = controller.get_destinations_name(delivery_ID, i);
                     System.out.println("You arrived at " + destination_name + " destination");
                     System.out.println("Please enter truck current weight");
@@ -41,7 +41,7 @@ public class Delivery_duration {
                                     break;
                                 }
                                 if (choice == 2) {
-                                    Delivery_errors.change_destination(delivery_ID);
+                                    Delivery_errors.change_destination(delivery_ID,i);
                                     break;
                                 }
                                 if (choice == 3) {
@@ -49,7 +49,7 @@ public class Delivery_duration {
                                     break;
                                 }
                                 if (choice == 4) {
-                                    Delivery_errors.remove_items(delivery_ID);
+                                    Delivery_errors.remove_items(delivery_ID,i);
                                     break;
                                 } else {
                                     System.out.println("Invalid choice, please enter 1, 2, 3 or 4");
@@ -62,7 +62,13 @@ public class Delivery_duration {
                     else {
                         controller.setCurr_weight(delivery_ID, weight);
                         System.out.println("The weight has been updated successfully, you can continue to the next destination");
-            }}}
+                        }
+                }
+                else {
+                    System.out.println("You arrived at " + controller.get_destinations_name(delivery_ID, i) + " destination");
+                    // TODO: implement unloading destination, remove loaded items in delivery
+                }
+            }
             System.out.println("The delivery has been completed successfully");
         }
 

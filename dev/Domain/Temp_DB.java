@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 public class Temp_DB {
     private static HashMap<Integer, Driver> drivers_d = new HashMap<Integer, Driver>();
-    private static HashMap<Integer, truck> trucks_d = new HashMap<Integer, truck>();
-    private static HashMap<Integer, site> site_d = new HashMap<Integer, site>();
+    private static HashMap<Integer, Truck> trucks_d = new HashMap<Integer, Truck>();
+    private static HashMap<Integer, Site> site_d = new HashMap<Integer, Site>();
     private static HashMap<Integer, Delivery> delivery_forms_d = new HashMap<Integer, Delivery>();
     private static HashMap<Integer, Item> items_d = new HashMap<Integer, Item>();
 
@@ -28,7 +28,7 @@ public class Temp_DB {
         String model = truck.get("model").getAsString();
         String max_weight = truck.get("max_weight").getAsString();
         String licence = truck.get("licence").getAsString();
-        truck new_truck = new truck(Integer.parseInt(ID), model, Double.parseDouble(max_weight), licence);
+        Truck new_truck = new Truck(Integer.parseInt(ID), model, Double.parseDouble(max_weight), licence);
         trucks_d.put(new_truck.getID(), new_truck);
     }
 
@@ -40,7 +40,7 @@ public class Temp_DB {
         String contacts_name = site.get("contacts_name").getAsString();
         String phone_num = site.get("phone_num").getAsString();
         String area = site.get("area").getAsString();
-        site new_site = new site(ID, type, name, address, contacts_name, phone_num, area);
+        Site new_site = new Site(ID, type, name, address, contacts_name, phone_num, area);
         site_d.put(new_site.getSite_ID(), new_site);
     }
 
@@ -51,8 +51,8 @@ public class Temp_DB {
         int truckID = delivery.get("truck_ID").getAsInt();
         int siteID = delivery.get("site_ID").getAsInt();
         Driver driver = get_driver(driverID);
-        truck truck = get_truck(truckID);
-        site site = get_site(siteID);
+        Truck truck = get_truck(truckID);
+        Site site = get_site(siteID);
         Delivery new_delivery = new Delivery(LocalDate.parse(date), LocalTime.parse(hour), truck, driver, site);
         delivery_forms_d.put(new_delivery.getID(), new_delivery);
     }
@@ -72,11 +72,11 @@ public class Temp_DB {
         return drivers_d.get(driverID);
     }
 
-    public static truck get_truck(int truckID) {
+    public static Truck get_truck(int truckID) {
         return trucks_d.get(truckID);
     }
 
-    public static site get_site(int site_ID) {
+    public static Site get_site(int site_ID) {
         return site_d.get(site_ID);
     }
 
@@ -166,7 +166,7 @@ public class Temp_DB {
     public static String print_items_form(int ID, int destinationID) {
         for (int deliveryID : delivery_forms_d.keySet()) {
             if (delivery_forms_d.get(deliveryID).getDriverID() == ID && delivery_forms_d.get(deliveryID).getDate().equals(LocalDate.now())) {
-                for (items_form items_form : delivery_forms_d.get(deliveryID).getItems_form()) {
+                for (Items_form items_form : delivery_forms_d.get(deliveryID).getItems_form()) {
                     if (items_form.getDestination().getSite_ID() == destinationID) {
                         return items_form.toString();
                     }
@@ -185,8 +185,8 @@ public class Temp_DB {
     }
 
     public static boolean destination_exists(int delivery_ID, int site_ID) {
-        ArrayList<items_form> item_form_arr = get_delivery(delivery_ID).getItems_form();
-        for (items_form items_form : item_form_arr) {
+        ArrayList<Items_form> item_form_arr = get_delivery(delivery_ID).getItems_form();
+        for (Items_form items_form : item_form_arr) {
             if (items_form.getDestination().getSite_ID() == site_ID) {
                 return true;
             }
@@ -195,12 +195,12 @@ public class Temp_DB {
     }
 
     public static boolean same_area(int delivery_ID, int site_ID) {
-        ArrayList<items_form> item_form_arr = get_delivery(delivery_ID).getItems_form();
+        ArrayList<Items_form> item_form_arr = get_delivery(delivery_ID).getItems_form();
         if (item_form_arr.size() == 0) {
             return true;
         }
-        site destination = get_site(site_ID);
-        site last_destination = item_form_arr.get(item_form_arr.size() - 1).getDestination();
+        Site destination = get_site(site_ID);
+        Site last_destination = item_form_arr.get(item_form_arr.size() - 1).getDestination();
         return destination.getArea().equals(last_destination.getArea());
     }
     public static boolean item_exists(int item_ID) {
@@ -208,7 +208,7 @@ public class Temp_DB {
     }
     public static void add_items_form(int delivery_ID, int site_ID){
         Delivery delivery = get_delivery(delivery_ID);
-        site destination = get_site(site_ID);
+        Site destination = get_site(site_ID);
         delivery.createItems_form(destination);
     }
     public static void add_item_to_Items_form(int delivery_ID, int item_form_ID, int item_ID, int quantity){
@@ -256,7 +256,7 @@ public class Temp_DB {
     }
     public static void decrease_item_in_loaded_items(int delivery_ID,int item_ID,int quantity){
         Delivery this_delivery = get_delivery(delivery_ID);
-        if (this_delivery.get_item_loaded(item_ID).getAmount() == quantity){
+        if (this_delivery.get_item_loaded(item_ID).getAmount_loaded() == quantity){
             this_delivery.remove_item_from_loaded_items(item_ID);
             return;
         }
@@ -267,7 +267,7 @@ public class Temp_DB {
         this_delivery.increase_item_in_loaded_items(item_ID, quantity);
     }
     public static int get_items_form_ID() {
-        return items_form.getCounter();
+        return Items_form.getCounter();
     }
     public static boolean items_form_exists(int delivery_ID, int items_form_ID){
         Delivery this_delivery = get_delivery(delivery_ID);
@@ -310,9 +310,10 @@ public class Temp_DB {
         return this_delivery.destinations_been_visited(destinationId, index);
     }
 
-    public static void remove_destination(int deliveryId, int destinationId) {
+    public static void remove_destination(int deliveryId, int destinationId, int curr_destination_id) {
         Delivery this_delivery = get_delivery(deliveryId);
-        Remove_site.remove_destination(this_delivery, destinationId);
+        this_delivery.remove_destination(destinationId,curr_destination_id);
+
     }
 
     public static int get_driver_ID_from_delivery(int deliveryId) {
@@ -323,5 +324,40 @@ public class Temp_DB {
     public static void replace_truck(int deliveryId, int truckId, int weight) {
         Delivery this_delivery = get_delivery(deliveryId);
         this_delivery.replace_truck(truckId, weight);
+    }
+
+    public static boolean item_exists_in_destination(int itemId, int destinationId, int deliveryId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.item_exists_in_destination(itemId, destinationId);
+    }
+
+    public static void remove_item_from_destination(int deliveryId, int itemId, int destinationId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.remove_item_from_destination(itemId, destinationId);
+    }
+
+    public static void update_item_quantity_unloaded_in_delivery(int quantity, int itemId, int deliveryId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.update_item_quantity_unloaded_in_delivery(quantity, itemId);
+    }
+
+    public static int get_item_quantity_unloaded_in_delivery(int deliveryId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_item_quantity_unloaded_in_delivery(itemId);
+    }
+
+    public static int calculate_difference_loaded_unloaded(int deliveryId, int itemId, int quantity) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.calculate_difference_loaded_unloaded(itemId, quantity);
+    }
+
+    public static void add_difference_to_loading_site(int deliveryId, int itemId, int diff, int itemsFormId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.add_difference_to_loading_site(itemId, diff, itemsFormId);
+    }
+
+    public static void update_item_quantity_loaded_in_delivery(int deliveryId, int itemId, int diff) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.increase_item_in_loaded_items(itemId, diff);
     }
 }

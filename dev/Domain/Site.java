@@ -1,6 +1,6 @@
 package Domain;
 
-public class site {
+public class Site {
     private int site_id;
     private String type;
     private String name;
@@ -9,7 +9,7 @@ public class site {
     private String phone;
     private String area;
 
-    public site(int site_id,String type, String name, String address, String contacts_name, String phone, String area) {
+    public Site(int site_id, String type, String name, String address, String contacts_name, String phone, String area) {
         this.site_id = site_id;
         this.type = type;
         this.name = name;

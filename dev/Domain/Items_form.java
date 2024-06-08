@@ -1,13 +1,13 @@
 package Domain;
 import java.util.ArrayList;
 
-public class items_form {
+public class Items_form {
     int id;
-    site destination;
+    Site destination;
     private ArrayList<Item> items;
 
     static int counter = 0;
-    public items_form(site destination, ArrayList<Item> items) {
+    public Items_form(Site destination, ArrayList<Item> items) {
     this.id = counter++;
     this.destination = destination;
     this.items = items;
@@ -16,7 +16,7 @@ public class items_form {
         public int getID() {
             return id;
         }
-        public site getDestination() {
+        public Site getDestination() {
             return destination;
         }
 
@@ -24,7 +24,7 @@ public class items_form {
             return items;
         }
 
-        public void setDestination(site destination) {
+        public void setDestination(Site destination) {
             this.destination = destination;
         }
 
@@ -48,7 +48,7 @@ public class items_form {
         public void setAmount(int itemID, int amount) {
             for (Item item : items) {
                 if (item.getItemId() == itemID) {
-                    item.setAmount(amount);
+                    item.setAmount_loaded(amount);
                     break;
                 }
             }

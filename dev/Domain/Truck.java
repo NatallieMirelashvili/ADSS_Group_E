@@ -1,6 +1,6 @@
 package Domain;
 
-public class truck {
+public class Truck {
     private int id;
     private String model;
     private double curr_weight;
@@ -9,7 +9,7 @@ public class truck {
     private boolean availability;
 
 
-    public truck(int id, String model, double max_weight, String licence) {
+    public Truck(int id, String model, double max_weight, String licence) {
         this.id = id;
         this.model = model;
         this.curr_weight = 0;

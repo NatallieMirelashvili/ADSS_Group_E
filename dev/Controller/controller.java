@@ -161,8 +161,8 @@ public class controller {
         return Temp_DB.destinations_been_visited(delivery_ID, destination_ID, index);
     }
 
-    public static void remove_destination(int deliveryId, int destinationId) {
-        Temp_DB.remove_destination(deliveryId, destinationId);
+    public static void remove_destination(int deliveryId, int destinationId,int curr_destination_id) {
+        Temp_DB.remove_destination(deliveryId, destinationId,curr_destination_id);
     }
 
     public static int get_driver_ID_from_delivery(int deliveryId) {
@@ -171,5 +171,32 @@ public class controller {
 
     public static void replace_truck(int deliveryId, int truckId, int weight) {
         Temp_DB.replace_truck(deliveryId, truckId, weight);
+    }
+
+    public static boolean item_exists_in_destination(int itemId, int destinationId, int deliveryId) {
+        return Temp_DB.item_exists_in_destination(itemId, destinationId, deliveryId);
+    }
+
+    public static void remove_item_from_destination(int deliveryId, int itemId, int destinationId) {
+        Temp_DB.remove_item_from_destination(deliveryId, itemId, destinationId);
+    }
+    public static void update_item_quantity_unloaded_in_delivery(int quantity,int item_ID,int delivery_ID){
+        Temp_DB.update_item_quantity_unloaded_in_delivery(quantity, item_ID, delivery_ID);
+    }
+
+    public static int get_item_quantity_unloaded_in_delivery(int deliveryId, int itemId) {
+        return Temp_DB.get_item_quantity_unloaded_in_delivery(deliveryId, itemId);
+    }
+
+    public static int calculate_difference_loaded_unloaded(int deliveryId, int itemId, int quantity) {
+        return Temp_DB.calculate_difference_loaded_unloaded(deliveryId, itemId, quantity);
+    }
+
+    public static void add_difference_to_loading_site(int deliveryId, int itemId, int diff, int itemsFormId) {
+        Temp_DB.add_difference_to_loading_site(deliveryId, itemId, diff, itemsFormId);
+    }
+
+    public static void update_item_quantity_loaded_in_delivery(int deliveryId, int itemId, int diff) {
+        Temp_DB.update_item_quantity_loaded_in_delivery(deliveryId, itemId, diff);
     }
 }

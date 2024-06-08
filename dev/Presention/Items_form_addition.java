@@ -185,16 +185,40 @@ public class Items_form_addition {
     }
 
     private static boolean handleUnloadingSite(Scanner sc, int delivery_ID, int item_ID, int quantity) {
+        int choice_2 = 0;
         if (!controller.item_exists_in_delivery(delivery_ID, item_ID) || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity) {
             System.out.println("This item does not exist in the delivery or The quantity exceeds the quantity of this item in the delivery ");
+            if (controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity + controller.get_item_quantity_unloaded_in_delivery(delivery_ID, item_ID)) {
+                int diff = controller.calculate_difference_loaded_unloaded(delivery_ID, item_ID, quantity);
+                System.out.println("for item ID " + item_ID + "in delivery ID " + delivery_ID + "the difference between loaded and unloaded is" + diff);
+                System.out.println("Please choose one of the following options:");
+                System.out.println("1. add the difference to the quantity in the matching loading site");
+                System.out.println("2. Add new item to this destination");
+                while (true) {
+                    try {
+                        choice_2 = sc.nextInt();
+                        if (choice_2 == 1) {
+                            Items_form_edit.add_difference_to_loading_site(delivery_ID, item_ID, diff, sc);
+                            return true;
+                        }
+                        if (choice_2 == 2) {
+                            return false;
+                        }
+                        System.out.println("Invalid input. Please enter 1 or 2");
+                    } catch (Exception e) {
+                        System.out.println("Invalid input. Please enter 1 or 2");
+                        sc.next();
+
+                    }
+                }
+            }
             System.out.println("1. Change former items form");
             System.out.println("2. Add new item to this destination");
-            int choice_2 = 0;
             while (true) {
                 try {
                     choice_2 = sc.nextInt();
                     if (choice_2 == 1) {
-                        item_form_edit.edit_item_form(delivery_ID,sc);
+                        Items_form_edit.edit_item_form(delivery_ID,sc);
                         return false;
                     }
                     if (choice_2 == 2) {
@@ -207,7 +231,9 @@ public class Items_form_addition {
 
                 }
             }
+
         }
+        controller.update_item_quantity_unloaded_in_delivery(quantity, item_ID, delivery_ID);
         return true;
     }
 }
