@@ -305,4 +305,23 @@ public class Temp_DB {
     }
 
 
+    public static boolean destinations_been_visited(int deliveryId, int destinationId, int index) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.destinations_been_visited(destinationId, index);
+    }
+
+    public static void remove_destination(int deliveryId, int destinationId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        Remove_site.remove_destination(this_delivery, destinationId);
+    }
+
+    public static int get_driver_ID_from_delivery(int deliveryId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.getDriverID();
+    }
+
+    public static void replace_truck(int deliveryId, int truckId, int weight) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.replace_truck(truckId, weight);
+    }
 }

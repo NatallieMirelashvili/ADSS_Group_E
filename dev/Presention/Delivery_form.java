@@ -49,10 +49,14 @@ public class Delivery_form {
         while (!validChoice) {
             while (!truckChange) {
                 truck_ID = getValidTruckID(sc);
+                if (truck_ID == -1)
+                    return;
                 truckChange = true;
             }
             while (!driverChange) {
                 driver_ID = getValidDriverID(sc);
+                if (driver_ID == -1)
+                    return;
                 driverChange = true;
             }
             if (!checklicense(truck_ID, driver_ID)) {
@@ -131,14 +135,14 @@ public class Delivery_form {
             return controller.check_license(truck_ID, driver_ID);
         }
 
-    private static int getValidTruckID(Scanner sc) {
+    static int getValidTruckID(Scanner sc) {
         int truck_ID;
         System.out.println("Please enter delivery truck ID or press -1 to return to Delivery Manager menu");
         while (true) {
             try {
                 truck_ID = sc.nextInt();
                 if (truck_ID == -1) {
-                    Delivery_manager_menu.show();
+                    return -1;
                 }
                 if (truck_ID < 0) {
                     System.out.println("Invalid input. Please enter a positive Integer as truck ID");
@@ -164,7 +168,7 @@ public class Delivery_form {
             try {
                 driver_ID = sc.nextInt();
                 if (driver_ID == -1) {
-                    Delivery_manager_menu.show();
+                    return -1;
                 }
                 if (driver_ID < 0) {
                     System.out.println("Invalid input. Please enter a positive Integer as driver ID");

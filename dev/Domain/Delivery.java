@@ -185,4 +185,20 @@ public class Delivery {
         }
         return false;
     }
+
+    public boolean destinations_been_visited(int destinationId, int index) {
+        for (int i = 0; i <= index; i++){
+            if (item_form.get(i).getDestination().getSite_ID() == destinationId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void replace_truck(int truckId, int weight) {
+        this.truck.setAvailability(true);
+        this.truck = Temp_DB.get_truck(truckId);
+        this.truck.setAvailability(false);
+        this.truck.setCurr_weight(weight);
+    }
 }

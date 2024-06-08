@@ -157,6 +157,19 @@ public class controller {
     public static boolean item_exists_in_items_form(int deliveryId, int itemsFormId, int itemId) {
         return Temp_DB.item_exists_in_items_form(deliveryId, itemsFormId, itemId);
     }
+    public static boolean destinations_been_visited(int delivery_ID, int destination_ID, int index){
+        return Temp_DB.destinations_been_visited(delivery_ID, destination_ID, index);
+    }
 
+    public static void remove_destination(int deliveryId, int destinationId) {
+        Temp_DB.remove_destination(deliveryId, destinationId);
+    }
 
+    public static int get_driver_ID_from_delivery(int deliveryId) {
+        return Temp_DB.get_driver_ID_from_delivery(deliveryId);
+    }
+
+    public static void replace_truck(int deliveryId, int truckId, int weight) {
+        Temp_DB.replace_truck(deliveryId, truckId, weight);
+    }
 }
