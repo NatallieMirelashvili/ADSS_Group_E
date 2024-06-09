@@ -56,6 +56,8 @@ public class Driver_Addition {
                 System.out.println("Invalid input. Please enter an Integer");
                 sc.next();
             }
+        }
+
             System.out.println("Driver added successfully \n");
 
             JsonObject driver = new JsonObject();
@@ -68,4 +70,3 @@ public class Driver_Addition {
             controller.add_driver(driver);
         }
     }
-}
