@@ -57,7 +57,7 @@ public class Delivery_duration {
                                         break;
                                     }
                                     if (choice == 2) {
-                                        Delivery_errors.change_destination(delivery_ID, i);
+                                        Delivery_errors.change_destination(delivery_ID, i,curr_destination_ID);
                                         weight_valid = false;
                                         break;
                                     }

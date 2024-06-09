@@ -88,13 +88,13 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
         return item_ID;
     }
 
-    public static void change_destination(int deliveryId,int index) {
+    public static void change_destination(int deliveryId, int index, int curr_destination_ID) {
         System.out.println("Please enter the ID of the unloading destination you would like to change");
         Scanner sc = new Scanner(System.in);
         int destination_ID = valid_destination_ID(sc, deliveryId, index);
         System.out.println("Please enter the ID of the new destination site");
         new_destination_ID = valid_change_destination_ID(sc, deliveryId);
-        controller.remove_destination(deliveryId, destination_ID, index);
+        controller.remove_destination(deliveryId, destination_ID, curr_destination_ID);
         Items_form_addition.add_new_items_form(deliveryId);
         new_destination_ID=-1;
 
@@ -110,11 +110,11 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
                     System.out.println("Invalid destination ID. Please enter a valid destination ID");
                     continue;
                 }
-                if (controller.destination_exists(destination_ID, delivery_ID)) {
+                if (controller.destination_exists(delivery_ID,destination_ID)) {
                     System.out.println("Destination with this ID already exist in this delivery, please enter a valid destination ID");
                     continue;
                 }
-                if (!controller.get_site_type(destination_ID).equals("loading")) {
+                if (controller.get_site_type(destination_ID).equals("loading")) {
                     System.out.println("This destination is an loading destination, please enter an unloading destination ID");
                     continue;
                 }
