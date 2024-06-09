@@ -54,7 +54,7 @@ public class Delivery_form {
                 truckChange = true;
             }
             while (!driverChange) {
-                driver_ID = getValidDriverID(sc);
+                driver_ID = getValidDriverID(sc,date);
                 if (driver_ID == -1)
                     return;
                 driverChange = true;
@@ -161,7 +161,7 @@ public class Delivery_form {
         }
     }
 
-    private static int getValidDriverID(Scanner sc) {
+    private static int getValidDriverID(Scanner sc, String date) {
         int driver_ID;
         System.out.println("Please enter delivery driver ID or press -1 to return to Delivery Manager menu");
         while (true) {
@@ -177,6 +177,9 @@ public class Delivery_form {
                     System.out.println("Driver with this ID does not exist, please enter a valid driver ID");
                 } else if (!controller.driver_available(driver_ID)) {
                     System.out.println("Driver with this ID is not available, please enter a valid driver ID");
+                }
+                else if (!controller.check_driver_schedule(driver_ID, date)) {
+                    System.out.println("Driver with this ID has a delivery scheduled for this date, please enter a valid driver ID");
                 }
                 else
                 return driver_ID;

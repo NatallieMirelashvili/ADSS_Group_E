@@ -88,12 +88,12 @@ public class Delivery {
         sb.append("Delivery ID: ").append(ID)
                 .append("\nDate: ").append(date)
                 .append("\nHour: ").append(hour)
-                .append("\nTruck: ").append(truck.getID())
-                .append("\nDriver: ").append(driver.getID()).append(",").append(driver.getName())
-                .append("\nOrigin address: ").append(origin.getSite_address()).append(" contact: ").append(origin.getSite_contact_name()).append(" phone: ").append(origin.getSite_contact_phone());
+                .append("\nTruck ID: ").append(truck.getID())
+                .append("\nDriver ID: ").append(driver.getID()).append(" , ").append(driver.getName())
+                .append("\nOrigin address: ").append(origin.getSite_address()).append(" contact: ").append(origin.getSite_contact_name()).append(" phone: ").append(origin.getSite_contact_phone()).append("\n");
 
         for (Items_form items_form : item_form) {
-            sb.append("\n").append(items_form.toString());
+            sb.append(items_form.toString()).append("\n");
         }
 
         return sb.toString();
@@ -227,7 +227,7 @@ public class Delivery {
     }
 
     public int calculate_difference_loaded_unloaded(int itemId, int quantity) {
-        return loaded_items.get(itemId).getAmount_loaded() - (loaded_items.get(itemId).getAmount_unloaded() + quantity);
+        return (loaded_items.get(itemId).getAmount_unloaded() + quantity) - loaded_items.get(itemId).getAmount_loaded();
     }
 
     public void add_difference_to_loading_site(int itemId, int diff, int itemsFormId) {
@@ -260,5 +260,36 @@ public class Delivery {
             }
         }
         item_form.remove(unload_form);
+    }
+
+    public int get_destination_site_ID(int index) {
+        return item_form.get(index).getDestination().getSite_ID();
+    }
+
+    public int get_items_amount_in_destination(int siteId) {
+        for (Items_form items_form : item_form) {
+            if (items_form.getDestination().getSite_ID() == siteId) {
+                return items_form.getItems().size();
+            }
+        }
+        return 0;
+    }
+
+    public int get_item_ID_in_destinations(int siteId, int itemIndex) {
+        for (Items_form items_form : item_form) {
+            if (items_form.getDestination().getSite_ID() == siteId) {
+                return items_form.getItems().get(itemIndex).getItemId();
+            }
+        }
+        return 0;
+    }
+
+    public int get_item_quantity_in_destinations(int siteId, int itemId) {
+        for (Items_form items_form : item_form) {
+            if (items_form.getDestination().getSite_ID() == siteId) {
+                return items_form.getItem(itemId).getAmount_loaded();
+            }
+        }
+        return 0;
     }
 }

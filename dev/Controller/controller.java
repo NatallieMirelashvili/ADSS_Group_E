@@ -199,4 +199,26 @@ public class controller {
     public static void update_item_quantity_loaded_in_delivery(int deliveryId, int itemId, int diff) {
         Temp_DB.update_item_quantity_loaded_in_delivery(deliveryId, itemId, diff);
     }
+
+    public static int get_items_amount_in_destination(int deliveryId, int siteId) {
+        return Temp_DB.get_items_amount_in_destination(deliveryId, siteId);
+
+    }
+
+    public static int get_destination_site_ID(int deliveryId, int index) {
+        return Temp_DB.get_destination_site_ID(deliveryId, index);
+
+    }
+
+    public static int get_item_ID_in_destinations(int deliveryId, int siteId, int item_index) {
+        return Temp_DB.get_item_ID_in_destinations(deliveryId, siteId, item_index);
+    }
+
+    public static int get_item_quantity_in_destinations(int deliveryId, int siteId, int itemId) {
+        return Temp_DB.get_item_quantity_in_destinations(deliveryId, siteId, itemId);
+    }
+
+    public static boolean check_driver_schedule(int driverId, String date) {
+        return Temp_DB.check_driver_schedule(driverId, date);
+    }
 }

@@ -5,9 +5,11 @@ import Controller.controller;
 
 public class Items_form_addition {
     public static void add_new_items_form(int delivery_ID) {
-        boolean add_new_items_form = true;
+        boolean add_new_items_form;
         int items_form_count = 0;
+        int site_ID=-1;
         while (true) {
+            add_new_items_form = true;
             System.out.println("Welcome to create new items form menu");
             System.out.println("Please choose one of the following options:");
             System.out.println("1. create new items form to the delivery");
@@ -27,22 +29,24 @@ public class Items_form_addition {
                         }
                         add_new_items_form = false;
                         break;
-                    }
-                    else  {
+                    } else {
                         System.out.println("Invalid input. Please enter 1 or 2");
                     }
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println("Invalid input. Please enter 1 or 2");
+                    sc.next();
                 }
             }
             if (!add_new_items_form) {
                 break;
             }
-
-            int site_ID = validateSiteId(sc, delivery_ID, items_form_count);
-            if (site_ID == -1) {
-                break;
+            if (Delivery_errors.new_destination_ID != -1) {
+                site_ID = Delivery_errors.new_destination_ID;
+            } else {
+                site_ID = validateSiteId(sc, delivery_ID, items_form_count);
+                if (site_ID == -1) {
+                    break;
+                }
             }
 
             String site_type = controller.get_site_type(site_ID);
@@ -190,7 +194,7 @@ public class Items_form_addition {
             System.out.println("This item does not exist in the delivery or The quantity exceeds the quantity of this item in the delivery ");
             if (controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity + controller.get_item_quantity_unloaded_in_delivery(delivery_ID, item_ID)) {
                 int diff = controller.calculate_difference_loaded_unloaded(delivery_ID, item_ID, quantity);
-                System.out.println("for item ID " + item_ID + "in delivery ID " + delivery_ID + "the difference between loaded and unloaded is" + diff);
+                System.out.println("for item ID " + item_ID + " in delivery ID " + delivery_ID + " the difference between loaded and unloaded is " + diff);
                 System.out.println("Please choose one of the following options:");
                 System.out.println("1. add the difference to the quantity in the matching loading site");
                 System.out.println("2. Add new item to this destination");

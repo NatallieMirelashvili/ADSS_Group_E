@@ -67,15 +67,14 @@ public class Items_form {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("items_form{")
+        sb.append("items_form ID: ").append(id).append("\n{\n")
                 .append("Destination: ").append(destination.getSite_address()).append(" contact: ").append(destination.getSite_contact_name()).append(" phone: ").append(destination.getSite_contact_phone())
-                .append(", items=");
+                .append(",\nitems:\n");
 
         for (Item item : items) {
-            sb.append("\n").append(item.toString());
+            sb.append(item.toString());
         }
-
-        sb.append('\n');
+        sb.append("}");
         return sb.toString();
     }
     public static int getCounter() {

@@ -360,4 +360,34 @@ public class Temp_DB {
         Delivery this_delivery = get_delivery(deliveryId);
         this_delivery.increase_item_in_loaded_items(itemId, diff);
     }
+
+    public static int get_destination_site_ID(int deliveryId, int index) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_destination_site_ID(index);
+    }
+
+    public static int get_items_amount_in_destination(int deliveryId, int siteId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_items_amount_in_destination(siteId);
+    }
+
+    public static int get_item_ID_in_destinations(int deliveryId, int siteId, int itemIndex) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_item_ID_in_destinations(siteId, itemIndex);
+    }
+
+    public static int get_item_quantity_in_destinations(int deliveryId, int siteId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_item_quantity_in_destinations(siteId, itemId);
+    }
+
+    public static boolean check_driver_schedule(int driverId, String date) {
+        for (Delivery delivery : delivery_forms_d.values()) {
+            if (delivery.getDriverID() == driverId && delivery.getDate().toString().equals(date)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

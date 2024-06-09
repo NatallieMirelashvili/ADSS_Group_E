@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static Presention.Delivery_form.getValidTruckID;
 
 public class Delivery_errors { // TODO: Implement this class after Delivery_duration
-    public static int new_destination_ID;
+    public static int new_destination_ID=-1;
     public static void remove_destination(int delivery_ID, int index) {
         System.out.println("Please enter the ID of an unloading destination you would like to remove");
         Scanner sc = new Scanner(System.in);
@@ -105,8 +105,8 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
         System.out.println("Please enter the ID of the new destination site");
         new_destination_ID = valid_change_destination_ID(sc, deliveryId);
         controller.remove_destination(deliveryId, destination_ID, index);
-        controller.add_items_form(deliveryId, new_destination_ID);
-
+        Items_form_addition.add_new_items_form(deliveryId);
+        new_destination_ID=-1;
 
 
     }
