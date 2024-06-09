@@ -2,7 +2,6 @@ package Presention;
 import Controller.controller;
 import java.util.Scanner;
 
-import static Presention.Delivery_form.getValidTruckID;
 
 public class Delivery_errors { // TODO: Implement this class after Delivery_duration
     public static int new_destination_ID=-1;
@@ -16,16 +15,7 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     public static void replace_truck(int deliveryId, int weight) {
         System.out.println("Please enter the ID of the truck you would like to replace the current truck with");
         Scanner sc = new Scanner(System.in);
-        int truck_ID;
-        while (true) {
-            truck_ID = getValidTruckID(sc);
-            int driver_ID = controller.get_driver_ID_from_delivery(deliveryId);
-            if(!controller.check_license(truck_ID,driver_ID)){
-                System.out.println("The truck and driver do not have the same license type, please enter a valid truck ID");
-                continue;
-                }
-            break;
-        }
+        int truck_ID = getValidTruckID(sc,weight,deliveryId);
         controller.replace_truck(deliveryId, truck_ID, weight);
     }
 
@@ -139,6 +129,38 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
             }
         }
         return destination_ID;
+    }
+
+    static int getValidTruckID(Scanner sc,int weight,int deliveryId) {
+        int truck_ID;
+        int driver_ID = controller.get_driver_ID_from_delivery(deliveryId);
+        while (true) {
+            try {
+                truck_ID = sc.nextInt();
+                if (truck_ID == -1) {
+                    return -1;
+                }
+                if (truck_ID < 0) {
+                    System.out.println("Invalid input. Please enter a positive Integer as truck ID");
+                }
+                else if (!controller.truck_exists(truck_ID)) {
+                    System.out.println("Truck with this ID does not exist, please enter a valid truck ID");
+                } else if (!controller.truck_available(truck_ID)) {
+                    System.out.println("Truck with this ID is not available, please enter a valid truck ID");
+                } else if (controller.truck_max_weight(truck_ID) < weight) {
+                    System.out.println("The truck is not suitable for the weight, please enter a valid truck ID");
+                }
+                else if (!controller.check_license(truck_ID, driver_ID))
+                {
+                    System.out.println("The truck and driver do not have the same license type, please enter a valid truck ID");
+                }
+                else
+                    return truck_ID;
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter an Integer as truck ID");
+                sc.next();
+            }
+        }
     }
 
     }

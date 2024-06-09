@@ -221,4 +221,20 @@ public class controller {
     public static boolean check_driver_schedule(int driverId, String date) {
         return Temp_DB.check_driver_schedule(driverId, date);
     }
+
+    public static boolean get_finished_delivery(int deliveryId) {
+        return Temp_DB.get_finished_delivery(deliveryId);
+    }
+
+    public static void finished_delivery(int deliveryId) {
+        Temp_DB.finished_delivery(deliveryId);
+    }
+
+    public static double truck_max_weight(int truckId) {
+        return Temp_DB.truck_max_weight(truckId);
+    }
+
+    public static boolean has_items_form(int delivery_id) {
+        return Temp_DB.has_items_form(delivery_id);
+    }
 }

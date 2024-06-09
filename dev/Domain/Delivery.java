@@ -17,6 +17,8 @@ public class Delivery {
 
     private HashMap<Integer, Item> loaded_items = new HashMap<Integer, Item>();
 
+    private boolean finished = false;
+
     public Delivery(LocalDate date, LocalTime hour, Truck truck, Driver driver, Site origin) {
         this.ID = counter++;
         this.date = date;
@@ -291,5 +293,13 @@ public class Delivery {
             }
         }
         return 0;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 }

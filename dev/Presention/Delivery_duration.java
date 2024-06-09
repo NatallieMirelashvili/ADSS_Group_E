@@ -6,9 +6,21 @@ public class Delivery_duration {
         public static void start_delivery_duration() {
             System.out.println("Enter delivery ID to start delivery or press -1 to go back to manager menu");
             Scanner sc = new Scanner(System.in);
-            int delivery_ID = valid_delivery_ID(sc);
-            if (delivery_ID == -1) {
-                return;
+            int delivery_ID;
+            while(true) {
+                try {
+                    delivery_ID = valid_delivery_ID(sc);
+                    if (delivery_ID == -1) {
+                        return;
+                    }
+                    else{
+                        System.out.println("Delivery number " + delivery_ID + " has started !");
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Please enter an Integer");
+                    sc.next();
+                }
             }
             for (int i = 0; i < controller.get_delivery_destinations_size(delivery_ID); i++) {
                 if (controller.get_delivery_destinations_loading(delivery_ID, i)) { // if loading destination
@@ -24,6 +36,7 @@ public class Delivery_duration {
                             weight_valid = true;
                         } catch (Exception e) {
                             System.out.println("Invalid input. Please enter an Integer");
+                            sc.next();
                         }
 
                         if (weight > controller.weight_check(delivery_ID)) {
@@ -47,6 +60,9 @@ public class Delivery_duration {
                                     }
                                     if (choice == 3) {
                                         Delivery_errors.replace_truck(delivery_ID, weight);
+                                        controller.setCurr_weight(delivery_ID, weight);
+                                        System.out.println("The weight has been updated successfully, you can continue to the next destination");
+                                        weight_valid=true;
                                         break;
                                     }
                                     if (choice == 4) {
@@ -57,9 +73,9 @@ public class Delivery_duration {
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Invalid input. Please enter 1, 2, 3 or 4");
+                                    sc.next();
                                 }
                             }
-                            weight_valid = false;
                         } else {
                             controller.setCurr_weight(delivery_ID, weight);
                             System.out.println("The weight has been updated successfully, you can continue to the next destination");
@@ -79,6 +95,7 @@ public class Delivery_duration {
                 }
             }
             System.out.println("The delivery has been completed successfully");
+            controller.finished_delivery(delivery_ID);
         }
 
         public static int valid_delivery_ID(Scanner sc) {
@@ -91,14 +108,26 @@ public class Delivery_duration {
                         return -1;
                     }
                     if (controller.delivery_exists(ID) && controller.delivery_starts_now(ID)) {
-                        System.out.println("Delivery number " + ID + " has started");
                         validChoice = true;
-                    } else {
+                    }if (controller.get_finished_delivery(ID)) {
+                        System.out.println("Delivery number " + ID + " has already been completed");
+                        System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
+                        validChoice = false;
+                    }
+                    if (!controller.has_items_form(ID)){
+                        System.out.println("Delivery number " + ID + " does not have an items form");
+                        System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
+                        validChoice = false;
+                    }
+                    if (validChoice)
+                        continue;
+                     else {
                         System.out.println("Delivery with this ID does not exist");
                         System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
                     }
                 } catch (Exception e) {
                     System.out.println("Invalid input. Please enter an Integer");
+                    sc.next();
                 }
             }
             return ID;

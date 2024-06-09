@@ -390,4 +390,22 @@ public class Temp_DB {
         return true;
     }
 
+    public static boolean get_finished_delivery(int deliveryId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.isFinished();
+    }
+
+    public static void finished_delivery(int deliveryId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        this_delivery.setFinished(true);
+    }
+
+    public static double truck_max_weight(int truckId) {
+        return get_truck(truckId).get_max_Weight();
+    }
+
+    public static boolean has_items_form(int deliveryId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.item_form_size() != 0;
+    }
 }
