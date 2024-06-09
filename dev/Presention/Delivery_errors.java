@@ -21,7 +21,7 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
 
 
     public static int valid_destination_ID(Scanner sc, int delivery_ID, int index) {
-        int destination_ID = 0;
+        int destination_ID;
         while (true) {
             try {
                 destination_ID = sc.nextInt();
@@ -63,7 +63,7 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     private static int valid_item_ID(Scanner sc, int deliveryId, int destinationId) {
-        int item_ID = 0;
+        int item_ID;
         while (true) {
             try {
                 item_ID = sc.nextInt();
@@ -71,7 +71,7 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
                     System.out.println("Invalid item ID. Please enter a valid item ID");
                     continue;
                 }
-                if (!controller.item_exists_in_delivery(item_ID, deliveryId)) {
+                if (!controller.item_exists_in_delivery(deliveryId, item_ID)) {
                     System.out.println("Item with this ID does not exist in this delivery, please enter a valid item ID");
                     continue;
                 }
@@ -102,7 +102,7 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     public static int valid_change_destination_ID(Scanner sc, int delivery_ID) {
-        int destination_ID = 0;
+        int destination_ID;
         while (true) {
             try {
                 destination_ID = sc.nextInt();

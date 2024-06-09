@@ -47,16 +47,18 @@ public class Delivery_duration {
                             System.out.println("2. Changing the destination site and its items");
                             System.out.println("3. replace the truck");
                             System.out.println("4. Remove some items");
-                            int choice = 0;
+                            int choice;
                             while (true) {
                                 try {
                                     choice = sc.nextInt();
                                     if (choice == 1) {
                                         Delivery_errors.remove_destination(delivery_ID, i,curr_destination_ID);
+                                        weight_valid = false;
                                         break;
                                     }
                                     if (choice == 2) {
                                         Delivery_errors.change_destination(delivery_ID, i);
+                                        weight_valid = false;
                                         break;
                                     }
                                     if (choice == 3) {
@@ -68,6 +70,7 @@ public class Delivery_duration {
                                     }
                                     if (choice == 4) {
                                         Delivery_errors.remove_items(delivery_ID, i);
+                                        weight_valid=false;
                                         break;
                                     } else {
                                         System.out.println("Invalid choice, please enter 1, 2, 3 or 4");
@@ -108,21 +111,21 @@ public class Delivery_duration {
                     if (ID == -1) {
                         return -1;
                     }
-                    if (controller.delivery_exists(ID) && controller.delivery_starts_now(ID)) {
-                        validChoice = true;
-                    }if (controller.get_finished_delivery(ID) && validChoice) {
-                        System.out.println("Delivery number " + ID + " has already been completed");
-                        System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
-                        validChoice = false;
+                    if (controller.delivery_exists(ID)){
+                        if (controller.delivery_starts_now(ID)){
+                            validChoice = true;
+                            if (controller.get_finished_delivery(ID)) {
+                                System.out.println("Delivery number " + ID + " has already been completed");
+                                System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
+                                validChoice = false;
+                            } else if (!controller.has_items_form(ID)){
+                                System.out.println("Delivery number " + ID + " does not have an items form");
+                                System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
+                                validChoice = false;
+                            }
+                        }
                     }
-                    if (!controller.has_items_form(ID) && validChoice){
-                        System.out.println("Delivery number " + ID + " does not have an items form");
-                        System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
-                        validChoice = false;
-                    }
-                    if (validChoice)
-                        continue;
-                     else {
+                    else {
                         System.out.println("Delivery with this ID does not exist");
                         System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
                     }
