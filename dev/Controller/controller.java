@@ -237,4 +237,8 @@ public class controller {
     public static boolean has_items_form(int delivery_id) {
         return Temp_DB.has_items_form(delivery_id);
     }
+
+    public static int get_destination_ID(int deliveryId, int i) {
+        return Temp_DB.get_destination_ID(deliveryId, i);
+    }
 }

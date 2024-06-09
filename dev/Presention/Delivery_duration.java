@@ -23,6 +23,7 @@ public class Delivery_duration {
                 }
             }
             for (int i = 0; i < controller.get_delivery_destinations_size(delivery_ID); i++) {
+                int curr_destination_ID = controller.get_destination_ID(delivery_ID, i);
                 if (controller.get_delivery_destinations_loading(delivery_ID, i)) { // if loading destination
                     String destination_name = controller.get_destinations_name(delivery_ID, i);
                     System.out.println("You arrived at " + destination_name + " destination");
@@ -51,7 +52,7 @@ public class Delivery_duration {
                                 try {
                                     choice = sc.nextInt();
                                     if (choice == 1) {
-                                        Delivery_errors.remove_destination(delivery_ID, i);
+                                        Delivery_errors.remove_destination(delivery_ID, i,curr_destination_ID);
                                         break;
                                     }
                                     if (choice == 2) {
@@ -109,12 +110,12 @@ public class Delivery_duration {
                     }
                     if (controller.delivery_exists(ID) && controller.delivery_starts_now(ID)) {
                         validChoice = true;
-                    }if (controller.get_finished_delivery(ID)) {
+                    }if (controller.get_finished_delivery(ID) && validChoice) {
                         System.out.println("Delivery number " + ID + " has already been completed");
                         System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
                         validChoice = false;
                     }
-                    if (!controller.has_items_form(ID)){
+                    if (!controller.has_items_form(ID) && validChoice){
                         System.out.println("Delivery number " + ID + " does not have an items form");
                         System.out.println("Enter delivery ID or press -1 to go back to delivery manager menu");
                         validChoice = false;

@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Delivery_errors { // TODO: Implement this class after Delivery_duration
     public static int new_destination_ID=-1;
-    public static void remove_destination(int delivery_ID, int index) {
+    public static void remove_destination(int delivery_ID, int index, int curr_destination_ID) {
         System.out.println("Please enter the ID of an unloading destination you would like to remove");
         Scanner sc = new Scanner(System.in);
         int destination_ID = valid_destination_ID(sc, delivery_ID, index);
-        controller.remove_destination(delivery_ID, destination_ID, index);
+        controller.remove_destination(delivery_ID, destination_ID, curr_destination_ID);
     }
 
     public static void replace_truck(int deliveryId, int weight) {
@@ -29,11 +29,11 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
                     System.out.println("Invalid destination ID. Please enter a valid destination ID");
                     continue;
                 }
-                if (!controller.destination_exists(destination_ID, delivery_ID)) {
+                if (!controller.destination_exists(delivery_ID,destination_ID)) {
                     System.out.println("Destination with this ID does not exist in this delivery, please enter a valid destination ID");
                     continue;
                 }
-                if (!controller.get_site_type(destination_ID).equals("loading")) {
+                if (controller.get_site_type(destination_ID).equals("loading")) {
                     System.out.println("This destination is an loading destination, please enter a unloading destination ID");
                     continue;
                 }

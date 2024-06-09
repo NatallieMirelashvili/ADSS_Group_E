@@ -408,4 +408,9 @@ public class Temp_DB {
         Delivery this_delivery = get_delivery(deliveryId);
         return this_delivery.item_form_size() != 0;
     }
+
+    public static int get_destination_ID(int deliveryId, int i) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.get_destination_ID(i);
+    }
 }

@@ -302,4 +302,8 @@ public class Delivery {
     public boolean isFinished() {
         return finished;
     }
+
+    public int get_destination_ID(int i) {
+        return item_form.get(i).getDestination().getSite_ID();
+    }
 }
