@@ -32,6 +32,7 @@ public class Delivery_manager_menu {
         show();
     }
     public static void show() {
+        int choice=0;
         Scanner sc = new Scanner(System.in);
         boolean continue_loop = true;
         System.out.println("Welcome to Delivery Manager menu");
@@ -46,12 +47,11 @@ public class Delivery_manager_menu {
             System.out.println("8. Exit \n");
             System.out.println("Please enter your choice: ");
 
-            int choice;
             try {
                 choice = sc.nextInt();
             } catch (Exception e) {
                 System.out.println("Please enter an Integer");
-                continue;
+                sc.next();
             }
 
             switch (choice){

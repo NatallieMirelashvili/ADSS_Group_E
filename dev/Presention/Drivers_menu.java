@@ -9,11 +9,14 @@ public class Drivers_menu {
         int ID = 0;
         int password = 1234;
         boolean continue_loop = true;
-        System.out.println("Please enter your ID:");
+        System.out.println("Please enter your ID or press -1 to go back to the main menu:");
         Scanner sc = new Scanner(System.in);
         while (continue_loop){
             try {
                 ID = sc.nextInt();
+                if (ID == -1){
+                    return;
+                }
                 if (!controller.driver_exists(ID)){
                     System.out.println("Driver with this ID does not exist");
                     System.out.println("Please enter your ID:");
@@ -23,6 +26,7 @@ public class Drivers_menu {
             }
             catch (Exception e){
                 System.out.println("Please enter an Integer as your ID");
+                sc.next();
             }
         }
         continue_loop = true;
@@ -41,6 +45,7 @@ public class Drivers_menu {
                 sc.next();
             }
         }
+        int choice = 0;
         continue_loop = true;
         while (continue_loop) {
             System.out.println("Welcome to Drivers menu");
@@ -51,64 +56,57 @@ public class Drivers_menu {
             System.out.println("5. Exit \n");
             System.out.println("Enter your choice: ");
 
-        int choice;
         try {
             choice = sc.nextInt();
         } catch (Exception e) {
             System.out.println("Please enter an Integer");
-            continue;
+            sc.next();
         }
-
-        switch (choice) {
-            case 1:
-                System.out.println(controller.print_transport_form(ID));
-                break;
-            case 2:
-                int destinationID = 0;
-                System.out.println("Enter the destination ID:");
-                while (continue_loop){
-                    while (!sc.hasNextInt()) {
-                        System.out.println("Please enter an Integer");
-                        sc.next();
-                    }
-                    destinationID = sc.nextInt();
-                    if (!controller.site_exists(destinationID)) {
-                        if (destinationID == 0) {
-                            break;
-                        }
-                        System.out.println("Site with this ID does not exist");
-                        System.out.println("Enter the destination ID:");
-                        System.out.println("To return to the main menu enter 0");
-                    } else {
-                        System.out.println(controller.print_items_form(ID, destinationID));
-                        break;
+            switch (choice) {
+                case 1 -> System.out.println(controller.print_transport_form(ID));
+                case 2 -> {
+                    int destinationID = 0;
+                    System.out.println("Enter the destination ID or press -1 to go back to the main menu:");
+                    while (continue_loop) {
+                        try {
+                            destinationID = sc.nextInt();
+                            if (!controller.site_exists(destinationID)) {
+                                if (destinationID == -1) {
+                                    break;
                                 }
+                                System.out.println("Site with this ID does not exist");
+                                System.out.println("Enter the destination ID:");
+                            } else {
+                                System.out.println(controller.print_items_form(ID, destinationID));
+                                break;
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Please enter an Integer as the destination ID");
+                            sc.next();
+                        }
+                    }
                 }
-                break;
-            case 3:
-                boolean start = controller.start_driving(ID);
-                if (!start) {
-                    System.out.println("You have no transportation to start \n");
-                    break;
+                case 3 -> {
+                    boolean start = controller.start_driving(ID);
+                    if (!start) {
+                        System.out.println("You have no transportation to start \n");
+                        break;
+                    }
+                    System.out.println("Transportation started successfully \n");
                 }
-                System.out.println("Transportation started successfully \n");
-                break;
-            case 4:
-                boolean end = controller.end_driving(ID);
-                if (!end) {
-                    System.out.println("You have no transportation to end \n");
-                    break;
+                case 4 -> {
+                    boolean end = controller.end_driving(ID);
+                    if (!end) {
+                        System.out.println("You have no transportation to end \n");
+                        break;
+                    }
+                    System.out.println("End of transportation \n");
                 }
-                controller.end_driving(ID);
-                System.out.println("End of transportation \n");
-                break;
-            case 5:
-                System.out.println("Exit");
-                continue_loop = false;
-                break;
-            default:
-                System.out.println("Invalid choice, please enter 1, 2, 3, 4 or 5");
-                break;
-        }
+                case 5 -> {
+                    System.out.println("Exit");
+                    continue_loop = false;
+                }
+                default -> System.out.println("Invalid choice, please enter 1, 2, 3, 4 or 5");
+            }
     }
 }}

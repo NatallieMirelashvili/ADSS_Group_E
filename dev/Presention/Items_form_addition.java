@@ -190,7 +190,7 @@ public class Items_form_addition {
 
     private static boolean handleUnloadingSite(Scanner sc, int delivery_ID, int item_ID, int quantity) {
         int choice_2 = 0;
-        if (!controller.item_exists_in_delivery(delivery_ID, item_ID) || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity) {
+        if (!controller.item_exists_in_delivery(delivery_ID, item_ID) || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity + controller.get_item_quantity_unloaded_in_delivery(delivery_ID, item_ID)) {
             System.out.println("This item does not exist in the delivery or The quantity exceeds the quantity of this item in the delivery ");
             if (controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity + controller.get_item_quantity_unloaded_in_delivery(delivery_ID, item_ID)) {
                 int diff = controller.calculate_difference_loaded_unloaded(delivery_ID, item_ID, quantity);

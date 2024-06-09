@@ -131,11 +131,11 @@ public class Temp_DB {
     }
 
     public static boolean end_driving(int driverID) {
-        get_driver(driverID).setAvailability(true);
         int deliveryID = get_delivery_id(driverID);
-        if (deliveryID == -1 || get_driver(driverID).getAvailability()) {
+        if (deliveryID == -1) {
             return false;
         }
+        get_driver(driverID).setAvailability(true);
         Delivery del = get_delivery(deliveryID);
         get_truck(del.getTruck_of_delivery().getID()).setAvailability(true);
         return true;
