@@ -4,6 +4,7 @@ import java.util.Scanner;
 import Controller.controller;
 
 public class Items_form_addition {
+
     public static void add_new_items_form(int delivery_ID) {
         boolean add_new_items_form;
         int items_form_count = 0;
@@ -43,6 +44,7 @@ public class Items_form_addition {
             if (Delivery_errors.new_destination_ID != -1) {
                 site_ID = Delivery_errors.new_destination_ID;
             } else {
+
                 site_ID = validateSiteId(sc, delivery_ID, items_form_count);
                 if (site_ID == -1) {
                     break;
