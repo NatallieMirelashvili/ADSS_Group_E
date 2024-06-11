@@ -3,6 +3,7 @@ import java.util.Scanner;
 import Controller.controller;
 
 public class Items_form_edit {
+    private static boolean made_changes = false;
     public static void edit_item_form(int delivery_ID, Scanner sc) {
         System.out.println("Please enter the ID of the items form you would like to edit");
         int items_form_ID = 0;
@@ -11,6 +12,11 @@ public class Items_form_edit {
                 items_form_ID = sc.nextInt();
                 if (!controller.items_form_exists(delivery_ID, items_form_ID)) {
                     System.out.println("items form does not exist, please enter a valid items form ID");
+                    continue;
+                }
+                if (!controller.get_site_type(controller.get_site_in_items_form(delivery_ID, items_form_ID)).equals("loading")) {
+                    System.out.println("You can only edit items form in loading sites");
+                    System.out.println("Please enter a valid items form ID");
                     continue;
                 }
                 break;
@@ -30,15 +36,24 @@ public class Items_form_edit {
                 try {
                     choice = sc.nextInt();
                     if (choice == 1) {
+                        made_changes = true;
                         break;
                     }
                     if (choice == 2) {
+                        made_changes = true;
                         break;
                     }
                     if (choice == 3) {
+                        made_changes = true;
                         break;
                     }
                     if (choice == 4) {
+                        if (!made_changes){
+                            System.out.println("You must make at least one change to the items form");
+                            System.out.println("Please choose the number of on of the options above");
+                            continue;
+                        }
+                        made_changes = false;
                         return;
                     } else {
                         System.out.println("Invalid input. Please enter 1, 2, 3 or 4");

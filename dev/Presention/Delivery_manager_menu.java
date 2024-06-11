@@ -82,7 +82,7 @@ public class Delivery_manager_menu {
                                 else break;
                             }
                             controller.change_site_area(ID, area);
-                            System.out.println("Area changed successfully");
+                            System.out.println("Area changed successfully \n");
                             break;
                         } catch (Exception e) {
                             System.out.println("Invalid input. Please enter an Integer");

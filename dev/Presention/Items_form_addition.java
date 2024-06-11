@@ -131,6 +131,10 @@ public class Items_form_addition {
                     System.out.println("Site with this ID does not exist, please enter a valid site ID");
                     continue;
                 }
+                if (count == 0 && controller.get_site_type(site_ID).equals("unloading")){
+                    System.out.println("The first site in the delivery must be a loading site, please enter a different site ID");
+                    continue;
+                }
                 if (controller.destination_exists(delivery_ID, site_ID)) {
                     System.out.println("This site is already in the delivery, please enter a different site ID");
                     continue;
