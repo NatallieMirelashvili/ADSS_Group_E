@@ -3,9 +3,15 @@ import Controller.controller;
 import java.util.Scanner;
 
 
-public class Delivery_errors { // TODO: Implement this class after Delivery_duration
+public class Delivery_errors {
     public static int new_destination_ID=-1;
     public static void remove_destination(int delivery_ID, int index, int curr_destination_ID) {
+        /**
+         * Removes a destination from a delivery.
+         * @param delivery_ID The ID of the delivery.
+         * @param index The index of the destination.
+         * @param curr_destination_ID The current destination ID.
+         */
         System.out.println("Please enter the ID of an unloading destination you would like to remove");
         Scanner sc = new Scanner(System.in);
         int destination_ID = valid_destination_ID(sc, delivery_ID, index);
@@ -13,6 +19,12 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     public static void replace_truck(int deliveryId, int weight) {
+
+        /**
+         * Replaces a truck in a delivery.
+         * @param deliveryId The ID of the delivery.
+         * @param weight The weight of the delivery.
+         */
         System.out.println("Please enter the ID of the truck you would like to replace the current truck with");
         Scanner sc = new Scanner(System.in);
         int truck_ID = getValidTruckID(sc,weight,deliveryId);
@@ -21,6 +33,13 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
 
 
     public static int valid_destination_ID(Scanner sc, int delivery_ID, int index) {
+        /**
+         * Validates a destination ID.
+         * @param sc Scanner object for user input.
+         * @param delivery_ID The ID of the delivery.
+         * @param index The index of the destination.
+         * @return Valid destination ID.
+         */
         int destination_ID;
         while (true) {
             try {
@@ -52,6 +71,12 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
 
 
     public static void remove_items(int deliveryId, int index) {
+/**
+         * Removes items from a destination.
+         * @param deliveryId The ID of the delivery.
+         * @param index The index of the destination.
+         */
+
         System.out.println("Please enter the ID of the unloading destination you would like to remove items from");
         Scanner sc = new Scanner(System.in);
         int destination_ID = valid_destination_ID(sc, deliveryId, index);
@@ -63,6 +88,13 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     private static int valid_item_ID(Scanner sc, int deliveryId, int destinationId) {
+        /**
+         * Validates an item ID.
+         * @param sc Scanner object for user input.
+         * @param deliveryId The ID of the delivery.
+         * @param destinationId The ID of the destination.
+         * @return Valid item ID.
+         */
         int item_ID;
         while (true) {
             try {
@@ -89,6 +121,12 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     public static void change_destination(int deliveryId, int index, int curr_destination_ID) {
+        /**
+         * Changes the destination of a delivery.
+         * @param deliveryId The ID of the delivery.
+         * @param index The index of the destination.
+         * @param curr_destination_ID The current destination ID.
+         */
         System.out.println("Please enter the ID of the unloading destination you would like to change");
         Scanner sc = new Scanner(System.in);
         int destination_ID = valid_destination_ID(sc, deliveryId, index);
@@ -102,6 +140,12 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     public static int valid_change_destination_ID(Scanner sc, int delivery_ID) {
+        /**
+         * Validates a destination ID for changing a destination.
+         * @param sc Scanner object for user input.
+         * @param delivery_ID The ID of the delivery.
+         * @return Valid destination ID.
+         */
         int destination_ID;
         while (true) {
             try {
@@ -132,6 +176,13 @@ public class Delivery_errors { // TODO: Implement this class after Delivery_dura
     }
 
     static int getValidTruckID(Scanner sc,int weight,int deliveryId) {
+        /**
+         * Validates a truck ID.
+         * @param sc Scanner object for user input.
+         * @param weight The weight of the delivery.
+         * @param deliveryId The ID of the delivery.
+         * @return Valid truck ID.
+         */
         int truck_ID;
         int driver_ID = controller.get_driver_ID_from_delivery(deliveryId);
         while (true) {

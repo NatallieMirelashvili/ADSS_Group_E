@@ -6,6 +6,10 @@ import Controller.controller;
 public class Items_form_addition {
 
     public static void add_new_items_form(int delivery_ID) {
+        /**
+         * Adds a new items form to the delivery.
+         * @param delivery_ID The ID of the delivery.
+         */
         boolean add_new_items_form;
         int items_form_count = 0;
         int site_ID;
@@ -110,6 +114,13 @@ public class Items_form_addition {
 
 
     private static int validateSiteId(Scanner sc, int delivery_ID, int count) {
+        /**
+         * Validates the site ID.
+         * @param sc Scanner object for user input.
+         * @param delivery_ID The ID of the delivery.
+         * @param count The count of items.
+         * @return Valid site ID or -1 if user wants to go back to Delivery Manager menu.
+         */
         System.out.println("Please enter destination site ID or press -1 to return to Delivery Manager menu");
         int site_ID = 0;
         boolean validChoice = true;
@@ -153,6 +164,13 @@ public class Items_form_addition {
     }
 
     private static int validateItemId(Scanner sc) {
+        /**
+         * Validates the site ID.
+         * @param sc Scanner object for user input.
+         * @param delivery_ID The ID of the delivery.
+         * @param count The count of items.
+         * @return Valid site ID or -1 if user wants to go back to Delivery Manager menu.
+         */
         int item_ID = 0;
         boolean validChoice = true;
         while (validChoice) {
@@ -176,6 +194,11 @@ public class Items_form_addition {
     }
 
     static int validateQuantity(Scanner sc) {
+        /**
+         * Validates the quantity on an item.
+         * @param sc Scanner object for user input.
+         * @return Valid quantity.
+         */
         int quantity = 0;
         boolean validChoice = true;
         while (validChoice) {
@@ -195,6 +218,14 @@ public class Items_form_addition {
     }
 
     private static boolean handleUnloadingSite(Scanner sc, int delivery_ID, int item_ID, int quantity) {
+        /**
+         * Handles the unloading site case.
+         * @param sc Scanner object for user input.
+         * @param delivery_ID The ID of the delivery.
+         * @param item_ID The ID of the item.
+         * @param quantity The quantity of the item.
+         * @return True if the item is added to the unloading site, false otherwise.
+         */
         int choice_2;
         if (!controller.item_exists_in_delivery(delivery_ID, item_ID) || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity || controller.get_item_quantity_in_delivery(delivery_ID, item_ID) < quantity + controller.get_item_quantity_unloaded_in_delivery(delivery_ID, item_ID)) {
             System.out.println("This item does not exist in the delivery or The quantity exceeds the quantity of this item in the delivery ");

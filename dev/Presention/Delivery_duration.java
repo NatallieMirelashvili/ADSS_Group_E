@@ -3,7 +3,12 @@ import java.util.Scanner;
 import Controller.controller;
 
 public class Delivery_duration {
+
         public static void start_delivery_duration() {
+            /**
+             * Starts the delivery duration process.
+             */
+
             System.out.println("Enter delivery ID to start delivery or press -1 to go back to manager menu");
             Scanner sc = new Scanner(System.in);
             int delivery_ID;
@@ -103,6 +108,12 @@ public class Delivery_duration {
         }
 
         public static int valid_delivery_ID(Scanner sc) {
+            /**
+             * Validates the delivery ID.
+             * @param sc Scanner object for user input.
+             * @return Valid delivery ID or -1 if user wants to go back to manager menu.
+             */
+
             int ID = 0;
             boolean validChoice = false;
             while (!validChoice) {

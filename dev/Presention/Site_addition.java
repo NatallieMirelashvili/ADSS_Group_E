@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Site_addition {
     public static void add_new_site() {
+        /**
+         * Adds a new site.
+         */
         boolean validChoice = false;
         int ID = 0;
         String type = "";

@@ -4,6 +4,9 @@ import Controller.controller;
 
 public class Delivery_manager_menu {
     public static void first_entrance(){
+        /**
+         * The first entrance to the delivery manager menu.
+         */
         final int manager_password = 102030;
         boolean continue_loop = true;
         int password = 0;
@@ -32,6 +35,9 @@ public class Delivery_manager_menu {
         show();
     }
     public static void show() {
+        /**
+         * Shows the delivery manager menu.
+         */
         int choice=0;
         Scanner sc = new Scanner(System.in);
         boolean continue_loop = true;

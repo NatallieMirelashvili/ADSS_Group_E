@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class Driver_Addition {
     public static void add_new_driver() {
+        /**
+         * Adds a new driver.
+         */
         int ID = 0;
         String licence = "";
         int password = 1234;

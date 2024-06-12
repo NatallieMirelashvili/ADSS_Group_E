@@ -63,7 +63,6 @@ public class Items_form {
             return null;
         }
 
-        // לבדוק אם לעשות get לאיטם ואז הסרה, מסיר גם מהשדה עצמו או רק מהקופי שלו
 
     public String toString() {
         StringBuilder sb = new StringBuilder();

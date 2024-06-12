@@ -1,31 +1,31 @@
 package Presention;
 import com.google.gson.JsonObject;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
+import java.nio.file.Paths;
+
 import Controller.controller;
 
 public class System_initialization {
     public static void start() {
         System.out.println("System initialization started");
         System.out.println("Reading Trucks...");
-        if (!readTrucks("dev/DataFiles/trucks1.csv")) {
+        if (!readTrucks("trucks1.csv")) {
             System.out.println("Error reading trucks");
         }
         System.out.println("Trucks read successfully");
         System.out.println("Reading Drivers...");
-        if (!readDrivers("dev/DataFiles/drivers.csv")) {
+        if (!readDrivers("drivers.csv")) {
             System.out.println("Error reading drivers");
         }
         System.out.println("Drivers read successfully");
         System.out.println("Reading Sites...");
-        if (!readSites("dev/DataFiles/sites.csv")) {
+        if (!readSites("sites.csv")) {
             System.out.println("Error reading sites");
         }
         System.out.println("Sites read successfully");
         System.out.println("Reading Items...");
-        if (!readItems("dev/DataFiles/items.csv")) {
+        if (!readItems("items.csv")) {
             System.out.println("Error reading items");
         }
         System.out.println("Items read successfully");
@@ -36,7 +36,7 @@ public class System_initialization {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(getPathToFiles(csvFile)));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(cvsSplitBy);
                 JsonObject truck = new JsonObject();
@@ -61,7 +61,7 @@ public class System_initialization {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(getPathToFiles(csvFile)));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(cvsSplitBy);
                 JsonObject driver = new JsonObject();
@@ -87,7 +87,7 @@ public class System_initialization {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(getPathToFiles(csvFile)));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(cvsSplitBy);
                 JsonObject site = new JsonObject();
@@ -114,7 +114,7 @@ public class System_initialization {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(getPathToFiles(csvFile)));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(cvsSplitBy);
                 JsonObject item = new JsonObject();
@@ -130,5 +130,11 @@ public class System_initialization {
             System.out.println("Error reading file");
             return false;
         }
+    }
+
+    private static String getPathToFiles(String relevanceFile){
+        String currDir = System.getProperty("user.dir");
+        File currDirF = new File(currDir);
+        return Paths.get(currDirF.getParent(), "dev","DataFiles",relevanceFile).toString();
     }
 }

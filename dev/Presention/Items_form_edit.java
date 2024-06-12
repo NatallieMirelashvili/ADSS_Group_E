@@ -5,6 +5,9 @@ import Controller.controller;
 public class Items_form_edit {
     private static boolean made_changes = false;
     public static void edit_item_form(int delivery_ID, Scanner sc,int ItemID, int amount) {
+        /**
+         * Edits an item form.
+         */
         System.out.println("Please enter the ID of the items form you would like to edit");
         int items_form_ID = 0;
         while (true) {
@@ -93,6 +96,13 @@ public class Items_form_edit {
     }
 
     private static int set_amount_of_item_in_items_form(int deliveryId, int itemsFormId, Scanner sc) {
+        /**
+         * Sets the amount of an item in an items form.
+         * @param deliveryId The ID of the delivery.
+         * @param itemsFormId The ID of the items form.
+         * @param sc Scanner object for user input.
+         * @return -1 if cancelled, 0 otherwise.
+         */
         System.out.println("Please enter the ID of the item you would like to set the amount of or press -1 to cancel");
         int item_ID = 0;
         while (true) {
@@ -136,6 +146,13 @@ public class Items_form_edit {
     }
 
     private static int add_item_to_items_form(int delivery_ID, int items_form_ID, Scanner sc) {
+        /**
+         * Adds an item to an items form.
+         * @param delivery_ID The ID of the delivery.
+         * @param items_form_ID The ID of the items form.
+         * @param sc Scanner object for user input.
+         * @return -1 if cancelled, 0 otherwise.
+         */
         System.out.println("Please enter the ID of the item you would like to add or press -1 to cancel");
         int item_ID = 0;
         while (true) {
@@ -184,6 +201,13 @@ public class Items_form_edit {
     }
 
     private static int remove_item_from_items_form(int delivery_ID, int items_form_ID, Scanner sc) {
+        /**
+         * Removes an item from an items form.
+         * @param delivery_ID The ID of the delivery.
+         * @param items_form_ID The ID of the items form.
+         * @param sc Scanner object for user input.
+         * @return -1 if cancelled, 0 otherwise.
+         */
         System.out.println("Please enter the ID of the item you would like to remove or press -1 to cancel");
         int item_ID = 0;
         while (true) {
@@ -214,6 +238,13 @@ public class Items_form_edit {
     }
 
     public static void add_difference_to_loading_site(int deliveryId, int itemId, int diff, Scanner sc) {
+        /**
+         * Adds the difference to a loading site.
+         * @param deliveryId The ID of the delivery.
+         * @param itemId The ID of the item.
+         * @param diff The difference to add.
+         * @param sc Scanner object for user input.
+         */
         System.out.println("Please enter the ID of the item form you would like to add the difference to");
         int items_form_ID = 0;
         while (true) {

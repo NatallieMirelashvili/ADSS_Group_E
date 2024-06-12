@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class Truck_addition {
     public static void add_new_truck() {
+        /**
+         * Adds a new truck.
+         */
         int ID = 0;
         double max_weight = 0;
         String licence = "";

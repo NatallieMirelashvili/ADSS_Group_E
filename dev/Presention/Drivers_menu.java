@@ -6,6 +6,9 @@ import Controller.controller;
 public class Drivers_menu {
 
     public static void show() {
+        /**
+         * Shows the driver's menu.
+         */
         int ID = 0;
         int password = 1234;
         boolean continue_loop = true;

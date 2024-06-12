@@ -7,6 +7,9 @@ import com.google.gson.JsonObject;
 
 public class Delivery_form {
     public static void add_new_delivery_form() {
+        /**
+         * Adds a new delivery form.
+         */
         int truck_ID = 0;
         int driver_ID = 0;
         int site_ID = 0;
@@ -139,10 +142,21 @@ public class Delivery_form {
 
 
         private static boolean checklicense(int truck_ID, int driver_ID) {
+            /**
+             * Checks if the driver and truck have the same license type.
+             * @param truck_ID The ID of the truck.
+             * @param driver_ID The ID of the driver.
+             * @return True if the driver and truck have the same license type, false otherwise.
+             */
             return controller.check_license(truck_ID, driver_ID);
         }
 
     static int getValidTruckID(Scanner sc) {
+        /**
+         * Validates a truck ID.
+         * @param sc Scanner object for user input.
+         * @return Valid truck ID or -1 if user wants to go back to manager menu.
+         */
         int truck_ID;
         System.out.println("Please enter delivery truck ID or press -1 to return to Delivery Manager menu");
         while (true) {
@@ -169,6 +183,12 @@ public class Delivery_form {
     }
 
     private static int getValidDriverID(Scanner sc, String date) {
+/**
+         * Validates a driver ID.
+         * @param sc Scanner object for user input.
+         * @param date The date of the delivery.
+         * @return Valid driver ID or -1 if user wants to go back to manager menu.
+         */
         int driver_ID;
         System.out.println("Please enter delivery driver ID or press -1 to return to Delivery Manager menu");
         while (true) {
