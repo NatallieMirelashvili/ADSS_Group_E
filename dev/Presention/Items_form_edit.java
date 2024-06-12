@@ -4,7 +4,7 @@ import Controller.controller;
 
 public class Items_form_edit {
     private static boolean made_changes = false;
-    public static void edit_item_form(int delivery_ID, Scanner sc) {
+    public static void edit_item_form(int delivery_ID, Scanner sc,int ItemID, int amount) {
         System.out.println("Please enter the ID of the items form you would like to edit");
         int items_form_ID = 0;
         while (true) {
@@ -53,6 +53,11 @@ public class Items_form_edit {
                             System.out.println("Please choose the number of on of the options above");
                             continue;
                         }
+                        if (!controller.problem_edit_fixed(delivery_ID, items_form_ID, ItemID, amount)){
+                            System.out.println("You must fix the problem before finishing the editing");
+                            System.out.println("Please choose the number of one of the options above");
+                            continue;
+                        }
                         made_changes = false;
                         return;
                     } else {
@@ -64,23 +69,38 @@ public class Items_form_edit {
                 }
             }
             if (choice == 1) {
-                add_item_to_items_form(delivery_ID, items_form_ID, sc);
+                int m = add_item_to_items_form(delivery_ID, items_form_ID, sc);
+                if (m == -1) {
+                    made_changes = false;
+                    continue;
+                }
             }
             if (choice == 2) {
-                remove_item_from_items_form(delivery_ID, items_form_ID, sc);
+                int t = remove_item_from_items_form(delivery_ID, items_form_ID, sc);
+                if (t == -1) {
+                    made_changes = false;
+                    continue;
+                }
             }
             if (choice == 3) {
-                set_amount_of_item_in_items_form(delivery_ID, items_form_ID, sc);
+                int n =set_amount_of_item_in_items_form(delivery_ID, items_form_ID, sc);
+                if (n == -1) {
+                    made_changes = false;
+                    continue;
+                }
             }
         }
     }
 
-    private static void set_amount_of_item_in_items_form(int deliveryId, int itemsFormId, Scanner sc) {
-        System.out.println("Please enter the ID of the item you would like to set the amount of");
+    private static int set_amount_of_item_in_items_form(int deliveryId, int itemsFormId, Scanner sc) {
+        System.out.println("Please enter the ID of the item you would like to set the amount of or press -1 to cancel");
         int item_ID = 0;
         while (true) {
             try {
                 item_ID = sc.nextInt();
+                if (item_ID == -1) {
+                    return -1;
+                }
                 if (!controller.item_exists_in_items_form(deliveryId, itemsFormId, item_ID)) {
                     System.out.println("Item does not exist, please enter a valid item ID");
                     continue;
@@ -112,16 +132,24 @@ public class Items_form_edit {
         }
         controller.set_amount_of_item_in_items_form(deliveryId, itemsFormId, item_ID, quantity);
         controller.increase_item_in_loaded_items(deliveryId, item_ID, quantity);
+        return 0;
     }
 
-    private static void add_item_to_items_form(int delivery_ID, int items_form_ID, Scanner sc) {
-        System.out.println("Please enter the ID of the item you would like to add");
+    private static int add_item_to_items_form(int delivery_ID, int items_form_ID, Scanner sc) {
+        System.out.println("Please enter the ID of the item you would like to add or press -1 to cancel");
         int item_ID = 0;
         while (true) {
             try {
                 item_ID = sc.nextInt();
+                if (item_ID == -1) {
+                    return -1;
+                }
                 if (!controller.item_exists(item_ID)) {
                     System.out.println("Item does not exist, please enter a valid item ID");
+                    continue;
+                }
+                if (controller.item_exists_in_delivery(delivery_ID, item_ID)) {
+                    System.out.println("This item is already in the delivery");
                     continue;
                 }
                 break;
@@ -152,16 +180,25 @@ public class Items_form_edit {
 //        if (site_type.equals("loading")) {
 //            controller.add_loaded_item(delivery_ID, item_ID, quantity);
 //        }
+    return 0;
     }
 
-    private static void remove_item_from_items_form(int delivery_ID, int items_form_ID, Scanner sc) {
-        System.out.println("Please enter the ID of the item you would like to remove");
+    private static int remove_item_from_items_form(int delivery_ID, int items_form_ID, Scanner sc) {
+        System.out.println("Please enter the ID of the item you would like to remove or press -1 to cancel");
         int item_ID = 0;
         while (true) {
             try {
                 item_ID = sc.nextInt();
+                if (item_ID == -1) {
+                    return -1;
+                }
                 if (!controller.item_exists_in_items_form(delivery_ID, items_form_ID, item_ID)) {
                     System.out.println("Item does not exist, please enter a valid item ID");
+                    continue;
+                }
+                if (controller.item_exists_in_diff_items_form(delivery_ID, items_form_ID, item_ID)) {
+                    System.out.println("This item is in the diff items form, you can't remove it from the items form");
+                    System.out.println("Please enter a valid item ID, or press -1 to cancel");
                     continue;
                 }
                 break;
@@ -170,9 +207,10 @@ public class Items_form_edit {
                 sc.next();
             }
         }
+
         controller.remove_item_from_items_form(delivery_ID, items_form_ID, item_ID);
         controller.remove_loaded_item(delivery_ID, item_ID);
-
+        return 0;
     }
 
     public static void add_difference_to_loading_site(int deliveryId, int itemId, int diff, Scanner sc) {

@@ -413,4 +413,14 @@ public class Temp_DB {
         Delivery this_delivery = get_delivery(deliveryId);
         return this_delivery.get_destination_ID(i);
     }
+
+    public static boolean item_exists_in_diff_items_form(int deliveryId, int itemsFormId, int itemId) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.item_exists_in_diff_items_form(itemsFormId, itemId);
+    }
+
+    public static boolean problem_edit_fixed(int deliveryId, int itemsFormId, int itemID, int amount) {
+        Delivery this_delivery = get_delivery(deliveryId);
+        return this_delivery.problem_edit_fixed(itemsFormId, itemID, amount);
+    }
 }

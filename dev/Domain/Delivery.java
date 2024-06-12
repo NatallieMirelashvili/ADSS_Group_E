@@ -133,6 +133,7 @@ public class Delivery {
     public void decrease_item_in_loaded_items(int item_id, int quantity) {
         loaded_items.get(item_id).setAmount_loaded(loaded_items.get(item_id).getAmount_loaded() - quantity);
     }
+
     public void increase_item_in_loaded_items(int item_id, int quantity) {
         loaded_items.get(item_id).setAmount_loaded(loaded_items.get(item_id).getAmount_loaded() + quantity);
     }
@@ -187,8 +188,8 @@ public class Delivery {
     }
 
     public boolean destinations_been_visited(int destinationId, int index) {
-        for (int i = 0; i <= index; i++){
-            if (item_form.get(i).getDestination().getSite_ID() == destinationId){
+        for (int i = 0; i <= index; i++) {
+            if (item_form.get(i).getDestination().getSite_ID() == destinationId) {
                 return true;
             }
         }
@@ -212,7 +213,7 @@ public class Delivery {
     }
 
     public void update_item_quantity_unloaded_in_delivery(int quantity, int itemId) {
-        loaded_items.get(itemId).setAmount_unloaded(quantity+loaded_items.get(itemId).getAmount_unloaded());
+        loaded_items.get(itemId).setAmount_unloaded(quantity + loaded_items.get(itemId).getAmount_unloaded());
     }
 
     public int get_item_quantity_unloaded_in_delivery(int itemId) {
@@ -247,7 +248,7 @@ public class Delivery {
         for (Items_form items_form : item_form) {
             if (items_form.getDestination().getSite_ID() == destinationId) {
                 unload_form = items_form;
-            } else if(items_form.getDestination().getSite_ID() == curr_destination_id) {
+            } else if (items_form.getDestination().getSite_ID() == curr_destination_id) {
                 load_form = items_form;
             }
         }
@@ -255,7 +256,7 @@ public class Delivery {
             if (load_form.item_exists(item.getItemId())) {
                 load_form.getItem(item.getItemId()).setAmount_loaded(load_form.getItem(item.getItemId()).getAmount_loaded() - item.getAmount_loaded());
                 decrease_item_in_loaded_items(item.getItemId(), item.getAmount_loaded());
-                if (load_form.getItem(item.getItemId()).getAmount_loaded() <=0) {
+                if (load_form.getItem(item.getItemId()).getAmount_loaded() <= 0) {
                     load_form.removeItem(item.getItemId());
                     remove_item_from_loaded_items(item.getItemId());
                 }
@@ -306,4 +307,29 @@ public class Delivery {
     public int get_destination_ID(int i) {
         return item_form.get(i).getDestination().getSite_ID();
     }
+
+    public boolean item_exists_in_diff_items_form(int itemsFormId, int itemId) {
+        for (Items_form items_form : item_form) {
+            if (items_form.getID() != itemsFormId) {
+                if (items_form.item_exists(itemId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean problem_edit_fixed(int itemsFormId, int itemID, int amount) {
+        for (Items_form items_form : item_form) {
+            if (items_form.getID() == itemsFormId) {
+                if (items_form.item_exists(itemID)) {
+                    if (items_form.getItem(itemID).getAmount_loaded() >= amount) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

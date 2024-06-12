@@ -54,7 +54,7 @@ public class Delivery_form {
                 truckChange = true;
             }
             while (!driverChange) {
-                driver_ID = getValidDriverID(sc,date);
+                driver_ID = getValidDriverID(sc, date);
                 if (driver_ID == -1)
                     return;
                 driverChange = true;
@@ -82,53 +82,60 @@ public class Delivery_form {
             }
             validChoice = true;
         }
-            validChoice = false;
-            System.out.println("Please enter delivery origin site ID or press -1 to return to Delivery Manager menu");
-            while (!validChoice) {
-                try {
-                    site_ID = sc.nextInt();
-                    if (site_ID == -1) {
-                        return;
-                    }
-                    if (site_ID < 0) {
-                        System.out.println("Invalid input. Please enter a positive Integer as site ID");
-                        continue;
-                    }
-                    if (!controller.site_exists(site_ID)) {
-                        System.out.println("Site with this ID does not exist please enter a valid site ID");
-                        continue;
-                    }
-                    validChoice = true;
-                } catch (Exception e) {
-                    System.out.println("Invalid input. Please enter an Integer as site ID");
-                    sc.next();
+        validChoice = false;
+        System.out.println("Please enter delivery origin site ID or press -1 to return to Delivery Manager menu");
+        while (!validChoice) {
+            try {
+                site_ID = sc.nextInt();
+                if (site_ID == -1) {
+                    return;
                 }
+                if (site_ID < 0) {
+                    System.out.println("Invalid input. Please enter a positive Integer as site ID");
+                    continue;
+                }
+                if (!controller.site_exists(site_ID)) {
+                    System.out.println("Site with this ID does not exist please enter a valid site ID");
+                    continue;
+                }
+                validChoice = true;
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter an Integer as site ID");
+                sc.next();
             }
+        }
         int delivery_ID = controller.get_delivery_ID();
         System.out.println("Delivery added successfully, delivery ID is:" + delivery_ID);
 
-            JsonObject delivery = new JsonObject();
-            delivery.addProperty("date", date);
-            delivery.addProperty("hour", time);
-            delivery.addProperty("truck_ID", truck_ID);
-            delivery.addProperty("driver_ID", driver_ID);
-            delivery.addProperty("site_ID", site_ID);
-            controller.add_delivery(delivery);
+        JsonObject delivery = new JsonObject();
+        delivery.addProperty("date", date);
+        delivery.addProperty("hour", time);
+        delivery.addProperty("truck_ID", truck_ID);
+        delivery.addProperty("driver_ID", driver_ID);
+        delivery.addProperty("site_ID", site_ID);
+        controller.add_delivery(delivery);
 
+        int choice;
+        while (true) {
             System.out.println("Enter 1 to create item form to the delivery or -1 to return to Delivery Manager menu");
-            int choice;
             try {
                 choice = sc.nextInt();
                 if (choice == 1) {
                     Items_form_addition.add_new_items_form(delivery_ID);
+                    break;
                 }
                 if (choice == -1) {
                     return;
+                } else {
+                    System.out.println("Invalid input. Please enter 1 or -1");
+
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter 1 or -1");
+                System.out.println("Error occurred while adding one of the items form, please try again");
+                sc.next();
             }
         }
+    }
 
 
         private static boolean checklicense(int truck_ID, int driver_ID) {

@@ -241,4 +241,12 @@ public class controller {
     public static int get_destination_ID(int deliveryId, int i) {
         return Temp_DB.get_destination_ID(deliveryId, i);
     }
+
+    public static boolean item_exists_in_diff_items_form(int deliveryId, int itemsFormId, int itemId) {
+        return Temp_DB.item_exists_in_diff_items_form(deliveryId, itemsFormId, itemId);
+    }
+
+    public static boolean problem_edit_fixed(int deliveryId, int itemsFormId, int itemID, int amount) {
+        return Temp_DB.problem_edit_fixed(deliveryId, itemsFormId, itemID, amount);
+    }
 }

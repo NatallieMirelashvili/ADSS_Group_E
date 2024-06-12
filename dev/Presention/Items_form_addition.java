@@ -205,7 +205,7 @@ public class Items_form_addition {
                     try {
                         choice_2 = sc.nextInt();
                         if (choice_2 == 1) {
-                            Items_form_edit.edit_item_form(delivery_ID, sc);
+                            Items_form_edit.edit_item_form(delivery_ID, sc, item_ID, quantity);
                             break;
                         }
                         if (choice_2 == 2) {
