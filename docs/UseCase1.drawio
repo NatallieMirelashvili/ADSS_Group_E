@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-23T06:55:52.353Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="t8shuwKwA0s5VX28qi0v" version="24.5.4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-23T13:41:37.722Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="97OmAPDTTIDSDw8c2E-E" version="24.5.4" type="github">
   <diagram name="‫עמוד-1‬" id="oHaQ85wRBRcyyTAZrTat">
     <mxGraphModel dx="1002" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -7,10 +7,124 @@
         </object>
         <mxCell id="1" parent="0" />
         <object label="Actor" kdjfd="nknk&#xa;&#xa;" id="Rgl3CEQJT4-loNlTJzd--1">
-          <mxCell style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxCell style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=16;" vertex="1" parent="1">
             <mxGeometry x="50" y="100" width="60" height="120" as="geometry" />
           </mxCell>
         </object>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--8" value="Casheir" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="58" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--9" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" edge="1" parent="1" target="Rgl3CEQJT4-loNlTJzd--10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="160" as="sourcePoint" />
+            <mxPoint x="260" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--10" value="Sell Item" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="220" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--11" value="" style="endArrow=none;html=1;rounded=0;entryX=0.01;entryY=0.425;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=16;" edge="1" parent="1" target="Rgl3CEQJT4-loNlTJzd--12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="160" as="sourcePoint" />
+            <mxPoint x="440" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--13" value="&amp;lt;&amp;lt;indlude&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="Rgl3CEQJT4-loNlTJzd--11">
+          <mxGeometry x="-0.1494" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--12" value="Delete from stock" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="587" y="290" width="113" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--14" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--15" value="Actor" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="70" y="408" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--16" value="System" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="60" y="355" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--18" value="Report on expired&lt;br style=&quot;font-size: 16px;&quot;&gt;item" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="240" y="330" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--19" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" edge="1" parent="1" target="Rgl3CEQJT4-loNlTJzd--18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="370" as="sourcePoint" />
+            <mxPoint x="210" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--20" value="" style="endArrow=none;html=1;rounded=0;entryX=-0.002;entryY=0.67;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=16;" edge="1" target="Rgl3CEQJT4-loNlTJzd--12" parent="1" source="Rgl3CEQJT4-loNlTJzd--18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="350" as="sourcePoint" />
+            <mxPoint x="531.2" y="374" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--21" value="&amp;lt;&amp;lt;indlude&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="Rgl3CEQJT4-loNlTJzd--20">
+          <mxGeometry x="-0.1494" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object label="Actor" kdjfd="nknk&#xa;&#xa;" id="Rgl3CEQJT4-loNlTJzd--23">
+          <mxCell style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=16;" vertex="1" parent="1">
+            <mxGeometry x="65" y="585" width="60" height="120" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--24" value="&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Assistant; font-size: 16px; text-align: start; text-wrap: wrap; background-color: rgb(255, 255, 255);&quot;&gt;Stockkeeper&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="45" y="555" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--27" value="Reporst on damaged&lt;br style=&quot;font-size: 16px;&quot;&gt;item" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="250" y="610" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--28" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" edge="1" parent="1" target="Rgl3CEQJT4-loNlTJzd--27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="650" as="sourcePoint" />
+            <mxPoint x="220" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--29" value="" style="endArrow=none;html=1;rounded=0;entryX=0.258;entryY=0.97;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=16;" edge="1" parent="1" target="Rgl3CEQJT4-loNlTJzd--12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="647" as="sourcePoint" />
+            <mxPoint x="538" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--30" value="&amp;lt;&amp;lt;indlude&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="Rgl3CEQJT4-loNlTJzd--29">
+          <mxGeometry x="-0.1494" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--36" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="970" y="330" as="sourcePoint" />
+            <mxPoint x="1143" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--37" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="Rgl3CEQJT4-loNlTJzd--36">
+          <mxGeometry x="-0.0968" y="-5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--38" value="Check minimal amount of reported&amp;nbsp;&lt;br style=&quot;font-size: 16px;&quot;&gt;item&#39;s type" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="807" y="290" width="163" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--39" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=16;" edge="1" parent="1" source="Rgl3CEQJT4-loNlTJzd--12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="330" as="sourcePoint" />
+            <mxPoint x="810" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--40" value="&amp;lt;&amp;lt;indlude&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="Rgl3CEQJT4-loNlTJzd--39">
+          <mxGeometry x="-0.16" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--41" value="Report on lack of this&amp;nbsp;&lt;br style=&quot;font-size: 16px;&quot;&gt;item&#39;s type" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="270" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Rgl3CEQJT4-loNlTJzd--42" value="&lt;h1&gt;&lt;span style=&quot;font-size: 22px;&quot;&gt;Updating Inventory &amp;amp; Warning of Shortage&lt;/span&gt;&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="390" y="38" width="470" height="70" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
