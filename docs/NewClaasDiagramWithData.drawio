@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-06-25T09:02:43.175Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="UyOJbu_G-_RiAH0LhVS9" version="24.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-25T17:40:34.433Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="gPadSI9fjVjjfz01sSdL" version="24.6.2" type="github">
   <diagram name="‫עמוד-1‬" id="dHkA9cBUytoh4jv0Vv6P">
-    <mxGraphModel dx="2369" dy="2044" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2006" dy="1838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -60,7 +60,7 @@
         <mxCell id="rCQZ0M5XMtd213yGawNZ-117" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-115">
           <mxGeometry y="60.382022471910105" width="445.65217391304355" height="9.348314606741571" as="geometry" />
         </mxCell>
-        <mxCell id="rCQZ0M5XMtd213yGawNZ-118" value="&lt;div&gt;&lt;div style=&quot;font-family: Helvetica;&quot;&gt;+searchItemRepo(int id): boolean&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica; background-color: initial;&quot;&gt;+ addProdRepo(Json): boolean&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica;&quot;&gt;+moveStoreWareRepo(int idToMove, Tuple&amp;lt;String, Intger&amp;gt; newPlace: void&lt;/span&gt;&lt;span style=&quot;font-family: Helvetica; background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-115">
+        <mxCell id="rCQZ0M5XMtd213yGawNZ-118" value="&lt;div&gt;&lt;div style=&quot;font-family: Helvetica;&quot;&gt;+searchItemRepo(int id): Item&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica; background-color: initial;&quot;&gt;+ addProdRepo(Json): boolean&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica;&quot;&gt;+moveStoreWareRepo(int idToMove, Tuple&amp;lt;String, Intger&amp;gt; newPlace: void&lt;/span&gt;&lt;span style=&quot;font-family: Helvetica; background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-115">
           <mxGeometry y="69.73033707865167" width="445.65217391304355" height="191.3800966183575" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-125" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=20;" edge="1" parent="rCQZ0M5XMtd213yGawNZ-204" source="rCQZ0M5XMtd213yGawNZ-120">
@@ -336,34 +336,34 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-215" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="-520" y="50" width="1790" height="760" as="geometry" />
+          <mxGeometry x="-520" y="50" width="1790" height="510" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-43" value="&lt;h2 style=&quot;font-size: 20px;&quot;&gt;Service Layer&lt;/h2&gt;" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=170;height=60;fontFamily=Helvetica;labelBackgroundColor=none;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=20;gradientColor=#97d077;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-215">
-          <mxGeometry width="1790" height="760" as="geometry" />
+          <mxGeometry width="1790" height="510" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-81" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;ProductChecker&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-215">
-          <mxGeometry x="220" y="74.14634146341464" width="530" height="290.9756097560975" as="geometry" />
+          <mxGeometry x="220" y="49.75609756097561" width="530" height="211.7073170731707" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-82" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;- myProdManage: ProductControler&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-81">
-          <mxGeometry y="50" width="530" height="37.073170731707314" as="geometry" />
+          <mxGeometry y="50" width="530" height="24.878048780487802" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-220" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-81">
-          <mxGeometry y="87.07317073170731" width="530" height="7.414634146341463" as="geometry" />
+          <mxGeometry y="74.8780487804878" width="530" height="4.97560975609756" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-84" value="&lt;div&gt;&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+ searchProdCKR(int ctalogNum): boolean&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+correctDateCKR(LocalDate from, LocalDate to):&amp;nbsp; boolean&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+correctRatio(doible ratioToCheck): boolean&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+manufacturForCatesCKR(&lt;/span&gt;&lt;span style=&quot;font-family: Helvetica; font-size: 18px; background-color: initial;&quot;&gt;String mainCat, String subCat, String size, String manufacurer): boolean&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-81">
-          <mxGeometry y="94.48780487804876" width="530" height="196.48780487804876" as="geometry" />
+          <mxGeometry y="79.85365853658536" width="530" height="131.85365853658536" as="geometry" />
         </mxCell>
-        <mxCell id="rCQZ0M5XMtd213yGawNZ-85" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;ItemChecker&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-215">
-          <mxGeometry x="1420" y="42.81690140845071" width="310" height="172.99512195121952" as="geometry" />
+        <mxCell id="rCQZ0M5XMtd213yGawNZ-85" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;ItemChecker&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=37;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-215">
+          <mxGeometry x="1420" y="28.732394366197187" width="310" height="132.95692554557124" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-86" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+ myItenManage: ItemControler&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-85">
-          <mxGeometry y="26" width="310" height="40.78048780487805" as="geometry" />
+          <mxGeometry y="37" width="310" height="24.681315789473683" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-223" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-85">
-          <mxGeometry y="66.78048780487805" width="310" height="7.414634146341464" as="geometry" />
+          <mxGeometry y="61.681315789473686" width="310" height="4.975609756097561" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-88" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+ searchItemCKR(int id): boolean&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-85">
-          <mxGeometry y="74.19512195121952" width="310" height="98.8" as="geometry" />
+          <mxGeometry y="66.65692554557124" width="310" height="66.3" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-216" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="-560" y="-420" width="1900" height="360" as="geometry" />
@@ -426,7 +426,7 @@
           <mxGeometry y="60" width="180" height="26" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-72" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px; font-weight: 400;&quot;&gt;ReadFile&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-216">
-          <mxGeometry x="650" y="200" width="180" height="86" as="geometry" />
+          <mxGeometry x="650" y="200" width="180" height="110" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-73" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+ field: type&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-72">
           <mxGeometry y="26" width="180" height="26" as="geometry" />
@@ -435,7 +435,7 @@
           <mxGeometry y="52" width="180" height="8" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-75" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px;&quot;&gt;+ runMenue(): void&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-72">
-          <mxGeometry y="60" width="180" height="26" as="geometry" />
+          <mxGeometry y="60" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="rCQZ0M5XMtd213yGawNZ-76" value="&lt;span style=&quot;font-family: Helvetica; font-size: 20px; font-weight: 400;&quot;&gt;ProduceReports&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;labelBackgroundColor=none;fontSize=20;" vertex="1" parent="rCQZ0M5XMtd213yGawNZ-216">
           <mxGeometry x="1080" y="236" width="180" height="86" as="geometry" />
