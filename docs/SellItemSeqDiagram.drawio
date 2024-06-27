@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-06-27T19:47:52.276Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="NPWmF9VRT_n2fMcNatVh" version="24.6.4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-27T19:48:28.790Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="g2KIBTTQYtibCQLMOYti" version="24.6.4" type="github">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-    <mxGraphModel dx="1002" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1253" dy="711" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -18,7 +18,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-10" value="&amp;lt;catNum, location&amp;gt; =&lt;br&gt;+reportDamage(int idToReport) " style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="aM9ryv3xv72pqoxQDRHE-7" vertex="1" connectable="0">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-10" value="&amp;lt;catNum, location&amp;gt; =&lt;br&gt;&amp;nbsp;removeItemCTR(int idToRem)&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="aM9ryv3xv72pqoxQDRHE-7" vertex="1" connectable="0">
           <mxGeometry x="0.0571" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -38,7 +38,7 @@
             <mxPoint x="1029.5" y="290.0689655172414" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-4" value="reportDamageRepo(&lt;div&gt;int idToReport) &lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-3" vertex="1" connectable="0">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-4" value="remove(idToRem)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-3" vertex="1" connectable="0">
           <mxGeometry x="-0.1297" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -49,7 +49,7 @@
             <mxPoint x="1029.5" y="170.28137931034487" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-6" value="reported = find(idToRem)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-5" vertex="1" connectable="0">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-6" value="removed = find(idToRem)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-5" vertex="1" connectable="0">
           <mxGeometry x="-0.0722" y="-1" relative="1" as="geometry">
             <mxPoint x="19" y="-1" as="offset" />
           </mxGeometry>
@@ -60,7 +60,7 @@
             <mxPoint x="945" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-9" value="reported&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-7" vertex="1" connectable="0">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-9" value="removed" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-7" vertex="1" connectable="0">
           <mxGeometry x="0.0313" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -82,13 +82,10 @@
         <mxCell id="9JyKOaciVN9gGJ-EEhEV-15" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-14" vertex="1">
           <mxGeometry x="110" y="250" width="10" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-16" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=19;" parent="1" target="9JyKOaciVN9gGJ-EEhEV-15" edge="1" source="sX0Y6YWAhH3KncdLoKx5-2">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-16" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=19;" parent="1" target="9JyKOaciVN9gGJ-EEhEV-15" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="240" y="339.9966666666667" as="sourcePoint" />
             <mxPoint x="1299.5000000000002" y="339.9966666666667" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="220" y="340" />
-            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="9JyKOaciVN9gGJ-EEhEV-17" value="removeItemCTR(catNum, location) " style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-16" vertex="1" connectable="0">
