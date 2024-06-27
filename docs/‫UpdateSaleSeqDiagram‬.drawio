@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-06-27T12:25:05.040Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="kkIDDEyHSSMYKOa13lRG" version="24.6.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-27T12:31:08.307Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="d6FJpKtEX1t5XguN8Y3R" version="24.6.3" type="github">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-    <mxGraphModel dx="2004" dy="1138" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="954" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -90,7 +90,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-26" value="presentation gets the&amp;nbsp;&lt;br style=&quot;font-size: 18px;&quot;&gt;sale&#39;s details from user inputs" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="80" y="190" width="130" height="90" as="geometry" />
+          <mxGeometry x="90" y="100" width="130" height="170" as="geometry" />
         </mxCell>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-27" value="" style="html=1;verticalAlign=bottom;endArrow=oval;dashed=1;endSize=8;curved=0;rounded=0;entryX=0.657;entryY=1.022;entryDx=0;entryDy=0;entryPerimeter=0;endFill=1;fontSize=18;" edge="1" parent="1" target="AZfFT43j_TAVs0j9CgRW-26">
           <mxGeometry relative="1" as="geometry">
@@ -164,7 +164,7 @@
         </mxCell>
         <UserObject label="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;[subCat =&quot;0&quot;]&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" link="&lt;div style=&quot;background-color:#2b2b2b;color:#a9b7c6;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;pre&gt;subCat.equals(&lt;span style=&quot;color:#6a8759;&quot;&gt;&quot;0&quot;&lt;/span&gt;)&lt;/pre&gt;&lt;/div&gt;" id="AZfFT43j_TAVs0j9CgRW-47">
           <mxCell style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
-            <mxGeometry x="1125" y="795" width="150" height="70" as="geometry" />
+            <mxGeometry x="1152.5" y="790" width="150" height="70" as="geometry" />
           </mxCell>
         </UserObject>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-49" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=18;" vertex="1" parent="1">
@@ -181,7 +181,7 @@
         </mxCell>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-52" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsByMainCat(&lt;div style=&quot;font-size: 18px;&quot;&gt;String mainCat,&lt;/div&gt;&lt;div style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp;ArrayList alreadyHave)&lt;/div&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-50">
           <mxGeometry x="0.0283" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="43" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-55" value="DAO:&lt;div&gt;ProductAccessObjAccessObj&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
@@ -293,7 +293,7 @@
         </mxCell>
         <UserObject label="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;[size = &quot;0&quot;]&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" link="&lt;div style=&quot;background-color:#2b2b2b;color:#a9b7c6;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;pre&gt;subCat.equals(&lt;span style=&quot;color:#6a8759;&quot;&gt;&quot;0&quot;&lt;/span&gt;)&lt;/pre&gt;&lt;/div&gt;" id="AZfFT43j_TAVs0j9CgRW-88">
           <mxCell style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
-            <mxGeometry x="1125" y="1460" width="140" height="70" as="geometry" />
+            <mxGeometry x="1152.5" y="1460" width="140" height="70" as="geometry" />
           </mxCell>
         </UserObject>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-102" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1" source="AZfFT43j_TAVs0j9CgRW-104">
@@ -318,7 +318,7 @@
         </mxCell>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-106" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsBySubCat(&lt;div style=&quot;font-size: 18px;&quot;&gt;String mainCat,&lt;br style=&quot;font-size: 18px;&quot;&gt;String subCat,&lt;/div&gt;&lt;div style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp;ArrayList alreadyHave)&lt;/div&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-105">
           <mxGeometry x="0.0283" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="29" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="AZfFT43j_TAVs0j9CgRW-108" value="relevanceRec" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" edge="1" parent="1">
