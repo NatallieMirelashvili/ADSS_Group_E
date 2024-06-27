@@ -1,28 +1,28 @@
-<mxfile host="app.diagrams.net" modified="2024-06-27T16:51:29.212Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="f2fYdlgclGhAZGDDc06U" version="24.6.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-27T18:39:56.167Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="4K1xhcWdDL1x5cJQn-Sr" version="24.6.4" type="github">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-    <mxGraphModel dx="4008" dy="2276" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1002" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-8" value="fac:Facade" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-8" value="fac:Facade" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="60" y="181" width="100" height="2499" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-9" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="AZfFT43j_TAVs0j9CgRW-8">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-9" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-8" vertex="1">
           <mxGeometry x="45" y="120" width="10" height="2340" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-10" value="CTR:&lt;br&gt;ProductControler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-10" value="CTR:&lt;br&gt;ProductControler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="670" y="181" width="150" height="2449" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-11" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="AZfFT43j_TAVs0j9CgRW-10">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-11" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-10" vertex="1">
           <mxGeometry x="70" y="150" width="10" height="2190" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-12" value="mng:&lt;br&gt;ProductManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-12" value="mng:&lt;br&gt;ProductManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1145" y="181" width="140" height="2299" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-13" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="AZfFT43j_TAVs0j9CgRW-12">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-13" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-12" vertex="1">
           <mxGeometry x="67.5" y="216" width="5" height="2054" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-67" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;setSaleOnProducts&lt;br style=&quot;font-size: 18px;&quot;&gt;(allRelevence,newSale)&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=18;" edge="1" parent="AZfFT43j_TAVs0j9CgRW-12" source="AZfFT43j_TAVs0j9CgRW-12" target="AZfFT43j_TAVs0j9CgRW-13">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-67" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;setSaleOnProducts&lt;br style=&quot;font-size: 18px;&quot;&gt;(allRelevence,newSale)&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-12" source="AZfFT43j_TAVs0j9CgRW-12" target="AZfFT43j_TAVs0j9CgRW-13" edge="1">
           <mxGeometry width="80" relative="1" as="geometry">
             <mxPoint x="160.93000000000006" y="669" as="sourcePoint" />
             <mxPoint x="155.0014285714285" y="959" as="targetPoint" />
@@ -33,25 +33,25 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-17" value="newSale:&lt;br&gt;salePrice" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-17" value="newSale:&lt;br&gt;salePrice" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1560" y="370" width="130" height="2100" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-18" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="AZfFT43j_TAVs0j9CgRW-17">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-18" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-17" vertex="1">
           <mxGeometry x="60" y="60" width="10" height="18.5" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-19" value="repo:&lt;br&gt;ProductRepo" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-19" value="repo:&lt;br&gt;ProductRepo" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1790" y="190" width="120" height="2290" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-26" value="presentation gets the&amp;nbsp;&lt;br style=&quot;font-size: 18px;&quot;&gt;sale&#39;s details from user inputs" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-26" value="presentation gets the&amp;nbsp;&lt;br style=&quot;font-size: 18px;&quot;&gt;sale&#39;s details from user inputs" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="430" y="40" width="130" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-27" value="" style="html=1;verticalAlign=bottom;endArrow=oval;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;fontSize=18;" edge="1" parent="1" target="AZfFT43j_TAVs0j9CgRW-26">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-27" value="" style="html=1;verticalAlign=bottom;endArrow=oval;dashed=1;endSize=8;curved=0;rounded=0;endFill=1;fontSize=18;" parent="1" target="AZfFT43j_TAVs0j9CgRW-26" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="380" y="280" as="sourcePoint" />
             <mxPoint x="380" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-30" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1" target="AZfFT43j_TAVs0j9CgRW-10">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-30" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" target="AZfFT43j_TAVs0j9CgRW-10" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="119.99666666666673" y="343" as="sourcePoint" />
             <mxPoint x="570" y="343" as="targetPoint" />
@@ -60,99 +60,99 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-31" value="updateSaleCTR(String mainCat, &lt;br style=&quot;font-size: 18px;&quot;&gt;String subCat, String size, &lt;br style=&quot;font-size: 18px;&quot;&gt;LocalDate from, &lt;br style=&quot;font-size: 18px;&quot;&gt;LocalDate to, &lt;br&gt;double ratio)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-30">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-31" value="updateSaleCTR(String mainCat, &lt;br style=&quot;font-size: 18px;&quot;&gt;String subCat, String size, &lt;br style=&quot;font-size: 18px;&quot;&gt;LocalDate from, &lt;br style=&quot;font-size: 18px;&quot;&gt;LocalDate to, &lt;br&gt;double ratio)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-30" vertex="1" connectable="0">
           <mxGeometry x="-0.1198" y="1" relative="1" as="geometry">
             <mxPoint x="25" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-32" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1" target="AZfFT43j_TAVs0j9CgRW-12">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-32" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" target="AZfFT43j_TAVs0j9CgRW-12" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="750" y="400.00260869565227" as="sourcePoint" />
             <mxPoint x="1092.5" y="400.41176470588243" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-33" value="setSalePriceInven&lt;br&gt;(String mainCat, &lt;br&gt;String subCat,&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;String size,&lt;br&gt;&amp;nbsp;LocalDate from,&lt;/div&gt;&lt;div style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp;LocalDate to, &lt;br&gt;double ratio)&amp;nbsp;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-32">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-33" value="setSalePriceInven&lt;br&gt;(String mainCat, &lt;br&gt;String subCat,&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;String size,&lt;br&gt;&amp;nbsp;LocalDate from,&lt;/div&gt;&lt;div style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp;LocalDate to, &lt;br&gt;double ratio)&amp;nbsp;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-32" vertex="1" connectable="0">
           <mxGeometry x="-0.0745" y="-2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-34" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=horizontal;curved=0;fontSize=18;" edge="1" parent="1" target="AZfFT43j_TAVs0j9CgRW-18">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-34" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=horizontal;curved=0;fontSize=18;" parent="1" target="AZfFT43j_TAVs0j9CgRW-18" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1220" y="450" as="sourcePoint" />
             <mxPoint x="1474.5" y="450.0008695652175" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-35" value="newSale =&lt;br&gt;&amp;nbsp;create(from, to, ratio)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-34">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-35" value="newSale =&lt;br&gt;&amp;nbsp;create(from, to, ratio)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-34" vertex="1" connectable="0">
           <mxGeometry x="0.0855" relative="1" as="geometry">
             <mxPoint x="-9" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
         <UserObject label="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;[subCat =&quot;0&quot;]&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" link="&lt;div style=&quot;background-color:#2b2b2b;color:#a9b7c6;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;pre&gt;subCat.equals(&lt;span style=&quot;color:#6a8759;&quot;&gt;&quot;0&quot;&lt;/span&gt;)&lt;/pre&gt;&lt;/div&gt;" id="AZfFT43j_TAVs0j9CgRW-47">
-          <mxCell style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
+          <mxCell style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" parent="1" vertex="1">
             <mxGeometry x="1220" y="610" width="150" height="70" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-49" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-49" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1030" y="600" width="1150" height="1830" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-51" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-51" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1845" y="680" width="10" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-50" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1" source="AZfFT43j_TAVs0j9CgRW-12">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-50" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" source="AZfFT43j_TAVs0j9CgRW-12" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1230" y="700.6800000000001" as="sourcePoint" />
             <mxPoint x="1845" y="700.1435294117646" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-52" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsByMainCat(String mainCat,ArrayList alreadyHave)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-50">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-52" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsByMainCat(String mainCat,ArrayList alreadyHave)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-50" vertex="1" connectable="0">
           <mxGeometry x="0.0283" relative="1" as="geometry">
             <mxPoint x="-1" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-63" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;allRelevance&lt;/font&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-63" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;allRelevance&lt;/font&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1835" y="799.9999999999998" as="sourcePoint" />
             <mxPoint x="1214.3235294117644" y="799.9999999999998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-69" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=50;height=22;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-69" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=50;height=22;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1145" y="1010" width="1005" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-71" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Prod in&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;allRelevence&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-71" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Prod in&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;allRelevence&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1220" y="1010" width="190" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-72" value="prod:Product" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-72" value="prod:Product" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="2020" y="181" width="200" height="2309" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-73" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="AZfFT43j_TAVs0j9CgRW-72">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-73" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-72" vertex="1">
           <mxGeometry x="95" y="869" width="10" height="37" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-75" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1" target="AZfFT43j_TAVs0j9CgRW-72">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-75" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" target="AZfFT43j_TAVs0j9CgRW-72" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1220" y="1070.1366666666668" as="sourcePoint" />
             <mxPoint x="1990" y="1070" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-76" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;setMySalePrice(newSale)&lt;/pre&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-75">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-76" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;setMySalePrice(newSale)&lt;/pre&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-75" vertex="1" connectable="0">
           <mxGeometry x="-0.0342" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-87" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-87" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1030" y="1211" width="1150" height="8" as="geometry" />
         </mxCell>
         <UserObject label="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;[size = &quot;0&quot;]&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" link="&lt;div style=&quot;background-color:#2b2b2b;color:#a9b7c6;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;pre&gt;subCat.equals(&lt;span style=&quot;color:#6a8759;&quot;&gt;&quot;0&quot;&lt;/span&gt;)&lt;/pre&gt;&lt;/div&gt;" id="AZfFT43j_TAVs0j9CgRW-88">
-          <mxCell style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
+          <mxCell style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" parent="1" vertex="1">
             <mxGeometry x="1210" y="1219" width="140" height="70" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-124" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-124" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1030" y="1840" width="1150" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-125" value="[else]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-125" value="[else]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1230" y="1848" width="70" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-160" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;setSaleOnProducts&lt;br style=&quot;font-size: 18px;&quot;&gt;(allRelevence,newSale)&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-160" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;setSaleOnProducts&lt;br style=&quot;font-size: 18px;&quot;&gt;(allRelevence,newSale)&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry width="80" relative="1" as="geometry">
             <mxPoint x="1214" y="1441" as="sourcePoint" />
             <mxPoint x="1218" y="1731" as="targetPoint" />
@@ -163,47 +163,47 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-162" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-162" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1845" y="1271" width="10" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-163" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-163" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1214" y="1291" as="sourcePoint" />
             <mxPoint x="1845" y="1291.1435294117646" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-164" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsBySubCat(String mainCat,&lt;br&gt;String subCat, ArrayList alreadyHave)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-163">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-164" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsBySubCat(String mainCat,&lt;br&gt;String subCat, ArrayList alreadyHave)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-163" vertex="1" connectable="0">
           <mxGeometry x="0.0283" relative="1" as="geometry">
             <mxPoint x="-1" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-165" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;allRelevance&lt;/font&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-165" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;allRelevance&lt;/font&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1835" y="1390.9999999999998" as="sourcePoint" />
             <mxPoint x="1214.3235294117644" y="1390.9999999999998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-166" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=50;height=22;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-166" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=50;height=22;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1145" y="1601" width="1005" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-167" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Prod in&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;allRelevence&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-167" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Prod in&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;allRelevence&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1220" y="1601" width="190" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-168" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-168" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="2115" y="1641" width="10" height="37" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-169" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-169" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1220" y="1661.1366666666668" as="sourcePoint" />
             <mxPoint x="2120" y="1661" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-170" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;setMySalePrice(newSale)&lt;/pre&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-169">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-170" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;setMySalePrice(newSale)&lt;/pre&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-169" vertex="1" connectable="0">
           <mxGeometry x="-0.0342" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-183" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;setSaleOnProducts&lt;br style=&quot;font-size: 18px;&quot;&gt;(allRelevence,newSale)&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-183" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;setSaleOnProducts&lt;br style=&quot;font-size: 18px;&quot;&gt;(allRelevence,newSale)&lt;/font&gt;&lt;/pre&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry width="80" relative="1" as="geometry">
             <mxPoint x="1214" y="2070" as="sourcePoint" />
             <mxPoint x="1218" y="2360" as="targetPoint" />
@@ -214,42 +214,42 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-184" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-184" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1845" y="1900" width="10" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-185" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-185" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1214" y="1920" as="sourcePoint" />
             <mxPoint x="1845" y="1920.1435294117646" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-186" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsBySize(String mainCat,&lt;br&gt;String subCat, String size, ArrayList alreadyHave)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-185">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-186" value="allRelanve =&amp;nbsp;&lt;div style=&quot;font-size: 18px;&quot;&gt;findAllProductsBySize(String mainCat,&lt;br&gt;String subCat, String size, ArrayList alreadyHave)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-185" vertex="1" connectable="0">
           <mxGeometry x="0.0283" relative="1" as="geometry">
             <mxPoint x="-1" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-187" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;allRelevance&lt;/font&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-187" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;allRelevance&lt;/font&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1835" y="2019.9999999999998" as="sourcePoint" />
             <mxPoint x="1214.3235294117644" y="2019.9999999999998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-188" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=50;height=22;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-188" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=50;height=22;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1145" y="2230" width="1005" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-189" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Prod in&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;allRelevence&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-189" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Prod in&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;allRelevence&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="1220" y="2230" width="190" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-190" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" vertex="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-190" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="2115" y="2270" width="10" height="37" as="geometry" />
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-191" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" edge="1" parent="1">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-191" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=18;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1220" y="2290.1366666666668" as="sourcePoint" />
             <mxPoint x="2120" y="2290" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AZfFT43j_TAVs0j9CgRW-192" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;setMySalePrice(newSale)&lt;/pre&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="AZfFT43j_TAVs0j9CgRW-191">
+        <mxCell id="AZfFT43j_TAVs0j9CgRW-192" value="&lt;div style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 18px;&quot;&gt;&lt;pre style=&quot;font-size: 18px;&quot;&gt;setMySalePrice(newSale)&lt;/pre&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" parent="AZfFT43j_TAVs0j9CgRW-191" vertex="1" connectable="0">
           <mxGeometry x="-0.0342" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
