@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2024-06-27T19:48:28.790Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="g2KIBTTQYtibCQLMOYti" version="24.6.4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-28T13:02:53.590Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="YL4EP0P6RrQjr2lf2xW8" version="24.6.4" type="github">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-    <mxGraphModel dx="1253" dy="711" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1591" dy="786" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="aM9ryv3xv72pqoxQDRHE-5" value="itemCTR:ItemControler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="1" vertex="1">
-          <mxGeometry x="605" y="80" width="190" height="360" as="geometry" />
+          <mxGeometry x="590" y="80" width="205" height="360" as="geometry" />
         </mxCell>
         <mxCell id="aM9ryv3xv72pqoxQDRHE-6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="aM9ryv3xv72pqoxQDRHE-5" vertex="1">
           <mxGeometry x="90" y="80" width="10" height="140" as="geometry" />
@@ -93,7 +93,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-18" value="prodCTR:ProductControler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="1" vertex="1">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-18" value="prodMng:ProductManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="1" vertex="1">
           <mxGeometry x="1595" y="80" width="230" height="380" as="geometry" />
         </mxCell>
         <mxCell id="9JyKOaciVN9gGJ-EEhEV-19" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-18" vertex="1">
@@ -107,16 +107,16 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-21" value="removeItemInven(catNum, location)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-20" vertex="1" connectable="0">
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-21" value="removeItemMng(catNum, location)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-20" vertex="1" connectable="0">
           <mxGeometry x="-0.0775" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9JyKOaciVN9gGJ-EEhEV-23" value="prodCTR:ProductControler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="1" vertex="1">
-          <mxGeometry x="2045" y="70" width="220" height="400" as="geometry" />
+        <mxCell id="9JyKOaciVN9gGJ-EEhEV-23" value="prodRepo:ProductReposetory" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="1" vertex="1">
+          <mxGeometry x="2050" y="77" width="254" height="400" as="geometry" />
         </mxCell>
         <mxCell id="9JyKOaciVN9gGJ-EEhEV-24" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=19;" parent="9JyKOaciVN9gGJ-EEhEV-23" vertex="1">
-          <mxGeometry x="105" y="310" width="10" height="30" as="geometry" />
+          <mxGeometry x="125.5" y="310" width="10" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9JyKOaciVN9gGJ-EEhEV-27" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;curved=0;fontSize=19;" parent="1" target="9JyKOaciVN9gGJ-EEhEV-23" edge="1">
           <mxGeometry relative="1" as="geometry">
