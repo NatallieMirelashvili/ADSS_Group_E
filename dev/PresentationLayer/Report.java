@@ -1,5 +1,5 @@
 package PresentationLayer;
-import ServiceLayer.StockController;
+import DomainLayer.Facade;
 import java.util.Scanner;
 public class Report {
 
@@ -13,7 +13,7 @@ public class Report {
 
 //    A help function which alert if product got into minimal amount situation.
     private static void CheckGetToMinimal(int idItem) {
-        boolean bool = StockController.checkMinimalControl(idItem);
+        boolean bool = Facade.checkMinimalControl(idItem);
         if (bool) {
             System.out.println("Those items are about to run out!\n");
         }
@@ -33,7 +33,7 @@ public class Report {
         String msg = "Please enter the id number of the item you want to report its damage:\n";
         int id_damage = GetIdFromUSR(msg);
         CheckGetToMinimal(id_damage);
-        boolean bool = StockController.reportDamageControl(id_damage);
+        boolean bool = Facade.reportDamageControl(id_damage);
         if(!bool){
             System.out.println("This item with the id: " + id_damage + " is not in the inventory\n");
             return;}
@@ -51,7 +51,7 @@ public class Report {
         String msg = "Please enter the id number of the item you want to report on its expiration:\n";
         int id_expire = GetIdFromUSR(msg);
         CheckGetToMinimal(id_expire);
-        boolean bool = StockController.reportExpiredControl(id_expire);
+        boolean bool = Facade.reportExpiredControl(id_expire);
         if(!bool){
             System.out.println("This item with the id: " + id_expire + " is not in the inventory\n");
             return;
@@ -69,7 +69,7 @@ public class Report {
         String msg = "Please enter the id number of the item you want to sell\n";
         int input = GetIdFromUSR(msg);
         CheckGetToMinimal(input);
-        boolean bool = StockController.sellItemControl(input);
+        boolean bool = Facade.sellItemControl(input);
         if(!bool){
             System.out.println("This item with the id: " + input + " is not in the inventory\n");
             return;
