@@ -6,20 +6,12 @@ import java.util.ArrayList;
 
 
 public class ItemAccessObj implements IDataAccessObj {
-    private static final String DATABASE_URL = "jdbc:sqlite:SuperMarket.db";
+    private Connection myConnection;
 
-    public Connection connect() {
-        Connection connection = null;
-        try {
-            // Load the SQLite JDBC driver (you don't need to do this explicitly with the latest drivers)
-            Class.forName("org.sqlite.JDBC");
-            // Establish a connection to the database
-            connection = DriverManager.getConnection(DATABASE_URL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connection;
+    public ItemAccessObj() throws SQLException {
+        myConnection = Database.connect();
     }
+
 
     @Override
     public JsonObject search(int UniqueToSearch) {
