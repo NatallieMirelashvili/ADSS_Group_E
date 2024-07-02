@@ -1,7 +1,9 @@
 package PresentationLayer;
-import DomainLayer.Facade;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static PresentationLayer.MainMenu.myFacade;
+
 
 public class ProduceReports {
     //   *****Menu Functions****
@@ -21,13 +23,13 @@ public class ProduceReports {
             which = scan.nextLine();
         }
         if (which.equals("All")) {
-            System.out.println(Facade.showAllItemsCtr());
+            System.out.println(myFacade.inventReportAllService());
             return;
         }
         ArrayList<String> askCatCorrect = Management.showCatalogChoices(scan);
         if (askCatCorrect == null)
             return;
-        System.out.println(Facade.showByCatCtr(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2)));
+        System.out.println(myFacade.inventReportByCatService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2)));
     }
 
     /***
@@ -37,7 +39,7 @@ public class ProduceReports {
      * Returns: None
      */
     public static void  ExpiredReport(){
-        System.out.println(Facade.showExpReportsCtr());
+        System.out.println(myFacade.expReportService());
     }
 
     /***
@@ -47,7 +49,7 @@ public class ProduceReports {
      * Returns: None
      */
     public static void  DamagedReport(){
-        System.out.println(Facade.showDamageReportsCtr());
+        System.out.println(myFacade.defectiveReportService());
     }
     public static void  ReturnToMainMenu(){
         System.out.println("Returning to main menu...\n");

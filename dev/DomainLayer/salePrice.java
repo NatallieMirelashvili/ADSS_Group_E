@@ -4,15 +4,19 @@ import java.time.LocalDate;
 public class salePrice {
 
 //    ***Fields***
+    private static int counter=1;
     private LocalDate startSale;
     private LocalDate endSale;
-    private double discountRatio;
+    private int discountRatio;
+    private int id;
 
 //    ***Constructor***
-    public salePrice(LocalDate startSale, LocalDate endSale, double discountRatio) {
+    public salePrice(LocalDate startSale, LocalDate endSale, int discountRatio) {
         this.startSale = startSale;
         this.endSale = endSale;
         this.discountRatio = discountRatio;
+        this.id = counter;
+        counter++;
     }
 
 //  ***Getters***
@@ -22,7 +26,7 @@ public class salePrice {
     public LocalDate getEndSale() {
         return endSale;
     }
-    public double getDiscountRatio() {
+    public int getDiscountRatio() {
         return discountRatio;
     }
 
@@ -33,7 +37,7 @@ public class salePrice {
     public void setEndSale(LocalDate endSale) {
         this.endSale = endSale;
     }
-    public void setDiscountRatio(double discountRatio) {
+    public void setDiscountRatio(int discountRatio) {
         this.discountRatio = discountRatio;
     }
 }

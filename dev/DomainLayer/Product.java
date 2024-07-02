@@ -1,32 +1,31 @@
 package DomainLayer;
 
-import java.util.ArrayList;
-
 public class Product {
 
 //   ***Fields***
     private final String catName;
     private final String subCatName;
-    private final String size;
+    private final String prodSize;
     private Tuple<Integer, Integer> total;
-    private final String manuFactor;
+    private final String manufacture;
     private final int catalogNumProduct;
     private final double marketPriceConst;
     private final double manuPriceConst;
     private double manuPriceCurr;
     private double marketPriceCurr;
     private salePrice mySalePrice;
-    private double discount;
-    private ArrayList<Item> items ;
+    private int discount;
     private final int minimalAmount;
+    private int orderAmount;
+    private boolean isMinimal;
 
 //    ***Contracture***
     public Product(String catName, String subCatName, String size, String manuFactor, int catalogNumProduct,
-                   double marketPriceConst, double manuPriceConst, double discount, int minimalAmount) {
+                   double marketPriceConst, double manuPriceConst, int discount, int minimalAmount,int orderAmount) {
         this.catName = catName;
         this.subCatName = subCatName;
-        this.size = size;
-        this.manuFactor = manuFactor;
+        this.prodSize = size;
+        this.manufacture = manuFactor;
         this.catalogNumProduct = catalogNumProduct;
         this.minimalAmount = minimalAmount;
         this.discount = discount;
@@ -37,9 +36,10 @@ public class Product {
         this.manuPriceConst = manuPriceConst;
         this.manuPriceCurr = manuPriceConst-(manuPriceConst*discount/100);
 
-        this.items = new ArrayList<>(0);
         this.mySalePrice=null;
         this.total= new Tuple<>(0,0);
+        this.orderAmount=orderAmount;
+        this.isMinimal =false;
     }
 
 //      ***Getters***
@@ -49,8 +49,8 @@ public class Product {
     public String getSubCatName() {
         return subCatName;
     }
-    public String getSize() {
-        return size;
+    public String getProdSize() {
+        return prodSize;
     }
     public int getTotalAmount() {
         return total.getVal1()+total.getVal2();
@@ -61,8 +61,8 @@ public class Product {
     public int getWarehouseAmount() {
         return total.getVal2();
     }
-    public String getManuFactor() {
-        return manuFactor;
+    public String getManufacture() {
+        return manufacture;
     }
     public int getCatalogNumProduct() {
         return catalogNumProduct;
@@ -82,19 +82,17 @@ public class Product {
     public salePrice getMySalePrice() {
         return mySalePrice;
     }
+    public int getOrderAmount() {return orderAmount; }
+    public boolean isMinimal() { return isMinimal; }
 
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
-//    ***Setters***
+    //    ***Setters***
     public void setMySalePrice(salePrice mySalePrice) {
         this.mySalePrice = mySalePrice;
-        if (mySalePrice.getStartSale().isEqual(Inventory.currentDate)) {
+        if (mySalePrice.getStartSale().isEqual(Facade.getCurrentDate())) {
             this.setMarketPriceCurr(this.getMarketPriceConst() - (this.getMarketPriceConst() * mySalePrice.getDiscountRatio() / 100));
         }
     }
-    public void setDiscount(double discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
         this.setManuPriceCurr(this.getManuPriceConst()-(this.getManuPriceConst()*discount/100));
     }
@@ -106,71 +104,22 @@ public class Product {
     public void setMarketPriceCurr(double marketPriceCurr) {
         this.marketPriceCurr = marketPriceCurr;
     }
+    public void setMinimal(boolean isMinimal) { this.isMinimal = isMinimal; }
 
-
-//    ***Help Functions***
-    public boolean isMinimal(){
-        return getTotalAmount()-1 <= minimalAmount;
-    }
-
-    //add item
-    public void addItemToLst(Item newItem){
-            items.add(newItem);
-            if (newItem.getStoreOrWare().equals("Store")){
-                setStoreAmount(getStoreAmount()+1);
-            }else //the item in warehouse
-                setWarehouseAmount(getWarehouseAmount()+1);
-    }
-
-    //remove item
-    public void removeItemToLst(Item removeItem) {
-        items.remove(removeItem);
-        if (removeItem.getStoreOrWare().equals("Store")) {
-            setStoreAmount(getStoreAmount() - 1);
-        } else //the item in warehouse
-            setWarehouseAmount(getWarehouseAmount() - 1);
-    }
-
-    //help function when item move from store to warehouse or vice versa
-    public void ProFromStoreToWare(int idToMove, Tuple<String, Integer> placeNew) {
-        Item item = FindItemInPro(idToMove);
-        if (item != null) {
-            item.setPlace(placeNew);
-            item.setStoreOrWare("Warehouse");
-            setWarehouseAmount(getWarehouseAmount()+1);
-            setStoreAmount(getStoreAmount()-1);
+    //    ***Help Functions***
+    public boolean checkMinimalProd(){
+        if (getTotalAmount()-1 <= minimalAmount) {
+            setMinimal(true);
+            return true;
         }
-    }
-    public void ProFromWareToStore(int idToMove, Tuple<String, Integer> placeNew) {
-        Item item = FindItemInPro(idToMove);
-        if (item != null) {
-            item.setPlace(placeNew);
-            item.setStoreOrWare("Store");
-            setWarehouseAmount(getWarehouseAmount()-1);
-            setStoreAmount(getStoreAmount()+1);
-        }
-    }
-
-    //return item by id; if he didn't exist return null
-    public Item FindItemInPro(int IDItem) {
-        for (Item items : items) {
-            if (items.getId() == IDItem) {
-                return items;
-            }
-        }
-        return null;
-    }
-
-    //add product to inventory
-    public void addMeToInvent(){
-        Inventory.addProductToInventory(this);
+        else return false;
     }
 
     public String printProduct(){
         String category = "Category:" + this.getCatName()+"\n";
         String subCategory = "Sub Category:" + this.getSubCatName()+"\n";
-        String size = "Size:" + this.getSize()+"\n";
-        String manufacturer = "Manufacturer:" + this.getManuFactor()+"\n";
+        String size = "Size:" + this.getProdSize()+"\n";
+        String manufacturer = "Manufacturer:" + this.getManufacture()+"\n";
         return  category+subCategory+size+manufacturer;
     }
 }

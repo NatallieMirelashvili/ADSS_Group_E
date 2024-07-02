@@ -1,6 +1,8 @@
 package DomainLayer;
-import java.util.ArrayList;
 import java.time.LocalDate;
+
+import static DomainLayer.ItemStatus.*;
+
 
 public class Item {
 //    ***Fields***
@@ -10,6 +12,7 @@ public class Item {
     private String StoreOrWare;
     private int catalogNumItem;
     private Product myProduct;
+    private ItemStatus status;
 
 
 //    ***Constructor***
@@ -26,6 +29,7 @@ public class Item {
             this.StoreOrWare = "Store";
         }
         this.myProduct=null;
+        this.status=FOR_SALE;
     }
 
 //    ***Getters***
@@ -45,19 +49,28 @@ public class Item {
     }
     public Product getMyProduct() { return myProduct; }
 
-//    ***Setters***
+    public ItemStatus getStatus() {
+        return status;
+    }
+
+    //    ***Setters***
     public void setPlace(Tuple<String, Integer> place) {
         this.place = place;
     }
     public void setStoreOrWare(String storeOrWare) { this.StoreOrWare = storeOrWare;
     }
 
-
-    //add item to list of product appropriate
-    //*this function assume that product appropriate is exist because it checked in presentation layer
-    public void addMeToProd() {
-        Product myProduct = Inventory.FindProduct(this.catalogNumItem);
-        myProduct.addItemToLst(this);
-        this.myProduct=myProduct;
+    public void setStatus(ItemStatus status) {
+        this.status = status;
+    }
+    public String printItem() {
+        String category = "Category:" + this.getMyProduct().getCatName() + "\n";
+        String subCategory = "Sub Category:" + this.getMyProduct().getSubCatName() + "\n";
+        String size = "Size:" + this.getMyProduct().getProdSize() + "\n";
+        String manufacturer = "Manufacturer:" + this.getMyProduct().getManufacture() + "\n";
+        String location = "Location:" + this.getPlace() + "\n";
+        String catalogNum = "Catalog Number:" + this.getCatalogNumItem() + "\n";
+        String id = "ID:" + this.getId() + "\n";
+        return category + subCategory + size + manufacturer + location + catalogNum + id;
     }
 }

@@ -1,6 +1,5 @@
 package PresentationLayer;
 import DomainLayer.Facade;
-import ServiceLayer.StockController;
 import java.util.Scanner;
 
 
@@ -9,6 +8,8 @@ import java.util.Scanner;
  * sub menus by subjects which presented to user.
  * */
 public class MainMenu {
+
+    public static Facade myFacade = new Facade();
 //    Flag
     private static boolean initProgram = false;
 //    help functions
@@ -76,9 +77,9 @@ public class MainMenu {
      */
     public static void nextDay(){
         System.out.println("Grate job for today!\n");
-        Facade.updateDateToNextCtr();
-        Facade.checkAllItemsExpCtr();
-        Facade.checkAllItemsSaleCtr();
+        myFacade.moveToNextDayService();
+        myFacade.checkAllItemsExpService();
+        myFacade.checkAllProductSaleService();
     }
     public static void exit(){
         System.out.println("Exiting program...\nGoodBye!");

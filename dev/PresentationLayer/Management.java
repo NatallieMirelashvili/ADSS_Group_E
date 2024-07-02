@@ -1,12 +1,13 @@
 package PresentationLayer;
 
 import DomainLayer.Tuple;
-import DomainLayer.Facade;
 import com.google.gson.JsonObject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static PresentationLayer.MainMenu.myFacade;
 
 public class Management {
 
@@ -25,7 +26,7 @@ public class Management {
         categoriesForSales.add(mainCat);
         categoriesForSales.add(sub);
         categoriesForSales.add(size);
-        boolean bool = Facade.searchProdByCategorService(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
+        boolean bool = myFacade.searchProdByCategoryService(categoriesForSales.get(0),categoriesForSales.get(1),categoriesForSales.get(2));
         if(!bool){
             System.out.println("There is no such products with the categories you supplied!\nIf you want to add any - please choose option 1\n");
             return null;
@@ -80,7 +81,7 @@ public class Management {
         memberLst.add("minimalAmount");
         memberLst.add("discount");
         JsonObject JsonObjProd = CreateJason(9, msgLst, memberLst);
-        boolean bool = Facade.createNewProd(JsonObjProd);
+        boolean bool = myFacade.addProductService(JsonObjProd);
         if (bool){
             System.out.println("The product added successfully");
             return;
@@ -112,9 +113,9 @@ public class Management {
         memberLst.add("place");
         memberLst.add("catalogNumItem");
         JsonObject JsonObjItem = CreateJason(4, msgLst, memberLst);
-        boolean prodInStock = Facade.searchProdByCatnumService(JsonObjItem.get("catalogNumItem").getAsInt());
+        boolean prodInStock = myFacade.searchProdByCatNumService(JsonObjItem.get("catalogNumItem").getAsInt());
         if(prodInStock){
-            Facade.createNewItem(JsonObjItem);
+            myFacade.addItemService(JsonObjItem);
         System.out.println("Item added successfully\n");
         return;
         }
@@ -125,7 +126,7 @@ public class Management {
         Scanner scan = new Scanner(System.in);
         if(scan.nextLine().equals("YES"))
             {AddProd();
-                Facade.createNewItem(JsonObjItem);
+                myFacade.addItemService(JsonObjItem);
             System.out.println("Thank you, the item and new product added successfully\n");
             return;}
         System.out.println("OK, item will not add\n");
@@ -143,11 +144,11 @@ public class Management {
         Scanner scan = new Scanner(System.in);
         String idMsg = "Please enter the catalog number of the product you want to cancel from selling";
         int input = readIntFromUsr(idMsg, scan);
-        if(!Facade.searchProdByCatnumService(input)){
+        if(!myFacade.searchProdByCatNumService(input)){
             System.out.println("Sorry, you can't remove unexcited product\n");
             return;
         }
-        Facade.removeProductService(input);
+        myFacade.removeProductService(input);
         System.out.println("Product removed successfully!\n");
     }
 
@@ -168,8 +169,8 @@ public class Management {
         String toSTR = readStrFromUsr(getToMSG, scan);
         LocalDate dueDate = LocalDate.parse(toSTR);
         System.out.println("Please enter the sale percentage: ");
-        double percentage = scan.nextDouble();
-        Facade.updateSaleService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), fromDate, dueDate, percentage);
+        int percentage = scan.nextDouble();
+        myFacade.updateSaleService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), fromDate, dueDate, percentage);
         System.out.println("Sale updated successfully\n");
     }
     /***
@@ -185,8 +186,8 @@ public class Management {
         String manuMSG = "Please enter the name of the manufacturer you want to update its percentage: ";
         String manu = readStrFromUsr(manuMSG, scan);
         System.out.println("Please enter the discount percentage: ");
-        double ratio = scan.nextDouble();
-        if(Facade.updateDiscountService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), ratio, manu)){
+        int ratio = scan.nextDouble();
+        if(myFacade.updateDiscountService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), ratio, manu)){
             System.out.println("Discount from manufacturer updated successfully\n");
             return;
         }
@@ -203,12 +204,12 @@ public class Management {
         Scanner scan1 = new Scanner(System.in);
         String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
         int id = readIntFromUsr(idMsg, scan1);
-        if(Facade.searchItemService(id)){
+        if(myFacade.searchItemService(id)){
             Scanner scan2 = new Scanner(System.in);
             String placeMSG = "Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.";
             String placeInLine = readStrFromUsr(placeMSG, scan2);
-            Tuple<String, Integer> place = Facade.createPlaceItem(placeInLine);
-            Facade.moveItemFromSControl(id,place);
+            Tuple<String, Integer> place = myFacade.createPlaceItem(placeInLine);
+            myFacade.moveToWareService(id,place);
             System.out.println("Item moved to warehouse successfully!\n");
             return;
         }
@@ -223,13 +224,13 @@ public class Management {
         Scanner scan1 = new Scanner(System.in);
         String idMsg = "Please enter the id number of the item you want to move from store to warehouse";
         int id = readIntFromUsr(idMsg, scan1);
-        if(Facade.searchItemService(id)){
+        if(myFacade.searchItemService(id)){
             System.out.println("Please type the pass in the store (its the item main category) where you want to put the item " +
                     "and then PRESS backspace and enter the shelf number.");
             Scanner scan2 = new Scanner(System.in);
             String placeInLine = scan2.nextLine();
-            Tuple<String, Integer> place = Facade.createPlaceItem(placeInLine);
-            Facade.moveItemFromWControl(id,place);
+            Tuple<String, Integer> place = myFacade.createPlaceItem(placeInLine);
+            myFacade.moveToStoreService(id,place);
             System.out.println("Item moved to store successfully!\n");
             return;
         }

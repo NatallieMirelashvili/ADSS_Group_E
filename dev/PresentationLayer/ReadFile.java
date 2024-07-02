@@ -2,7 +2,8 @@ package PresentationLayer;
 import com.google.gson.JsonObject;
 import java.io.*;
 import java.nio.file.Paths;
-import DomainLayer.Facade;
+import static PresentationLayer.MainMenu.myFacade;
+
 
 
 public class ReadFile {
@@ -71,8 +72,8 @@ public class ReadFile {
 
 //                create needed object by Json using controller:
                 switch (initCase){
-                    case 1 -> Facade.createNewProd(record);
-                    case 2 -> Facade.createNewItem(record);
+                    case 1 -> myFacade.addProductService(record);
+                    case 2 -> myFacade.addItemService(record);
                 }
                 line = buffer.readLine();
 

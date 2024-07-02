@@ -3,48 +3,110 @@ package DomainLayer;
 import com.google.gson.JsonObject;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import static DomainLayer.ItemStatus.*;
 
 public class Facade {
 
+    public ProductController myProductCTR = new ProductController();
+    public ItemController myItemCTR = new ItemController();
+    public static LocalDate currentDate = LocalDate.now();
+    public static LocalDate getCurrentDate(){
+        return currentDate;
+    }
+
     /**
-     * Name: searchProdByCatnumService - a method which check if the given catalog number is in the inventory
+     * Name: moveToNextDayService - Use Inventory's method to move to the next day (by date).
+     * Args: None
+     * Returns: None
+     * */
+    public static void moveToNextDayService(){
+        currentDate = currentDate.plusDays(1);
+    }
+
+    /**
+     * Name: searchProdByCatNumService - a method which check if the given catalog number is in the inventory
      * Args: int cagNum - The catalog number you want to check.
      * Returns: boolean - Is in the inventory?
      * */
-    public static boolean searchProdByCatnumService(int cagNum){return Inventory.ProductExist(cagNum);}
+    public boolean searchProdByCatNumService(int cagNum){return myProductCTR.searchProdByCatNumCTR(cagNum);}
 
     /**
-     * Name: searchProdByCategorService - a method which check if the given categories classified before.
+     * Name: searchProdByCategoryService - a method which check if the given categories classified before.
      * Args: String cat - The main category.
      *       String subCat - The sub category.
      *       String size - The category which present the size of the product.
      * Returns: boolean - Is in the inventory?
      * */
-    public static boolean searchProdByCategorService(String cat, String subCat, String size){
-        return Inventory.ProductExistByCat(cat, subCat, size);
+    public boolean searchProdByCategoryService(String cat, String subCat, String size){
+        return myProductCTR.searchProdByCategoryCTR(cat, subCat, size);
     }
-
-
 
     /**
      * Name: searchItemService - Use Inventory's method to check if item's id is in the inventory.
      * Args: int idToCheck - The id you want to check
      * Returns: boolean - id is in the inventory?
      * */
-    public static boolean searchItemService(int id){
-        return Inventory.ItemExist(id);
+    public boolean searchItemService(int id){
+        return (myItemCTR.searchItemCTR(id)!=null);
     }
 
-    public static void addItemService(JsonObject newItem){}
-    public static void addProductService(JsonObject newProd){}
+    public void addItemService(JsonObject newItem){
+        Item itemToReport = myItemCTR.addItemCTR(newItem);
+        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),itemToReport.getStoreOrWare());
+    }
+
+    public void addProductService(JsonObject newProd){
+        myProductCTR.addProdCTR(newProd);}
 
     /**
      * Name: removeProductService - Use Inventory's method to delete product from inventory.
      * Args: int catalogNum - The catalog number of the product you want to remove.
      * Returns: None
      * */
-    public static void removeProductService(int catalogNum){
-        Inventory.removeProd(catalogNum);
+    public void removeProductService(int catalogNum){
+        myProductCTR.removeProdCTR(catalogNum);
+    }
+
+    /**
+     * Name: removeItemService - Use Inventory's method to sell item in the inventory.
+     * Args: int idToRemove - The id number of the item you want to sell.
+     * Returns: boolean - item wan in the inventory?
+     * */
+    public void removeSellItemService(int idToRemove){
+        Item itemToReport = myItemCTR.removeItemCTR(idToRemove);
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),itemToReport.getStoreOrWare());
+    }
+
+    /**
+     * Name: reportDamageService - Use Inventory's method to report on a damaged item and removes it from inventory.
+     * Args: int idToReport - The id number of the item you want to report on.
+     * Returns: boolean - item wan in the inventory?
+     * */
+    public void reportDamageService(int idToReport){
+        Item itemToReport = myItemCTR.reportStatusCTR(DAMAGE,idToReport);
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),itemToReport.getStoreOrWare());
+    }
+
+    /**
+     * Name: reportExpService - Use Inventory's method to report on an expired item and removes it from inventory.
+     * Args: int idToReport - The id number of the item you want to report on.
+     * Returns: boolean - item wan in the inventory?
+     * */
+    public void reportExpService(int idToReport){
+        Item itemToReport = myItemCTR.reportStatusCTR(EXPIRED,idToReport);
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),itemToReport.getStoreOrWare());
+    }
+
+    /**
+     * Name: reportExpService - Use Inventory's method to report on an expired item and removes it from inventory.
+     * Args: int idToReport - The id number of the item you want to report on.
+     * Returns: boolean - item wan in the inventory?
+     * */
+    public void reportForSellService(int idToReport){
+        Item itemToReport = myItemCTR.reportStatusCTR(FOR_SALE,idToReport);
+        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),itemToReport.getStoreOrWare());
     }
 
     /**
@@ -57,110 +119,9 @@ public class Facade {
      *       double ratio - the ratio from the original price of the product.
      * Returns: None
      * */
-    public static void updateSaleService(String main, String sub, String size, LocalDate from, LocalDate to, double ratio){
-        Inventory.setSalePrice(main, sub, size, from, to, ratio);
+    public void updateSaleService(String main, String sub, String size, LocalDate from, LocalDate to, int ratio){
+        myProductCTR.updateSaleCTR(main, sub, size, from, to, ratio);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Name: createPlaceItem - a method which turns a string which presents item's place by the instruction.
-     * For example item 1234 is in the warehouse in aile A shelf 6, so the method gets the "A 6" input and returns the
-     * proper tuple <A, 6>
-     * Args: String placeStr
-     * Returns: Tuple<String, Integer>
-     * */
-    public static Tuple<String, Integer> createPlaceItem(String placeStr){
-        String[] passShelf = placeStr.split(" ");
-        String pass = passShelf[0];
-        Integer shelf = Integer.parseInt(passShelf[1]);
-        return new Tuple<>(pass, shelf);
-    }
-
-    /**
-     * Name: createNewItem - a method which turns a Json object which presents item's characters and adds the new item
-     * to the inventory. Using Item's class methods.
-     * Args: JsonObject record
-     * Returns: None
-     * */
-    public static void createNewItem(JsonObject record){
-        Tuple<String, Integer> place = createPlaceItem(record.get("place").getAsString());
-        String expD = record.get("expirationDate").getAsString();
-        LocalDate expDate = LocalDate.parse(expD);
-        Item newItem = new Item(record.get("id").getAsInt(), expDate, place, record.get("catalogNumItem").getAsInt());
-        newItem.addMeToProd();
-    }
-
-    /**
-     * Name: createNewProd - a method which turns a Json object which presents product's characters and adds the new product
-     * to the inventory. Using Product's class constructor and StockController methods.
-     * Args: JsonObject record
-     * Returns: None
-     * */
-    public static boolean createNewProd(JsonObject record){
-        boolean alreadyInStock = searchProdByCatnumService(record.get("catalogNumProduct").getAsInt());
-        if(!alreadyInStock){
-            Product newProd = new Product(record.get("catName").getAsString(), record.get("subCatName").getAsString(),
-                    record.get("size").getAsString(),record.get("manuFactor").getAsString(),
-                    record.get("catalogNumProduct").getAsInt(),
-                    record.get("marketPriceConst").getAsDouble(),record.get("manuPriceConst").getAsDouble(),
-                    record.get("discount").getAsDouble(), record.get("minimalAmount").getAsInt());
-            newProd.addMeToInvent();
-            return true;
-        }
-        return false;
-    }
-
-
-
-
-
-    /**
-     * Name: sellItemControl - Use Inventory's method to sell item in the inventory.
-     * Args: int idSell - The id number of the item you want to sell.
-     * Returns: boolean - item wan in the inventory?
-     * */
-    public static boolean sellItemControl(int idSell){
-        return Inventory.ItemSells(idSell);
-    }
-
-    /**
-     * Name: reportDamageControl - Use Inventory's method to report on a damaged item and removes it from inventory.
-     * Args: int idDamage - The id number of the item you want to report on.
-     * Returns: boolean - item wan in the inventory?
-     * */
-    public static boolean reportDamageControl(int idDamage){
-        return Inventory.ItemDefective(idDamage);
-    }
-
-    /**
-     * Name: reportExpiredControl - Use Inventory's method to report on an expired item and removes it from inventory.
-     * Args: int idExp - The id number of the item you want to report on.
-     * Returns: boolean - item wan in the inventory?
-     * */
-    public static boolean reportExpiredControl(int idExp){
-        return Inventory.ItemExpired(idExp);
-    }
-
-    /**
-     * Name: checkMinimalControl - Use Inventory's method to check if product got to its minimal amount to alert on.
-     * Args: int idOfItem - The id number of the item you want to check its product amount.
-     * Returns: boolean - item wan in the inventory?
-     * */
-    public static boolean checkMinimalControl(int idOfItem){return Inventory.checkMinimal(idOfItem);}
-
-
-
 
     /**
      * Name: updateDiscountService - Use Inventory's method to update manufacturer of product's discount.
@@ -173,95 +134,137 @@ public class Facade {
      *       String manu - The manufacturer you want to update its discount.
      * Returns: boolean - Manufacturer is defined in the system?
      * */
-    public static boolean updateDiscountService(String main, String sub, String size, double ratio, String manu){
-        return Inventory.setDiscount(main, sub, size, ratio, manu);
+    public boolean updateDiscountService(String main, String sub, String size, int ratio, String manu){
+        return myProductCTR.updateDisCTR(main, sub, size, ratio, manu);
     }
 
     /**
-     * Name: moveItemFromSControl - Use Inventory's method to move an item from store to warehouse.
-     * Args: int idToMove - id's item to move
+     * Name: moveToWareService - Use Inventory's method to move an item from store to warehouse.
+     * Args: int id - id's item to move
      *       Tuple<String, Integer> newPlace - new place of item in the warehouse.
      * Returns: None
      * */
-    public static void moveItemFromSControl(int idToMove,Tuple<String, Integer> newPlace){
-        Inventory.FromStoreToWare(idToMove, newPlace);
+    public void moveToWareService(int id, Tuple<String, Integer> newPlace){
+        Item itemToReport = myItemCTR.moveToWhere(id, newPlace,"warehouse");
+        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),"warehouse");
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),"store");
     }
 
     /**
-     * Name: moveItemFromWControl - Use Inventory's method to move an item from warehouse to store.
-     * Args: int idToMove - id's item to move
+     * Name: moveToStoreService - Use Inventory's method to move an item from warehouse to store.
+     * Args: int id - id's item to move
      *       Tuple<String, Integer> newPlace - new place of item in the store.
      * Returns: None
      * */
-    public static void moveItemFromWControl(int idToMove, Tuple<String, Integer> newPlace){
-        Inventory.FromWareToStore(idToMove, newPlace);
+    public void moveToStoreService(int id, Tuple<String, Integer> newPlace){
+        Item itemToReport = myItemCTR.moveToWhere(id, newPlace,"store");
+        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),"store");
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),"warehouse");
     }
 
     /**
-     * Name: checkAllItemsExpCtr - Use Inventory's method to check the expiration date of all the inventory's items
+     * Name: checkMinimalAmountService - Use Inventory's method to check if product got to its minimal amount to alert on.
+     * Args: int id - The id number of the item you want to check its product amount.
+     * Returns: boolean - item wan in the inventory?
+     * */
+    public boolean checkMinimalAmountService(int id){
+        Item itemToReport = myItemCTR.searchItemCTR(id);
+        return myProductCTR.checkMinimalAmountCTR(itemToReport.getCatalogNumItem());
+    }
+
+    /**
+     * Name: checkAllItemsExpService - Use Inventory's method to check the expiration date of all the inventory's items
      * and removes them if founded.
      * Args: None
      * Returns: None
      * */
-    public static void checkAllItemsExpCtr(){
-        Inventory.checkAllItemsExp();
+    public void checkAllItemsExpService(){
+        ArrayList<Item> itemToReport = myItemCTR.checkAllItemsExpCTR();
+        for (Item item:itemToReport){
+            reportExpService(item.getId());
+        }
     }
 
     /**
-     * Name: checkAllItemsSaleCtr - Use Inventory's method to check the expiration date of all the inventory's product's sales
+     * Name: checkAllProductSaleService - Use Inventory's method to check the expiration date of all the inventory's product's sales
      * if necessary.
      * Args: None
      * Returns: None
      * */
-    public static void checkAllItemsSaleCtr(){
-        Inventory.checkAllProdSale();
+    public void checkAllProductSaleService(){
+        myProductCTR.checkAllProductSaleCTR();
     }
 
+
+
+
+
+
+
     /**
-     * Name: checkAllItemsSaleCtr - Use Inventory's method to move to the next day (by date).
+     * Name: inventReportByCatService - Use Inventory's method to return the inventory's report by specific categories.
      * Args: None
-     * Returns: None
+     * Returns: StringBuilder - The report (Presentation prints).
      * */
-    public static void updateDateToNextCtr(){
-        Inventory.moveToNextDay();
+    public StringBuilder inventReportByCatService(String main, String sub, String size) {
+        ArrayList<Product> productsToPrint = myProductCTR.inventReportByCatCTR(main, sub, size);
+        StringBuilder print = myProductCTR.HelperGenerateReportsProduct(productsToPrint);
+        return print;
     }
 
     /**
-     * Name: showAllItemsCtr - Use Inventory's method to return the inventory's report not by specific categories
+     * Name: inventReportAllService - Use Inventory's method to return the inventory's report not by specific categories
      * (All items).
      * Args: None
      * Returns: StringBuilder - The report (Presentation prints).
      * */
-    public static StringBuilder showAllItemsCtr(){
-        return ReportGeneration.GenerateReportsStock();
+    public StringBuilder inventReportAllService(){
+        ArrayList<Product> productsToPrint = myProductCTR.inventReportAllService();
+        StringBuilder print = myProductCTR.HelperGenerateReportsProduct(productsToPrint);
+        return print;
     }
 
     /**
-     * Name: showByCatCtr - Use Inventory's method to return the inventory's report by specific categories.
-     * Args: None
-     * Returns: StringBuilder - The report (Presentation prints).
-     * */
-    public static StringBuilder showByCatCtr(String main, String sub, String size){
-        return ReportGeneration.GenerateReportsStockByCat(main, sub, size);
-    }
-
-    /**
-     * Name: showExpReportsCtr - Use Inventory's method to return the expired items report.
+     * Name: shortageReportService - Use Inventory's method to return the shortage products report.
      * Args: None
      * Returns: String - The report (Presentation prints).
      * */
-    public static String showExpReportsCtr(){
-        return ReportGeneration.generateReportExpired();
+    public StringBuilder shortageReportService(){
+        ArrayList<Product> productsToPrint = myProductCTR.shortageReportCTR();
+        StringBuilder print = myProductCTR.HelperGenerateReportsProduct(productsToPrint);
+        return print;
     }
 
     /**
-     * Name: showDamageReportsCtr - Use Inventory's method to return the damaged items report.
+     * Name: expReportService - Use Inventory's method to return the expired items report.
      * Args: None
      * Returns: String - The report (Presentation prints).
      * */
-    public static String showDamageReportsCtr(){
-        return ReportGeneration.generateReportDamage();
+    public String expReportService(){
+        ArrayList<Item> itemsToPrint = myItemCTR.expReportCTR();
+        String print = myItemCTR.HelperGenerateReportsItem("expired",itemsToPrint);
+        return print;
     }
+
+    /**
+     * Name: defectiveReportService - Use Inventory's method to return the damaged items report.
+     * Args: None
+     * Returns: String - The report (Presentation prints).
+     * */
+    public String defectiveReportService(){
+        ArrayList<Item> itemsToPrint = myItemCTR.defectiveReportCTR();
+        String print = myItemCTR.HelperGenerateReportsItem("defective",itemsToPrint);
+        return print;
+    }
+
+
+
+
+
+
+
+
+
 
 
 
