@@ -1,5 +1,5 @@
 package PresentationLayer;
-import ServiceLayer.StockController;
+import DomainLayer.Facade;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,13 +21,13 @@ public class ProduceReports {
             which = scan.nextLine();
         }
         if (which.equals("All")) {
-            System.out.println(StockController.showAllItemsCtr());
+            System.out.println(Facade.showAllItemsCtr());
             return;
         }
         ArrayList<String> askCatCorrect = Management.showCatalogChoices(scan);
         if (askCatCorrect == null)
             return;
-        System.out.println(StockController.showByCatCtr(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2)));
+        System.out.println(Facade.showByCatCtr(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2)));
     }
 
     /***
@@ -37,7 +37,7 @@ public class ProduceReports {
      * Returns: None
      */
     public static void  ExpiredReport(){
-        System.out.println(StockController.showExpReportsCtr());
+        System.out.println(Facade.showExpReportsCtr());
     }
 
     /***
@@ -47,7 +47,7 @@ public class ProduceReports {
      * Returns: None
      */
     public static void  DamagedReport(){
-        System.out.println(StockController.showDamageReportsCtr());
+        System.out.println(Facade.showDamageReportsCtr());
     }
     public static void  ReturnToMainMenu(){
         System.out.println("Returning to main menu...\n");

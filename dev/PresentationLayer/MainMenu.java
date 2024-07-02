@@ -1,4 +1,5 @@
 package PresentationLayer;
+import DomainLayer.Facade;
 import ServiceLayer.StockController;
 import java.util.Scanner;
 
@@ -75,9 +76,9 @@ public class MainMenu {
      */
     public static void nextDay(){
         System.out.println("Grate job for today!\n");
-        StockController.updateDateToNextCtr();
-        StockController.checkAllItemsExpCtr();
-        StockController.checkAllItemsSaleCtr();
+        Facade.updateDateToNextCtr();
+        Facade.checkAllItemsExpCtr();
+        Facade.checkAllItemsSaleCtr();
     }
     public static void exit(){
         System.out.println("Exiting program...\nGoodBye!");

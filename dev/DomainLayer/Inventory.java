@@ -114,13 +114,16 @@ public class Inventory{
 
     //help function-update discount about list of products
     static public boolean discountOnProducts (ArrayList<Product> products, double discount, String manufacturer) {
+        int success = 0;
         for (Product product : products) {
             if (product.getManuFactor().equals(manufacturer)) {
                 product.setDiscount(discount);
-                return true;
+                success++;
             }
         }
-        return false;
+        if (success==0)
+            return false;
+        return true;
     }
 
     //find if product exist in inventory when given category
