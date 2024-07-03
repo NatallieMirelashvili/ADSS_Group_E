@@ -124,7 +124,7 @@ public class Report {
             case 3 -> SellItem();
             case 4 -> retrieveItem();
             case 5 -> ReturnToMainMenu();
-            default -> System.out.println("Please choose valid number between 1-4");
+            default -> System.out.println("Please choose valid number between 1-5");
         }
         return userInput;
     }

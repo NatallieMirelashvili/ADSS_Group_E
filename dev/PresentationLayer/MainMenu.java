@@ -115,7 +115,7 @@ public class MainMenu {
             case 4 -> managerDetails();
             case 5 -> nextDay();
             case 6 -> exit();
-            default -> System.out.println("Please choose valid number between 1-7");
+            default -> System.out.println("Please choose valid number between 1-6");
 
         }
         return userInput;
