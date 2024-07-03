@@ -58,7 +58,7 @@ public class ItemRepo implements IRepository{
         Item newItem = addToRepoOnly(newRec);
         myDAOItem.insert(newRec);
         return newItem;
-    }
+     }
 
     //helper to add
     private Item addToRepoOnly(JsonObject newRec) {
