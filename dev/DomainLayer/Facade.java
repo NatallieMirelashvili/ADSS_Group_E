@@ -1,10 +1,7 @@
 package DomainLayer;
-
 import com.google.gson.JsonObject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import static DomainLayer.ItemStatus.*;
 
 public class Facade {
@@ -198,9 +195,6 @@ public class Facade {
 
 
 
-
-
-
     /**
      * Name: inventReportByCatService - Use Inventory's method to return the inventory's report by specific categories.
      * Args: None
@@ -208,8 +202,7 @@ public class Facade {
      * */
     public StringBuilder inventReportByCatService(String main, String sub, String size) {
         ArrayList<Product> productsToPrint = myProductCTR.inventReportByCatCTR(main, sub, size);
-        StringBuilder print = myProductCTR.HelperGenerateReportsProduct(productsToPrint);
-        return print;
+        return myProductCTR.HelperGenerateReportsProduct(productsToPrint);
     }
 
     /**
@@ -220,8 +213,7 @@ public class Facade {
      * */
     public StringBuilder inventReportAllService(){
         ArrayList<Product> productsToPrint = myProductCTR.inventReportAllService();
-        StringBuilder print = myProductCTR.HelperGenerateReportsProduct(productsToPrint);
-        return print;
+        return myProductCTR.HelperGenerateReportsProduct(productsToPrint);
     }
 
     /**
@@ -231,8 +223,7 @@ public class Facade {
      * */
     public StringBuilder shortageReportService(){
         ArrayList<Product> productsToPrint = myProductCTR.shortageReportCTR();
-        StringBuilder print = myProductCTR.HelperGenerateReportsProduct(productsToPrint);
-        return print;
+        return myProductCTR.HelperGenerateReportsProduct(productsToPrint);
     }
 
     /**
@@ -242,8 +233,7 @@ public class Facade {
      * */
     public String expReportService(){
         ArrayList<Item> itemsToPrint = myItemCTR.expReportCTR();
-        String print = myItemCTR.HelperGenerateReportsItem("expired",itemsToPrint);
-        return print;
+        return myItemCTR.HelperGenerateReportsItem("expired",itemsToPrint);
     }
 
     /**
@@ -253,8 +243,7 @@ public class Facade {
      * */
     public String defectiveReportService(){
         ArrayList<Item> itemsToPrint = myItemCTR.defectiveReportCTR();
-        String print = myItemCTR.HelperGenerateReportsItem("defective",itemsToPrint);
-        return print;
+        return myItemCTR.HelperGenerateReportsItem("defective",itemsToPrint);
     }
 
 

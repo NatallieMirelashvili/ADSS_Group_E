@@ -11,11 +11,11 @@ public class MainMenu {
 
     public static Facade myFacade = new Facade();
 //    Flag
-    private static boolean initProgram = false;
-//    help functions
-    private static boolean isInit(){
-        return initProgram;
-    }
+//    private static boolean initProgram = false;
+////    help functions
+//    private static boolean isInit(){
+//        return initProgram;
+//    }
 
 // ***Menu Functions***
 
@@ -24,25 +24,25 @@ public class MainMenu {
      * Args:None
      * Returns:None
      */
-    public static void initProg(){
-        boolean initStatus = isInit();
-        if (initStatus){
-            System.out.println("System already initialed\n");
-            return;
-        }
-        System.out.println("Welcome to your market system\n");
-        boolean bool = ReadFile.readProducts();
-        if (!bool){
-            return;
-        }
-        System.out.println("Thank you! Products line of your market initialize\n");
-        bool = ReadFile.readItems();
-        if (!bool){
-            return;
-        }
-        initProgram = true;
-        System.out.println("Thank you! we are ready to start...\n");
-    }
+//    public static void initProg(){
+//        boolean initStatus = isInit();
+//        if (initStatus){
+//            System.out.println("System already initialed\n");
+//            return;
+//        }
+//        System.out.println("Welcome to your market system\n");
+//        boolean bool = ReadFile.readProducts();
+//        if (!bool){
+//            return;
+//        }
+//        System.out.println("Thank you! Products line of your market initialize\n");
+//        bool = ReadFile.readItems();
+//        if (!bool){
+//            return;
+//        }
+//        initProgram = true;
+//        System.out.println("Thank you! we are ready to start...\n");
+//    }
 
     public static void GenerateReports(){
         ProduceReports.runMenu();
@@ -77,7 +77,7 @@ public class MainMenu {
      */
     public static void nextDay(){
         System.out.println("Grate job for today!\n");
-        myFacade.moveToNextDayService();
+        Facade.moveToNextDayService();
         myFacade.checkAllItemsExpService();
         myFacade.checkAllProductSaleService();
     }
@@ -87,8 +87,7 @@ public class MainMenu {
     public static String printMenu() {
         return """
                 What would you like to do today?
-                1. fetch program
-                2. sell/report on a damage/expired item
+                2. sell/report on a damage/expired item/retrieve item
                 3. Generate reports
                 4. Preform an inventory actions
                 5. Show warehouse manager's contact details
@@ -99,7 +98,7 @@ public class MainMenu {
 
     public static void runMenu(){
         int choice = 0;
-        while (choice!=7){
+        while (choice!=6){
             choice = GetChoice();
         }
     }
@@ -108,13 +107,14 @@ public class MainMenu {
         System.out.print(printMenu());
         int userInput = scanner.nextInt();
         switch (userInput) {
-            case 1 -> initProg();
-            case 2 -> ThrowItem();
-            case 3 -> GenerateReports();
-            case 4 -> inventory();
-            case 5 -> managerDetails();
-            case 6 -> nextDay();
-            case 7 -> exit();
+//
+//            case 1 -> initProg();
+            case 1 -> ThrowItem();
+            case 2 -> GenerateReports();
+            case 3 -> inventory();
+            case 4 -> managerDetails();
+            case 5 -> nextDay();
+            case 6 -> exit();
             default -> System.out.println("Please choose valid number between 1-7");
 
         }

@@ -4,7 +4,8 @@ import static PresentationLayer.MainMenu.myFacade;
 
 public class Report {
 
-//    ***Help Functions***
+
+    //    ***Help Functions***
 //    An help function which scan id of items from user.
     private static int GetIdFromUSR(String msg){
         Scanner scanner = new Scanner(System.in);
@@ -33,12 +34,14 @@ public class Report {
     public static void  ReportDamaged(){
         String msg = "Please enter the id number of the item you want to report its damage:\n";
         int id_damage = GetIdFromUSR(msg);
-        CheckGetToMinimal(id_damage);
-        boolean bool = myFacade.reportDamageService(id_damage);
+        boolean bool = myFacade.searchItemService(id_damage);
         if(!bool){
             System.out.println("This item with the id: " + id_damage + " is not in the inventory\n");
-            return;}
+            return;
+        }
+        myFacade.reportDamageService(id_damage);
         System.out.println("The item reported successfully!\n");
+        CheckGetToMinimal(id_damage);
     }
 
     /***
@@ -51,13 +54,14 @@ public class Report {
     public static void ReportExpired(){
         String msg = "Please enter the id number of the item you want to report on its expiration:\n";
         int id_expire = GetIdFromUSR(msg);
-        CheckGetToMinimal(id_expire);
-        boolean bool = myFacade.reportExpService(id_expire);
+        boolean bool = myFacade.searchItemService(id_expire);
         if(!bool){
             System.out.println("This item with the id: " + id_expire + " is not in the inventory\n");
             return;
         }
+        myFacade.reportExpService(id_expire);
         System.out.println("The item reported successfully!\n");
+        CheckGetToMinimal(id_expire);
     }
 
     /***
@@ -69,14 +73,28 @@ public class Report {
     public static void SellItem() {
         String msg = "Please enter the id number of the item you want to sell\n";
         int input = GetIdFromUSR(msg);
-        CheckGetToMinimal(input);
-        boolean bool = myFacade.removeSellItemService(input);
+        boolean bool = myFacade.searchItemService(input);
         if(!bool){
             System.out.println("This item with the id: " + input + " is not in the inventory\n");
             return;
         }
-        System.out.println("The item sold successfully!\n");
+        myFacade.removeSellItemService(input);
+        System.out.println("The item reported successfully!\n");
+        CheckGetToMinimal(input);
     }
+    private static void retrieveItem() {
+        String msg = "Please enter the id number of the item you want to retrieve\n";
+        int input = GetIdFromUSR(msg);
+        CheckGetToMinimal(input);
+        boolean bool = myFacade.searchItemService(input);
+        if(!bool){
+            System.out.println("This item with the id: " + input + " is not in the inventory\n");
+            return;
+        }
+        myFacade.reportForSellService(input);
+        System.out.println("The item reported successfully!\n");
+    }
+
     public static void  ReturnToMainMenu(){
         System.out.println("Returning to main menu...\n");
 }
@@ -84,14 +102,15 @@ public class Report {
         return """
                 What would you like to report on?
                 1. Report on a damaged item
-                2. Report on an expired item.
+                2. Report on an expired item
                 3. Sell an item
-                4. Return to main menu
+                4. Retrieve item to inventory
+                5. Return to main menu
                 """;
     }
     public static void runMenu(){
         int choice = 0;
-        while (choice!=4){
+        while (choice!=5){
             choice = GetChoice();
         }
     }
@@ -103,9 +122,12 @@ public class Report {
             case 1 -> ReportDamaged();
             case 2 -> ReportExpired();
             case 3 -> SellItem();
-            case 4 -> ReturnToMainMenu();
+            case 4 -> retrieveItem();
+            case 5 -> ReturnToMainMenu();
             default -> System.out.println("Please choose valid number between 1-4");
         }
         return userInput;
     }
+
+
 }

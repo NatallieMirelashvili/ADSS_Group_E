@@ -1,11 +1,11 @@
 package PresentationLayer;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static PresentationLayer.MainMenu.myFacade;
 
 
 public class ProduceReports {
+
     //   *****Menu Functions****
     /***
      *Name:InventoryReport - A methods which print the inventory report by asked categories or the full inventory.
@@ -51,6 +51,12 @@ public class ProduceReports {
     public static void  DamagedReport(){
         System.out.println(myFacade.defectiveReportService());
     }
+
+    private static void ShortageReport() {
+        System.out.println(myFacade.shortageReportService());
+    }
+
+
     public static void  ReturnToMainMenu(){
         System.out.println("Returning to main menu...\n");
 
@@ -61,12 +67,13 @@ public class ProduceReports {
                 1. Produce an inventory report
                 2. Produce an expired report
                 3. Produce a damaged report
-                4. Return to main menu
+                4. Produce a shortage report
+                5. Return to main menu
                 """;
     }
     public static void runMenu(){
         int choice = 0;
-        while (choice!=4){
+        while (choice!=5){
             choice = GetChoice();
         }
     }
@@ -78,10 +85,13 @@ public class ProduceReports {
             case 1 -> InventoryReport();
             case 2 -> ExpiredReport();
             case 3 -> DamagedReport();
-            case 4 -> ReturnToMainMenu();
+            case 4 -> ShortageReport();
+            case 5 -> ReturnToMainMenu();
             default -> System.out.println("Please choose valid number between 1-5");
 
         }
         return userInput;
     }
+
+
 }

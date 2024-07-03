@@ -21,36 +21,22 @@ public class ItemAccessObj implements IDataAccessObj {
                 "expirationDate DATE NOT NULL," +
                 "place TEXT NOT NULL," +
                 "StoreOrWare TEXT NOT NULL," +
-                "status INTEGER NOT NULL" +
+                "status INTEGER NOT NULL," +
+                "catalogNumItem INTEGER," +
                 "FOREIGN KEY (catalogNumItem) REFERENCES Product(catalogNumProduct))";
         try (
                 Connection connection = Database.connect();
                 PreparedStatement SQLStyle = connection.prepareStatement(sql);
         ) {
-            SQLStyle.executeUpdate(sql);
+            SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public JsonObject search(int UniqueToSearch) {
-        String sql = "SELECT * FROM Item WHERE id = ?";
-        JsonObject result = null;
-        try (
-                Connection connection = Database.connect();
-                PreparedStatement SQLStyle = connection.prepareStatement(sql);
-        ) {
-            SQLStyle.setInt(1, UniqueToSearch);
-            ResultSet matchedRecords = SQLStyle.executeQuery();
-            if (matchedRecords.next()) {
-                result = IDataAccessObj.parseRecToJson(matchedRecords, myField);
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
-        }
-        return result;
+        return IDataAccessObj.runSearch(UniqueToSearch, "Item", "id", myField);
     }
 
     @Override
@@ -107,6 +93,10 @@ public class ItemAccessObj implements IDataAccessObj {
     public void reportExpDB(int idToReport) {
         reportHelper(idToReport, 1);
     }
+    public void reportForSaleDB(int idToReport) {
+        reportHelper(idToReport, 2);
+    }
+
 
     public ArrayList<JsonObject> findAllDefectiveDB(ArrayList<Integer> alreadyHave) {
         return findALLHelper(0, alreadyHave);
@@ -117,11 +107,15 @@ public class ItemAccessObj implements IDataAccessObj {
         return findALLHelper(1, alreadyHave);
     }
 
+
+
     //    ******Help functions*****
+
+
     private String parsePlace(Tuple<String, Integer> newPlace) {
 //        getVal1() == pass
 //        getVal2() == num of shelf
-        return "" + newPlace.getVal1() + " " + newPlace.getVal2();
+        return "" + newPlace.getVal1() + "," + newPlace.getVal2();
     }
 
     private void movesHelper(int idToMove, Tuple<String, Integer> newPlace, String place) {
@@ -156,7 +150,7 @@ public class ItemAccessObj implements IDataAccessObj {
 
 
     private ArrayList<JsonObject> findALLHelper(int status,ArrayList<Integer> alreadyHave){
-        String subQuery = IDataAccessObj.innerQuery(alreadyHave.size());
+        String subQuery = IDataAccessObj.innerQuery(alreadyHave.size(), "id", "Item");
         String sql = "SELECT * FROM Item WHERE status = ? AND id NOT IN (" + subQuery + ")";
         ArrayList<JsonObject> relevanceRecords = new ArrayList<>();
         try (
@@ -173,9 +167,54 @@ public class ItemAccessObj implements IDataAccessObj {
                 relevanceRecords.add(defectiveRec);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
         return relevanceRecords;
+    }
+//        private void deleteTable(){
+//        String sql =  "DROP TABLE IF EXISTS Item";
+//                try (
+//                Connection connection = Database.connect();
+//                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+//                )
+//                {
+//                    SQLStyle.executeUpdate();
+//                }
+//
+//                catch (SQLException e) {
+//                throw new RuntimeException("Natallie check yourself");
+//                }
+//    }
+    public static void main(String[] args) {
+        ItemAccessObj dao = new ItemAccessObj();
+        JsonObject newRec1 = new JsonObject();
+        newRec1.addProperty("id", 2222);
+        newRec1.addProperty("expirationDate", "2024-09-09");
+        newRec1.addProperty("place", "A,6");
+        newRec1.addProperty("StoreOrWare", "Warehouse");
+        newRec1.addProperty("status", 0);
+        newRec1.addProperty("catalogNumItem", 1212);
+        JsonObject newRec2 = new JsonObject();
+        newRec2.addProperty("id", 1010);
+        newRec2.addProperty("expirationDate", "2024-09-09");
+        newRec2.addProperty("place", "A,6");
+        newRec2.addProperty("StoreOrWare", "Warehouse");
+        newRec2.addProperty("status", 0);
+        newRec2.addProperty("catalogNumItem", 1212);
+        JsonObject newRec3 = new JsonObject();
+        newRec3.addProperty("id", 2020);
+        newRec3.addProperty("expirationDate", "2024-09-09");
+        newRec3.addProperty("place", "A,6");
+        newRec3.addProperty("StoreOrWare", "Warehouse");
+        newRec3.addProperty("status", 1);
+        newRec3.addProperty("catalogNumItem", 1212);
+        dao.reportExpDB(2222);
+        dao.reportExpDB(1010);
+
+        ArrayList<JsonObject> result = dao.findAllExpDB(new ArrayList<>());
+        for (JsonObject rec : result){
+            System.out.println(rec);
+        }
     }
 
 

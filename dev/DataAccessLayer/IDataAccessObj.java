@@ -1,5 +1,8 @@
 package DataAccessLayer;
 import com.google.gson.JsonObject;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,8 +17,8 @@ public interface IDataAccessObj {
 
     public void createTable();
 
-    static String innerQuery(int numOFUniques) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM Item WHERE id IN (");
+    static String innerQuery(int numOFUniques, String uniqueField, String tableName) {
+        StringBuilder sql = new StringBuilder(" SELECT " + uniqueField + " FROM " + tableName + " WHERE " + uniqueField +" IN (");
         for (int i = 0; i < numOFUniques; i++) {
             sql.append("?");
             if (i < numOFUniques - 1) {
@@ -40,6 +43,28 @@ public interface IDataAccessObj {
 
         }
         return null;
+    }
+
+    static JsonObject runSearch(int UniqueToSearch, String tableToSearchOn, String primaryKeyField, ArrayList<String> fields) {
+        String sql = "SELECT * FROM " + tableToSearchOn + " WHERE " + primaryKeyField + " = ?";
+        JsonObject result = null;
+
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+        )
+        {
+            SQLStyle.setInt(1, UniqueToSearch);
+            ResultSet rs = SQLStyle.executeQuery();
+
+            if (rs.next()) {
+                result = IDataAccessObj.parseRecToJson(rs, fields);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return result;
     }
     }
 

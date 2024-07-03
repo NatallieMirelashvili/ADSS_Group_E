@@ -1,16 +1,12 @@
 package PresentationLayer;
-
 import DomainLayer.Tuple;
 import com.google.gson.JsonObject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static PresentationLayer.MainMenu.myFacade;
 
 public class Management {
-
 //    help function:
     /***
      *Name:showCatalogChoices - A sub function which present the categories you can classify your products when its necessary.
@@ -60,7 +56,7 @@ public class Management {
      */
 //   *****Menu Functions****
     public static void AddProd(){
-        ArrayList<String> msgLst = new ArrayList<>(9);
+        ArrayList<String> msgLst = new ArrayList<>(10);
         msgLst.add("Enter main category: ");
         msgLst.add("Enter sub category: ");
         msgLst.add("Enter size, for liquid add the word 'litter' else add the word 'gram' after the size number: ");
@@ -70,19 +66,22 @@ public class Management {
         msgLst.add("Enter initial manufacturer price of product:");
         msgLst.add("Enter minimal amount in which to inform when its product about to run out: ");
         msgLst.add("Enter a discount from manufacturer in ratio (if you dont want to add please type '0'): ");
-        ArrayList<String> memberLst = new ArrayList<>(9);
+        msgLst.add("Enter a the amount of items you want to order from this product when it ran out: ");
+        ArrayList<String> memberLst = new ArrayList<>(10);
         memberLst.add("catName");
         memberLst.add("subCatName");
-        memberLst.add("size");
+        memberLst.add("ProdSize");
         memberLst.add("manuFactor");
         memberLst.add("catalogNumProduct");
         memberLst.add("marketPriceConst");
         memberLst.add("manuPriceConst");
         memberLst.add("minimalAmount");
         memberLst.add("discount");
-        JsonObject JsonObjProd = CreateJason(9, msgLst, memberLst);
-        boolean bool = myFacade.addProductService(JsonObjProd);
-        if (bool){
+        memberLst.add("OrderAmount");
+        JsonObject JsonObjProd = CreateJason(10, msgLst, memberLst);
+        boolean bool = myFacade.searchProdByCatNumService(JsonObjProd.get("catalogNumProduct").getAsInt());
+        if (!bool){
+            myFacade.addProductService(JsonObjProd);
             System.out.println("The product added successfully");
             return;
         }
@@ -113,6 +112,11 @@ public class Management {
         memberLst.add("place");
         memberLst.add("catalogNumItem");
         JsonObject JsonObjItem = CreateJason(4, msgLst, memberLst);
+        boolean bool = myFacade.searchItemService(JsonObjItem.get("id").getAsInt());
+        if(bool){
+            System.out.println("Added field - item already in stock!");
+            return;
+        }
         boolean prodInStock = myFacade.searchProdByCatNumService(JsonObjItem.get("catalogNumItem").getAsInt());
         if(prodInStock){
             myFacade.addItemService(JsonObjItem);
@@ -128,9 +132,9 @@ public class Management {
             {AddProd();
                 myFacade.addItemService(JsonObjItem);
             System.out.println("Thank you, the item and new product added successfully\n");
-            return;}
+            return;
+            }
         System.out.println("OK, item will not add\n");
-
     }
 
     /***
@@ -168,8 +172,8 @@ public class Management {
         String getToMSG ="Please enter the due date of sale by the format: YYYY-MM-DD";
         String toSTR = readStrFromUsr(getToMSG, scan);
         LocalDate dueDate = LocalDate.parse(toSTR);
-        System.out.println("Please enter the sale percentage: ");
-        int percentage = scan.nextDouble();
+        System.out.println("Please enter the sale percentage in integer (10, 20, and so...): ");
+        int percentage = scan.nextInt();
         myFacade.updateSaleService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), fromDate, dueDate, percentage);
         System.out.println("Sale updated successfully\n");
     }
@@ -185,14 +189,13 @@ public class Management {
             return;
         String manuMSG = "Please enter the name of the manufacturer you want to update its percentage: ";
         String manu = readStrFromUsr(manuMSG, scan);
-        System.out.println("Please enter the discount percentage: ");
-        int ratio = scan.nextDouble();
+        System.out.println("Please enter the discount percentage (10, 20, and so...): ");
+        int ratio = scan.nextInt();
         if(myFacade.updateDiscountService(askCatCorrect.get(0), askCatCorrect.get(1), askCatCorrect.get(2), ratio, manu)){
             System.out.println("Discount from manufacturer updated successfully\n");
             return;
         }
         System.out.println("There is no such manufacturer " + manu + "!\n");
-
     }
 
     /***
@@ -206,7 +209,7 @@ public class Management {
         int id = readIntFromUsr(idMsg, scan1);
         if(myFacade.searchItemService(id)){
             Scanner scan2 = new Scanner(System.in);
-            String placeMSG = "Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.";
+            String placeMSG = "Enter the aile (a letter from A-Z) and then PRESS coma and enter the shelf number.";
             String placeInLine = readStrFromUsr(placeMSG, scan2);
             Tuple<String, Integer> place = myFacade.createPlaceItem(placeInLine);
             myFacade.moveToWareService(id,place);
@@ -226,7 +229,7 @@ public class Management {
         int id = readIntFromUsr(idMsg, scan1);
         if(myFacade.searchItemService(id)){
             System.out.println("Please type the pass in the store (its the item main category) where you want to put the item " +
-                    "and then PRESS backspace and enter the shelf number.");
+                    "and then PRESS coma and enter the shelf number.");
             Scanner scan2 = new Scanner(System.in);
             String placeInLine = scan2.nextLine();
             Tuple<String, Integer> place = myFacade.createPlaceItem(placeInLine);

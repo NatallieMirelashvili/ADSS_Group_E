@@ -3,51 +3,36 @@ package DataAccessLayer;
 import com.google.gson.JsonObject;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SaleItemAccessObj implements IDataAccessObj {
+    final ArrayList<String> myField = new ArrayList<>() {{
+        add("idSale");
+        add("startSale");
+        add("endSale");
+        add("discountRatio");
+    }};
     @Override
     public void createTable() {
         String sql = "CREATE TABLE IF NOT EXISTS salePrice (" +
                 "idSale INTEGER PRIMARY KEY," +
                 "startSale DATE NOT NULL," +
                 "endSale DATE NOT NULL," +
-                "discountRatio DOUBLE NOT NULL,";
+                "discountRatio INTEGER NOT NULL)";
         try (
                 Connection connection = Database.connect();
                 PreparedStatement SQLStyle = connection.prepareStatement(sql);
         )
         {
-            SQLStyle.executeUpdate(sql);
+            SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
     @Override
     public JsonObject search(int UniqueToSearch) {
-        String sql = "SELECT * FROM salePrice WHERE idSale = ?";
-        JsonObject result = null;
-
-        try (
-                Connection connection = Database.connect();
-                PreparedStatement SQLStyle = connection.prepareStatement(sql);
-        )
-        {
-
-            SQLStyle.setInt(1, UniqueToSearch);
-            ResultSet rs = SQLStyle.executeQuery();
-
-            if (rs.next()) {
-                result = new JsonObject();
-                result.addProperty("idSale", rs.getInt("idSale"));
-                result.addProperty("startSale", rs.getString("startSale"));
-                result.addProperty("endSale", rs.getString("endSale"));
-                result.addProperty("discountRatio", rs.getDouble("discountRatio"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
-        }
-
-        return result;
+        return IDataAccessObj.runSearch(UniqueToSearch, "salePrice", "idSale", myField);
     }
 
     @Override
@@ -66,7 +51,7 @@ public class SaleItemAccessObj implements IDataAccessObj {
 
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -85,5 +70,25 @@ public class SaleItemAccessObj implements IDataAccessObj {
         } catch (SQLException e) {
             throw new RuntimeException("Natallie check yourself");
         }
+    }
+
+
+    public static void main(String[] args) {
+        SaleItemAccessObj dao = new SaleItemAccessObj();
+        JsonObject js = dao.search(1234567);
+        JsonObject newRec = new JsonObject();
+        newRec.addProperty("idSale", 123467);
+        String fromSTR = "2024-07-02";
+        String toSTR = "2024-07-10";
+        newRec.addProperty("startSale", LocalDate.parse(fromSTR).toString());
+        newRec.addProperty("endSale", LocalDate.parse(toSTR).toString());
+        newRec.addProperty("discountRatio", 10);
+//        dao.insert(newRec);
+        js = dao.search(123467);
+        System.out.println(js);
+//        dao.remove(1234567);
+
+
+
     }
 }
