@@ -1,5 +1,6 @@
 package DomainLayer;
 
+import DataAccessLayer.ProductAccessObj;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 
 public class ProductRepo implements IRepository{
     private HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> myProducts;
-
+    private ProductAccessObj myDAOProduct;
     public HashMap<String, HashMap<String, HashMap<String, ArrayList<Product>>>> getMyProducts() {
         return myProducts;
     }
@@ -26,7 +27,8 @@ public class ProductRepo implements IRepository{
             } else {   // case where subCat does not exist
                 return (size.equals("0") && subCat.equals("0"));
             }
-        } else { // case where cat does not exist
+        } else { // case where cat does not exist in repo
+
             return false;
         }
     }

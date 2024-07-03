@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="96e01df1-a0d5-4ee1-a335-0ef8964d7b3f" name="Changes" comment="update domain and report">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/ItemRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/ItemRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/ProductRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/ProductRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DomainLayer/Tuple.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DomainLayer/Tuple.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -49,27 +52,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/RAVIT/מסמכים/New folder/OneDrive/שולחן העבודה/שנה ב/סמ ב/ניתוצ/ADSS_Group_E&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "C:/Users/RAVIT/מסמכים/New folder/OneDrive/שולחן העבודה/שנה ב/סמ ב/ניתוצ/ADSS_Group_E",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="DomainLayer" />
@@ -103,6 +112,10 @@
       <workItem from="1717425364801" duration="4794000" />
       <workItem from="1717448738758" duration="13679000" />
       <workItem from="1717502180372" duration="16172000" />
+      <workItem from="1719855172936" duration="6450000" />
+      <workItem from="1719909294006" duration="13210000" />
+      <workItem from="1719923719150" duration="20021000" />
+      <workItem from="1720018619588" duration="3704000" />
     </task>
     <task id="LOCAL‎-00001" summary="update report">
       <created>1717337896487</created>
