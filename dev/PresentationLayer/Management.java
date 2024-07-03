@@ -276,7 +276,7 @@ public class Management {
             case 6 -> MoveStoreWare();
             case 7 -> MoveWareStore();
             case 8 -> ReturnToMainMenu();
-            default -> System.out.println("Please choose valid number between 1-9");
+            default -> System.out.println("Please choose valid number between 1-8");
 
         }
         return userInput;
