@@ -20,7 +20,7 @@ public class ProductController {
 
     //find if product exist in inventory when given category
     public boolean searchProdByCategoryCTR(String cat, String subCat, String size) {
-        return myProductRepo.findIfExist(cat, subCat, size);
+        return myProductRepo.findIfExistWithData(cat, subCat, size);
     }
 
     public void addProdCTR(JsonObject newProdRec) {

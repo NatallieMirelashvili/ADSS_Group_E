@@ -18,21 +18,42 @@ public class ProductRepo implements IRepository<Product>{
     //      find if product exist in inventory when given catalog number
 //      static public boolean ProductExist(int catNumber) {
 //      return searchProdByCatNumCTR(catNumber) != null;
-    public boolean findIfExist(String cat, String subCat, String size) {
-        if (myProducts.get(cat) != null || myDAOProduct.findAllProductsByMainCatDB(cat, new ArrayList<>(0)).size() !=0) {
-            if (myProducts.get(cat).get(subCat) != null||myDAOProduct.findAllProductsBySubCatDB(cat,subCat, new ArrayList<>(0)).size() !=0) {
-                if (myProducts.get(cat).get(subCat).get(size) != null || myDAOProduct.findAllProductsBySizeDB(cat, subCat, size,new ArrayList<>(0)).size() !=0) {
+    public boolean findIfExistWithout(String cat, String subCat, String size){
+        if (myProducts.get(cat) != null){
+            if (myProducts.get(cat).get(subCat) != null){
+                if (myProducts.get(cat).get(subCat).get(size) != null){
                     return true;
                 } else {  // case where size does not exist
                     return size.equals("0");
                 }
             } else {   // case where subCat does not exist
-                return (size.equals("0") && subCat.equals("0"));
+                return size.equals("0") && subCat.equals("0");
             }
-        } else { // case where cat does not exist in repo
+        }  // case where cat does not exist in repo
+        return false;
+    }
 
-            return false;
-        }
+    public boolean findIfExistWithData(String cat, String subCat, String size) {
+        if (myProducts.get(cat) != null){
+            if (myProducts.get(cat).get(subCat) != null){
+                if (myProducts.get(cat).get(subCat).get(size) != null){
+                    return true;
+                } else {  // case where size does not exist
+                    if(size.equals("0")){
+                        return true;
+                    }
+                    else {return myDAOProduct.findAllProductsBySizeDB(cat, subCat, size,new ArrayList<>(0)).size() !=0;}
+                }
+            } else {   // case where subCat does not exist
+                if(size.equals("0") && subCat.equals("0")){
+                    return true;
+                }
+                else {
+                    return myDAOProduct.findAllProductsBySubCatDB(cat,subCat, new ArrayList<>(0)).size() !=0;
+                }
+            }
+        }  // case where cat does not exist in repo
+            return myDAOProduct.findAllProductsByMainCatDB(cat, new ArrayList<>(0)).size() !=0;
     }
 
     //return product in inventory if he exists; otherwise return null.
@@ -57,7 +78,7 @@ public class ProductRepo implements IRepository<Product>{
     //return an array list of all products by category
     public ArrayList<Product> findAllProductsByMainCat(String cat) {
         ArrayList<Product> res = new ArrayList<>();
-        if (findIfExist(cat, "0", "0")) {
+        if (findIfExistWithout(cat, "0", "0")) {
             HashMap<String, HashMap<String, ArrayList<Product>>> subCatToChange = myProducts.get(cat);
             for (String mySubCat : subCatToChange.keySet()) {
                 res.addAll(findAllProductsBySubCat(cat, mySubCat));
@@ -80,7 +101,7 @@ public class ProductRepo implements IRepository<Product>{
     //return an array list of all products by category and sub category
     public ArrayList<Product> findAllProductsBySubCat(String cat, String subCat) {
         ArrayList<Product> res = new ArrayList<>();
-        if (findIfExist(cat, subCat, "0")) {
+        if (findIfExistWithout(cat, subCat, "0")) {
             HashMap<String, ArrayList<Product>> products1 = myProducts.get(cat).get(subCat);
             for (String mySize : products1.keySet()) {
                 res.addAll(findAllProductsBySize(cat, subCat, mySize));
@@ -104,7 +125,7 @@ public class ProductRepo implements IRepository<Product>{
     //return an array list of all products by category, sub category and size
     public ArrayList<Product> findAllProductsBySize(String cat, String subCat, String size) {
         ArrayList<Product> res = new ArrayList<>();
-        if (findIfExist(cat, subCat, size)) {
+        if (findIfExistWithout(cat, subCat, size)) {
            res = myProducts.get(cat).get(subCat).get(size);
         }
             ArrayList<Integer> alreadyHave = new ArrayList<>();
@@ -264,8 +285,6 @@ public class ProductRepo implements IRepository<Product>{
     public void setIsMinimal(Product product, boolean b) {
         myDAOProduct.updateIsMinimal(product.getCatalogNumProduct(), b);
     }
-
-
 }
 
 

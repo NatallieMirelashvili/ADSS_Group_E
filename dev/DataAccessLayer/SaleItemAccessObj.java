@@ -68,7 +68,7 @@ public class SaleItemAccessObj implements IDataAccessObj {
             SQLStyle.setInt(1, UniqueToRemove);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
     public int getLastSaleID(){
@@ -104,24 +104,5 @@ public class SaleItemAccessObj implements IDataAccessObj {
         }
     }
 
-    public static void main(String[] args) {
-        SaleItemAccessObj dao = new SaleItemAccessObj();
-//        JsonObject js = dao.search(1234567);
-//        JsonObject newRec = new JsonObject();
-//        newRec.addProperty("idSale", 123467);
-//        String fromSTR = "2024-07-02";
-//        String toSTR = "2024-07-10";
-//        newRec.addProperty("startSale", LocalDate.parse(fromSTR).toString());
-//        newRec.addProperty("endSale", LocalDate.parse(toSTR).toString());
-//        newRec.addProperty("discountRatio", 10);
-        dao.createTable();
-////        dao.insert(newRec);
-//        js = dao.search(123467);
-//        System.out.println(js);
-////        dao.remove(1234567);
-//        dao.remove(1);
 
-
-
-    }
 }

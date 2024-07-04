@@ -1,19 +1,10 @@
 package DataAccessLayer;
 import com.google.gson.JsonObject;
 
-import javax.lang.model.type.NullType;
 import java.sql.*;
 import java.util.ArrayList;
 
-//            try (
-//                Connection connection = Database.connect();
-//                PreparedStatement SQLStyle = connection.prepareStatement(sql);
-//                )
-//                {}
-//
-//                catch (SQLException e) {
-//                throw new RuntimeException("Natallie check yourself");
-//                }
+
 public class ProductAccessObj implements IDataAccessObj{
     final ArrayList<String> myField = new ArrayList<>() {{
         add("catalogNumProduct");
@@ -119,7 +110,7 @@ public class ProductAccessObj implements IDataAccessObj{
             SQLStyle.setInt(1, UniqueToRemove);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -165,7 +156,7 @@ public class ProductAccessObj implements IDataAccessObj{
                 }
 
                 catch (SQLException e) {
-                throw new RuntimeException("Natallie check yourself");
+                throw new RuntimeException(e.getMessage());
                 }
         return res;
     }
@@ -181,7 +172,7 @@ public class ProductAccessObj implements IDataAccessObj{
                 }
 
         catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
     public void updateMarketPrice(int catNum, double newPrice){
@@ -197,7 +188,7 @@ public class ProductAccessObj implements IDataAccessObj{
                 }
 
                 catch (SQLException e) {
-                throw new RuntimeException("Natallie check yourself");
+                throw new RuntimeException(e.getMessage());
                 }
     }
     public void updateDisDB(ArrayList<Integer> catalogNumbersToUpdate, int ratio){
@@ -211,7 +202,7 @@ public class ProductAccessObj implements IDataAccessObj{
         }
 
         catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -228,26 +219,11 @@ public class ProductAccessObj implements IDataAccessObj{
             }
 
             catch (SQLException e) {
-                throw new RuntimeException("Natallie check yourself");
+                throw new RuntimeException(e.getMessage());
             }
     }
     public void updatePlacedItemDB(int catNum, String WareOrStore){
         updateProdAmount(catNum, WareOrStore, 2);
-    }
-    public void changeStatusMinimal(int catNum, boolean newStat){
-        String sql = "UPDATE Product SET isMinimal = ? WHERE catalogNumProduct = ?";
-        try (
-                Connection connection = Database.connect();
-                PreparedStatement SQLStyle = connection.prepareStatement(sql);
-                )
-                {
-                    SQLStyle.setBoolean(1, newStat);
-                    SQLStyle.setInt(2, catNum);
-                    SQLStyle.executeUpdate();
-                }
-                catch (SQLException e) {
-                throw new RuntimeException(e.getMessage());
-                }
     }
 
     public void dropTable(){
@@ -327,7 +303,7 @@ public class ProductAccessObj implements IDataAccessObj{
                 relevanceRecords.add(defectiveRec);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
         return relevanceRecords;
     }
@@ -356,38 +332,10 @@ public class ProductAccessObj implements IDataAccessObj{
         }
     }
     catch (SQLException e){
-        throw new RuntimeException("Natallie check yourself", e);
+        throw new RuntimeException(e.getMessage());
 
     }
         return SQLStyle;
     }
 
-
-    public static void main(String[] args) {
-        ProductAccessObj dao = new ProductAccessObj();
-//        JsonObject newRec1 = new JsonObject();
-//        newRec1.addProperty("catalogNumProduct", 1212);
-//        newRec1.addProperty("ProdSize", "7 litters");
-//        newRec1.addProperty("catName", "diary");
-//        newRec1.addProperty("subCatName", "milk");
-//        newRec1.addProperty("total", "0,1");
-//        newRec1.addProperty("manuFactor", "tara");
-//        newRec1.addProperty("marketPriceConst", 10);
-//        newRec1.addProperty("manuPriceConst", 8);
-//        newRec1.addProperty("discount", 0);
-//        newRec1.addProperty("minimalAmount", 20);
-//        newRec1.addProperty("orderAmount", 50);
-//        dao.createTable();
-//        dao.insert(newRec1);
-//        ArrayList<Integer> toUpdate = new ArrayList<>(2);
-//        toUpdate.add(1212);
-//        toUpdate.add(1414);
-//        dao.updateSaleDB(toUpdate, 1, 10);
-//        System.out.println(dao.search(1212));
-//        System.out.println(dao.search(1414));
-//        dao.remove(1212);
-//        dao.remove(1414);
-        dao.remove(6565);
-
-    }
 }

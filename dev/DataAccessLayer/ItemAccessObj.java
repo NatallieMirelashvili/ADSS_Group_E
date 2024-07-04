@@ -77,7 +77,7 @@ public class ItemAccessObj implements IDataAccessObj {
             SQLStyle.setInt(1, UniqueToRemove);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ public class ItemAccessObj implements IDataAccessObj {
             SQLStyle.setInt(3, idToMove);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ public class ItemAccessObj implements IDataAccessObj {
             SQLStyle.setInt(2, id);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -176,17 +176,18 @@ public class ItemAccessObj implements IDataAccessObj {
         }
         return relevanceRecords;
     }
-
-    public static void main(String[] args) {
-        ItemAccessObj dao = new ItemAccessObj();
-//        JsonObject newRec1 = new JsonObject();
-//        newRec1.addProperty("id", 8080);
-//        newRec1.addProperty("expirationDate", "2024-09-09");
-//        newRec1.addProperty("place", "A,6");
-//        newRec1.addProperty("catalogNumItem", 1212);
-//        dao.moveStoreWareDB(8080, new Tuple<>("A", 8));
-//        dao.remove(8080);
-        dao.remove(7070);
+    public void dropTable(){
+        String sql = "DROP TABLE IF EXISTS Item";
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+        )
+        {
+            SQLStyle.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
 

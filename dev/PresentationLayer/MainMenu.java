@@ -24,25 +24,7 @@ public class MainMenu {
      * Args:None
      * Returns:None
      */
-//    public static void initProg(){
-//        boolean initStatus = isInit();
-//        if (initStatus){
-//            System.out.println("System already initialed\n");
-//            return;
-//        }
-//        System.out.println("Welcome to your market system\n");
-//        boolean bool = ReadFile.readProducts();
-//        if (!bool){
-//            return;
-//        }
-//        System.out.println("Thank you! Products line of your market initialize\n");
-//        bool = ReadFile.readItems();
-//        if (!bool){
-//            return;
-//        }
-//        initProgram = true;
-//        System.out.println("Thank you! we are ready to start...\n");
-//    }
+
 
     public static void GenerateReports(){
         ProduceReports.runMenu();
