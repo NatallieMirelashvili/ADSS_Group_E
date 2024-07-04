@@ -103,7 +103,7 @@ public class Management {
         msgLst.add("Enter item id: ");
         msgLst.add("Enter expiration date YYYY-MM-DD: ");
         msgLst.add("If you want to add this item to the warehouse Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.\n" +
-                "else enter item's main category and then PRESS backspace then" +
+                "else enter item's main category and then PRESS coma then" +
                 " enter the shelf number:");
         msgLst.add("Enter catalog number from the Catalog Number Table you received with the program instructions: ");
         ArrayList<String> memberLst = new ArrayList<>(4);
@@ -211,7 +211,7 @@ public class Management {
             Scanner scan2 = new Scanner(System.in);
             String placeMSG = "Enter the aile (a letter from A-Z) and then PRESS coma and enter the shelf number.";
             String placeInLine = readStrFromUsr(placeMSG, scan2);
-            Tuple<String, Integer> place = myFacade.createPlaceItem(placeInLine);
+            Tuple<String, Integer> place = Tuple.createPlaceItem(placeInLine);
             myFacade.moveToWareService(id,place);
             System.out.println("Item moved to warehouse successfully!\n");
             return;
@@ -232,7 +232,7 @@ public class Management {
                     "and then PRESS coma and enter the shelf number.");
             Scanner scan2 = new Scanner(System.in);
             String placeInLine = scan2.nextLine();
-            Tuple<String, Integer> place = myFacade.createPlaceItem(placeInLine);
+            Tuple<String, Integer> place = Tuple.createPlaceItem(placeInLine);
             myFacade.moveToStoreService(id,place);
             System.out.println("Item moved to store successfully!\n");
             return;

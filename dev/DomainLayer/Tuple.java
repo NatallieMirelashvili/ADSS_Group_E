@@ -44,7 +44,7 @@ public class Tuple<T,U> implements Serializable {
     }
 
     public static Tuple<String, Integer> createPlaceItem(String placeStr) {
-        String[] passShelf = placeStr.split(" ");
+        String[] passShelf = placeStr.split(",");
         String pass = passShelf[0];
         Integer shelf = Integer.parseInt(passShelf[1]);
         return new Tuple<>(pass, shelf);

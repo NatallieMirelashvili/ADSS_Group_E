@@ -1,5 +1,7 @@
 package DataAccessLayer;
 import com.google.gson.JsonObject;
+
+import javax.lang.model.type.NullType;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -26,7 +28,7 @@ public class ProductAccessObj implements IDataAccessObj{
         add("marketPriceCurr");
         add("discount");
         add("minimalAmount");
-        add("OrderAmount");
+        add("orderAmount");
         add("isMinimal");
         add("mySalePrice");
     }};
@@ -43,9 +45,9 @@ public class ProductAccessObj implements IDataAccessObj{
                 "manuPriceConst DOUBLE NOT NULL," +
                 "manuPriceCurr DOUBLE NOT NULL," +
                 "marketPriceCurr DOUBLE NOT NULL," +
-                "discount DOUBLE NOT NULL," +
+                "discount INTEGER NOT NULL," +
                 "minimalAmount INTEGER NOT NULL," +
-                "OrderAmount INTEGER NOT NULL," +
+                "orderAmount INTEGER NOT NULL," +
                 "isMinimal INTEGER NOT NULL," +
                 "mySalePrice INTEGER," +
                 " FOREIGN KEY (mySalePrice) REFERENCES salePrice(idSale))";
@@ -71,7 +73,7 @@ public class ProductAccessObj implements IDataAccessObj{
     public void insert(JsonObject recordToAdd) {
         String sql = "INSERT INTO Product (catalogNumProduct, ProdSize, catName, subCatName, total, manuFactor, " +
                 "marketPriceConst, manuPriceConst, manuPriceCurr, marketPriceCurr, discount, minimalAmount," +
-                " OrderAmount, isMinimal, mySalePrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                " orderAmount, isMinimal, mySalePrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
                 Connection connection = Database.connect();
@@ -82,17 +84,21 @@ public class ProductAccessObj implements IDataAccessObj{
             SQLStyle.setString(2, recordToAdd.get("ProdSize").getAsString());
             SQLStyle.setString(3, recordToAdd.get("catName").getAsString());
             SQLStyle.setString(4, recordToAdd.get("subCatName").getAsString());
-            SQLStyle.setString(5, recordToAdd.get("total").getAsString());
+//            At start total = "0,0"
+            SQLStyle.setString(5, "0,0");
             SQLStyle.setString(6, recordToAdd.get("manuFactor").getAsString());
             SQLStyle.setDouble(7, recordToAdd.get("marketPriceConst").getAsDouble());
             SQLStyle.setDouble(8, recordToAdd.get("manuPriceConst").getAsDouble());
-            SQLStyle.setDouble(9, recordToAdd.get("manuPriceCurr").getAsDouble());
-            SQLStyle.setDouble(10, recordToAdd.get("marketPriceCurr").getAsDouble());
-            SQLStyle.setDouble(11, recordToAdd.get("discount").getAsDouble());
+//            At start -> const == curr
+            SQLStyle.setDouble(9, recordToAdd.get("manuPriceConst").getAsDouble());
+            SQLStyle.setDouble(10, recordToAdd.get("marketPriceConst").getAsDouble());
+            SQLStyle.setInt(11, recordToAdd.get("discount").getAsInt());
             SQLStyle.setInt(12, recordToAdd.get("minimalAmount").getAsInt());
-            SQLStyle.setInt(13, recordToAdd.get("OrderAmount").getAsInt());
-            SQLStyle.setBoolean(14, recordToAdd.get("isMinimal").getAsBoolean());
-            SQLStyle.setString(15, recordToAdd.get("mySalePrice").getAsString());
+            SQLStyle.setInt(13, recordToAdd.get("orderAmount").getAsInt());
+//            At start -> is minimal == false
+            SQLStyle.setBoolean(14, false);
+//            At start -> there is no sale price
+            SQLStyle.setNull(15, 0);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -191,7 +197,20 @@ public class ProductAccessObj implements IDataAccessObj{
                 }
     }
 
+    public void dropTable(){
+        String sql = "DROP TABLE IF EXISTS Product";
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+        )
+        {
 
+            SQLStyle.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
 // *****Help Functions*****
 
@@ -294,68 +313,26 @@ public class ProductAccessObj implements IDataAccessObj{
 
     public static void main(String[] args) {
         ProductAccessObj dao = new ProductAccessObj();
-        JsonObject newRec1 = new JsonObject();
-        newRec1.addProperty("catalogNumProduct", 1212);
-        newRec1.addProperty("ProdSize", "7 litters");
-        newRec1.addProperty("catName", "diary");
-        newRec1.addProperty("subCatName", "milk");
-        newRec1.addProperty("total", "5,8");
-        newRec1.addProperty("manuFactor", "tara");
-        newRec1.addProperty("marketPriceConst", 444);
-        newRec1.addProperty("manuPriceConst", 8765);
-        newRec1.addProperty("manuPriceCurr", 98);
-        newRec1.addProperty("marketPriceCurr", 444);
-        newRec1.addProperty("discount", 8);
-        newRec1.addProperty("minimalAmount", 99);
-        newRec1.addProperty("OrderAmount", 6543);
-        newRec1.addProperty("isMinimal", false);
-        newRec1.addProperty("mySalePrice", 123467);
-        JsonObject newRec2 = new JsonObject();
-        newRec2.addProperty("catalogNumProduct", 1414);
-        newRec2.addProperty("ProdSize", "7 litters");
-        newRec2.addProperty("catName", "diary");
-        newRec2.addProperty("subCatName", "milk");
-        newRec2.addProperty("total", "5,8");
-        newRec2.addProperty("manuFactor", "tara");
-        newRec2.addProperty("marketPriceConst", 500);
-        newRec2.addProperty("manuPriceConst", 8765);
-        newRec2.addProperty("manuPriceCurr", 98);
-        newRec2.addProperty("marketPriceCurr", 500);
-        newRec2.addProperty("discount", 8);
-        newRec2.addProperty("minimalAmount", 99);
-        newRec2.addProperty("OrderAmount", 6543);
-        newRec2.addProperty("isMinimal", false);
-        newRec2.addProperty("mySalePrice", 123467);
-        JsonObject newRec3 = new JsonObject();
-        newRec3.addProperty("catalogNumProduct", 1515);
-        newRec3.addProperty("ProdSize", "6 litters");
-        newRec3.addProperty("catName", "diary");
-        newRec3.addProperty("subCatName", "Kotech");
-        newRec3.addProperty("total", "5,8");
-        newRec3.addProperty("manuFactor", "tara");
-        newRec3.addProperty("marketPriceConst", 600);
-        newRec3.addProperty("manuPriceConst", 8765);
-        newRec3.addProperty("manuPriceCurr", 98);
-        newRec3.addProperty("marketPriceCurr", 600);
-        newRec3.addProperty("discount", 8);
-        newRec3.addProperty("minimalAmount", 99);
-        newRec3.addProperty("OrderAmount", 6543);
-        newRec3.addProperty("isMinimal", false);
-        newRec3.addProperty("mySalePrice", 123467);
-        dao.remove(1212);
-        dao.remove(1414);
-        dao.remove(1515);
-        dao.insert(newRec1);
-        dao.insert(newRec2);
-        dao.insert(newRec3);
-
-//        ArrayList<Integer> toUpdate = new ArrayList<>(3);
-//        toUpdate.add(1212);
-//        toUpdate.add(1414);
-//        toUpdate.add(1515);
-        dao.changeStatusMinimal(1515, true);
-        JsonObject found = dao.search(1515);
-        System.out.println(found);
+//        JsonObject newRec1 = new JsonObject();
+//        newRec1.addProperty("catalogNumProduct", 1212);
+//        newRec1.addProperty("ProdSize", "7 litters");
+//        newRec1.addProperty("catName", "diary");
+//        newRec1.addProperty("subCatName", "milk");
+//        newRec1.addProperty("total", "0,1");
+//        newRec1.addProperty("manuFactor", "tara");
+//        newRec1.addProperty("marketPriceConst", 10);
+//        newRec1.addProperty("manuPriceConst", 8);
+//        newRec1.addProperty("discount", 0);
+//        newRec1.addProperty("minimalAmount", 20);
+//        newRec1.addProperty("orderAmount", 50);
+//        dao.createTable();
+//        dao.insert(newRec1);
+        ArrayList<Integer> toUpdate = new ArrayList<>(2);
+        toUpdate.add(1212);
+        toUpdate.add(1414);
+        dao.updateSaleDB(toUpdate, 1, 10);
+        System.out.println(dao.search(1212));
+        System.out.println(dao.search(1414));
 
     }
 }

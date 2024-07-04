@@ -60,6 +60,10 @@ public class Item {
     public void setStoreOrWare(String storeOrWare) { this.StoreOrWare = storeOrWare;
     }
 
+    public void setMyProduct(Product myProduct) {
+        this.myProduct = myProduct;
+    }
+
     public void setStatus(ItemStatus status) {
         this.status = status;
     }

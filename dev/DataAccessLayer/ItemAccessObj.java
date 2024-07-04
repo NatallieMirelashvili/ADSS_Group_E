@@ -51,12 +51,18 @@ public class ItemAccessObj implements IDataAccessObj {
             SQLStyle.setInt(1, recordToAdd.get("id").getAsInt());
             SQLStyle.setString(2, recordToAdd.get("expirationDate").getAsString());
             SQLStyle.setString(3, recordToAdd.get("place").getAsString());
-            SQLStyle.setString(4, recordToAdd.get("StoreOrWare").getAsString());
-            SQLStyle.setInt(5, recordToAdd.get("status").getAsInt());
+//            find out item location:
+            String[] split = recordToAdd.get("place").getAsString().split(",");
+            if(split[0].length() == 1)
+                SQLStyle.setString(4, "Warehouse");
+            else
+                SQLStyle.setString(4, "Store");
+            // At start all items added with status 2
+            SQLStyle.setInt(5, 2);
             SQLStyle.setInt(6, recordToAdd.get("catalogNumItem").getAsInt());
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Natallie check yourself");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -171,50 +177,14 @@ public class ItemAccessObj implements IDataAccessObj {
         }
         return relevanceRecords;
     }
-//        private void deleteTable(){
-//        String sql =  "DROP TABLE IF EXISTS Item";
-//                try (
-//                Connection connection = Database.connect();
-//                PreparedStatement SQLStyle = connection.prepareStatement(sql);
-//                )
-//                {
-//                    SQLStyle.executeUpdate();
-//                }
-//
-//                catch (SQLException e) {
-//                throw new RuntimeException("Natallie check yourself");
-//                }
-//    }
+
     public static void main(String[] args) {
         ItemAccessObj dao = new ItemAccessObj();
         JsonObject newRec1 = new JsonObject();
-        newRec1.addProperty("id", 2222);
+        newRec1.addProperty("id", 8080);
         newRec1.addProperty("expirationDate", "2024-09-09");
         newRec1.addProperty("place", "A,6");
-        newRec1.addProperty("StoreOrWare", "Warehouse");
-        newRec1.addProperty("status", 0);
         newRec1.addProperty("catalogNumItem", 1212);
-        JsonObject newRec2 = new JsonObject();
-        newRec2.addProperty("id", 1010);
-        newRec2.addProperty("expirationDate", "2024-09-09");
-        newRec2.addProperty("place", "A,6");
-        newRec2.addProperty("StoreOrWare", "Warehouse");
-        newRec2.addProperty("status", 0);
-        newRec2.addProperty("catalogNumItem", 1212);
-        JsonObject newRec3 = new JsonObject();
-        newRec3.addProperty("id", 2020);
-        newRec3.addProperty("expirationDate", "2024-09-09");
-        newRec3.addProperty("place", "A,6");
-        newRec3.addProperty("StoreOrWare", "Warehouse");
-        newRec3.addProperty("status", 1);
-        newRec3.addProperty("catalogNumItem", 1212);
-        dao.reportExpDB(2222);
-        dao.reportExpDB(1010);
-
-        ArrayList<JsonObject> result = dao.findAllExpDB(new ArrayList<>());
-        for (JsonObject rec : result){
-            System.out.println(rec);
-        }
     }
 
 

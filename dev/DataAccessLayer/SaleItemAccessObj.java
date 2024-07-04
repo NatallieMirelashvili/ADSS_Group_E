@@ -87,6 +87,7 @@ public class SaleItemAccessObj implements IDataAccessObj {
         js = dao.search(123467);
         System.out.println(js);
 //        dao.remove(1234567);
+        dao.remove(1);
 
 
 

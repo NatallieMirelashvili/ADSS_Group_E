@@ -5,8 +5,6 @@ import com.google.gson.JsonObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static DomainLayer.ItemStatus.FOR_SALE;
-
 public class ProductController {
 
     public ProductRepo myProductRepo = new ProductRepo();
@@ -16,8 +14,8 @@ public class ProductController {
         return amountProducts;
     }
 
-    public boolean searchProdByCatNumCTR(int catNumber) {
-        return myProductRepo.find(catNumber) != null;
+    public Product searchProdByCatNumCTR(int catNumber) {
+        return myProductRepo.find(catNumber);
     }
 
     //find if product exist in inventory when given category

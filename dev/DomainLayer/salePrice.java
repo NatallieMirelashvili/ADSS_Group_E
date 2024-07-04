@@ -18,6 +18,12 @@ public class salePrice {
         this.id = counter;
         counter++;
     }
+    public salePrice(LocalDate startSale, LocalDate endSale, int discountRatio, int id){
+        this.startSale = startSale;
+        this.endSale = endSale;
+        this.discountRatio = discountRatio;
+        this.id = id;
+    }
 
 //  ***Getters***
     public LocalDate getStartSale() {
@@ -30,7 +36,11 @@ public class salePrice {
         return discountRatio;
     }
 
-//    ***Setters***
+    public int getId() {
+        return id;
+    }
+
+    //    ***Setters***
     public void setStartSale(LocalDate startSale) {
         this.startSale = startSale;
     }

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import static DomainLayer.ItemStatus.*;
 
-public class ItemRepo implements IRepository{
-    private ArrayList<Item> myItems;
-    private ItemAccessObj myDAOItem;
+public class ItemRepo implements IRepository<Item>{
+    private ArrayList<Item> myItems = new ArrayList<>();
+    private final ItemAccessObj myDAOItem = new ItemAccessObj();
     public ArrayList<Item> getMyItems() {
         return myItems;
     }
@@ -24,8 +24,7 @@ public class ItemRepo implements IRepository{
         //case that item not in repo, search on DAO
         JsonObject itemInDAO = myDAOItem.search(unique);
         if (myDAOItem.search(unique)!=null) {
-            Item itemToReturn = addToRepoOnly(itemInDAO);
-            return itemToReturn;
+            return addToRepoOnly(itemInDAO, true);
         }
         return null;
     }
@@ -48,24 +47,33 @@ public class ItemRepo implements IRepository{
             itemToAdd = myDAOItem.findAllDefectiveDB(alreadyHave);
         }
         for (JsonObject item:itemToAdd) {
-            Item itemInStatus = addToRepoOnly(item);
+            Item itemInStatus = addToRepoOnly(item, true);
             itemByStatus.add(itemInStatus);
         }
         return itemByStatus;
     }
 
     public Item add(JsonObject newRec) {
-        Item newItem = addToRepoOnly(newRec);
+//        Bran new item
+        Item newItem = addToRepoOnly(newRec, false);
         myDAOItem.insert(newRec);
         return newItem;
      }
 
     //helper to add
-    private Item addToRepoOnly(JsonObject newRec) {
+    private Item addToRepoOnly(JsonObject newRec, boolean fromDB) {
         Tuple<String, Integer> place = Tuple.createPlaceItem(newRec.get("place").getAsString());
         String expD = newRec.get("expirationDate").getAsString();
         LocalDate expDate = LocalDate.parse(expD);
         Item newItem = new Item(newRec.get("id").getAsInt(), expDate, place, newRec.get("catalogNumItem").getAsInt());
+        if(fromDB){
+//            set status
+            switch (newRec.get("status").getAsInt()) {
+                case 0 -> newItem.setStatus(DAMAGE);
+                case 1 -> newItem.setStatus(EXPIRED);
+            }
+
+        }
         myItems.add(newItem);
         return newItem;
     }
@@ -93,7 +101,7 @@ public class ItemRepo implements IRepository{
     }
 
     //move item from store to warehouse
-    public Item moveToWhere(int idToMove, Tuple<String, Integer> newPlace, String toWhere) {
+    public Item move(int idToMove, Tuple<String, Integer> newPlace, String toWhere) {
         Item itemMove = find(idToMove);
         itemMove.setPlace(newPlace);
         itemMove.setStoreOrWare(toWhere);
@@ -105,12 +113,9 @@ public class ItemRepo implements IRepository{
         }
         return itemMove;
     }
+
+
 }
-
-
-
-
-
 
 
 //        Tuple<String,Item> itemToRemove= new Tuple<>();

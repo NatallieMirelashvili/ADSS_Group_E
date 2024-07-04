@@ -104,6 +104,15 @@ public class Product {
     public void setMarketPriceCurr(double marketPriceCurr) {
         this.marketPriceCurr = marketPriceCurr;
     }
+
+    public void setTotal(Tuple<Integer, Integer> total) {
+        this.total = total;
+    }
+
+    public void setOrderAmount(int orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
     public void setMinimal(boolean isMinimal) { this.isMinimal = isMinimal; }
 
     //    ***Help Functions***

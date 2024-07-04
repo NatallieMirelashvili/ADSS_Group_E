@@ -29,7 +29,7 @@ public class ItemController {
         return myItemRepo.reportStatus(status,idToReport);
     }
     public Item moveToWhere(int idToMove, Tuple<String, Integer> newPlace, String toWhere){
-        return myItemRepo.moveToWhere(idToMove,newPlace,toWhere);
+        return myItemRepo.move(idToMove,newPlace,toWhere);
     }
     public ArrayList<Item> checkAllItemsExpCTR() {
         ArrayList<Item> itemsForSale = myItemRepo.findAllByStatus(FOR_SALE);

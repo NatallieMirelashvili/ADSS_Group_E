@@ -27,7 +27,7 @@ public class Facade {
      * Args: int cagNum - The catalog number you want to check.
      * Returns: boolean - Is in the inventory?
      * */
-    public boolean searchProdByCatNumService(int cagNum){return myProductCTR.searchProdByCatNumCTR(cagNum);}
+    public boolean searchProdByCatNumService(int cagNum){return myProductCTR.searchProdByCatNumCTR(cagNum) != null;}
 
     /**
      * Name: searchProdByCategoryService - a method which check if the given categories classified before.
@@ -51,6 +51,8 @@ public class Facade {
 
     public void addItemService(JsonObject newItem){
         Item itemToReport = myItemCTR.addItemCTR(newItem);
+//        Create the link item -> product
+        itemToReport.setMyProduct(myProductCTR.searchProdByCatNumCTR(itemToReport.getCatalogNumItem()));
         myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),itemToReport.getStoreOrWare());
     }
 
