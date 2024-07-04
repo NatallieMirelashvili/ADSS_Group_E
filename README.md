@@ -14,4 +14,5 @@ Item:
 Product:
 1414,2 litter,Dairy,Cheese,"2,0",Tara,9,10,10,10,0,20,50,0,
 1212,0.5 litter,Dairy,Milk,"0,1",Tara,10,10,10,10,0,20,50,0,
-הנחיות לקוד מצורפות 
+
+instruction: docs->instructions.pdf
