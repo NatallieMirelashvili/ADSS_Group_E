@@ -57,7 +57,8 @@ public class ProductAccessObj implements IDataAccessObj{
         )
         {
             SQLStyle.executeUpdate();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -98,7 +99,7 @@ public class ProductAccessObj implements IDataAccessObj{
 //            At start -> is minimal == false
             SQLStyle.setBoolean(14, false);
 //            At start -> there is no sale price
-            SQLStyle.setNull(15, 0);
+            SQLStyle.setInt(15, 0);
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -149,6 +150,25 @@ public class ProductAccessObj implements IDataAccessObj{
         String[] myCat = new String[]{mainCat, subCat, size};
         return findALLHelper(sql, alreadyHave, myCat);
     }
+    public ArrayList<String> findAllExistMainCategories(){
+        ArrayList<String> res = new ArrayList<>();
+        String sql = "SELECT catName FROM Product GROUP BY catName";
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+                )
+                {
+                    ResultSet categories = SQLStyle.executeQuery();
+                    while (categories.next()){
+                        res.add(categories.getString("catName"));
+                    }
+                }
+
+                catch (SQLException e) {
+                throw new RuntimeException("Natallie check yourself");
+                }
+        return res;
+    }
     public void updateSaleDB(ArrayList<Integer> catalogNumToUpdate, int idOfNewSale, int ratio){
         String subQuery = IDataAccessObj.innerQuery(catalogNumToUpdate.size(), "catalogNumProduct", "Product");
         String javaStyle = "UPDATE Product SET marketPriceCurr = marketPriceConst * (1 - (? / 100.0)), mySalePrice = ?  " +
@@ -164,6 +184,22 @@ public class ProductAccessObj implements IDataAccessObj{
             throw new RuntimeException("Natallie check yourself");
         }
     }
+    public void updateMarketPrice(int catNum, double newPrice){
+        String sql = "UPDATE Product SET marketPriceCurr = ? WHERE catalogNumProduct = ?";
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+                )
+                {
+                    SQLStyle.setDouble(1, newPrice);
+                    SQLStyle.setInt(2, catNum);
+                    SQLStyle.executeUpdate();
+                }
+
+                catch (SQLException e) {
+                throw new RuntimeException("Natallie check yourself");
+                }
+    }
     public void updateDisDB(ArrayList<Integer> catalogNumbersToUpdate, int ratio){
         String subQuery = IDataAccessObj.innerQuery(catalogNumbersToUpdate.size(), "catalogNumProduct","Product");
         String javaStyle = "UPDATE Product SET manuPriceCurr = manuPriceConst * (1 - (? / 100.0)) WHERE catalogNumProduct IN (" + subQuery + ")";
@@ -177,6 +213,23 @@ public class ProductAccessObj implements IDataAccessObj{
         catch (SQLException e) {
             throw new RuntimeException("Natallie check yourself");
         }
+    }
+
+    public void updateIsMinimal(int catNum, boolean bool){
+            String sql = "UPDATE Product SET isMinimal = ? WHERE catalogNumProduct = ?";
+            try (
+                    Connection connection = Database.connect();
+                    PreparedStatement SQLStyle = connection.prepareStatement(sql);
+            )
+            {
+                SQLStyle.setBoolean(1, bool);
+                SQLStyle.setInt(2, catNum);
+                SQLStyle.executeUpdate();
+            }
+
+            catch (SQLException e) {
+                throw new RuntimeException("Natallie check yourself");
+            }
     }
     public void updatePlacedItemDB(int catNum, String WareOrStore){
         updateProdAmount(catNum, WareOrStore, 2);
@@ -204,7 +257,6 @@ public class ProductAccessObj implements IDataAccessObj{
                 PreparedStatement SQLStyle = connection.prepareStatement(sql);
         )
         {
-
             SQLStyle.executeUpdate();
         }
         catch (SQLException e) {
@@ -327,12 +379,15 @@ public class ProductAccessObj implements IDataAccessObj{
 //        newRec1.addProperty("orderAmount", 50);
 //        dao.createTable();
 //        dao.insert(newRec1);
-        ArrayList<Integer> toUpdate = new ArrayList<>(2);
-        toUpdate.add(1212);
-        toUpdate.add(1414);
-        dao.updateSaleDB(toUpdate, 1, 10);
-        System.out.println(dao.search(1212));
-        System.out.println(dao.search(1414));
+//        ArrayList<Integer> toUpdate = new ArrayList<>(2);
+//        toUpdate.add(1212);
+//        toUpdate.add(1414);
+//        dao.updateSaleDB(toUpdate, 1, 10);
+//        System.out.println(dao.search(1212));
+//        System.out.println(dao.search(1414));
+//        dao.remove(1212);
+//        dao.remove(1414);
+        dao.remove(6565);
 
     }
 }

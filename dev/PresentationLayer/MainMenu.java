@@ -87,12 +87,12 @@ public class MainMenu {
     public static String printMenu() {
         return """
                 What would you like to do today?
-                2. sell/report on a damage/expired item/retrieve item
-                3. Generate reports
-                4. Preform an inventory actions
-                5. Show warehouse manager's contact details
-                6. End of shift report
-                7. Exit program
+                1. sell/report on a damage/expired item/retrieve item
+                2. Generate reports
+                3. Preform an inventory actions
+                4. Show warehouse manager's contact details
+                5. End of shift report
+                6. Exit program
                 """;
     }
 

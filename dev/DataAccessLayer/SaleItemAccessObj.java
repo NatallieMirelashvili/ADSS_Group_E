@@ -47,7 +47,7 @@ public class SaleItemAccessObj implements IDataAccessObj {
             SQLStyle.setInt(1, recordToAdd.get("idSale").getAsInt());
             SQLStyle.setString(2, recordToAdd.get("startSale").getAsString());
             SQLStyle.setString(3, recordToAdd.get("endSale").getAsString());
-            SQLStyle.setDouble(4, recordToAdd.get("discountRatio").getAsDouble());
+            SQLStyle.setDouble(4, recordToAdd.get("discountRatio").getAsInt());
 
             SQLStyle.executeUpdate();
         } catch (SQLException e) {
@@ -71,23 +71,55 @@ public class SaleItemAccessObj implements IDataAccessObj {
             throw new RuntimeException("Natallie check yourself");
         }
     }
+    public int getLastSaleID(){
+        String sql = "SELECT MAX(idSale) AS max_id FROM salePrice";
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+                )
+                {
+                    ResultSet maxIdx = SQLStyle.executeQuery();
+                    if(maxIdx.next())
+                        return maxIdx.getInt("max_id");
+                }
 
+                catch (SQLException e) {
+                throw new RuntimeException(e.getMessage());
+                }
+        return 0;
+
+    }
+    public void dropTable(){
+        String sql = "DROP TABLE IF EXISTS salePrice";
+        try (
+                Connection connection = Database.connect();
+                PreparedStatement SQLStyle = connection.prepareStatement(sql);
+        )
+        {
+
+            SQLStyle.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         SaleItemAccessObj dao = new SaleItemAccessObj();
-        JsonObject js = dao.search(1234567);
-        JsonObject newRec = new JsonObject();
-        newRec.addProperty("idSale", 123467);
-        String fromSTR = "2024-07-02";
-        String toSTR = "2024-07-10";
-        newRec.addProperty("startSale", LocalDate.parse(fromSTR).toString());
-        newRec.addProperty("endSale", LocalDate.parse(toSTR).toString());
-        newRec.addProperty("discountRatio", 10);
-//        dao.insert(newRec);
-        js = dao.search(123467);
-        System.out.println(js);
-//        dao.remove(1234567);
-        dao.remove(1);
+//        JsonObject js = dao.search(1234567);
+//        JsonObject newRec = new JsonObject();
+//        newRec.addProperty("idSale", 123467);
+//        String fromSTR = "2024-07-02";
+//        String toSTR = "2024-07-10";
+//        newRec.addProperty("startSale", LocalDate.parse(fromSTR).toString());
+//        newRec.addProperty("endSale", LocalDate.parse(toSTR).toString());
+//        newRec.addProperty("discountRatio", 10);
+        dao.createTable();
+////        dao.insert(newRec);
+//        js = dao.search(123467);
+//        System.out.println(js);
+////        dao.remove(1234567);
+//        dao.remove(1);
 
 
 

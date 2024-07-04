@@ -39,9 +39,9 @@ public class Report {
             System.out.println("This item with the id: " + id_damage + " is not in the inventory\n");
             return;
         }
+        CheckGetToMinimal(id_damage);
         myFacade.reportDamageService(id_damage);
         System.out.println("The item reported successfully!\n");
-        CheckGetToMinimal(id_damage);
     }
 
     /***
@@ -59,9 +59,9 @@ public class Report {
             System.out.println("This item with the id: " + id_expire + " is not in the inventory\n");
             return;
         }
+        CheckGetToMinimal(id_expire);
         myFacade.reportExpService(id_expire);
         System.out.println("The item reported successfully!\n");
-        CheckGetToMinimal(id_expire);
     }
 
     /***
@@ -78,14 +78,13 @@ public class Report {
             System.out.println("This item with the id: " + input + " is not in the inventory\n");
             return;
         }
+        CheckGetToMinimal(input);
         myFacade.removeSellItemService(input);
         System.out.println("The item reported successfully!\n");
-        CheckGetToMinimal(input);
     }
     private static void retrieveItem() {
         String msg = "Please enter the id number of the item you want to retrieve\n";
         int input = GetIdFromUSR(msg);
-        CheckGetToMinimal(input);
         boolean bool = myFacade.searchItemService(input);
         if(!bool){
             System.out.println("This item with the id: " + input + " is not in the inventory\n");

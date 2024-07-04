@@ -114,7 +114,6 @@ public class ItemAccessObj implements IDataAccessObj {
     }
 
 
-
     //    ******Help functions*****
 
 
@@ -180,11 +179,14 @@ public class ItemAccessObj implements IDataAccessObj {
 
     public static void main(String[] args) {
         ItemAccessObj dao = new ItemAccessObj();
-        JsonObject newRec1 = new JsonObject();
-        newRec1.addProperty("id", 8080);
-        newRec1.addProperty("expirationDate", "2024-09-09");
-        newRec1.addProperty("place", "A,6");
-        newRec1.addProperty("catalogNumItem", 1212);
+//        JsonObject newRec1 = new JsonObject();
+//        newRec1.addProperty("id", 8080);
+//        newRec1.addProperty("expirationDate", "2024-09-09");
+//        newRec1.addProperty("place", "A,6");
+//        newRec1.addProperty("catalogNumItem", 1212);
+//        dao.moveStoreWareDB(8080, new Tuple<>("A", 8));
+//        dao.remove(8080);
+        dao.remove(7070);
     }
 
 

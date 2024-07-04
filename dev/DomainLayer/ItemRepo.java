@@ -11,6 +11,7 @@ import static DomainLayer.ItemStatus.*;
 public class ItemRepo implements IRepository<Item>{
     private ArrayList<Item> myItems = new ArrayList<>();
     private final ItemAccessObj myDAOItem = new ItemAccessObj();
+
     public ArrayList<Item> getMyItems() {
         return myItems;
     }
@@ -72,6 +73,8 @@ public class ItemRepo implements IRepository<Item>{
                 case 0 -> newItem.setStatus(DAMAGE);
                 case 1 -> newItem.setStatus(EXPIRED);
             }
+            Product itemProd = ProductController.searchProdByCatNumCTR(newRec.get("catalogNumItem").getAsInt());
+            newItem.setMyProduct(itemProd);
 
         }
         myItems.add(newItem);
@@ -113,6 +116,7 @@ public class ItemRepo implements IRepository<Item>{
         }
         return itemMove;
     }
+
 
 
 }

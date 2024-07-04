@@ -19,9 +19,9 @@ public class ProductRepo implements IRepository<Product>{
 //      static public boolean ProductExist(int catNumber) {
 //      return searchProdByCatNumCTR(catNumber) != null;
     public boolean findIfExist(String cat, String subCat, String size) {
-        if (myProducts.get(cat) != null) {
-            if (myProducts.get(cat).get(subCat) != null) {
-                if (myProducts.get(cat).get(subCat).get(size) != null) {
+        if (myProducts.get(cat) != null || myDAOProduct.findAllProductsByMainCatDB(cat, new ArrayList<>(0)).size() !=0) {
+            if (myProducts.get(cat).get(subCat) != null||myDAOProduct.findAllProductsBySubCatDB(cat,subCat, new ArrayList<>(0)).size() !=0) {
+                if (myProducts.get(cat).get(subCat).get(size) != null || myDAOProduct.findAllProductsBySizeDB(cat, subCat, size,new ArrayList<>(0)).size() !=0) {
                     return true;
                 } else {  // case where size does not exist
                     return size.equals("0");
@@ -53,63 +53,79 @@ public class ProductRepo implements IRepository<Product>{
         return null;
     }
 
+
     //return an array list of all products by category
     public ArrayList<Product> findAllProductsByMainCat(String cat) {
-        ArrayList<Product> productsInCatch = new ArrayList<>();
+        ArrayList<Product> res = new ArrayList<>();
         if (findIfExist(cat, "0", "0")) {
             HashMap<String, HashMap<String, ArrayList<Product>>> subCatToChange = myProducts.get(cat);
             for (String mySubCat : subCatToChange.keySet()) {
-                productsInCatch.addAll(findAllProductsBySubCat(cat, mySubCat));
+                res.addAll(findAllProductsBySubCat(cat, mySubCat));
             }
         }
             ArrayList<Integer> alreadyHave = new ArrayList<>();
-            for (Product prod: productsInCatch){
+            for (Product prod: res){
                 alreadyHave.add(prod.getCatalogNumProduct());
             }
             ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsByMainCatDB(cat, alreadyHave);
 //            FETCH TO CATCH
-            return FetchAndCombine(theRestFromDB, productsInCatch);
-
+            for(JsonObject record: theRestFromDB){
+//                fromDB = true!
+                Product parsedProdAndAdded = addToRepoOnly(record, true);
+                res.add(parsedProdAndAdded);
+            }
+            return res;
     }
 
     //return an array list of all products by category and sub category
     public ArrayList<Product> findAllProductsBySubCat(String cat, String subCat) {
-        ArrayList<Product> productsInCatch = new ArrayList<>();
+        ArrayList<Product> res = new ArrayList<>();
         if (findIfExist(cat, subCat, "0")) {
             HashMap<String, ArrayList<Product>> products1 = myProducts.get(cat).get(subCat);
             for (String mySize : products1.keySet()) {
-                productsInCatch.addAll(findAllProductsBySize(cat, subCat, mySize));
+                res.addAll(findAllProductsBySize(cat, subCat, mySize));
             }
         }
             ArrayList<Integer> alreadyHave = new ArrayList<>();
-            for (Product prod: productsInCatch){
+            for (Product prod: res){
                 alreadyHave.add(prod.getCatalogNumProduct());
             }
             ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsBySubCatDB(cat, subCat, alreadyHave);
 //            FETCH TO CATCH
-            return FetchAndCombine(theRestFromDB, productsInCatch);
+            for(JsonObject record: theRestFromDB){
+    //                fromDB = true!
+                Product parsedProdAndAdded = addToRepoOnly(record, true);
+                res.add(parsedProdAndAdded);
+            }
+            return res;
 
     }
 
     //return an array list of all products by category, sub category and size
     public ArrayList<Product> findAllProductsBySize(String cat, String subCat, String size) {
-        ArrayList<Product> inCatch = new ArrayList<>();
+        ArrayList<Product> res = new ArrayList<>();
         if (findIfExist(cat, subCat, size)) {
-           inCatch = myProducts.get(cat).get(subCat).get(size);
+           res = myProducts.get(cat).get(subCat).get(size);
         }
             ArrayList<Integer> alreadyHave = new ArrayList<>();
-            for (Product prod: inCatch){
+            for (Product prod: res){
                 alreadyHave.add(prod.getCatalogNumProduct());
             }
             ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsBySizeDB(cat, subCat, size, alreadyHave);
 //            FETCH TO CATCH
-            return FetchAndCombine(theRestFromDB, inCatch);
+            for(JsonObject record: theRestFromDB){
+                //                fromDB = true!
+                Product parsedProdAndAdded = addToRepoOnly(record, true);
+                res.add(parsedProdAndAdded);
+            }
+            return res;
     }
 
     //return an array list of all products by category only in catch memo
     public ArrayList<Product> findAll() {
+        ArrayList<String> getAllPossibleCategories = myDAOProduct.findAllExistMainCategories();
         ArrayList<Product> productsRes = new ArrayList<>();
-        for (String Category : myProducts.keySet()) {
+        for (String Category : getAllPossibleCategories) {
             productsRes.addAll(findAllProductsByMainCat(Category));
         }
         return productsRes;
@@ -153,7 +169,11 @@ public class ProductRepo implements IRepository<Product>{
     }
 
     //update function:
-    public void updateSalePriceRepo(ArrayList<Product> products, salePrice newSale) {
+    public void updateSalePriceRepo(ArrayList<Product> products, JsonObject js) {
+        int saleID = myDAOSaleItem.getLastSaleID() + 1;
+        js.addProperty("idSale", saleID);
+        salePrice newSale = new salePrice(LocalDate.parse(js.get("startSale").getAsString()),
+                LocalDate.parse(js.get("endSale").getAsString()), js.get("discountRatio").getAsInt(), saleID);
         ArrayList<Integer> forDB = new ArrayList<>();
         for (Product product : products)
         {
@@ -161,12 +181,7 @@ public class ProductRepo implements IRepository<Product>{
             forDB.add(product.getCatalogNumProduct());
         }
 //        DB stuff:
-        JsonObject saleItemRec = new JsonObject();
-        saleItemRec.addProperty("idSale", newSale.getId());
-        saleItemRec.addProperty("startSale", newSale.getStartSale().toString());
-        saleItemRec.addProperty("endSale", newSale.getEndSale().toString());
-        saleItemRec.addProperty("discountRatio", newSale.getDiscountRatio());
-        myDAOSaleItem.insert(saleItemRec);
+        myDAOSaleItem.insert(js);
         myDAOProduct.updateSaleDB(forDB, newSale.getId(), newSale.getDiscountRatio());
     }
 
@@ -191,18 +206,26 @@ public class ProductRepo implements IRepository<Product>{
         if (addOrRemove.equals("ADD")) {
             if (place.equals("Store")) {
                 prodToUpdate.setStoreAmount(prodToUpdate.getStoreAmount() + 1);
+                myDAOProduct.addItemDB(catNum, "Store");
             } else //warehouse
-                prodToUpdate.setWarehouseAmount(prodToUpdate.getWarehouseAmount() + 1);
+            {prodToUpdate.setWarehouseAmount(prodToUpdate.getWarehouseAmount() + 1);
+                myDAOProduct.addItemDB(catNum, "Warehouse");
+            }
         } else { //REMOVE
             if (place.equals("Store")) {
                 prodToUpdate.setStoreAmount(prodToUpdate.getStoreAmount() - 1);
+                myDAOProduct.removeItemDB(catNum, "Store");
+
             } else //warehouse
-                prodToUpdate.setWarehouseAmount(prodToUpdate.getWarehouseAmount() - 1);
+            {prodToUpdate.setWarehouseAmount(prodToUpdate.getWarehouseAmount() - 1);
+                myDAOProduct.removeItemDB(catNum, "Warehouse");
+            }
         }
     }
 
     public void updatePrice(Product product, double newPrice){
         product.setMarketPriceCurr(newPrice);
+        myDAOProduct.updateMarketPrice(product.getCatalogNumProduct(), newPrice);
     }
     private Product parseToProd(JsonObject record, boolean fromDB){
         Product newProd = new Product(record.get("catName").getAsString(), record.get("subCatName").getAsString(),
@@ -214,16 +237,17 @@ public class ProductRepo implements IRepository<Product>{
         {
             return newProd;
         }
-//        CHECK THIS -> SALE ITEM STILL DONT ADDED TO TABLE
-        if(!record.get("mySalePrice").isJsonNull()){
-//            Setting sale price if there is one
+        if(record.has("mySalePrice") && !record.get("mySalePrice").isJsonNull()){
             JsonObject saleRec = myDAOSaleItem.search(record.get("mySalePrice").getAsInt());
+        if(saleRec != null){
+//            Setting sale price if there is one
             String start = saleRec.get("startSale").getAsString();
             LocalDate startDate = LocalDate.parse(start);
             String end = saleRec.get("endSale").getAsString();
             LocalDate endDate = LocalDate.parse(end);
             salePrice sale = new salePrice(startDate, endDate,saleRec.get("discountRatio").getAsInt(), saleRec.get("idSale").getAsInt());
             newProd.setMySalePrice(sale);
+        }
         }
 //            set is minimal
             newProd.setMinimal(record.get("isMinimal").getAsBoolean());
@@ -237,16 +261,10 @@ public class ProductRepo implements IRepository<Product>{
             return newProd;
     }
 
-//    parsing the given array list of Json founded from DB to Products and combine the given array list of products into one
-    private ArrayList<Product> FetchAndCombine(ArrayList<JsonObject> records, ArrayList<Product> alreadyIn){
-        ArrayList<Product> combined = new ArrayList<>(alreadyIn);
-//        Parse to products:
-        for(JsonObject rec: records){
-            Product fetch = parseToProd(rec, true);
-            combined.add(fetch);
-        }
-        return combined;
+    public void setIsMinimal(Product product, boolean b) {
+        myDAOProduct.updateIsMinimal(product.getCatalogNumProduct(), b);
     }
+
 
 }
 

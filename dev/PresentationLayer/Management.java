@@ -77,7 +77,7 @@ public class Management {
         memberLst.add("manuPriceConst");
         memberLst.add("minimalAmount");
         memberLst.add("discount");
-        memberLst.add("OrderAmount");
+        memberLst.add("orderAmount");
         JsonObject JsonObjProd = CreateJason(10, msgLst, memberLst);
         boolean bool = myFacade.searchProdByCatNumService(JsonObjProd.get("catalogNumProduct").getAsInt());
         if (!bool){
@@ -102,7 +102,7 @@ public class Management {
         ArrayList<String> msgLst = new ArrayList<>(4);
         msgLst.add("Enter item id: ");
         msgLst.add("Enter expiration date YYYY-MM-DD: ");
-        msgLst.add("If you want to add this item to the warehouse Enter the aile (a letter from A-Z) and then PRESS backspace and enter the shelf number.\n" +
+        msgLst.add("If you want to add this item to the warehouse Enter the aile (a letter from A-Z) and then PRESS coma and enter the shelf number.\n" +
                 "else enter item's main category and then PRESS coma then" +
                 " enter the shelf number:");
         msgLst.add("Enter catalog number from the Catalog Number Table you received with the program instructions: ");

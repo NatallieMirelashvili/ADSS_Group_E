@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class ProductController {
 
-    public ProductRepo myProductRepo = new ProductRepo();
+    public static ProductRepo myProductRepo = new ProductRepo();
     private int amountProducts = 0;
 
     public int getAmountProducts() {
         return amountProducts;
     }
 
-    public Product searchProdByCatNumCTR(int catNumber) {
+    public static Product searchProdByCatNumCTR(int catNumber) {
         return myProductRepo.find(catNumber);
     }
 
@@ -44,16 +44,19 @@ public class ProductController {
 
     //update sale price about products by category, sub category and size that given (all or some)
     public void updateSaleCTR(String cat, String subCat, String size, LocalDate from, LocalDate to, int ratioSale) {
-        salePrice newSale = new salePrice(from, to, ratioSale);
+        JsonObject js = new JsonObject();
+        js.addProperty("startSale", from.toString());
+        js.addProperty("endSale",to.toString());
+        js.addProperty("discountRatio",ratioSale);
         if (subCat.equals("0")) {
-            myProductRepo.updateSalePriceRepo(myProductRepo.findAllProductsByMainCat(cat), newSale);
+            myProductRepo.updateSalePriceRepo(myProductRepo.findAllProductsByMainCat(cat),js);
             return;
         }
         if (size.equals("0")) {
-            myProductRepo.updateSalePriceRepo(myProductRepo.findAllProductsBySubCat(cat, subCat), newSale);
+            myProductRepo.updateSalePriceRepo(myProductRepo.findAllProductsBySubCat(cat, subCat), js);
             return;
         }
-        myProductRepo.updateSalePriceRepo(myProductRepo.findAllProductsBySize(cat, subCat, size), newSale);
+        myProductRepo.updateSalePriceRepo(myProductRepo.findAllProductsBySize(cat, subCat, size), js);
     }
 
     //update discount about products by category, sub category and size that given (all or some)
@@ -110,8 +113,10 @@ public class ProductController {
         ArrayList<Product> productsToCheck = myProductRepo.findAll();
         ArrayList<Product> productsToPrint = new ArrayList<>();
         for (Product product : productsToCheck) {
-            if (product.checkMinimalProd())
+            if (product.checkMinimalProd()){
                 productsToPrint.add(product);
+                myProductRepo.setIsMinimal(product, true);
+            }
         }
         return productsToPrint;
     }

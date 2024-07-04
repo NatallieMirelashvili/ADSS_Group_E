@@ -144,9 +144,9 @@ public class Facade {
      * Returns: None
      * */
     public void moveToWareService(int id, Tuple<String, Integer> newPlace){
-        Item itemToReport = myItemCTR.moveToWhere(id, newPlace,"warehouse");
-        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),"warehouse");
-        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),"store");
+        Item itemToReport = myItemCTR.moveToWhere(id, newPlace,"Warehouse");
+        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),"Warehouse");
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),"Store");
     }
 
     /**
@@ -156,9 +156,9 @@ public class Facade {
      * Returns: None
      * */
     public void moveToStoreService(int id, Tuple<String, Integer> newPlace){
-        Item itemToReport = myItemCTR.moveToWhere(id, newPlace,"store");
-        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),"store");
-        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),"warehouse");
+        Item itemToReport = myItemCTR.moveToWhere(id, newPlace,"Store");
+        myProductCTR.reportItemAdd(itemToReport.getCatalogNumItem(),"Store");
+        myProductCTR.reportItemRemove(itemToReport.getCatalogNumItem(),"Warehouse");
     }
 
     /**
@@ -248,15 +248,12 @@ public class Facade {
         return myItemCTR.HelperGenerateReportsItem("defective",itemsToPrint);
     }
 
-
-
-
-
-
-
-
-
-
-
+    public static void main(String[] args) {
+        Facade fac = new Facade();
+//        LocalDate from = LocalDate.parse("2024-07-04");
+//        LocalDate to = LocalDate.parse("2024-07-07");
+//        fac.updateSaleService("Dairy", "0", "0",from, to, 10 );
+        System.out.println(fac.expReportService());
+    }
 
 }
