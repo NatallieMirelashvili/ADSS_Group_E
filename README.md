@@ -10,13 +10,14 @@ xerial.sqlite.jdbc
 
 Item:
 
-1234,2007,"Dairy,1",Store,2,1010
+1234,2024-07-08,"Dairy,1",Store,2,1010
 
-4321,2006,"A,1",Warehouse,2,1010
+4321,2024-07-10,"A,1",Warehouse,2,1010
 
-4545,2006,"A,2",Warehouse,2,3030
+4545,2024-07-10,"A,2",Warehouse,2,3030
 
-5555,2006,"Dairy,2",Store,2,2020
+5555,2024-07-30,"Dairy,2",Store,2,2020
+
 
 
 Product:

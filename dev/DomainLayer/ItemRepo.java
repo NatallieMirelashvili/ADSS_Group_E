@@ -24,7 +24,7 @@ public class ItemRepo implements IRepository<Item>{
         }
         //case that item not in repo, search on DAO
         JsonObject itemInDAO = myDAOItem.search(unique);
-        if (myDAOItem.search(unique)!=null) {
+        if (itemInDAO!=null) {
             return addToRepoOnly(itemInDAO, true);
         }
         return null;

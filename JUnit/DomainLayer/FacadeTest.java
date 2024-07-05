@@ -23,8 +23,8 @@ class FacadeTest {
     @Test
     public void searchProd(){
 //        search item test:
-        assertFalse(myFacade.searchItemService(5000));
-        assertTrue(myFacade.searchItemService(1010));
+        assertFalse(myFacade.searchProdByCatNumService(5000));
+        assertTrue(myFacade.searchProdByCatNumService(1010));
     }
     @Test
      public void addProd(){
@@ -51,28 +51,32 @@ class FacadeTest {
         item.addProperty("place", "Electric,6");
         item.addProperty("catalogNumItem", 4040);
         myFacade.addItemService(item);
-        assertTrue(myFacade.searchItemService(12345));
+        assertTrue(myFacade.searchItemService(123456));
     }
     @Test
     public void reportDamage(){
-        myFacade.reportDamageService(12345);
+        myFacade.reportDamageService(123456);
         assertEquals(0, forDBChecks.find(4040).getStoreAmount());
+
     }
     @Test
-    public void reportExpired(){
-        myFacade.reportExpService(7070);
-        assertEquals(0, forDBChecks.find(4040).getTotalAmount());
-    }
-    @Test
-    public void retrieveExpired(){
-        myFacade.reportForSellService(7070);
+    public void retrieveItem(){
+        myFacade.reportForSellService(123456);
         assertEquals(1, forDBChecks.find(4040).getTotalAmount());
     }
     @Test
+    public void reportExpired(){
+        myFacade.reportExpService(123456);
+        assertEquals(0, forDBChecks.find(4040).getTotalAmount());
+    }
+
+    @Test
     public void moveItemToWare(){
-//        item 12345 is in the STORE
-        myFacade.moveToWareService(12345, new Tuple<>("A", 8));
-//        now 4040 has 0 item in Store
+//        back item to sell status:
+        myFacade.reportForSellService(123456);
+//        item 123456 is in the STORE
+        myFacade.moveToWareService(123456, new Tuple<>("A", 8));
+////        now 4040 has 0 item in Store
         assertEquals(0, forDBChecks.find(4040).getStoreAmount());
     }
 

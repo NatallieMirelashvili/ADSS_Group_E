@@ -18,10 +18,10 @@ public class ItemAccessObj implements IDataAccessObj {
     public void createTable() {
         String sql = "CREATE TABLE IF NOT EXISTS Item (" +
                 "id INTEGER PRIMARY KEY," +
-                "expirationDate DATE NOT NULL," +
+                "expirationDate TEXT NOT NULL," +
                 "place TEXT NOT NULL," +
-                "StoreOrWare TEXT NOT NULL," +
-                "status INTEGER NOT NULL," +
+                "StoreOrWare TEXT," +
+                "status INTEGER," +
                 "catalogNumItem INTEGER," +
                 "FOREIGN KEY (catalogNumItem) REFERENCES Product(catalogNumProduct))";
         try (
