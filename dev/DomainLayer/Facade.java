@@ -248,12 +248,5 @@ public class Facade {
         return myItemCTR.HelperGenerateReportsItem("defective",itemsToPrint);
     }
 
-    public static void main(String[] args) {
-        Facade fac = new Facade();
-//        LocalDate from = LocalDate.parse("2024-07-04");
-//        LocalDate to = LocalDate.parse("2024-07-07");
-//        fac.updateSaleService("Dairy", "0", "0",from, to, 10 );
-        System.out.println(fac.expReportService());
-    }
 
 }
