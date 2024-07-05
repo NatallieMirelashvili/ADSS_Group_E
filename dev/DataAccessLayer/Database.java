@@ -6,5 +6,6 @@ public class Database {
     public static Connection connect() throws SQLException {
             return DriverManager.getConnection(DB_URL);
         }
+
 }
 
