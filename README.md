@@ -9,15 +9,22 @@ junit.jupiter
 xerial.sqlite.jdbc
 
 Item:
+
 1234,2007,"Dairy,1",Store,2,1010
+
 4321,2006,"A,1",Warehouse,2,1010
+
 4545,2006,"A,2",Warehouse,2,3030
+
 5555,2006,"Dairy,2",Store,2,2020
 
 
 Product:
+
 1010,0.5 litter,Dairy,Milk,"1,1",Tara,10,8,8,10,0,20,50,0,null
+
 2020,2 litter,Dairy,Milk,"1,0",Tnuva,10,8,8,10,0,30,50,0,null
+
 3030,500 gram,Dairy,Cheese,"0,1",Gad,10,8,8,10,0,30,50,0,null
 
 instruction placed in docs->instructions.pdf
