@@ -122,15 +122,5 @@ public class ItemRepo implements IRepository<Item>{
 }
 
 
-//        Tuple<String,Item> itemToRemove= new Tuple<>();
-//        Item item = FindItemInInvent(IDItem);
-//        if(item!=null){
-//            Product product = item.getMyProduct();
-//            String detailsItem = product.printProduct();
-//            itemToRemove.setVal1(detailsItem);
-//            itemToRemove.setVal2(item);
-//            product.removeItemToLst(item);
-//        }
-//        return itemToRemove;
 
 
