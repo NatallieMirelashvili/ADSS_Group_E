@@ -12,6 +12,11 @@ public class Items_form {
     this.destination = destination;
     this.items = items;
 }
+    public Items_form(Site destination) {
+        this.id = counter++;
+        this.destination = destination;
+        this.items = new ArrayList<Item>();
+    }
 
         public int getID() {
             return id;
