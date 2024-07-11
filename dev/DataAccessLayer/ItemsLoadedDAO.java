@@ -24,11 +24,15 @@ public class ItemsLoadedDAO implements IDAO {
     }
 
     @Override
-    public void remove(int delivey_id, int item_id) {
-        String sql = "DELETE FROM ItemsLoaded WHERE id = ?";
+    public void remove(int id) {
+// not needed
+    }
+    public void remove(int deliveryID, int itemID) {
+        String sql = "DELETE FROM ItemsLoaded WHERE delivery_id = ? AND item_id = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, deliveryID);
+            pstmt.setInt(2, itemID);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

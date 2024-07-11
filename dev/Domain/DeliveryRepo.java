@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DeliveryRepo implements IRepository<Delivery>{
+public class DeliveryRepo implements IRepository<Delivery> {
     private static HashMap<Integer, Delivery> delivery_forms_d = new HashMap<Integer, Delivery>();
     // all delivery's in the DB
     private static DeliveryDAO deliveryDAO = new DeliveryDAO();
@@ -30,6 +30,7 @@ public class DeliveryRepo implements IRepository<Delivery>{
     public void add(JsonObject delivery) {
 
     }
+
     public void add(Delivery delivery, int driverID, int truckID, int siteID) {
         delivery_forms_d.put(delivery.getID(), delivery);
         JsonObject deliveryjo = new JsonObject();
@@ -43,7 +44,7 @@ public class DeliveryRepo implements IRepository<Delivery>{
     }
 
 
-        @Override
+    @Override
     public void remove(int id) {
         delivery_forms_d.remove(id);
         deliveryDAO.remove(id);
@@ -77,7 +78,7 @@ public class DeliveryRepo implements IRepository<Delivery>{
                 int truckID = delivery.get("truck_id").getAsInt();
                 int siteID = delivery.get("site_id").getAsInt();
 
-                Delivery newDelivery = new Delivery(id, LocalDate.parse(date), LocalTime.parse(hour),STD_manager.get_truck(truckID),STD_manager.get_driver(driverID),STD_manager.get_site(siteID));
+                Delivery newDelivery = new Delivery(id, LocalDate.parse(date), LocalTime.parse(hour), STD_manager.get_truck(truckID), STD_manager.get_driver(driverID), STD_manager.get_site(siteID));
                 // TODO: needs more work, adding items form and his items
                 deliveries.add(newDelivery);
                 delivery_forms_d.put(id, newDelivery);
@@ -85,6 +86,7 @@ public class DeliveryRepo implements IRepository<Delivery>{
         }
         return deliveries;
     }
+
     @Override
     public Delivery get(int id) {
         // TODO: needs more work, adding items form and his items
@@ -92,6 +94,9 @@ public class DeliveryRepo implements IRepository<Delivery>{
             return delivery_forms_d.get(id);
         } else {
             JsonObject delivery = deliveryDAO.get(id);
+            if (delivery == null) {
+                return null;
+            }
             int ID = delivery.get("ID").getAsInt();
             String date = delivery.get("date").getAsString();
             String hour = delivery.get("hour").getAsString();
@@ -99,7 +104,7 @@ public class DeliveryRepo implements IRepository<Delivery>{
             int truckID = delivery.get("truck_id").getAsInt();
             int siteID = delivery.get("site_id").getAsInt();
 
-            Delivery newDelivery = new Delivery(id, LocalDate.parse(date), LocalTime.parse(hour),STD_manager.get_truck(truckID),STD_manager.get_driver(driverID),STD_manager.get_site(siteID));
+            Delivery newDelivery = new Delivery(id, LocalDate.parse(date), LocalTime.parse(hour), STD_manager.get_truck(truckID), STD_manager.get_driver(driverID), STD_manager.get_site(siteID));
 
             delivery_forms_d.put(id, newDelivery);
             return newDelivery;
@@ -163,6 +168,28 @@ public class DeliveryRepo implements IRepository<Delivery>{
         itemLoadedJO.addProperty("delivery_id", deliveryId);
         itemLoadedJO.addProperty("item_id", itemId);
         itemLoadedJO.addProperty("amount_loaded", quantity);
+        itemLoadedJO.addProperty("amount_unloaded", 0);
         itemsLoadedDAO.add(itemLoadedJO);
+    }
+
+
+    public void remove_item_from_loaded_items(int deliveryId, int itemId) {
+        itemsLoadedDAO.remove(deliveryId,itemId);
+    }
+
+    public void decrease_item_in_loaded_items(int deliveryId, int itemId, int quantity) {
+        itemsLoadedDAO.setAmountLoaded(deliveryId,itemId,itemsLoadedDAO.getAmountLoaded(deliveryId,itemId)-quantity);
+    }
+
+    public void increase_item_in_loaded_items(int deliveryId, int itemId, int quantity) {
+        itemsLoadedDAO.setAmountLoaded(deliveryId,itemId,itemsLoadedDAO.getAmountLoaded(deliveryId,itemId)+(quantity-itemsLoadedDAO.getAmountLoaded(deliveryId,itemId)));
+    }
+
+    public void update_Item_Amount_Unloaded(int deliveryId, int itemId, int quantity) {
+        itemsLoadedDAO.setAmountUnLoaded(deliveryId,itemId,itemsLoadedDAO.getAmountUnLoaded(deliveryId,itemId)+quantity);
+    }
+
+    public void add_difference_to_loading_site(int itemId, int diff, int itemsFormId) {
+        itemDetailsDAO.increaseItemAmountLoaded(itemsFormId,itemId,diff);
     }
 }

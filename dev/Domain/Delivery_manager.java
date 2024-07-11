@@ -323,7 +323,54 @@ public class Delivery_manager {
         update_delivery(delivers.get(deliveryId));
 
     }
+
+    public static boolean item_exists_in_delivery(int deliveryId, int itemId) {
+        return delivers.get(deliveryId).item_loaded(itemId);
+    }
+
+    public static int get_item_quantity_in_delivery(int deliveryId, int itemId) {
+        return delivers.get(deliveryId).get_item_quantity(itemId);
+    }
+
+    public static void decrease_item_in_loaded_items(int deliveryId, int itemId, int quantity) {
+        if (delivers.get(deliveryId).get_item_loaded(itemId).getAmount_loaded() == quantity){
+            delivers.get(deliveryId).remove_item_from_loaded_items(itemId);
+            delivers.remove_item_from_loaded_items(deliveryId,itemId);
+            return;
+        }
+        delivers.get(deliveryId).decrease_item_in_loaded_items(itemId,quantity);
+        delivers.decrease_item_in_loaded_items(deliveryId,itemId, quantity);
+    }
+
+    public static void increase_item_in_loaded_items(int deliveryId, int itemId, int quantity) {
+        delivers.get(deliveryId).increase_item_in_loaded_items(itemId,quantity);
+        delivers.increase_item_in_loaded_items(deliveryId,itemId, quantity);
+    }
+
+    public static void remove_loaded_item(int deliveryId, int itemId) {
+        delivers.remove_item_from_loaded_items(deliveryId,itemId);
+    }
+
+    public static void update_item_quantity_unloaded_in_delivery(int quantity, int itemId, int deliveryId) {
+        delivers.get(deliveryId).update_item_quantity_unloaded_in_delivery(quantity,itemId);
+        delivers.update_Item_Amount_Unloaded(deliveryId,itemId,quantity);
+    }
+
+    public static int get_item_quantity_unloaded_in_delivery(int deliveryId, int itemId) {
+        return delivers.get(deliveryId).get_item_quantity_unloaded_in_delivery(itemId);
+    }
+
+    public static int calculate_difference_loaded_unloaded(int deliveryId, int itemId, int quantity) {
+        return delivers.get(deliveryId).calculate_difference_loaded_unloaded(itemId, quantity);
+    }
+
+    public static void add_difference_to_loading_site(int deliveryId, int itemId, int diff, int itemsFormId) {
+        delivers.get(deliveryId).add_difference_to_loading_site(itemId,diff,itemsFormId);
+        delivers.add_difference_to_loading_site(itemId,diff,itemsFormId);
+    }
+
 }
+
 
 
 

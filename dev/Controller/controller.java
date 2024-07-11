@@ -298,7 +298,7 @@ public class controller {
          * @param item_ID The ID of the item.
          * @return True if the item exists in the delivery, false otherwise.
          */
-        return Temp_DB.item_exists_in_delivery(delivery_ID, item_ID);
+        return Delivery_manager.item_exists_in_delivery(delivery_ID, item_ID);
     }
     public static int get_item_quantity_in_delivery(int delivery_ID, int item_ID){
         /**
@@ -307,7 +307,7 @@ public class controller {
          * @param item_ID The ID of the item.
          * @return The quantity of the item in the delivery.
          */
-        return Temp_DB.get_item_quantity_in_delivery(delivery_ID, item_ID);
+        return Delivery_manager.get_item_quantity_in_delivery(delivery_ID, item_ID);
     }
     public static void decrease_item_in_loaded_items(int delivery_ID,int item_ID,int quantity){
         /**
@@ -316,7 +316,7 @@ public class controller {
          * @param item_ID The ID of the item.
          * @param quantity The quantity to decrease.
          */
-        Temp_DB.decrease_item_in_loaded_items(delivery_ID, item_ID, quantity);
+        Delivery_manager.decrease_item_in_loaded_items(delivery_ID, item_ID, quantity);
     }
     public static void increase_item_in_loaded_items(int delivery_ID,int item_ID,int quantity)
     /**
@@ -326,7 +326,7 @@ public class controller {
          * @param quantity The quantity to increase.
          */
     {
-        Temp_DB.increase_item_in_loaded_items(delivery_ID, item_ID, quantity);
+        Delivery_manager.increase_item_in_loaded_items(delivery_ID, item_ID, quantity);
     }
     public static int get_items_form_ID(){
         /**
@@ -370,7 +370,7 @@ public class controller {
          * @param deliveryId The ID of the delivery.
          * @param itemId The ID of the item.
          */
-        Temp_DB.remove_loaded_item(deliveryId, itemId);
+        Delivery_manager.remove_loaded_item(deliveryId, itemId);
     }
 
     public static int get_item_quantity_in_items_form(int deliveryId, int itemsFormId, int itemId) {
@@ -472,7 +472,7 @@ public class controller {
          * @param item_ID The ID of the item.
          * @param delivery_ID The ID of the delivery.
          */
-        Temp_DB.update_item_quantity_unloaded_in_delivery(quantity, item_ID, delivery_ID);
+        Delivery_manager.update_item_quantity_unloaded_in_delivery(quantity, item_ID, delivery_ID);
     }
 
     public static int get_item_quantity_unloaded_in_delivery(int deliveryId, int itemId) {
@@ -482,7 +482,7 @@ public class controller {
          * @param itemId The ID of the item.
          * @return The quantity of the item that needs to be unloaded.
          */
-        return Temp_DB.get_item_quantity_unloaded_in_delivery(deliveryId, itemId);
+        return Delivery_manager.get_item_quantity_unloaded_in_delivery(deliveryId, itemId);
     }
 
     public static int calculate_difference_loaded_unloaded(int deliveryId, int itemId, int quantity) {
@@ -493,7 +493,7 @@ public class controller {
          * @param quantity The quantity of the item.
          * @return The difference between the loaded and unloaded items.
          */
-        return Temp_DB.calculate_difference_loaded_unloaded(deliveryId, itemId, quantity);
+        return Delivery_manager.calculate_difference_loaded_unloaded(deliveryId, itemId, quantity);
     }
 
     public static void add_difference_to_loading_site(int deliveryId, int itemId, int diff, int itemsFormId) {
@@ -504,7 +504,7 @@ public class controller {
          * @param diff The difference between the loaded and unloaded items.
          * @param itemsFormId The ID of the items form.
          */
-        Temp_DB.add_difference_to_loading_site(deliveryId, itemId, diff, itemsFormId);
+        Delivery_manager.add_difference_to_loading_site(deliveryId, itemId, diff, itemsFormId);
     }
 
     public static void update_item_quantity_loaded_in_delivery(int deliveryId, int itemId, int diff) {
@@ -514,7 +514,7 @@ public class controller {
          * @param itemId The ID of the item.
          * @param diff The difference between the loaded and unloaded items.
          */
-        Temp_DB.update_item_quantity_loaded_in_delivery(deliveryId, itemId, diff);
+        Delivery_manager.increase_item_in_loaded_items(deliveryId, itemId, diff);
     }
 
     public static int get_items_amount_in_destination(int deliveryId, int siteId) {

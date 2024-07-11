@@ -121,7 +121,7 @@ public class ItemDetailsDAO {
     }
 
     public int getItemAmount(int item_form_id, int item_id) {
-        String sql = "SELECT amount FROM items_in_IF WHERE item_form_id = ? AND item_id = ?";
+        String sql = "SELECT amount_loaded FROM items_in_IF WHERE item_form_id = ? AND item_id = ?";
         int amount = 0;
 
         try (Connection conn = DriverManager.getConnection(URL);
@@ -130,7 +130,7 @@ public class ItemDetailsDAO {
             pstmt.setInt(2, item_id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    amount = rs.getInt("amount");
+                    amount = rs.getInt("amount_loaded");
                 }
             }
         } catch (SQLException e) {

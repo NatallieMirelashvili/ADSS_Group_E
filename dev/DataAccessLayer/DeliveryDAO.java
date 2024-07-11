@@ -124,6 +124,7 @@ public class DeliveryDAO implements IDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs == null) return null;
                 if (rs.next()) {
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("id", rs.getInt("id"));
