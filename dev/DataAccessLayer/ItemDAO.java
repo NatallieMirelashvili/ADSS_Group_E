@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDAO implements IDAO {
-    private static final String URL = "jdbc:sqlite:DeliveryDB.sqlite";
+    private static final String URL = "jdbc:sqlite:identifier.sqlite";
 
     public ItemDAO() {
         try (Connection conn = DriverManager.getConnection(URL);
@@ -22,10 +22,10 @@ public class ItemDAO implements IDAO {
 
     @Override
     public void add(JsonObject jsonObject) {
-        String sql = "INSERT INTO items (id, name) VALUES (?, ?)";
+        String sql = "INSERT INTO items (ID, name) VALUES (?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, jsonObject.get("id").getAsInt());
+            pstmt.setInt(1, jsonObject.get("ID").getAsInt());
             pstmt.setString(2, jsonObject.get("name").getAsString());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class ItemDAO implements IDAO {
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM items WHERE id = ?";
+        String sql = "DELETE FROM items WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
@@ -47,14 +47,14 @@ public class ItemDAO implements IDAO {
 
     @Override
     public JsonObject get(int id) {
-        String sql = "SELECT * FROM items WHERE id = ?";
+        String sql = "SELECT * FROM items WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("id", rs.getInt("id"));
+                    jsonObject.addProperty("ID", rs.getInt("ID"));
                     jsonObject.addProperty("name", rs.getString("name"));
                     return jsonObject;
                 }
@@ -67,11 +67,11 @@ public class ItemDAO implements IDAO {
 
     @Override
     public void update(JsonObject jsonObject) {
-        String sql = "UPDATE items SET name = ? WHERE id = ?";
+        String sql = "UPDATE items SET name = ? WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, jsonObject.get("name").getAsString());
-            pstmt.setInt(2, jsonObject.get("id").getAsInt());
+            pstmt.setInt(2, jsonObject.get("ID").getAsInt());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class ItemDAO implements IDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("id", rs.getInt("id"));
+                jsonObject.addProperty("ID", rs.getInt("ID"));
                 jsonObject.addProperty("name", rs.getString("name"));
                 items.add(jsonObject);
             }

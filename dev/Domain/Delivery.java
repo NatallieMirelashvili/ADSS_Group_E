@@ -52,6 +52,7 @@ public class Delivery {
         this.driver = driver;
         this.origin = origin;
         loaded_items = new HashMap<Integer, Item>();
+        counter++;
     }
 
 
@@ -200,7 +201,7 @@ public class Delivery {
 //        return item_form.size();
 //    }
 
-    public void add_loaded_item(Item item, int quantity) {
+    public void add_loaded_item_nquantity(Item item, int quantity) {
         /**
          * Adds a loaded item.
          * @param item - the item to add
@@ -301,29 +302,29 @@ public class Delivery {
 //        return 0;
 //    }
 
-    public void set_amount_of_item_in_items_form(int itemsFormId, int itemId, int quantity) {
-        /**
-         * Sets the amount of an item in an items form.
-         */
-        for (Items_form items_form : item_form) {
-            if (items_form.getID() == itemsFormId) {
-                items_form.setAmount(itemId, quantity);
-                break;
-            }
-        }
-    }
-
-    public boolean item_exists_in_items_form(int itemsFormId, int itemId) {
-        /**
-         * Returns whether an item exists in an items form.
-         */
-        for (Items_form items_form : item_form) {
-            if (items_form.getID() == itemsFormId) {
-                return items_form.item_exists(itemId);
-            }
-        }
-        return false;
-    }
+//    public void set_amount_of_item_in_items_form(int itemsFormId, int itemId, int quantity) {
+//        /**
+//         * Sets the amount of an item in an items form.
+//         */
+//        for (Items_form items_form : item_form) {
+//            if (items_form.getID() == itemsFormId) {
+//                items_form.setAmount(itemId, quantity);
+//                break;
+//            }
+//        }
+//    }
+//
+//    public boolean item_exists_in_items_form(int itemsFormId, int itemId) {
+//        /**
+//         * Returns whether an item exists in an items form.
+//         */
+//        for (Items_form items_form : item_form) {
+//            if (items_form.getID() == itemsFormId) {
+//                return items_form.item_exists(itemId);
+//            }
+//        }
+//        return false;
+//    }
 
 //    public boolean destinations_been_visited(int destinationId, int index) {
 //        /**
@@ -404,44 +405,44 @@ public class Delivery {
         }
     }
 
-    public void remove_destination(int destinationId, int curr_destination_id) {
-        /**
-         * Removes a destination from the delivery.
-         * @param destinationId The ID of the destination to be removed.
-         * @param curr_destination_id The ID of the current destination.
-         */
-        // Initialize the loading and unloading forms
-        Items_form load_form = null;
-        Items_form unload_form = null;
-
-        // Iterate over all items forms in the delivery
-        for (Items_form items_form : item_form) {
-            // If the destination of the items form matches the destination to be removed, set it as the unloading form
-            if (items_form.getDestination().getSite_ID() == destinationId) {
-                unload_form = items_form;
-                // If the destination of the items form matches the current destination, set it as the loading form
-            } else if (items_form.getDestination().getSite_ID() == curr_destination_id) {
-                load_form = items_form;
-            }
-        }
-        // Iterate over all items in the unloading form
-        for (Item item : unload_form.getItems()) {
-            // If the item exists in the loading form, update its loaded amount
-            if (load_form.item_exists(item.getItemId())) {
-                // Decrease the loaded amount of the item in the loading form by the loaded amount of the item in the unloading form
-                load_form.getItem(item.getItemId()).setAmount_loaded(load_form.getItem(item.getItemId()).getAmount_loaded() - item.getAmount_loaded());
-                // Decrease the loaded amount of the item in the loaded items by the loaded amount of the item in the unloading form
-                decrease_item_in_loaded_items(item.getItemId(), item.getAmount_loaded());
-                // If the loaded amount of the item in the loading form is zero or less, remove the item from the loading form and the loaded items
-                if (load_form.getItem(item.getItemId()).getAmount_loaded() <= 0) {
-                    load_form.removeItem(item.getItemId());
-                    remove_item_from_loaded_items(item.getItemId());
-                }
-            }
-        }
-        // Remove the unloading form from the items forms of the delivery
-        item_form.remove(unload_form);
-    }
+//    public void remove_destination(int destinationId, int curr_destination_id) {
+//        /**
+//         * Removes a destination from the delivery.
+//         * @param destinationId The ID of the destination to be removed.
+//         * @param curr_destination_id The ID of the current destination.
+//         */
+//        // Initialize the loading and unloading forms
+//        Items_form load_form = null;
+//        Items_form unload_form = null;
+//
+//        // Iterate over all items forms in the delivery
+//        for (Items_form items_form : item_form) {
+//            // If the destination of the items form matches the destination to be removed, set it as the unloading form
+//            if (items_form.getDestination().getSite_ID() == destinationId) {
+//                unload_form = items_form;
+//                // If the destination of the items form matches the current destination, set it as the loading form
+//            } else if (items_form.getDestination().getSite_ID() == curr_destination_id) {
+//                load_form = items_form;
+//            }
+//        }
+//        // Iterate over all items in the unloading form
+//        for (Item item : unload_form.getItems()) {
+//            // If the item exists in the loading form, update its loaded amount
+//            if (load_form.item_exists(item.getItemId())) {
+//                // Decrease the loaded amount of the item in the loading form by the loaded amount of the item in the unloading form
+//                load_form.getItem(item.getItemId()).setAmount_loaded(load_form.getItem(item.getItemId()).getAmount_loaded() - item.getAmount_loaded());
+//                // Decrease the loaded amount of the item in the loaded items by the loaded amount of the item in the unloading form
+//                decrease_item_in_loaded_items(item.getItemId(), item.getAmount_loaded());
+//                // If the loaded amount of the item in the loading form is zero or less, remove the item from the loading form and the loaded items
+//                if (load_form.getItem(item.getItemId()).getAmount_loaded() <= 0) {
+//                    load_form.removeItem(item.getItemId());
+//                    remove_item_from_loaded_items(item.getItemId());
+//                }
+//            }
+//        }
+//        // Remove the unloading form from the items forms of the delivery
+//        item_form.remove(unload_form);
+//    }
 
 //    public int get_destination_site_ID(int index) {
 //        /**
@@ -549,5 +550,11 @@ public class Delivery {
 
     public Driver getDriver() {
         return driver;
+    }
+
+    public void add_loaded_item(Item newItem) {
+        if (!loaded_items.containsKey(newItem.getItemId())) {
+            loaded_items.put(newItem.getItemId(), newItem);
+        }
     }
 }

@@ -3,6 +3,7 @@ package Domain;
 import DataAccessLayer.TruckDAO;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,17 +13,13 @@ public class TruckRepo implements IRepository<Truck>{
 
     @Override
     public void add(JsonObject obj) {
-
+        truckDAO.add(obj);
     }
 
     @Override
     public void remove(int id) {
-
-    }
-
-    @Override
-    public void remove(JsonObject obj) {
-
+        trucks_d.remove(id);
+        truckDAO.remove(id);
     }
 
     @Override
@@ -32,12 +29,36 @@ public class TruckRepo implements IRepository<Truck>{
 
     @Override
     public List<Truck> getAll() {
-
+        List<JsonObject> jsonTrucks = truckDAO.getAll();
+        List<Truck> trucks = new ArrayList<>();
+        for (JsonObject jsonTruck : jsonTrucks) {
+            int id = jsonTruck.get("ID").getAsInt();
+            String model = jsonTruck.get("model").getAsString();
+            double max_weight = jsonTruck.get("max_weight").getAsDouble();
+            String licence = jsonTruck.get("licence").getAsString();
+            Truck truck = new Truck(id, model, max_weight, licence);
+            trucks.add(truck);
+            trucks_d.put(id, truck);
+        }
+        return trucks;
     }
 
     @Override
     public Truck get(int id) {
-
+        if (trucks_d.containsKey(id)) {
+            return trucks_d.get(id);
+        }
+        JsonObject jsonTruck = truckDAO.get(id);
+        if (jsonTruck != null) {
+            int truckId = jsonTruck.get("ID").getAsInt();
+            String model = jsonTruck.get("model").getAsString();
+            double max_weight = jsonTruck.get("max_weight").getAsDouble();
+            String licence = jsonTruck.get("licence").getAsString();
+            Truck truck = new Truck(truckId, model, max_weight, licence);
+            trucks_d.put(truckId, truck);
+            return truck;
+        }
+        return null;
     }
 
     @Override

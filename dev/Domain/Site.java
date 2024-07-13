@@ -52,4 +52,7 @@ public class Site {
     public String getArea() {
         return area;
     }
+    public String toString() {
+        return "Site ID: " + site_id + "\nSite Name: " + name + "\nType: " + type + "\nAddress: " + address + "\nContact Name: " + contacts_name + "\nPhone Number: " + phone + "\nArea: " + area;
+    }
 }

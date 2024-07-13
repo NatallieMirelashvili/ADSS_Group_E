@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryDAO implements IDAO {
-    private static final String URL = "jdbc:sqlite:DeliveryDB.sqlite";
+    private static final String URL = "jdbc:sqlite:identifier.sqlite";
 
     public DeliveryDAO() {
         createDeliveryTable();
-        createDeliveryItemsFormTable();
     }
 
     private void createDeliveryTable() {
@@ -32,26 +31,13 @@ public class DeliveryDAO implements IDAO {
         }
     }
 
-    private void createDeliveryItemsFormTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS delivery_items_form (" +
-                "delivery_id INTEGER, " +
-                "item_form_id INTEGER, " +
-                "FOREIGN KEY (delivery_id) REFERENCES deliverys(id), " +
-                "FOREIGN KEY (item_form_id) REFERENCES items_form(id))";
-        try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void add(JsonObject jsonObject) {
-        String sql = "INSERT INTO deliverys (id, date, hour, driver_id, truck_id, site_id, item_form_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO deliverys (ID, date, hour, driver_id, truck_id, site_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, jsonObject.get("id").getAsInt());
+            pstmt.setInt(1, jsonObject.get("ID").getAsInt());
             pstmt.setString(2, jsonObject.get("date").getAsString());
             pstmt.setString(3, jsonObject.get("hour").getAsString());
             pstmt.setInt(4, jsonObject.get("driver_id").getAsInt());
@@ -65,7 +51,7 @@ public class DeliveryDAO implements IDAO {
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM deliverys WHERE id = ?";
+        String sql = "DELETE FROM deliverys WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
@@ -77,16 +63,15 @@ public class DeliveryDAO implements IDAO {
 
     @Override
     public void update(JsonObject jsonObject) {
-        String sql = "UPDATE deliverys SET date = ?, hour = ?, driver_id = ?, truck_id = ?, site_id = ?, item_form_id = ? WHERE id = ?";
+        String sql = "UPDATE deliverys SET date = ?, hour = ?, driver_id = ?, truck_id = ?, site_id = ? WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, jsonObject.get("date").getAsString());
-            pstmt.setString(2, jsonObject.get("hour").getAsString());
-            pstmt.setInt(3, jsonObject.get("driver_id").getAsInt());
-            pstmt.setInt(4, jsonObject.get("truck_id").getAsInt());
-            pstmt.setInt(5, jsonObject.get("site_id").getAsInt());
-            pstmt.setInt(6, jsonObject.get("item_form_id").getAsInt());
-            pstmt.setInt(7, jsonObject.get("id").getAsInt());
+            pstmt.setString(2, jsonObject.get("date").getAsString());
+            pstmt.setString(3, jsonObject.get("hour").getAsString());
+            pstmt.setInt(4, jsonObject.get("driver_id").getAsInt());
+            pstmt.setInt(5, jsonObject.get("truck_id").getAsInt());
+            pstmt.setInt(6, jsonObject.get("site_id").getAsInt());
+            pstmt.setInt(1, jsonObject.get("ID").getAsInt());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,13 +87,12 @@ public class DeliveryDAO implements IDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("id", rs.getInt("id"));
+                jsonObject.addProperty("id", rs.getInt("ID"));
                 jsonObject.addProperty("date", rs.getString("date"));
                 jsonObject.addProperty("hour", rs.getString("hour"));
                 jsonObject.addProperty("driver_id", rs.getInt("driver_id"));
                 jsonObject.addProperty("truck_id", rs.getInt("truck_id"));
                 jsonObject.addProperty("site_id", rs.getInt("site_id"));
-                jsonObject.addProperty("item_form_id", rs.getInt("item_form_id"));
                 deliveries.add(jsonObject);
             }
         } catch (SQLException e) {
@@ -119,7 +103,7 @@ public class DeliveryDAO implements IDAO {
 
     @Override
     public JsonObject get(int id) {
-        String sql = "SELECT * FROM deliverys WHERE id = ?";
+        String sql = "SELECT * FROM deliverys WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
@@ -127,13 +111,12 @@ public class DeliveryDAO implements IDAO {
                 if (rs == null) return null;
                 if (rs.next()) {
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("id", rs.getInt("id"));
+                    jsonObject.addProperty("id", rs.getInt("ID"));
                     jsonObject.addProperty("date", rs.getString("date"));
                     jsonObject.addProperty("hour", rs.getString("hour"));
                     jsonObject.addProperty("driver_id", rs.getInt("driver_id"));
                     jsonObject.addProperty("truck_id", rs.getInt("truck_id"));
                     jsonObject.addProperty("site_id", rs.getInt("site_id"));
-                    jsonObject.addProperty("item_form_id", rs.getInt("item_form_id"));
                     return jsonObject;
                 }
             }
@@ -143,16 +126,19 @@ public class DeliveryDAO implements IDAO {
         return null;
     }
 
-    public void addItemformID(int deliveryID,int itemformID) {
-        String sql = "INSERT INTO delivery_items_form (delivery_id, item_form_id) VALUES (?, ?)";
-        try (Connection conn = DriverManager.getConnection(DeliveryDAO.URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, deliveryID);
-            pstmt.setInt(2, itemformID);
-            pstmt.executeUpdate();
+
+    public int[] getIDS() {
+        String sql = "SELECT ID FROM deliverys";
+        List<Integer> ids = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                ids.add(rs.getInt("ID"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return ids.stream().mapToInt(i -> i).toArray();
     }
-
 }

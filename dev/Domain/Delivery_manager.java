@@ -7,8 +7,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Delivery_manager {
-    public static DeliveryRepo delivers;
-    public static ItemRepo items;
+    public static DeliveryRepo delivers = new DeliveryRepo();
+    public static ItemRepo items = new ItemRepo();
 
 
     public static void add_delivery(JsonObject delivery) {
@@ -302,11 +302,11 @@ public class Delivery_manager {
         for (Items_form form : items_form) {
             if (form.getID() == itemsFormId) {
                 if (form.getItem(itemID).getAmount_loaded() >= amount) {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public static int findDeliveryByDriverIDAndDate(int driverID) {
@@ -319,6 +319,7 @@ public class Delivery_manager {
     }
 
     public static void add_loaded_item(int deliveryId, int itemId, int quantity) {
+        delivers.get(deliveryId).add_loaded_item_nquantity(items.get(itemId), quantity);
         delivers.add_loaded_item(deliveryId,itemId, quantity);
         update_delivery(delivers.get(deliveryId));
 
@@ -369,7 +370,56 @@ public class Delivery_manager {
         delivers.add_difference_to_loading_site(itemId,diff,itemsFormId);
     }
 
+    public static void remove_destination(int deliveryId, int destinationId, int currDestinationId) {
+        Delivery d = delivers.get(deliveryId);
+        Items_form load_form = null;
+        Items_form unload_form = null;
+        ArrayList<Items_form> items_form = delivers.get(deliveryId).getItems_form();
+        for (Items_form form : items_form) {
+            if (form.getDestination().getSite_ID() == destinationId)
+                    unload_form = form;
+            else if (form.getDestination().getSite_ID() == currDestinationId){
+                    unload_form = form;
+                }
+            }
+        for (Item item : unload_form.getItems()) {
+            // If the item exists in the loading form, update its loaded amount
+            if (load_form.item_exists(item.getItemId())) {
+                // Decrease the loaded amount of the item in the loading form by the loaded amount of the item in the unloading form
+                load_form.getItem(item.getItemId()).setAmount_loaded(load_form.getItem(item.getItemId()).getAmount_loaded() - item.getAmount_loaded());
+                delivers.updateItemAmountLoaded(load_form.getID(), item.getItemId(), load_form.getItem(item.getItemId()).getAmount_loaded()-item.getAmount_loaded());
+                // Decrease the loaded amount of the item in the loaded items by the loaded amount of the item in the unloading form
+                d.decrease_item_in_loaded_items(item.getItemId(), item.getAmount_loaded());
+                decrease_item_in_loaded_items(deliveryId, item.getItemId(), item.getAmount_loaded());
+                // If the loaded amount of the item in the loading form is zero or less, remove the item from the loading form and the loaded items
+                if (load_form.getItem(item.getItemId()).getAmount_loaded() <= 0) {
+                    load_form.removeItem(item.getItemId());
+                    delivers.removeItemFromItemsForm(load_form.getID(), item.getItemId());
+                }
+            }
+        }
+        // Remove the unloading form from the items forms of the delivery
+        items_form.remove(unload_form);
+        delivers.removeItemForm(unload_form.getID());
+    }
+
+
+    public static String[] print_all_deliveries() {
+        ArrayList<String> deliveries = new ArrayList<>();
+        for (Delivery delivery : delivers.getAll()) {
+            deliveries.add(delivery.toString());
+        }
+        return deliveries.toArray(new String[0]);
+    }
+
+    public static void addAllItems(ArrayList<JsonObject> items) {
+        for (JsonObject item : items) {
+            add_item(item);
+        }
+    }
 }
+
+
 
 
 

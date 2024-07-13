@@ -2,10 +2,12 @@ package Domain;
 
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+
 public class STD_manager {
-    public static DriverRepo drivers;
-    public static TruckRepo trucks;
-    public static SiteRepo sites;
+    public static DriverRepo drivers = new DriverRepo();
+    public static TruckRepo trucks = new TruckRepo();
+    public static SiteRepo sites = new SiteRepo();
 
 
     public static void add_driver(JsonObject driver) {
@@ -115,5 +117,35 @@ public class STD_manager {
         }
         return "No delivery for this driver today";
 
+    }
+
+    public static String[] print_all_drivers() {
+        return drivers.getAll().stream().map(Driver::toString).toArray(String[]::new);
+    }
+
+    public static String[] print_all_trucks() {
+        return trucks.getAll().stream().map(Truck::toString).toArray(String[]::new);
+    }
+
+    public static String[] print_all_sites() {
+        return sites.getAll().stream().map(Site::toString).toArray(String[]::new);
+    }
+
+    public static void addAllTrucks(ArrayList<JsonObject> trucks) {
+        for (JsonObject truck : trucks) {
+            add_truck(truck);
+        }
+    }
+
+    public static void addAllDrivers(ArrayList<JsonObject> drivers) {
+        for (JsonObject driver : drivers) {
+            add_driver(driver);
+        }
+    }
+
+    public static void addAllSites(ArrayList<JsonObject> sites) {
+        for (JsonObject site : sites) {
+            add_site(site);
+        }
     }
 }

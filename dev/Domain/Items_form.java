@@ -17,6 +17,12 @@ public class Items_form {
         this.destination = destination;
         this.items = new ArrayList<Item>();
     }
+    public Items_form(int id, Site destination) {
+        this.id = id;
+        this.destination = destination;
+        this.items = new ArrayList<Item>();
+        counter++;
+    }
 
         public int getID() {
             return id;
@@ -72,7 +78,7 @@ public class Items_form {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("items_form ID: ").append(id).append("\n{\n")
-                .append("Destination: ").append(destination.getSite_address()).append(" contact: ").append(destination.getSite_contact_name()).append(" phone: ").append(destination.getSite_contact_phone())
+                .append("Destination: ").append(destination.getSite_address()).append(" Type: ").append(destination.get_type()).append(" contact: ").append(destination.getSite_contact_name()).append(" phone: ").append(destination.getSite_contact_phone())
                 .append(",\nitems:\n");
 
         for (Item item : items) {

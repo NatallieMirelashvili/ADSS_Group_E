@@ -43,5 +43,8 @@ public class Truck {
     public String getLicense() {
         return licence;
     }
+    public String toString() {
+        return "Truck ID: " + id + "\nModel: " + model + "\nCurrent Weight: " + curr_weight + "\nMax Weight: " + max_weight + "\nLicence: " + licence;
+    }
 }
 

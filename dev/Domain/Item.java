@@ -23,6 +23,13 @@ public class Item {
         this.amount_loaded = amount;
     }
 
+    public Item(int itemId, String name, int amountLoaded, int amountUnloaded) {
+        this.itemId = itemId;
+        this.itemName = name;
+        this.amount_loaded = amountLoaded;
+        this.amount_unloaded = amountUnloaded;
+    }
+
     // Getter and setter methods for itemId
     public int getItemId() {
         return itemId;

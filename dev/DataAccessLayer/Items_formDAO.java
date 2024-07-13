@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Items_formDAO implements IDAO {
-    private static final String URL = "jdbc:sqlite:DeliveryDB.sqlite";
+    private static final String URL = "jdbc:sqlite:identifier.sqlite";
 
     public Items_formDAO() {
         try (Connection conn = DriverManager.getConnection(URL);
@@ -111,5 +111,25 @@ public class Items_formDAO implements IDAO {
     }
 
 
-}
+    public ArrayList<JsonObject> get_IF_by_delivery_id(int id) {
+        String sql = "SELECT * FROM items_form WHERE delivery_id = ?";
+        ArrayList<JsonObject> items = new ArrayList<>();
 
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("ID", rs.getInt("ID"));
+                    jsonObject.addProperty("destenation_id", rs.getInt("destenation_id"));
+                    items.add(jsonObject);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+}

@@ -2,6 +2,8 @@ package Controller;
 import Domain.*;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+
 public class controller {
     public static void add_driver(JsonObject driver) {
         /**
@@ -423,7 +425,7 @@ public class controller {
          * @param destinationId The ID of the destination.
          * @param curr_destination_id The current destination ID.
          */
-        Temp_DB.remove_destination(deliveryId, destinationId,curr_destination_id);
+        Delivery_manager.remove_destination(deliveryId, destinationId,curr_destination_id);
     }
 
     public static int get_driver_ID_from_delivery(int deliveryId) {
@@ -637,5 +639,69 @@ public class controller {
          * @return True if the problem was fixed, false otherwise.
          */
         return Delivery_manager.problem_edit_fixed(deliveryId, itemsFormId, itemID, amount);
+    }
+
+    public static String[] print_all_drivers() {
+        /**
+         * Prints all the drivers.
+         * @return The drivers.
+         */
+        return STD_manager.print_all_drivers();
+    }
+
+    public static String[] print_all_trucks() {
+        /**
+         * Prints all the trucks.
+         * @return The trucks.
+         */
+        return STD_manager.print_all_trucks();
+    }
+
+    public static String[] print_all_sites() {
+        /**
+         * Prints all the sites.
+         * @return The sites.
+         */
+        return STD_manager.print_all_sites();
+    }
+
+    public static String[] print_all_deliveries() {
+        /**
+         * Prints all the deliveries.
+         * @return The deliveries.
+         */
+        return Delivery_manager.print_all_deliveries();
+    }
+
+    public static void addAllTrucks(ArrayList<JsonObject> trucks) {
+        /**
+         * Adds all the trucks to the database.
+         * @param trucks The trucks.
+         */
+        STD_manager.addAllTrucks(trucks);
+    }
+
+    public static void addAllDrivers(ArrayList<JsonObject> drivers) {
+        /**
+         * Adds all the drivers to the database.
+         * @param drivers The drivers.
+         */
+        STD_manager.addAllDrivers(drivers);
+    }
+
+    public static void addAllSites(ArrayList<JsonObject> sites) {
+        /**
+         * Adds all the sites to the database.
+         * @param sites The sites.
+         */
+        STD_manager.addAllSites(sites);
+    }
+
+    public static void addAllItems(ArrayList<JsonObject> items) {
+        /**
+         * Adds all the items to the database.
+         * @param items The items.
+         */
+        Delivery_manager.addAllItems(items);
     }
 }

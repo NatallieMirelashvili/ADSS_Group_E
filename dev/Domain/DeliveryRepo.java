@@ -37,9 +37,9 @@ public class DeliveryRepo implements IRepository<Delivery> {
         deliveryjo.addProperty("ID", delivery.getID());
         deliveryjo.addProperty("date", delivery.getDate().toString());
         deliveryjo.addProperty("hour", delivery.getHour().toString());
-        deliveryjo.addProperty("truck_ID", truckID);
-        deliveryjo.addProperty("driver_ID", driverID);
-        deliveryjo.addProperty("site_ID", siteID);
+        deliveryjo.addProperty("truck_id", truckID);
+        deliveryjo.addProperty("driver_id", driverID);
+        deliveryjo.addProperty("site_id", siteID);
         deliveryDAO.add(deliveryjo);
     }
 
@@ -58,9 +58,9 @@ public class DeliveryRepo implements IRepository<Delivery> {
             deliveryjo.addProperty("ID", obj.getID());
             deliveryjo.addProperty("date", obj.getDate().toString());
             deliveryjo.addProperty("hour", obj.getHour().toString());
-            deliveryjo.addProperty("truck_ID", obj.getTruckID());
-            deliveryjo.addProperty("driver_ID", obj.getDriverID());
-            deliveryjo.addProperty("site_ID", obj.getSiteID());
+            deliveryjo.addProperty("truck_id", obj.getTruckID());
+            deliveryjo.addProperty("driver_id", obj.getDriverID());
+            deliveryjo.addProperty("site_id", obj.getSiteID());
             deliveryDAO.update(deliveryjo);
         }
     }
@@ -68,20 +68,14 @@ public class DeliveryRepo implements IRepository<Delivery> {
     @Override
     public List<Delivery> getAll() {
         List<Delivery> deliveries = new ArrayList<>(delivery_forms_d.values());
-        List<JsonObject> jsonDeliveries = deliveryDAO.getAll();
-        for (JsonObject delivery : jsonDeliveries) {
-            int id = delivery.get("ID").getAsInt();
+        int[] ids = deliveryDAO.getIDS();
+        for (int id : ids) {
             if (!delivery_forms_d.containsKey(id)) {
-                String date = delivery.get("date").getAsString();
-                String hour = delivery.get("hour").getAsString();
-                int driverID = delivery.get("driver_id").getAsInt();
-                int truckID = delivery.get("truck_id").getAsInt();
-                int siteID = delivery.get("site_id").getAsInt();
-
-                Delivery newDelivery = new Delivery(id, LocalDate.parse(date), LocalTime.parse(hour), STD_manager.get_truck(truckID), STD_manager.get_driver(driverID), STD_manager.get_site(siteID));
-                // TODO: needs more work, adding items form and his items
-                deliveries.add(newDelivery);
-                delivery_forms_d.put(id, newDelivery);
+                Delivery delivery = get(id);
+                if (delivery != null) {
+                    deliveries.add(delivery);
+                    delivery_forms_d.put(id, delivery);
+                }
             }
         }
         return deliveries;
@@ -89,15 +83,16 @@ public class DeliveryRepo implements IRepository<Delivery> {
 
     @Override
     public Delivery get(int id) {
-        // TODO: needs more work, adding items form and his items
         if (delivery_forms_d.get(id) != null) {
             return delivery_forms_d.get(id);
         } else {
             JsonObject delivery = deliveryDAO.get(id);
+            ArrayList<JsonObject> items_form = items_formDAO.get_IF_by_delivery_id(id);
+            ArrayList<JsonObject> items_loaded = itemsLoadedDAO.get_items_by_delivery_id(id);
             if (delivery == null) {
                 return null;
             }
-            int ID = delivery.get("ID").getAsInt();
+            int ID = delivery.get("id").getAsInt();
             String date = delivery.get("date").getAsString();
             String hour = delivery.get("hour").getAsString();
             int driverID = delivery.get("driver_id").getAsInt();
@@ -105,7 +100,20 @@ public class DeliveryRepo implements IRepository<Delivery> {
             int siteID = delivery.get("site_id").getAsInt();
 
             Delivery newDelivery = new Delivery(id, LocalDate.parse(date), LocalTime.parse(hour), STD_manager.get_truck(truckID), STD_manager.get_driver(driverID), STD_manager.get_site(siteID));
-
+            for (JsonObject itemForm : items_form) {
+                int itemFormID = itemForm.get("ID").getAsInt();
+                Items_form itemsForm = new Items_form(itemFormID, STD_manager.get_site(itemForm.get("destenation_id").getAsInt()));
+                newDelivery.add_items_form(itemsForm);
+                ArrayList<JsonObject> items = itemDetailsDAO.get_items_by_item_form_id(itemFormID);
+                for (JsonObject item : items) {
+                    Item newitem = new Item(item.get("item_id").getAsInt(),item.get("name").getAsString(),item.get("amount_loaded").getAsInt(),item.get("amount_unloaded").getAsInt());
+                    newDelivery.getItems_form().get(itemFormID).addItem(newitem);
+                }
+            }
+            for (JsonObject itemLoaded : items_loaded) {
+                Item new_item = new Item(itemLoaded.get("item_id").getAsInt(),itemLoaded.get("name").getAsString(),itemLoaded.get("amount_loaded").getAsInt(),itemLoaded.get("amount_unloaded").getAsInt());
+                newDelivery.add_loaded_item(new_item);
+            }
             delivery_forms_d.put(id, newDelivery);
             return newDelivery;
         }
@@ -121,7 +129,7 @@ public class DeliveryRepo implements IRepository<Delivery> {
         JsonObject itemsFormJO = new JsonObject();
         itemsFormJO.addProperty("ID", itemsForm.getID());
         itemsFormJO.addProperty("delivery_id", deliveryID);
-        itemsFormJO.addProperty("destination_id", itemsForm.getDestination().getSite_ID());
+        itemsFormJO.addProperty("destenation_id", itemsForm.getDestination().getSite_ID());
         items_formDAO.add(itemsFormJO);
 
     }
@@ -129,7 +137,7 @@ public class DeliveryRepo implements IRepository<Delivery> {
     public void addItemToItemsForm(int itemFormId, int itemId, int quantity) {
         JsonObject itemDetailsJO = new JsonObject();
         itemDetailsJO.addProperty("item_id", itemId);
-        itemDetailsJO.addProperty("items_form_id", itemFormId);
+        itemDetailsJO.addProperty("item_form_id", itemFormId);
         itemDetailsJO.addProperty("amount_loaded", quantity);
         itemDetailsJO.addProperty("amount_unloaded", 0);
         itemDetailsDAO.add(itemDetailsJO);
@@ -191,5 +199,10 @@ public class DeliveryRepo implements IRepository<Delivery> {
 
     public void add_difference_to_loading_site(int itemId, int diff, int itemsFormId) {
         itemDetailsDAO.increaseItemAmountLoaded(itemsFormId,itemId,diff);
+    }
+
+    public void removeItemForm(int ifid) {
+        items_formDAO.remove(ifid);
+        itemDetailsDAO.remove(ifid);
     }
 }

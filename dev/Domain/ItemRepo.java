@@ -13,8 +13,6 @@ public class ItemRepo implements IRepository<Item>{
 
     @Override
     public void add(JsonObject obj) {
-        String ID = obj.get("ID").getAsString();
-        String name = obj.get("name").getAsString();
         itemDAO.add(obj);
     }
 

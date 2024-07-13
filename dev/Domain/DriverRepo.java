@@ -23,7 +23,14 @@ public class DriverRepo implements IRepository<Driver> {
 
     @Override
     public void update(Driver obj) {
-
+        drivers_d.put(obj.getID(), obj);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("ID", obj.getID());
+        jsonObject.addProperty("name", obj.getName());
+        jsonObject.addProperty("licence", obj.getLicense());
+        jsonObject.addProperty("phone_num", obj.getPhone_num());
+        jsonObject.addProperty("password", obj.getPassword());
+        driverDAO.update(jsonObject);
     }
 
 

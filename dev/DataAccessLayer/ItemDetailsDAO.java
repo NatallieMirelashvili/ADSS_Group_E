@@ -5,8 +5,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDetailsDAO {
-    private static final String URL = "jdbc:sqlite:DeliveryDB.sqlite";
+public class ItemDetailsDAO implements IDAO {
+    private static final String URL = "jdbc:sqlite:identifier.sqlite";
 
     public ItemDetailsDAO() {
         try (Connection conn = DriverManager.getConnection(URL);
@@ -24,13 +24,25 @@ public class ItemDetailsDAO {
     }
 
     public void add(JsonObject jsonObject) {
-        String sql = "INSERT INTO items_in_IF (item_id, items_form_id, amount_loaded, amount_unloaded) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO items_in_IF (item_id, item_form_id, amount_loaded, amount_unloaded) VALUES (?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, jsonObject.get("item_id").getAsInt());
-            pstmt.setInt(2, jsonObject.get("items_form_id").getAsInt());
+            pstmt.setInt(2, jsonObject.get("item_form_id").getAsInt());
             pstmt.setInt(3, jsonObject.get("amount_loaded").getAsInt());
             pstmt.setInt(4, jsonObject.get("amount_unloaded").getAsInt());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void remove(int id) {
+        String sql = "DELETE FROM items_in_IF WHERE item_form_id = ?";
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,6 +117,11 @@ public class ItemDetailsDAO {
         return itemDetails;
     }
 
+    @Override
+    public JsonObject get(int id) {
+        return null;
+    }
+
     public void setItemAmountLoaded(int item_form_id, int item_id, int amount) {
         String sql = "INSERT INTO items_in_IF (item_form_id, item_id, amount_loaded) VALUES ( ?, ?, ?)" +
                 "ON CONFLICT(item_form_id, item_id) DO UPDATE SET amount = ?";
@@ -146,6 +163,28 @@ public class ItemDetailsDAO {
     public void decreaseItemAmountLoaded( int item_form_id, int item_id, int amount) {
         int currentAmount = getItemAmount( item_form_id, item_id);
         setItemAmountLoaded(item_form_id, item_id, currentAmount - amount);
+    }
+
+    public ArrayList<JsonObject> get_items_by_item_form_id(int itemFormID) {
+        ArrayList<JsonObject> items = new ArrayList<>();
+        String sql = "SELECT * FROM items_in_IF i join items j on i.item_id = j.ID WHERE items_form_id = ?";
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, itemFormID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("item_id", rs.getInt("item_id"));
+                    jsonObject.addProperty("name", rs.getString("name"));
+                    jsonObject.addProperty("amount_loaded", rs.getInt("amount_loaded"));
+                    jsonObject.addProperty("amount_unloaded", rs.getInt("amount_unloaded"));
+                    items.add(jsonObject);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+    }
+        return items;
     }
 }
 

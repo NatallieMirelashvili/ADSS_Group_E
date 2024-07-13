@@ -19,6 +19,7 @@ public class Driver_Addition {
         while (!validChoice) {
             try {
                 ID = sc.nextInt();
+                sc.nextLine();
                 if (ID < 0) {
                     System.out.println("Invalid input. Please enter a positive Integer");
                     continue;

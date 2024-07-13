@@ -50,7 +50,11 @@ public class Delivery_manager_menu {
             System.out.println("5. Add new site");
             System.out.println("6. Add new items form to existing delivery");
             System.out.println("7. Start delivery");
-            System.out.println("8. Exit \n");
+            System.out.println("8. Print all drivers");
+            System.out.println("9. Print all Trucks");
+            System.out.println("10. Print all Sites");
+            System.out.println("11. Print all Deliveries");
+            System.out.println("12. Exit \n");
             System.out.println("Please enter your choice: ");
 
             try {
@@ -131,6 +135,38 @@ public class Delivery_manager_menu {
                     Delivery_duration.start_delivery_duration();
                     break;
                 case 8:
+                    String[] s = controller.print_all_drivers();
+                    for (String i : s){
+                        System.out.println(i);
+                        System.out.println();
+                    }
+                    break;
+                case 9:
+                    String[] str = controller.print_all_trucks();
+                    for (String i : str){
+                        System.out.println(i);
+                        System.out.println();
+                    }
+                    break;
+                case 10:
+                    String[] sites = controller.print_all_sites();
+                    for (String i : sites){
+                        System.out.println(i);
+                        System.out.println();
+                    }
+                    break;
+                case 11:
+                    String[] del = controller.print_all_deliveries();
+                    if (del.length == 0){
+                        System.out.println("No deliveries found");
+                        break;
+                    }
+                    for (String i : del){
+                        System.out.println(i);
+                        System.out.println();
+                    }
+                    break;
+                case 12:
                     continue_loop = false;
                     break;
                 default:

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsLoadedDAO implements IDAO {
-    private static final String URL = "jdbc:sqlite:DeliveryDB.sqlite";
+    private static final String URL = "jdbc:sqlite:identifier.sqlite";
 
     @Override
     public void add(JsonObject jsonObject) {
@@ -165,5 +165,27 @@ public class ItemsLoadedDAO implements IDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<JsonObject> get_items_by_delivery_id(int id) {
+        ArrayList<JsonObject> items = new ArrayList<>();
+        String sql = "SELECT * FROM ItemsLoaded il join items i on il.item_id = i.ID WHERE delivery_id = ?";
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("item_id", rs.getInt("item_id"));
+                    jsonObject.addProperty("name", rs.getString("name"));
+                    jsonObject.addProperty("amount_loaded", rs.getInt("amount_loaded"));
+                    jsonObject.addProperty("amount_unloaded", rs.getInt("amount_unloaded"));
+                    items.add(jsonObject);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+    }
+        return items;
     }
 }

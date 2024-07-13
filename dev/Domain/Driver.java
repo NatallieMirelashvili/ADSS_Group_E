@@ -49,4 +49,8 @@ public class Driver {
     public String getLicense() {
         return licence;
     }
+
+    public String getPhone_num() {
+        return phone_num;
+    }
 }
