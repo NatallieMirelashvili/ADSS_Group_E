@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class ProductController {
 
     public static ProductRepo myProductRepo = new ProductRepo();
+    public static productToDeliveryRepo myProductToDeliveryCTR = new productToDeliveryRepo();
     private int amountProducts = 0;
 
     public int getAmountProducts() {
@@ -68,6 +69,20 @@ public class ProductController {
             return myProductRepo.updateDisRepo(myProductRepo.findAllProductsBySubCat(cat, subCat), myDiscount, myManufacturer);
         }
         return myProductRepo.updateDisRepo(myProductRepo.findAllProductsBySize(cat, subCat, size), myDiscount, myManufacturer);
+    }
+
+    public void RequestDeliveryCTR(String cat, String subCat, String size, String myManufacturer) {
+        ArrayList<Product> products = myProductRepo.findAllProductsBySize(cat, subCat, size);
+        JsonObject productManu = new JsonObject();
+        for (Product product:products){
+            if (product.getManufacture().equals(myManufacturer)) {
+                productManu.addProperty("idStore", 4);
+                productManu.addProperty("manufacturer", product.getManufacture());
+                productManu.addProperty("catalogNumber", product.getCatalogNumProduct());
+                productManu.addProperty("orderAmount", product.getOrderAmount());
+                myProductToDeliveryCTR.add(productManu);
+            }
+        }
     }
 
     //return true if the product of item is minimal amount
