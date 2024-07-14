@@ -248,5 +248,10 @@ public class Facade {
         return myItemCTR.HelperGenerateReportsItem("defective",itemsToPrint);
     }
 
+    //new
+    public void RequestDelivery (String main, String sub, String size, String manu){
+         myProductCTR.RequestDeliveryCTR(main, sub, size, manu);
+    }
+
 
 }

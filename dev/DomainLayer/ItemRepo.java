@@ -11,7 +11,6 @@ import static DomainLayer.ItemStatus.*;
 public class ItemRepo implements IRepository<Item>{
     private ArrayList<Item> myItems = new ArrayList<>();
     private final ItemAccessObj myDAOItem = new ItemAccessObj();
-
     public ArrayList<Item> getMyItems() {
         return myItems;
     }
