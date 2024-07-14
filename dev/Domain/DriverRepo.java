@@ -19,6 +19,7 @@ public class DriverRepo implements IRepository<Driver> {
     @Override
     public void remove(int id) {
         drivers_d.remove(id);
+        driverDAO.remove(id);
     }
 
     @Override
@@ -55,6 +56,9 @@ public class DriverRepo implements IRepository<Driver> {
         Driver getter = drivers_d.get(id);
         if (getter == null) {
             JsonObject driver = driverDAO.get(id);
+            if (driver == null) {
+                return null;
+            }
             String ID = driver.get("ID").getAsString();
             String name = driver.get("name").getAsString();
             String licence = driver.get("licence").getAsString();

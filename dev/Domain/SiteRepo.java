@@ -61,6 +61,9 @@ public class SiteRepo implements IRepository<Site> {
             return sites_d.get(id);
         } else {
             JsonObject site = siteDAO.get(id);
+            if (site == null) {
+                return null;
+            }
             int ID = site.get("ID").getAsInt();
             String type = site.get("type").getAsString();
             String name = site.get("name").getAsString();

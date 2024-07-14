@@ -417,6 +417,14 @@ public class Delivery_manager {
             add_item(item);
         }
     }
+
+    public static void remove_item(int id) {
+        items.remove(id);
+    }
+
+    public static void remove_delivery(int id) {
+        delivers.remove(id);
+    }
 }
 
 

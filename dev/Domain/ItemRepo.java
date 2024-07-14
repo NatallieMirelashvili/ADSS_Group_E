@@ -52,7 +52,7 @@ public class ItemRepo implements IRepository<Item>{
         }
         JsonObject jsonItem = itemDAO.get(id);
         if (jsonItem != null) {
-            int itemId = jsonItem.get("id").getAsInt();
+            int itemId = jsonItem.get("ID").getAsInt();
             String name = jsonItem.get("name").getAsString();
             Item item = new Item(itemId, name);
             items_d.put(itemId, item);

@@ -126,32 +126,6 @@ public class Delivery {
         return this.truck;
     }
 
-//    public int createItems_form(Site destination) {
-//        /**
-//         * Creates a new items form.
-//         * @param destination - the destination of the items form
-//         */
-//        ArrayList<Item> items = new ArrayList<Item>();
-//        Items_form new_items_form = new Items_form(destination, items);
-//        item_form.add(new_items_form);
-//        return new_items_form.getID();
-//    }
-
-//    public void add_item_to_Items_form(int items_form_ID, Item item, int amount) {
-//        /**
-//         * Adds an item to an items form.
-//         * @param items_form_ID - the ID of the items form
-//         * @param item - the item to add
-//         * @param amount - the amount of the item
-//         */
-//        for (Items_form items_form_s : item_form) {
-//            if (items_form_s.getID() == items_form_ID) {
-//                items_form_s.addItem(new Item(item, amount));
-//                break;
-//            }
-//        }
-//    }
-
     public void removeItems_form(int items_formID) {
         /**
          * Removes an items form.
@@ -192,14 +166,6 @@ public class Delivery {
          */
         return item_form;
     }
-
-//    public int item_form_size() {
-//        /**
-//         * Returns the size of the items form.
-//         * @return the size of the items form
-//         */
-//        return item_form.size();
-//    }
 
     public void add_loaded_item_nquantity(Item item, int quantity) {
         /**
@@ -263,104 +229,7 @@ public class Delivery {
          */
         loaded_items.remove(item_ID);
     }
-
-//    public boolean items_form_exists(int items_form_ID) {
-//        /**
-//         * Returns whether an items form exists.
-//         * @param items_form_ID - the ID of the items form
-//         * @return whether an items form exists
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() == items_form_ID) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    public void remove_item_from_items_form(int itemsFormId, int itemId) {
-//        /**
-//         * Removes an item from an items form.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() == itemsFormId) {
-//                items_form.removeItem(itemId);
-//                break;
-//            }
-//        }
-//    }
-
-//    public int get_item_quantity_in_items_form(int itemsFormId, int itemId) {
-//        /**
-//         * Returns the quantity of an item in an items form.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() == itemsFormId) {
-//                return items_form.getItem(itemId).getAmount_loaded();
-//            }
-//        }
-//        return 0;
-//    }
-
-//    public void set_amount_of_item_in_items_form(int itemsFormId, int itemId, int quantity) {
-//        /**
-//         * Sets the amount of an item in an items form.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() == itemsFormId) {
-//                items_form.setAmount(itemId, quantity);
-//                break;
-//            }
-//        }
-//    }
-//
-//    public boolean item_exists_in_items_form(int itemsFormId, int itemId) {
-//        /**
-//         * Returns whether an item exists in an items form.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() == itemsFormId) {
-//                return items_form.item_exists(itemId);
-//            }
-//        }
-//        return false;
-//    }
-
-//    public boolean destinations_been_visited(int destinationId, int index) {
-//        /**
-//         * Returns whether the destinations have been visited.
-//         */
-//        for (int i = 0; i <= index; i++) {
-//            if (item_form.get(i).getDestination().getSite_ID() == destinationId) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    public void replace_truck(int truckId, int weight) {
-//        /**
-//         * Replaces the truck and change its availability accordingly.
-//         */
-//        this.truck.setAvailability(true);
-//        this.truck = Temp_DB.get_truck(truckId);
-//        this.truck.setAvailability(false);
-//        this.truck.setCurr_weight(weight);
-//    }
-
-//    public boolean item_exists_in_destination(int itemId, int destinationId) {
-//        /**
-//         * Returns whether an item exists in a destination.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getDestination().getSite_ID() == destinationId) {
-//                return items_form.item_exists(itemId);
-//            }
-//        }
-//        return false;
-//    }
-
-    public void update_item_quantity_unloaded_in_delivery(int quantity, int itemId) {
+   public void update_item_quantity_unloaded_in_delivery(int quantity, int itemId) {
         /**
          * Updates the quantity of an item unloaded in the delivery.
          */
@@ -373,18 +242,6 @@ public class Delivery {
          */
         return loaded_items.get(itemId).getAmount_unloaded();
     }
-
-//    public void remove_item_from_destination(int itemId, int destinationId) {
-//        /**
-//         * Removes an item from a destination.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getDestination().getSite_ID() == destinationId) {
-//                items_form.removeItem(itemId);
-//                break;
-//            }
-//        }
-//    }
 
     public int calculate_difference_loaded_unloaded(int itemId, int quantity) {
         /**
@@ -405,88 +262,6 @@ public class Delivery {
         }
     }
 
-//    public void remove_destination(int destinationId, int curr_destination_id) {
-//        /**
-//         * Removes a destination from the delivery.
-//         * @param destinationId The ID of the destination to be removed.
-//         * @param curr_destination_id The ID of the current destination.
-//         */
-//        // Initialize the loading and unloading forms
-//        Items_form load_form = null;
-//        Items_form unload_form = null;
-//
-//        // Iterate over all items forms in the delivery
-//        for (Items_form items_form : item_form) {
-//            // If the destination of the items form matches the destination to be removed, set it as the unloading form
-//            if (items_form.getDestination().getSite_ID() == destinationId) {
-//                unload_form = items_form;
-//                // If the destination of the items form matches the current destination, set it as the loading form
-//            } else if (items_form.getDestination().getSite_ID() == curr_destination_id) {
-//                load_form = items_form;
-//            }
-//        }
-//        // Iterate over all items in the unloading form
-//        for (Item item : unload_form.getItems()) {
-//            // If the item exists in the loading form, update its loaded amount
-//            if (load_form.item_exists(item.getItemId())) {
-//                // Decrease the loaded amount of the item in the loading form by the loaded amount of the item in the unloading form
-//                load_form.getItem(item.getItemId()).setAmount_loaded(load_form.getItem(item.getItemId()).getAmount_loaded() - item.getAmount_loaded());
-//                // Decrease the loaded amount of the item in the loaded items by the loaded amount of the item in the unloading form
-//                decrease_item_in_loaded_items(item.getItemId(), item.getAmount_loaded());
-//                // If the loaded amount of the item in the loading form is zero or less, remove the item from the loading form and the loaded items
-//                if (load_form.getItem(item.getItemId()).getAmount_loaded() <= 0) {
-//                    load_form.removeItem(item.getItemId());
-//                    remove_item_from_loaded_items(item.getItemId());
-//                }
-//            }
-//        }
-//        // Remove the unloading form from the items forms of the delivery
-//        item_form.remove(unload_form);
-//    }
-
-//    public int get_destination_site_ID(int index) {
-//        /**
-//         * Returns the site ID of the destination at the given index.
-//         */
-//        return item_form.get(index).getDestination().getSite_ID();
-//    }
-
-//    public int get_items_amount_in_destination(int siteId) {
-//        /**
-//         * Returns the amount of items in the destination.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getDestination().getSite_ID() == siteId) {
-//                return items_form.getItems().size();
-//            }
-//        }
-//        return 0;
-//    }
-
-//    public int get_item_ID_in_destinations(int siteId, int itemIndex) {
-//        /**
-//         * Returns the ID of the item in the destination.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getDestination().getSite_ID() == siteId) {
-//                return items_form.getItems().get(itemIndex).getItemId();
-//            }
-//        }
-//        return 0;
-//    }
-
-//    public int get_item_quantity_in_destinations(int siteId, int itemId) {
-//        /**
-//         * Returns the quantity of the item in the destination.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getDestination().getSite_ID() == siteId) {
-//                return items_form.getItem(itemId).getAmount_loaded();
-//            }
-//        }
-//        return 0;
-//    }
-
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
@@ -494,43 +269,6 @@ public class Delivery {
     public boolean isFinished() {
         return finished;
     }
-
-//    public int get_destination_ID(int i) {
-//        /**
-//         * Returns the ID of the destination at the given index.
-//         */
-//        return item_form.get(i).getDestination().getSite_ID();
-//    }
-
-//    public boolean item_exists_in_diff_items_form(int itemsFormId, int itemId) {
-//        /**
-//         * Returns whether an item exists in a different items form.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() != itemsFormId) {
-//                if (items_form.item_exists(itemId)) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
-//    public boolean problem_edit_fixed(int itemsFormId, int itemID, int amount) {
-//        /**
-//         * Returns whether the problem of editing the item is fixed.
-//         */
-//        for (Items_form items_form : item_form) {
-//            if (items_form.getID() == itemsFormId) {
-//                if (items_form.item_exists(itemID)) {
-//                    if (items_form.getItem(itemID).getAmount_loaded() >= amount) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     public int getTruckID() {
         return truck.getID();

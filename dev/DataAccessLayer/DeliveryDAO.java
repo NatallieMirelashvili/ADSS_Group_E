@@ -29,6 +29,7 @@ public class DeliveryDAO implements IDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -66,12 +67,12 @@ public class DeliveryDAO implements IDAO {
         String sql = "UPDATE deliverys SET date = ?, hour = ?, driver_id = ?, truck_id = ?, site_id = ? WHERE ID = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(2, jsonObject.get("date").getAsString());
-            pstmt.setString(3, jsonObject.get("hour").getAsString());
-            pstmt.setInt(4, jsonObject.get("driver_id").getAsInt());
-            pstmt.setInt(5, jsonObject.get("truck_id").getAsInt());
-            pstmt.setInt(6, jsonObject.get("site_id").getAsInt());
-            pstmt.setInt(1, jsonObject.get("ID").getAsInt());
+            pstmt.setString(1, jsonObject.get("date").getAsString());
+            pstmt.setString(2, jsonObject.get("hour").getAsString());
+            pstmt.setInt(3, jsonObject.get("driver_id").getAsInt());
+            pstmt.setInt(4, jsonObject.get("truck_id").getAsInt());
+            pstmt.setInt(5, jsonObject.get("site_id").getAsInt());
+            pstmt.setInt(6, jsonObject.get("ID").getAsInt());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

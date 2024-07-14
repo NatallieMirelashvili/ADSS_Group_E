@@ -46,5 +46,9 @@ public class Truck {
     public String toString() {
         return "Truck ID: " + id + "\nModel: " + model + "\nCurrent Weight: " + curr_weight + "\nMax Weight: " + max_weight + "\nLicence: " + licence;
     }
+
+    public String getModel() {
+        return model;
+    }
 }
 

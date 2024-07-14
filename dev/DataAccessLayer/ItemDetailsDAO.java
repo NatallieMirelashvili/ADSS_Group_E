@@ -123,14 +123,12 @@ public class ItemDetailsDAO implements IDAO {
     }
 
     public void setItemAmountLoaded(int item_form_id, int item_id, int amount) {
-        String sql = "INSERT INTO items_in_IF (item_form_id, item_id, amount_loaded) VALUES ( ?, ?, ?)" +
-                "ON CONFLICT(item_form_id, item_id) DO UPDATE SET amount = ?";
-
+        String sql = "UPDATE items_in_IF SET amount_loaded = ? WHERE item_id = ? AND item_form_id = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, item_form_id);
+            pstmt.setInt(1, amount);
             pstmt.setInt(2, item_id);
-            pstmt.setInt(3, amount);
+            pstmt.setInt(3, item_form_id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
