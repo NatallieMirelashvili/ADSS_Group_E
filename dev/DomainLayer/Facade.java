@@ -249,8 +249,8 @@ public class Facade {
     }
 
     //new
-    public void RequestDelivery (String main, String sub, String size, String manu){
-         myProductCTR.RequestDeliveryCTR(main, sub, size, manu);
+    public boolean RequestDelivery (String manu){
+         return myProductCTR.RequestDeliveryCTR(manu);
     }
 
 

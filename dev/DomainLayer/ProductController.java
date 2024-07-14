@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ProductController {
 
     public static ProductRepo myProductRepo = new ProductRepo();
-    public static productToDeliveryRepo myProductToDeliveryCTR = new productToDeliveryRepo();
+    public static productToDeliveryRepo myProductToDeliveryRepo = new productToDeliveryRepo();
     private int amountProducts = 0;
 
     public int getAmountProducts() {
@@ -71,18 +71,21 @@ public class ProductController {
         return myProductRepo.updateDisRepo(myProductRepo.findAllProductsBySize(cat, subCat, size), myDiscount, myManufacturer);
     }
 
-    public void RequestDeliveryCTR(String cat, String subCat, String size, String myManufacturer) {
-        ArrayList<Product> products = myProductRepo.findAllProductsBySize(cat, subCat, size);
+    public boolean RequestDeliveryCTR(String myManufacturer) {
+        boolean success= false;
+        ArrayList<Product> products = myProductRepo.findAll();
         JsonObject productManu = new JsonObject();
         for (Product product:products){
-            if (product.getManufacture().equals(myManufacturer)) {
+            if ((product.getManufacture().equals(myManufacturer))&&(product.isMinimal())) {
+                success = true;
                 productManu.addProperty("idStore", 4);
                 productManu.addProperty("manufacturer", product.getManufacture());
                 productManu.addProperty("catalogNumber", product.getCatalogNumProduct());
                 productManu.addProperty("orderAmount", product.getOrderAmount());
-                myProductToDeliveryCTR.add(productManu);
+                myProductToDeliveryRepo.add(productManu);
             }
         }
+        return success;
     }
 
     //return true if the product of item is minimal amount
