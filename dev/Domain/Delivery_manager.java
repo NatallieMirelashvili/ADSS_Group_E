@@ -425,6 +425,9 @@ public class Delivery_manager {
     public static void remove_delivery(int id) {
         delivers.remove(id);
     }
+    public static ArrayList<String> get_pending_orders() {
+        return delivers.get_pending_orders();
+    }
 }
 
 

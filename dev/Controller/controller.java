@@ -704,4 +704,12 @@ public class controller {
          */
         Delivery_manager.addAllItems(items);
     }
+
+    public static ArrayList<String> get_pending_orders() {
+        /**
+         * Retrieves all the pending orders.
+         * @return The pending orders.
+         */
+        return Delivery_manager.get_pending_orders();
+    }
 }

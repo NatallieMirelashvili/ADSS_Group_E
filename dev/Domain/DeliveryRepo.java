@@ -1,9 +1,6 @@
 package Domain;
 
-import DataAccessLayer.DeliveryDAO;
-import DataAccessLayer.ItemDetailsDAO;
-import DataAccessLayer.Items_formDAO;
-import DataAccessLayer.ItemsLoadedDAO;
+import DataAccessLayer.*;
 import com.google.gson.JsonObject;
 
 
@@ -23,8 +20,9 @@ public class DeliveryRepo implements IRepository<Delivery> {
     private static ItemDetailsDAO itemDetailsDAO = new ItemDetailsDAO();
     // all items in delivery form in the DB
     private static ItemsLoadedDAO itemsLoadedDAO = new ItemsLoadedDAO();
-    //TODO: maybe add a ItemDAO object here
 
+    private static OrderDAO ordersDAO = new OrderDAO();
+    private static Dest_ItemsDAO destItemsDAO = new Dest_ItemsDAO();
 
     @Override
     public void add(JsonObject delivery) {
@@ -204,5 +202,28 @@ public class DeliveryRepo implements IRepository<Delivery> {
     public void removeItemForm(int ifid) {
         items_formDAO.remove(ifid);
         itemDetailsDAO.remove(ifid);
+    }
+
+    public ArrayList<String> get_pending_orders() {
+        List<JsonObject> sitesjo = destItemsDAO.getAll();
+        ArrayList<String> orders = new ArrayList<>();
+        for (JsonObject site : sitesjo) {
+            int supplierID = site.get("sup_id").getAsInt();
+            int siteID = site.get("site_id").getAsInt();
+            Site dest = STD_manager.get_site(siteID);
+            Site s = STD_manager.get_site(supplierID);
+            Items_form supitemsform = new Items_form(s);
+            Items_form destitemsform = new Items_form(dest);
+            ArrayList<JsonObject> items = ordersDAO.get_items_by_destination(supplierID);
+            for (JsonObject item : items) {
+                Item supitem = new Item(item.get("item_id").getAsInt(),item.get("name").getAsString(),item.get("amount_loaded").getAsInt(),0);
+                Item destitem = new Item(item.get("item_id").getAsInt(),item.get("name").getAsString(),0,item.get("amount_unloaded").getAsInt());
+                supitemsform.addItem(supitem);
+                destitemsform.addItem(destitem);
+            }
+            orders.add(supitemsform.toString());
+            orders.add(destitemsform.toString());
+        }
+        return orders;
     }
 }

@@ -54,7 +54,8 @@ public class Delivery_manager_menu {
             System.out.println("9. Print all Trucks");
             System.out.println("10. Print all Sites");
             System.out.println("11. Print all Deliveries");
-            System.out.println("12. Exit \n");
+            System.out.println("12. Get pending orders");
+            System.out.println("13. Exit \n");
             System.out.println("Please enter your choice: ");
 
             try {
@@ -88,7 +89,7 @@ public class Delivery_manager_menu {
                                 area = sc.nextLine();
                                 if (!area.equals("north") && !area.equals("center") && !area.equals("south")) {
                                     System.out.println("Invalid area, please enter north, center or south");
-                            }
+                                }
                                 else break;
                             }
                             controller.change_site_area(ID, area);
@@ -167,6 +168,18 @@ public class Delivery_manager_menu {
                     }
                     break;
                 case 12:
+                    ArrayList<String> orders = controller.get_pending_orders();
+                    if (orders.isEmpty()){
+                        System.out.println("No pending orders found");
+                        break;
+                    }
+                    for (String i : orders){
+                        System.out.println(i);
+                        System.out.println();
+                    }
+                    break;
+
+                case 13:
                     continue_loop = false;
                     break;
                 default:
