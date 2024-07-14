@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DriverDAO implements IDAO  {
-    private static final String URL = "jdbc:sqlite:identifier.sqlite";
+    private static final String URL = "jdbc:sqlite:C:\\Users\\tomba\\IdeaProjects\\ADSS_Group_E\\identifier.sqlite";
     public DriverDAO() {
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement()) {

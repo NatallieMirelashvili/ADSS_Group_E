@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SiteDAO implements IDAO {
-    private static final String URL = "jdbc:sqlite:identifier.sqlite";
+    private static final String URL = "jdbc:sqlite:C:\\Users\\tomba\\IdeaProjects\\ADSS_Group_E\\identifier.sqlite";
 
     public SiteDAO() {
         try (Connection conn = DriverManager.getConnection(URL);
