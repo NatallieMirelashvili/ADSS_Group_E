@@ -2,6 +2,8 @@ package PresentationLayer;
 import DomainLayer.Facade;
 import java.util.Scanner;
 
+import static PresentationLayer.Management.readStrFromUsr;
+
 
 /**
  * MainMenu - a class which its purpose to run the main menu for thr user. The main menu functions contains passes to
@@ -63,6 +65,16 @@ public class MainMenu {
         myFacade.checkAllItemsExpService();
         myFacade.checkAllProductSaleService();
     }
+
+    public static void RequestDelivery(){
+        Scanner scan = new Scanner(System.in);
+        String manuMSG = "Please enter the name of the manufacturer you want to make a delivery: ";
+        String manu = readStrFromUsr(manuMSG, scan);
+        if (myFacade.RequestDelivery(manu)){
+            System.out.println("The delivery was made successfully!\n");
+        }
+        System.out.println("There are not products in shortage from this manufacturer.\n");
+    }
     public static void exit(){
         System.out.println("Exiting program...\nGoodBye!");
     }
@@ -74,7 +86,8 @@ public class MainMenu {
                 3. Preform an inventory actions
                 4. Show warehouse manager's contact details
                 5. End of shift report
-                6. Exit program
+                6. Request to delivery
+                7. Exit program
                 """;
     }
 
@@ -96,7 +109,8 @@ public class MainMenu {
             case 3 -> inventory();
             case 4 -> managerDetails();
             case 5 -> nextDay();
-            case 6 -> exit();
+            case 6 -> RequestDelivery();
+            case 7 -> exit();
             default -> System.out.println("Please choose valid number between 1-6");
 
         }

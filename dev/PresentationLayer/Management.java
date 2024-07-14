@@ -29,7 +29,7 @@ public class Management {
         }
         return categoriesForSales;
     }
-    private static String readStrFromUsr(String msg, Scanner scan){
+    static String readStrFromUsr(String msg, Scanner scan){
         System.out.println(msg);
         return scan.nextLine();
     }
