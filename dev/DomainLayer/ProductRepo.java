@@ -53,7 +53,7 @@ public class ProductRepo implements IRepository<Product>{
                 }
             }
         }  // case where cat does not exist in repo
-            return myDAOProduct.findAllProductsByMainCatDB(cat, new ArrayList<>(0)).size() !=0;
+        return myDAOProduct.findAllProductsByMainCatDB(cat, new ArrayList<>(0)).size() !=0;
     }
 
     //return product in inventory if he exists; otherwise return null.
@@ -84,18 +84,18 @@ public class ProductRepo implements IRepository<Product>{
                 res.addAll(findAllProductsBySubCat(cat, mySubCat));
             }
         }
-            ArrayList<Integer> alreadyHave = new ArrayList<>();
-            for (Product prod: res){
-                alreadyHave.add(prod.getCatalogNumProduct());
-            }
-            ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsByMainCatDB(cat, alreadyHave);
+        ArrayList<Integer> alreadyHave = new ArrayList<>();
+        for (Product prod: res){
+            alreadyHave.add(prod.getCatalogNumProduct());
+        }
+        ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsByMainCatDB(cat, alreadyHave);
 //            FETCH TO CATCH
-            for(JsonObject record: theRestFromDB){
+        for(JsonObject record: theRestFromDB){
 //                fromDB = true!
-                Product parsedProdAndAdded = addToRepoOnly(record, true);
-                res.add(parsedProdAndAdded);
-            }
-            return res;
+            Product parsedProdAndAdded = addToRepoOnly(record, true);
+            res.add(parsedProdAndAdded);
+        }
+        return res;
     }
 
     //return an array list of all products by category and sub category
@@ -107,18 +107,18 @@ public class ProductRepo implements IRepository<Product>{
                 res.addAll(findAllProductsBySize(cat, subCat, mySize));
             }
         }
-            ArrayList<Integer> alreadyHave = new ArrayList<>();
-            for (Product prod: res){
-                alreadyHave.add(prod.getCatalogNumProduct());
-            }
-            ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsBySubCatDB(cat, subCat, alreadyHave);
+        ArrayList<Integer> alreadyHave = new ArrayList<>();
+        for (Product prod: res){
+            alreadyHave.add(prod.getCatalogNumProduct());
+        }
+        ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsBySubCatDB(cat, subCat, alreadyHave);
 //            FETCH TO CATCH
-            for(JsonObject record: theRestFromDB){
-    //                fromDB = true!
-                Product parsedProdAndAdded = addToRepoOnly(record, true);
-                res.add(parsedProdAndAdded);
-            }
-            return res;
+        for(JsonObject record: theRestFromDB){
+            //                fromDB = true!
+            Product parsedProdAndAdded = addToRepoOnly(record, true);
+            res.add(parsedProdAndAdded);
+        }
+        return res;
 
     }
 
@@ -126,20 +126,20 @@ public class ProductRepo implements IRepository<Product>{
     public ArrayList<Product> findAllProductsBySize(String cat, String subCat, String size) {
         ArrayList<Product> res = new ArrayList<>();
         if (findIfExistWithout(cat, subCat, size)) {
-           res = myProducts.get(cat).get(subCat).get(size);
+            res = myProducts.get(cat).get(subCat).get(size);
         }
-            ArrayList<Integer> alreadyHave = new ArrayList<>();
-            for (Product prod: res){
-                alreadyHave.add(prod.getCatalogNumProduct());
-            }
-            ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsBySizeDB(cat, subCat, size, alreadyHave);
+        ArrayList<Integer> alreadyHave = new ArrayList<>();
+        for (Product prod: res){
+            alreadyHave.add(prod.getCatalogNumProduct());
+        }
+        ArrayList<JsonObject> theRestFromDB = myDAOProduct.findAllProductsBySizeDB(cat, subCat, size, alreadyHave);
 //            FETCH TO CATCH
-            for(JsonObject record: theRestFromDB){
-                //                fromDB = true!
-                Product parsedProdAndAdded = addToRepoOnly(record, true);
-                res.add(parsedProdAndAdded);
-            }
-            return res;
+        for(JsonObject record: theRestFromDB){
+            //                fromDB = true!
+            Product parsedProdAndAdded = addToRepoOnly(record, true);
+            res.add(parsedProdAndAdded);
+        }
+        return res;
     }
 
     //return an array list of all products by category only in catch memo
@@ -177,7 +177,7 @@ public class ProductRepo implements IRepository<Product>{
             myProducts.get(newProd.getCatName()).get(newProd.getSubCatName()).putIfAbsent(newProd.getProdSize(), new ArrayList<>());
             myProducts.get(newProd.getCatName()).get(newProd.getSubCatName()).get(newProd.getProdSize()).addAll(proToAdd);
         } else {
-            findAllProductsBySize(newProd.getCatName(), newProd.getSubCatName(), newProd.getProdSize()).add(newProd);
+            myProducts.get(newProd.getCatName()).get(newProd.getSubCatName()).get(newProd.getProdSize()).add(newProd);
         }
         return newProd;
     }
@@ -260,26 +260,26 @@ public class ProductRepo implements IRepository<Product>{
         }
         if(record.has("mySalePrice") && !record.get("mySalePrice").isJsonNull()){
             JsonObject saleRec = myDAOSaleItem.search(record.get("mySalePrice").getAsInt());
-        if(saleRec != null){
+            if(saleRec != null){
 //            Setting sale price if there is one
-            String start = saleRec.get("startSale").getAsString();
-            LocalDate startDate = LocalDate.parse(start);
-            String end = saleRec.get("endSale").getAsString();
-            LocalDate endDate = LocalDate.parse(end);
-            salePrice sale = new salePrice(startDate, endDate,saleRec.get("discountRatio").getAsInt(), saleRec.get("idSale").getAsInt());
-            newProd.setMySalePrice(sale);
-        }
+                String start = saleRec.get("startSale").getAsString();
+                LocalDate startDate = LocalDate.parse(start);
+                String end = saleRec.get("endSale").getAsString();
+                LocalDate endDate = LocalDate.parse(end);
+                salePrice sale = new salePrice(startDate, endDate,saleRec.get("discountRatio").getAsInt(), saleRec.get("idSale").getAsInt());
+                newProd.setMySalePrice(sale);
+            }
         }
 //            set is minimal
-            newProd.setMinimal(record.get("isMinimal").getAsBoolean());
+        newProd.setMinimal(record.get("isMinimal").getAsBoolean());
 //            set total -> "Amount in store,amount in warehouse"
-            String[] totalSTR = record.get("total").getAsString().split(",");
-            Tuple<Integer, Integer> total = new Tuple<>(Integer.parseInt(totalSTR[0]), Integer.parseInt(totalSTR[1]));
-            newProd.setTotal(total);
+        String[] totalSTR = record.get("total").getAsString().split(",");
+        Tuple<Integer, Integer> total = new Tuple<>(Integer.parseInt(totalSTR[0]), Integer.parseInt(totalSTR[1]));
+        newProd.setTotal(total);
 //            set curr prices:
-            newProd.setManuPriceCurr(record.get("manuPriceCurr").getAsDouble());
-            newProd.setMarketPriceCurr(record.get("marketPriceCurr").getAsDouble());
-            return newProd;
+        newProd.setManuPriceCurr(record.get("manuPriceCurr").getAsDouble());
+        newProd.setMarketPriceCurr(record.get("marketPriceCurr").getAsDouble());
+        return newProd;
     }
 
     public void setIsMinimal(Product product, boolean b) {
