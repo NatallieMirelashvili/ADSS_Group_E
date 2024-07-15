@@ -1,4 +1,4 @@
-package DataAccessLayer;
+package DAOLayer;
 import DomainLayer.Tuple;
 import com.google.gson.JsonObject;
 import java.sql.*;

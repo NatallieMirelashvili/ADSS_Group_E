@@ -1,4 +1,4 @@
-package DataAccessLayer;
+package DAOLayer;
 
 import com.google.gson.JsonObject;
 

@@ -93,7 +93,7 @@ public class MainMenu {
 
     public static void runMenu(){
         int choice = 0;
-        while (choice!=6){
+        while (choice!=7){
             choice = GetChoice();
         }
     }
@@ -103,7 +103,6 @@ public class MainMenu {
         int userInput = scanner.nextInt();
         switch (userInput) {
 //
-//            case 1 -> initProg();
             case 1 -> ThrowItem();
             case 2 -> GenerateReports();
             case 3 -> inventory();
@@ -111,7 +110,7 @@ public class MainMenu {
             case 5 -> nextDay();
             case 6 -> RequestDelivery();
             case 7 -> exit();
-            default -> System.out.println("Please choose valid number between 1-6");
+            default -> System.out.println("Please choose valid number between 1-7");
 
         }
         return userInput;

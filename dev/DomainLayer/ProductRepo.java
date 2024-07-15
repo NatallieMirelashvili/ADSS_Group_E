@@ -1,6 +1,6 @@
 package DomainLayer;
-import DataAccessLayer.ProductAccessObj;
-import DataAccessLayer.SaleItemAccessObj;
+import DAOLayer.ProductAccessObj;
+import DAOLayer.SaleItemAccessObj;
 import com.google.gson.JsonObject;
 
 import java.time.LocalDate;

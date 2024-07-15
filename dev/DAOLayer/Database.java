@@ -1,4 +1,4 @@
-package DataAccessLayer;
+package DAOLayer;
 import java.sql.*;
 
 public class Database {

@@ -1,9 +1,8 @@
-package DataAccessLayer;
+package DAOLayer;
 
 import com.google.gson.JsonObject;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SaleItemAccessObj implements IDataAccessObj {

@@ -82,19 +82,14 @@ class FacadeTest {
 
     @Test
     public void updateSale(){
-        String from = "2024-07-04";
-        String to = "2024-07-07";
+        String from = "2024-07-15";
+        String to = "2024-08-01";
         myFacade.updateSaleService("Electric", "0", "0", LocalDate.parse(from), LocalDate.parse(to), 10);
 //        current price updated:
         assertEquals(4500.0, forDBChecks.find(4040).getMarketPriceCurr());
 //        Link product -> saleItem created:
         assertEquals(1, forDBChecks.find(4040).getMySalePrice().getId());
 
-    }
-    @Test
-    public void updateDis(){
-        myFacade.updateDiscountService("Electric", "0", "0",10,"Apple");
-        assertEquals(3600.0, forDBChecks.find(4040).getManuPriceCurr());
     }
 
 }

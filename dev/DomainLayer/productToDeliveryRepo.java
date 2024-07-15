@@ -1,7 +1,6 @@
 package DomainLayer;
 
-import DataAccessLayer.ItemAccessObj;
-import DataAccessLayer.ProductToDelAccessObj;
+import DAOLayer.ProductToDelAccessObj;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
