@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Delivery_manager {
     public static DeliveryRepo delivers = new DeliveryRepo();
-    public static ItemRepo items = new ItemRepo();
+    public static ItemRepositoryDelivery items = new ItemRepositoryDelivery();
 
 
     public static void add_delivery(JsonObject delivery) {
@@ -50,7 +50,7 @@ public class Delivery_manager {
         return delivers.get(id);
     }
 
-    public static Item get_item(int id) {
+    public static Product_to_Delivery get_item(int id) {
         return items.get(id);
     }
 
@@ -84,7 +84,7 @@ public class Delivery_manager {
         ArrayList<Items_form> items_form = delivers.get(deliveryId).getItems_form();
         for (Items_form form : items_form) {
             if (form.getID() == itemFormId) {
-                form.addItem(new Item(items.get(itemId), quantity));
+                form.addItem(new Product_to_Delivery(items.get(itemId), quantity));
             }
         }
         update_delivery(delivers.get(deliveryId));
@@ -382,19 +382,19 @@ public class Delivery_manager {
                     unload_form = form;
                 }
             }
-        for (Item item : unload_form.getItems()) {
+        for (Product_to_Delivery producttoDelivery : unload_form.getItems()) {
             // If the item exists in the loading form, update its loaded amount
-            if (load_form.item_exists(item.getItemId())) {
+            if (load_form.item_exists(producttoDelivery.getItemId())) {
                 // Decrease the loaded amount of the item in the loading form by the loaded amount of the item in the unloading form
-                load_form.getItem(item.getItemId()).setAmount_loaded(load_form.getItem(item.getItemId()).getAmount_loaded() - item.getAmount_loaded());
-                delivers.updateItemAmountLoaded(load_form.getID(), item.getItemId(), load_form.getItem(item.getItemId()).getAmount_loaded()-item.getAmount_loaded());
+                load_form.getItem(producttoDelivery.getItemId()).setAmount_loaded(load_form.getItem(producttoDelivery.getItemId()).getAmount_loaded() - producttoDelivery.getAmount_loaded());
+                delivers.updateItemAmountLoaded(load_form.getID(), producttoDelivery.getItemId(), load_form.getItem(producttoDelivery.getItemId()).getAmount_loaded()- producttoDelivery.getAmount_loaded());
                 // Decrease the loaded amount of the item in the loaded items by the loaded amount of the item in the unloading form
-                d.decrease_item_in_loaded_items(item.getItemId(), item.getAmount_loaded());
-                decrease_item_in_loaded_items(deliveryId, item.getItemId(), item.getAmount_loaded());
+                d.decrease_item_in_loaded_items(producttoDelivery.getItemId(), producttoDelivery.getAmount_loaded());
+                decrease_item_in_loaded_items(deliveryId, producttoDelivery.getItemId(), producttoDelivery.getAmount_loaded());
                 // If the loaded amount of the item in the loading form is zero or less, remove the item from the loading form and the loaded items
-                if (load_form.getItem(item.getItemId()).getAmount_loaded() <= 0) {
-                    load_form.removeItem(item.getItemId());
-                    delivers.removeItemFromItemsForm(load_form.getID(), item.getItemId());
+                if (load_form.getItem(producttoDelivery.getItemId()).getAmount_loaded() <= 0) {
+                    load_form.removeItem(producttoDelivery.getItemId());
+                    delivers.removeItemFromItemsForm(load_form.getID(), producttoDelivery.getItemId());
                 }
             }
         }

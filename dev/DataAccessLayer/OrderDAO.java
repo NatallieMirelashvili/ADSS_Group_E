@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAO implements IDAO{
-    private static final String URL = "jdbc:sqlite:C:\\Users\\tomba\\IdeaProjects\\ADSS_Group_E\\identifier.sqlite";
+    private static final String URL = "jdbc:sqlite:C:/Users/User/Desktop/לימודים/ניתוצ/עבודה 0/ADSS_Group_E/identifier.sqlite";
 
     @Override
     public void add(JsonObject jsonObject) {
@@ -35,7 +35,7 @@ public class OrderDAO implements IDAO{
     }
     public ArrayList<JsonObject> get_items_by_destination(int sup_id){
         ArrayList<JsonObject> items = new ArrayList<>();
-        String sql = "SELECT * FROM Orders o join items j on o.catalogNumber = j.ID WHERE sup_id = ?";
+        String sql = "SELECT * FROM Orders o join items j on o.catalogNumber = j.ID WHERE manufacturer = ?";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, sup_id);

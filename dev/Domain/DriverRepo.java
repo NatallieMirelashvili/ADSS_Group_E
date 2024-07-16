@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DriverRepo implements IRepository<Driver> {
+public class DriverRepo implements IRepositoryDelivery<Driver> {
     private static HashMap<Integer, Driver> drivers_d = new HashMap<Integer, Driver>();
     private static DriverDAO driverDAO = new DriverDAO();
 

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ItemRepo implements IRepository<Item>{
-    private static HashMap<Integer, Item> items_d = new HashMap<Integer, Item>();
+public class ItemRepositoryDelivery implements IRepositoryDelivery<Product_to_Delivery> {
+    private static HashMap<Integer, Product_to_Delivery> items_d = new HashMap<Integer, Product_to_Delivery>();
     private static ItemDAO itemDAO = new ItemDAO();
 
     @Override
@@ -23,7 +23,7 @@ public class ItemRepo implements IRepository<Item>{
     }
 
     @Override
-    public void update(Item obj) {
+    public void update(Product_to_Delivery obj) {
         items_d.put(obj.getItemId(), obj);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("id", obj.getItemId());
@@ -32,21 +32,21 @@ public class ItemRepo implements IRepository<Item>{
     }
 
     @Override
-    public List<Item> getAll() {
+    public List<Product_to_Delivery> getAll() {
         List<JsonObject> jsonItems = itemDAO.getAll();
-        List<Item> items = new ArrayList<>();
+        List<Product_to_Delivery> producttoDeliveries = new ArrayList<>();
         for (JsonObject jsonItem : jsonItems) {
             int id = jsonItem.get("id").getAsInt();
             String name = jsonItem.get("name").getAsString();
-            Item item = new Item(id, name);
-            items.add(item);
-            items_d.put(id, item);
+            Product_to_Delivery producttoDelivery = new Product_to_Delivery(id, name);
+            producttoDeliveries.add(producttoDelivery);
+            items_d.put(id, producttoDelivery);
         }
-        return items;
+        return producttoDeliveries;
     }
 
     @Override
-    public Item get(int id) {
+    public Product_to_Delivery get(int id) {
         if (items_d.containsKey(id)) {
             return items_d.get(id);
         }
@@ -54,9 +54,9 @@ public class ItemRepo implements IRepository<Item>{
         if (jsonItem != null) {
             int itemId = jsonItem.get("ID").getAsInt();
             String name = jsonItem.get("name").getAsString();
-            Item item = new Item(itemId, name);
-            items_d.put(itemId, item);
-            return item;
+            Product_to_Delivery producttoDelivery = new Product_to_Delivery(itemId, name);
+            items_d.put(itemId, producttoDelivery);
+            return producttoDelivery;
         }
         return null;
     }

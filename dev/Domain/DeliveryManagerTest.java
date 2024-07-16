@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,10 +81,10 @@ public class DeliveryManagerTest {
 
         Delivery_manager.add_item(item1);
 
-        Item item = Delivery_manager.get_item(300);
+        Product_to_Delivery producttoDelivery = Delivery_manager.get_item(300);
 
-        assertEquals(300, item.getItemId());
-        assertEquals("TEST", item.getItemName());
+        assertEquals(300, producttoDelivery.getItemId());
+        assertEquals("TEST", producttoDelivery.getItemName());
         Delivery_manager.remove_item(300);
 
     }

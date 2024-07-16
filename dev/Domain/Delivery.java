@@ -15,7 +15,7 @@ public class Delivery {
     private ArrayList<Items_form> item_form = new ArrayList<Items_form>();
     static int counter = 0;
 
-    private HashMap<Integer, Item> loaded_items = new HashMap<Integer, Item>();
+    private HashMap<Integer, Product_to_Delivery> loaded_items = new HashMap<Integer, Product_to_Delivery>();
 
     private boolean finished = false;
 
@@ -34,7 +34,7 @@ public class Delivery {
         this.truck = truck;
         this.driver = driver;
         this.origin = origin;
-        loaded_items = new HashMap<Integer, Item>();
+        loaded_items = new HashMap<Integer, Product_to_Delivery>();
     }
     public Delivery(int id,LocalDate date, LocalTime hour, Truck truck, Driver driver, Site origin) {
         /**
@@ -51,7 +51,7 @@ public class Delivery {
         this.truck = truck;
         this.driver = driver;
         this.origin = origin;
-        loaded_items = new HashMap<Integer, Item>();
+        loaded_items = new HashMap<Integer, Product_to_Delivery>();
         counter++;
     }
 
@@ -167,18 +167,18 @@ public class Delivery {
         return item_form;
     }
 
-    public void add_loaded_item_nquantity(Item item, int quantity) {
+    public void add_loaded_item_nquantity(Product_to_Delivery producttoDelivery, int quantity) {
         /**
          * Adds a loaded item.
          * @param item - the item to add
          * @param quantity - the quantity of the item
          */
-        if (loaded_items.containsKey(item.getItemId())) {
-            Item loaded_item = loaded_items.get(item.getItemId());
-            loaded_item.setAmount_loaded(loaded_item.getAmount_loaded() + quantity);
+        if (loaded_items.containsKey(producttoDelivery.getItemId())) {
+            Product_to_Delivery loaded_producttoDelivery = loaded_items.get(producttoDelivery.getItemId());
+            loaded_producttoDelivery.setAmount_loaded(loaded_producttoDelivery.getAmount_loaded() + quantity);
             return;
         }
-        loaded_items.put(item.getItemId(), new Item(item, quantity));
+        loaded_items.put(producttoDelivery.getItemId(), new Product_to_Delivery(producttoDelivery, quantity));
     }
 
     public boolean item_loaded(int item_ID) {
@@ -199,7 +199,7 @@ public class Delivery {
         return loaded_items.get(item_ID).getAmount_loaded();
     }
 
-    public Item get_item_loaded(int item_ID) {
+    public Product_to_Delivery get_item_loaded(int item_ID) {
         /**
          * Returns the item loaded.
          * @param item_ID - the ID of the item
@@ -290,9 +290,9 @@ public class Delivery {
         return driver;
     }
 
-    public void add_loaded_item(Item newItem) {
-        if (!loaded_items.containsKey(newItem.getItemId())) {
-            loaded_items.put(newItem.getItemId(), newItem);
+    public void add_loaded_item(Product_to_Delivery newProducttoDelivery) {
+        if (!loaded_items.containsKey(newProducttoDelivery.getItemId())) {
+            loaded_items.put(newProducttoDelivery.getItemId(), newProducttoDelivery);
         }
     }
 }

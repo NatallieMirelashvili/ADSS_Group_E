@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DeliveryRepo implements IRepository<Delivery> {
+public class DeliveryRepo implements IRepositoryDelivery<Delivery> {
     private static HashMap<Integer, Delivery> delivery_forms_d = new HashMap<Integer, Delivery>();
     // all delivery's in the DB
     private static DeliveryDAO deliveryDAO = new DeliveryDAO();
@@ -104,13 +104,13 @@ public class DeliveryRepo implements IRepository<Delivery> {
                 newDelivery.add_items_form(itemsForm);
                 ArrayList<JsonObject> items = itemDetailsDAO.get_items_by_item_form_id(itemFormID);
                 for (JsonObject item : items) {
-                    Item newitem = new Item(item.get("item_id").getAsInt(),item.get("name").getAsString(),item.get("amount_loaded").getAsInt(),item.get("amount_unloaded").getAsInt());
+                    Product_to_Delivery newitem = new Product_to_Delivery(item.get("item_id").getAsInt(),item.get("name").getAsString(),item.get("amount_loaded").getAsInt(),item.get("amount_unloaded").getAsInt());
                     newDelivery.getItems_form().get(itemFormID).addItem(newitem);
                 }
             }
             for (JsonObject itemLoaded : items_loaded) {
-                Item new_item = new Item(itemLoaded.get("item_id").getAsInt(),itemLoaded.get("name").getAsString(),itemLoaded.get("amount_loaded").getAsInt(),itemLoaded.get("amount_unloaded").getAsInt());
-                newDelivery.add_loaded_item(new_item);
+                Product_to_Delivery new_producttoDelivery = new Product_to_Delivery(itemLoaded.get("item_id").getAsInt(),itemLoaded.get("name").getAsString(),itemLoaded.get("amount_loaded").getAsInt(),itemLoaded.get("amount_unloaded").getAsInt());
+                newDelivery.add_loaded_item(new_producttoDelivery);
             }
             delivery_forms_d.put(id, newDelivery);
             return newDelivery;
@@ -216,8 +216,8 @@ public class DeliveryRepo implements IRepository<Delivery> {
             Items_form destitemsform = new Items_form(dest);
             ArrayList<JsonObject> items = ordersDAO.get_items_by_destination(supplierID);
             for (JsonObject item : items) {
-                Item supitem = new Item(item.get("item_id").getAsInt(),item.get("name").getAsString(),item.get("amount_loaded").getAsInt(),0);
-                Item destitem = new Item(item.get("item_id").getAsInt(),item.get("name").getAsString(),0,item.get("amount_unloaded").getAsInt());
+                Product_to_Delivery supitem = new Product_to_Delivery(item.get("item_id").getAsInt(),item.get("name").getAsString(),item.get("amount_loaded").getAsInt(),0);
+                Product_to_Delivery destitem = new Product_to_Delivery(item.get("item_id").getAsInt(),item.get("name").getAsString(),0,item.get("amount_unloaded").getAsInt());
                 supitemsform.addItem(supitem);
                 destitemsform.addItem(destitem);
             }

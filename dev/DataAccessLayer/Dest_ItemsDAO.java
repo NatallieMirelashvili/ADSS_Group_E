@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dest_ItemsDAO implements IDAO{
-    private static final String URL = "jdbc:sqlite:C:\\Users\\tomba\\IdeaProjects\\ADSS_Group_E\\identifier.sqlite";
+    private static final String URL = "jdbc:sqlite:C:/Users/User/Desktop/לימודים/ניתוצ/עבודה 0/ADSS_Group_E/identifier.db";
 
     @Override
     public void add(JsonObject jsonObject) {

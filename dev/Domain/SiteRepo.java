@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SiteRepo implements IRepository<Site> {
+public class SiteRepo implements IRepositoryDelivery<Site> {
     private static HashMap<Integer, Site> sites_d = new HashMap<Integer, Site>();
     private static SiteDAO siteDAO = new SiteDAO();
 

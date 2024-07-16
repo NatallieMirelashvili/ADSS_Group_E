@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TruckRepo implements IRepository<Truck>{
+public class TruckRepo implements IRepositoryDelivery<Truck> {
     private static HashMap<Integer, Truck> trucks_d = new HashMap<Integer, Truck>();
     private static TruckDAO truckDAO = new TruckDAO();
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Items_formDAO implements IDAO {
-    private static final String URL = "jdbc:sqlite:C:\\Users\\tomba\\IdeaProjects\\ADSS_Group_E\\identifier.sqlite";
+    private static final String URL = "jdbc:sqlite:C:/Users/User/Desktop/לימודים/ניתוצ/עבודה 0/ADSS_Group_E/identifier.sqlite";
 
     public Items_formDAO() {
         try (Connection conn = DriverManager.getConnection(URL);

@@ -4,23 +4,23 @@ import java.util.ArrayList;
 public class Items_form {
     int id;
     Site destination;
-    private ArrayList<Item> items;
+    private ArrayList<Product_to_Delivery> producttoDeliveries;
 
     static int counter = 0;
-    public Items_form(Site destination, ArrayList<Item> items) {
+    public Items_form(Site destination, ArrayList<Product_to_Delivery> producttoDeliveries) {
     this.id = counter++;
     this.destination = destination;
-    this.items = items;
+    this.producttoDeliveries = producttoDeliveries;
 }
     public Items_form(Site destination) {
         this.id = counter++;
         this.destination = destination;
-        this.items = new ArrayList<Item>();
+        this.producttoDeliveries = new ArrayList<Product_to_Delivery>();
     }
     public Items_form(int id, Site destination) {
         this.id = id;
         this.destination = destination;
-        this.items = new ArrayList<Item>();
+        this.producttoDeliveries = new ArrayList<Product_to_Delivery>();
         counter++;
     }
 
@@ -31,44 +31,44 @@ public class Items_form {
             return destination;
         }
 
-        public ArrayList<Item> getItems() {
-            return items;
+        public ArrayList<Product_to_Delivery> getItems() {
+            return producttoDeliveries;
         }
 
         public void setDestination(Site destination) {
             this.destination = destination;
         }
 
-        public void setItems(ArrayList<Item> items) {
-            this.items = items;
+        public void setItems(ArrayList<Product_to_Delivery> producttoDeliveries) {
+            this.producttoDeliveries = producttoDeliveries;
         }
 
-        public void addItem(Item item) {
-            items.add(item);
+        public void addItem(Product_to_Delivery producttoDelivery) {
+            producttoDeliveries.add(producttoDelivery);
         }
 
         public void removeItem(int itemID) {
-            for (Item item : items) {
-                if (item.getItemId() == itemID) {
-                    items.remove(item);
+            for (Product_to_Delivery producttoDelivery : producttoDeliveries) {
+                if (producttoDelivery.getItemId() == itemID) {
+                    producttoDeliveries.remove(producttoDelivery);
                     break;
                 }
             }
         }
 
         public void setAmount(int itemID, int amount) {
-            for (Item item : items) {
-                if (item.getItemId() == itemID) {
-                    item.setAmount_loaded(amount);
+            for (Product_to_Delivery producttoDelivery : producttoDeliveries) {
+                if (producttoDelivery.getItemId() == itemID) {
+                    producttoDelivery.setAmount_loaded(amount);
                     break;
                 }
             }
         }
 
-        public Item getItem(int itemID) {
-            for (Item item : items) {
-                if (item.getItemId() == itemID) {
-                    return item;
+        public Product_to_Delivery getItem(int itemID) {
+            for (Product_to_Delivery producttoDelivery : producttoDeliveries) {
+                if (producttoDelivery.getItemId() == itemID) {
+                    return producttoDelivery;
                 }
             }
             return null;
@@ -81,8 +81,8 @@ public class Items_form {
                 .append("Destination: ").append(destination.getSite_address()).append(" Type: ").append(destination.get_type()).append(" contact: ").append(destination.getSite_contact_name()).append(" phone: ").append(destination.getSite_contact_phone())
                 .append(",\nitems:\n");
 
-        for (Item item : items) {
-            sb.append(item.toString());
+        for (Product_to_Delivery producttoDelivery : producttoDeliveries) {
+            sb.append(producttoDelivery.toString());
         }
         sb.append("}");
         return sb.toString();
@@ -92,8 +92,8 @@ public class Items_form {
     }
 
     public boolean item_exists(int itemId) {
-        for (Item item : items) {
-            if (item.getItemId() == itemId) {
+        for (Product_to_Delivery producttoDelivery : producttoDeliveries) {
+            if (producttoDelivery.getItemId() == itemId) {
                 return true;
             }
         }

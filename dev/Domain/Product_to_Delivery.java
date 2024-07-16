@@ -1,6 +1,6 @@
 package Domain;
 
-public class Item {
+public class Product_to_Delivery {
     // Private attributes for item details
     private int itemId;
     private String itemName;
@@ -10,20 +10,20 @@ public class Item {
 
 
     // Constructor to initialize item details
-    public Item(int itemId, String itemName) {
+    public Product_to_Delivery(int itemId, String itemName) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.amount_loaded = 0;
         this.amount_unloaded = 0;
     }
 
-    public Item(Item old_item, int amount){
-        this.itemId = old_item.getItemId();
-        this.itemName = old_item.getItemName();
+    public Product_to_Delivery(Product_to_Delivery old_producttoDelivery, int amount){
+        this.itemId = old_producttoDelivery.getItemId();
+        this.itemName = old_producttoDelivery.getItemName();
         this.amount_loaded = amount;
     }
 
-    public Item(int itemId, String name, int amountLoaded, int amountUnloaded) {
+    public Product_to_Delivery(int itemId, String name, int amountLoaded, int amountUnloaded) {
         this.itemId = itemId;
         this.itemName = name;
         this.amount_loaded = amountLoaded;
@@ -68,11 +68,12 @@ public class Item {
     public String toString() {
         return  "itemId='" + itemId + '\'' +
                 ", itemName='" + itemName + '\'' +
-                ", amount=" + amount_loaded +
+                ", amount_loaded=" + amount_loaded +
+                ", amount_unloaded=" + amount_unloaded +
                 '\n';
     }
 
-    public Item getItem() {
+    public Product_to_Delivery getItem() {
         return this;
     }
 }
